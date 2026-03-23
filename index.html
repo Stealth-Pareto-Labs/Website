@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pareto Labs — Research network for AI companies</title>
-  <meta name="description" content="We connect AI companies with domain experts and research participants to build better products, faster.">
+  <title>Pareto Labs — Market intelligence for the AI era</title>
+  <meta name="description" content="Live competitive signals, pricing intelligence, and market simulations — powered by human expertise. Built for AI companies.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;1,9..144,200;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -511,6 +511,83 @@
       color: var(--ink3);
     }
 
+    /* ── CAPABILITIES LIST ─────────────────────────── */
+    .cap-list {
+      display: flex;
+      flex-direction: column;
+      margin-top: 72px;
+    }
+    .cap-item {
+      display: grid;
+      grid-template-columns: 56px 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+      padding: 40px 0;
+      border-top: 1px solid var(--line);
+      transition: background 0.2s;
+    }
+    .cap-item:last-child { border-bottom: 1px solid var(--line); }
+    .cap-num {
+      font-family: var(--f-d);
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--ink3);
+      padding-top: 4px;
+    }
+    .cap-title {
+      font-family: var(--f-d);
+      font-size: clamp(20px, 2.2vw, 28px);
+      font-weight: 300;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+    }
+    .cap-title em { font-style: italic; }
+    .cap-body {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--ink2);
+      line-height: 1.75;
+    }
+
+    /* ── PLATFORM NUMBERS ───────────────────────────── */
+    .platform-numbers {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: 72px;
+      border-top: 1px solid var(--line);
+    }
+    .pn-item {
+      padding: 40px 32px 40px 0;
+      border-right: 1px solid var(--line);
+    }
+    .pn-item:last-child { border-right: none; }
+    .pn-val {
+      font-family: var(--f-d);
+      font-size: clamp(32px, 3.5vw, 48px);
+      font-weight: 200;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .pn-val em { font-style: italic; }
+    .pn-label {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--ink2);
+      line-height: 1.55;
+    }
+
+    /* ── CUSTOMER SECTION ───────────────────────────── */
+    .customer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    @media (min-width: 1100px) {
+      .customer-grid { grid-template-columns: 5fr 6fr; }
+    }
+
     /* ── REVEAL ────────────────────────────────────── */
     .rv {
       opacity: 0;
@@ -530,6 +607,13 @@
       .numbers-row { grid-template-columns: 1fr; }
       .number-item { border-right: none; border-bottom: 1px solid var(--line); padding: 40px 0; }
       .number-item:first-child { padding-left: 0; }
+      .cap-item { grid-template-columns: 1fr; gap: 12px; }
+      .cap-num { display: none; }
+      .platform-numbers { grid-template-columns: 1fr 1fr; }
+      .pn-item:nth-child(2) { border-right: none; }
+      .pn-item:nth-child(3) { border-top: 1px solid var(--line); }
+      .pn-item:nth-child(4) { border-top: 1px solid var(--line); border-right: none; }
+      .customer-grid { grid-template-columns: 1fr; gap: 48px; }
       .steps { grid-template-columns: 1fr; gap: 40px; }
       .step { border-right: none; border-bottom: 1px solid var(--line); padding: 0 0 40px; }
       .step:last-child { border-bottom: none; padding-bottom: 0; }
@@ -548,9 +632,10 @@
 <nav id="nav">
   <a class="nav-logo" href="#">Pareto Labs</a>
   <ul class="nav-links">
-    <li><a href="#experts">Join as an Expert</a></li>
-    <li><a href="#participants">Participate in Research</a></li>
-    <li><a href="mailto:hello@trypareto.ai">Contact</a></li>
+    <li><a href="#platform">Platform</a></li>
+    <li><a href="#experts">Expert Network</a></li>
+    <li><a href="#participants">Participate</a></li>
+    <li><a href="#get-access" style="color:var(--ink);font-weight:500">Get Early Access</a></li>
   </ul>
 </nav>
 
@@ -558,12 +643,13 @@
 <div class="hero">
   <div></div><!-- spacer -->
   <div class="hero-body">
-    <p class="hero-eyebrow">Pareto Labs &mdash; Research Network</p>
-    <h1 class="hero-h1">Human knowledge.<br><em>Applied intelligently.</em></h1>
+    <p class="hero-eyebrow">Pareto Labs &mdash; Market Intelligence for the AI Era</p>
+    <h1 class="hero-h1">Predict your market.<br><em>Before it moves.</em></h1>
     <div class="hero-bottom">
-      <p class="hero-sub">We connect AI companies with domain experts and research participants to build better products, faster.</p>
+      <p class="hero-sub">Live competitive signals, pricing intelligence, and market simulations — grounded in real human expertise.</p>
       <div class="hero-ctas">
-        <a href="#experts" class="btn btn-dark">Join as an Expert</a>
+        <a href="#get-access" class="btn btn-dark">Get Early Access</a>
+        <a href="#experts" class="btn btn-ghost">Join as an Expert</a>
         <a href="#participants" class="btn btn-ghost">Participate in Research</a>
       </div>
     </div>
@@ -574,7 +660,7 @@
 <!-- INTRO ───────────────────────────────────────── -->
 <section>
   <div class="wrap-narrow rv">
-    <p class="intro-text">AI companies are making critical product decisions without the right human insight. We built Pareto Labs to close that gap &mdash; <em>connecting them with experts and participants who actually know.</em></p>
+    <p class="intro-text">AI companies are flying blind &mdash; setting prices in the dark, missing competitor moves, getting disrupted without warning. Pareto Labs is <em>the intelligence layer they never had:</em> live signals, deep expertise, and simulations that show you what&rsquo;s coming next.</p>
   </div>
 </section>
 
@@ -597,6 +683,148 @@
     </div>
   </div>
 </div>
+
+<!-- PLATFORM ────────────────────────────────────── -->
+<section id="platform">
+  <div class="wrap">
+    <div class="section-tag">The Platform</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;" class="rv">
+      <h2 class="col-h2" style="margin-bottom:0">Everything your competitors<br>don&rsquo;t want you<br>to <em>know.</em></h2>
+      <p class="col-body" style="margin-bottom:0;align-self:end">Pareto Labs turns live market data and human expert networks into a continuous intelligence feed — so you can price with confidence, anticipate disruption, and outmaneuver competition before they move.</p>
+    </div>
+
+    <div class="cap-list">
+
+      <div class="cap-item rv">
+        <span class="cap-num">01</span>
+        <h3 class="cap-title">Live Competitive<br><em>Signals</em></h3>
+        <p class="cap-body">We track every pricing move, product launch, and positioning shift across your competitive landscape in real time. No more discovering a competitor dropped prices after you&rsquo;ve already lost the deal.</p>
+      </div>
+
+      <div class="cap-item rv" style="transition-delay:.07s">
+        <span class="cap-num">02</span>
+        <h3 class="cap-title">AI Cost &amp; Pricing<br><em>Intelligence</em></h3>
+        <p class="cap-body">We translate raw AI cost data — inference costs, model pricing shifts, provider changes — directly into your pricing power and revenue strategy. Know exactly what margin you have, and where the floor is moving.</p>
+      </div>
+
+      <div class="cap-item rv" style="transition-delay:.14s">
+        <span class="cap-num">03</span>
+        <h3 class="cap-title">Customer &amp; Market<br><em>Tracking</em></h3>
+        <p class="cap-body">Full-spectrum visibility into your customers, their behaviors, churn signals, and the competitive options they&rsquo;re evaluating. See the whole board, not just your corner of it.</p>
+      </div>
+
+      <div class="cap-item rv" style="transition-delay:.21s">
+        <span class="cap-num">04</span>
+        <h3 class="cap-title">Disruption<br><em>Simulations</em></h3>
+        <p class="cap-body">Run market simulations that model how cost curves, new entrants, and pricing shifts will reshape your category. Predict disruption before it strikes — and have your response ready before it arrives.</p>
+      </div>
+
+    </div>
+
+    <div class="platform-numbers rv">
+      <div class="pn-item">
+        <div class="pn-val">Real<em>&#8209;time</em></div>
+        <div class="pn-label">Competitive signal monitoring, updated continuously</div>
+      </div>
+      <div class="pn-item">
+        <div class="pn-val"><em>4</em>×</div>
+        <div class="pn-label">Faster to insight than traditional analyst research</div>
+      </div>
+      <div class="pn-item">
+        <div class="pn-val">360<em>°</em></div>
+        <div class="pn-label">View across pricing, product, customer, and cost data</div>
+      </div>
+      <div class="pn-item">
+        <div class="pn-val"><em>∞</em></div>
+        <div class="pn-label">Simulations you can run, any scenario, any time</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GET EARLY ACCESS ────────────────────────────── -->
+<section id="get-access">
+  <div class="wrap">
+    <div class="section-tag">For Companies</div>
+    <div class="customer-grid">
+
+      <!-- Left: Copy -->
+      <div class="rv">
+        <p class="col-label">Use the platform</p>
+        <h2 class="col-h2">Stop guessing.<br><em>Start knowing.</em></h2>
+        <p class="col-body">Pareto Labs is currently in early access. We&rsquo;re onboarding a select group of AI companies who want to move from reactive to predictive — with intelligence that actually reflects how the market works.</p>
+        <ul class="benefits">
+          <li>Live competitive monitoring across your entire category</li>
+          <li>Pricing intelligence tied directly to AI cost data and margins</li>
+          <li>Customer tracking and churn signal detection</li>
+          <li>On-demand market simulations and disruption forecasts</li>
+          <li>Expert network access — validate strategy with real domain knowledge</li>
+        </ul>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="rv" style="transition-delay:.15s">
+        <div class="form-wrap">
+          <p class="form-title">Request early access</p>
+          <form id="customer-form" action="https://formspree.io/f/YOUR_CUSTOMER_FORM_ID" method="POST">
+            <div class="fields">
+              <div class="field">
+                <label for="c-name">Your name</label>
+                <input id="c-name" name="name" type="text" placeholder="James Wright" required>
+              </div>
+              <div class="field">
+                <label for="c-email">Work email</label>
+                <input id="c-email" name="email" type="email" placeholder="james@company.ai" required>
+              </div>
+              <div class="field">
+                <label for="c-company">Company</label>
+                <input id="c-company" name="company" type="text" placeholder="Your company name">
+              </div>
+              <div class="field">
+                <label for="c-role">Your role</label>
+                <select id="c-role" name="role">
+                  <option value="">Select your role</option>
+                  <option>Founder / CEO</option>
+                  <option>Head of Product</option>
+                  <option>Head of Revenue / Sales</option>
+                  <option>Head of Strategy</option>
+                  <option>CFO / Finance</option>
+                  <option>Growth / Marketing</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="c-size">Company size</label>
+                <select id="c-size" name="size">
+                  <option value="">Select size</option>
+                  <option>1–10 people</option>
+                  <option>11–50 people</option>
+                  <option>51–200 people</option>
+                  <option>200+ people</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="c-challenge">Biggest challenge right now</label>
+                <textarea id="c-challenge" name="challenge" placeholder="e.g. We don&apos;t know how to price against a competitor who just dropped 40%…"></textarea>
+              </div>
+            </div>
+            <div class="form-footer">
+              <button type="submit" class="btn btn-dark">Request Early Access</button>
+              <p class="form-note">We&rsquo;re selective about early access. We&rsquo;ll review and respond within 48 hours.</p>
+            </div>
+          </form>
+          <div class="form-success" id="customer-success">
+            <div class="success-check">✓</div>
+            <h3>Request received.</h3>
+            <p>We&rsquo;ll review your application and be in touch within 48 hours.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 <!-- EXPERTS ─────────────────────────────────────── -->
 <section id="experts">
@@ -685,7 +913,7 @@
 
 <!-- DIVIDER ─────────────────────────────────────── -->
 <div style="padding: 0 48px; max-width: 1160px; margin: 0 auto;">
-  <div class="divider-text">and for everyone else</div>
+  <div class="divider-text">and for research participants</div>
 </div>
 
 <!-- PARTICIPANTS ─────────────────────────────────── -->
@@ -790,8 +1018,10 @@
     <div class="footer-inner">
       <div class="footer-logo">Pareto Labs</div>
       <ul class="footer-links">
+        <li><a href="#platform">Platform</a></li>
+        <li><a href="#get-access">Early Access</a></li>
         <li><a href="#experts">Expert Network</a></li>
-        <li><a href="#participants">Research Participants</a></li>
+        <li><a href="#participants">Participate</a></li>
         <li><a href="mailto:hello@trypareto.ai">hello@trypareto.ai</a></li>
       </ul>
       <p class="footer-copy">&copy; 2025 Pareto Labs</p>
@@ -844,6 +1074,7 @@
 
   setupForm('expert-form', 'expert-success');
   setupForm('participant-form', 'participant-success');
+  setupForm('customer-form', 'customer-success');
 </script>
 
 </body>
