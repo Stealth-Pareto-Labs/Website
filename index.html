@@ -3,716 +3,793 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Pareto Labs — From signal to decision. Real market intelligence for AI companies. Customer voices, competitive signals, pricing conviction.">
-  <title>Pareto Labs — trypareto.ai</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <title>Pareto Labs — The economic operating system AI never had.</title>
+  <meta name="description" content="AI companies set prices in the dark. Miss competitor moves. Get blindsided by disruption. The intelligence layer is now here.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Grotesk:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <link rel="stylesheet" href="assets/style.css">
-
   <style>
+    /* ── Page-specific styles ── */
 
-  /* ─── HERO ─── */
-  .hero {
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 var(--pad) 80px;
-    position: relative;
-    overflow: hidden;
-  }
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 100px;
+      overflow: hidden;
+      background-color: var(--bg);
+    }
 
-  /* single geometric accent — thin amber horizontal rule */
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, var(--amber) 40%, var(--amber) 60%, transparent 100%);
-    opacity: 0.22;
-  }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
 
-  .hero-label {
-    position: absolute;
-    top: 50%;
-    right: var(--pad);
-    transform: translateY(-50%) rotate(90deg);
-    transform-origin: center center;
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    white-space: nowrap;
-  }
+    .hero-kicker {
+      font-family: var(--ui);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      margin-bottom: 28px;
+    }
 
-  .hero-inner {
-    max-width: var(--w);
-    margin: 0 auto;
-    width: 100%;
-  }
+    .hero-headline {
+      font-family: var(--display);
+      font-size: clamp(64px, 9vw, 112px);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+      max-width: 760px;
+      margin-bottom: 36px;
+    }
 
-  .hero-tag {
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--amber);
-    margin-bottom: 32px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+    .hero-sub {
+      font-family: var(--body);
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--ink2);
+      max-width: 440px;
+      line-height: 1.75;
+      margin-bottom: 52px;
+    }
 
-  .hero-tag::before {
-    content: '';
-    display: block;
-    width: 28px;
-    height: 1px;
-    background: var(--amber);
-    opacity: 0.6;
-  }
+    .hero-cta {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
 
-  .hero-hl {
-    font-family: var(--serif);
-    font-size: clamp(62px, 8vw, 108px);
-    font-weight: 700;
-    line-height: 1.02;
-    letter-spacing: -0.03em;
-    color: var(--ink);
-    max-width: 820px;
-    margin-bottom: 36px;
-  }
-
-  .hero-hl em {
-    font-style: italic;
-    font-weight: 400;
-    color: var(--ink-2);
-  }
-
-  .hero-foot {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 40px;
-    flex-wrap: wrap;
-  }
-
-  .hero-sub {
-    font-size: 17px;
-    font-weight: 300;
-    line-height: 1.7;
-    color: var(--ink-2);
-    max-width: 420px;
-  }
-
-  .hero-cta {
-    flex-shrink: 0;
-  }
-
-  /* ─── STATEMENT SECTION ─── */
-  .statements {
-    border-top: 1px solid var(--rule);
-  }
-
-  .statement {
-    display: grid;
-    grid-template-columns: 88px 1fr;
-    align-items: baseline;
-    gap: 0 48px;
-    padding: 56px 0;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .statement-n {
-    font-family: var(--serif);
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--ink-3);
-    letter-spacing: 0.06em;
-    padding-top: 4px;
-  }
-
-  .statement-body {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .statement-head {
-    font-family: var(--serif);
-    font-size: clamp(28px, 3.5vw, 46px);
-    font-weight: 600;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-  }
-
-  .statement-copy {
-    font-size: 16px;
-    font-weight: 300;
-    color: var(--ink-2);
-    line-height: 1.65;
-    max-width: 520px;
-  }
-
-  /* ─── OUTPUTS — editorial list ─── */
-  .outputs {
-    padding: 120px 0;
-    border-top: 1px solid var(--rule);
-  }
-
-  .outputs-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 72px;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-
-  .outputs-title {
-    font-family: var(--serif);
-    font-size: clamp(38px, 4.5vw, 60px);
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    line-height: 1.08;
-  }
-
-  .outputs-sub {
-    font-size: 15px;
-    color: var(--ink-2);
-    max-width: 280px;
-    line-height: 1.6;
-    text-align: right;
-  }
-
-  .output-list {
-    list-style: none;
-  }
-
-  .output-item {
-    display: grid;
-    grid-template-columns: 40px 260px 1fr;
-    align-items: baseline;
-    gap: 0 48px;
-    padding: 36px 0;
-    border-top: 1px solid var(--rule);
-    transition: border-color 0.3s;
-  }
-
-  .output-item:last-child {
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .output-item:hover {
-    border-color: rgba(200, 131, 26, 0.2);
-  }
-
-  .output-n {
-    font-family: var(--serif);
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--ink-3);
-    letter-spacing: 0.04em;
-  }
-
-  .output-title {
-    font-family: var(--serif);
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--ink);
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-  }
-
-  .output-desc {
-    font-size: 15px;
-    font-weight: 300;
-    color: var(--ink-2);
-    line-height: 1.65;
-  }
-
-  /* ─── WHY NOW — pull quote ─── */
-  .whynow {
-    padding: 140px 0;
-    border-top: 1px solid var(--rule);
-    background: var(--bg-2);
-  }
-
-  .whynow-inner {
-    max-width: 800px;
-  }
-
-  .whynow-kicker {
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    margin-bottom: 40px;
-  }
-
-  .whynow-quote {
-    font-family: var(--serif);
-    font-size: clamp(28px, 3.5vw, 46px);
-    font-weight: 500;
-    font-style: italic;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-  }
-
-  .whynow-quote strong {
-    font-style: normal;
-    font-weight: 700;
-    color: var(--ink);
-  }
-
-  .whynow-follow {
-    margin-top: 32px;
-    font-size: 16px;
-    font-weight: 300;
-    color: var(--ink-2);
-    line-height: 1.7;
-    max-width: 560px;
-  }
-
-  /* ─── CONTACT ─── */
-  .contact {
-    padding: 120px 0;
-    border-top: 1px solid var(--rule);
-  }
-
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 340px 1fr;
-    gap: 0 100px;
-    align-items: start;
-  }
-
-  .contact-aside {
-    padding-top: 8px;
-    position: sticky;
-    top: 100px;
-  }
-
-  .contact-hl {
-    font-family: var(--serif);
-    font-size: clamp(36px, 4vw, 54px);
-    font-weight: 600;
-    line-height: 1.08;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    margin-bottom: 20px;
-  }
-
-  .contact-copy {
-    font-size: 15px;
-    font-weight: 300;
-    color: var(--ink-2);
-    line-height: 1.7;
-  }
-
-  /* ─── AUDIENCE ─── */
-  .audience {
-    padding: 0;
-    border-top: 1px solid var(--rule);
-  }
-
-  .audience-item {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: 40px;
-    padding: 56px 0;
-    border-bottom: 1px solid var(--rule);
-    transition: background 0.3s;
-  }
-
-  .audience-item:hover {
-    background: linear-gradient(90deg, var(--bg-2) 0%, transparent 60%);
-  }
-
-  .audience-kicker {
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--amber);
-    margin-bottom: 12px;
-  }
-
-  .audience-hl {
-    font-family: var(--serif);
-    font-size: clamp(24px, 2.8vw, 36px);
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    line-height: 1.15;
-    margin-bottom: 12px;
-  }
-
-  .audience-body {
-    font-size: 15px;
-    font-weight: 300;
-    color: var(--ink-2);
-    line-height: 1.65;
-    max-width: 520px;
-  }
-
-  .audience-arrow {
-    flex-shrink: 0;
-    width: 48px;
-    height: 48px;
-    border: 1px solid var(--rule);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--ink-2);
-    transition: border-color 0.2s, color 0.2s, transform 0.2s;
-  }
-
-  .audience-item:hover .audience-arrow {
-    border-color: var(--amber);
-    color: var(--amber);
-    transform: translateX(4px);
-  }
-
-  .audience-arrow i { width: 18px; height: 18px; }
-
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 860px) {
-    .hero-label { display: none; }
+    /* Statements */
+    .statements {
+      padding: 0;
+    }
 
     .statement {
-      grid-template-columns: 52px 1fr;
-      gap: 0 24px;
-      padding: 40px 0;
+      display: grid;
+      grid-template-columns: 64px 1fr auto;
+      align-items: center;
+      gap: 0 48px;
+      padding: 52px 0;
+      border-top: 1px solid var(--rule);
+      transition: background 0.3s ease;
+      cursor: default;
+    }
+
+    .statement:last-child {
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .statement:hover {
+      background: linear-gradient(90deg, var(--cyan-dim) 0%, transparent 35%);
+    }
+
+    .statement-num {
+      font-family: var(--ui);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--ink3);
+      letter-spacing: 0.06em;
+    }
+
+    .statement-content {}
+
+    .statement-title {
+      font-family: var(--display);
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .statement-body {
+      font-family: var(--body);
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--ink2);
+      line-height: 1.75;
+      max-width: 560px;
+    }
+
+    .statement-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cyan);
+      opacity: 0.4;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .statement:hover .statement-dot {
+      opacity: 1;
+      transform: scale(1.3);
+    }
+
+    /* Outputs */
+    .outputs {
+      padding: 140px 0;
+    }
+
+    .outputs-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 80px;
+      gap: 40px;
+    }
+
+    .outputs-title {
+      font-family: var(--display);
+      font-size: clamp(40px, 5vw, 60px);
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
+
+    .outputs-sub {
+      font-family: var(--body);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--ink2);
+      max-width: 260px;
+      line-height: 1.7;
+      text-align: right;
     }
 
     .output-item {
-      grid-template-columns: 32px 1fr;
-      gap: 0 20px;
+      display: grid;
+      grid-template-columns: 36px 1fr 1fr;
+      gap: 0 56px;
+      padding: 40px 0;
+      border-top: 1px solid var(--rule);
+      align-items: start;
+      transition: border-color 0.25s ease;
+    }
+
+    .output-item:last-child {
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .output-item:hover {
+      border-color: var(--rule-c);
+    }
+
+    .output-item:hover .output-title {
+      color: var(--cyan);
+    }
+
+    .output-n {
+      font-family: var(--ui);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ink3);
+      letter-spacing: 0.08em;
+      padding-top: 3px;
+    }
+
+    .output-title {
+      font-family: var(--display);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      transition: color 0.25s ease;
     }
 
     .output-desc {
-      grid-column: 2;
-      margin-top: 6px;
+      font-family: var(--body);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--ink2);
+      line-height: 1.75;
     }
 
-    .outputs-header { flex-direction: column; gap: 12px; }
-    .outputs-sub { text-align: left; max-width: 400px; }
-
-    .contact-grid { grid-template-columns: 1fr; gap: 48px; }
-    .contact-aside { position: static; }
-
-    .audience-item {
-      grid-template-columns: 1fr;
-      gap: 24px;
+    /* Why Now */
+    .why-now {
+      background: var(--bg2);
+      padding: 140px 0;
     }
-    .audience-arrow { display: none; }
-  }
 
-  @media (max-width: 540px) {
-    .hero { padding-bottom: 60px; }
-    .hero-hl { letter-spacing: -0.02em; }
-    .statement { grid-template-columns: 1fr; gap: 16px; }
-    .statement-n { font-size: 11px; }
-    .output-item { grid-template-columns: 1fr; gap: 8px; }
-    .output-n { display: none; }
-    .whynow { padding: 80px 0; }
-  }
+    .why-now-inner {
+      max-width: 780px;
+    }
 
+    .why-now-kicker {
+      font-family: var(--ui);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      margin-bottom: 32px;
+    }
+
+    .why-now-headline {
+      font-family: var(--display);
+      font-size: clamp(28px, 3.8vw, 48px);
+      font-weight: 700;
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      margin-bottom: 32px;
+    }
+
+    .why-now-body {
+      font-family: var(--body);
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--ink2);
+      line-height: 1.8;
+    }
+
+    /* Contact */
+    .contact {
+      padding: 120px 0;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 0 100px;
+      align-items: start;
+    }
+
+    .contact-left {
+      position: sticky;
+      top: 100px;
+    }
+
+    .contact-title {
+      font-family: var(--display);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .contact-sub {
+      font-family: var(--body);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--ink2);
+      line-height: 1.75;
+    }
+
+    .contact-details {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--ui);
+      font-size: 13px;
+      color: var(--ink2);
+    }
+
+    .contact-detail-dot {
+      color: var(--cyan);
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    /* Audience rows */
+    .audience {
+      padding: 0 0 120px;
+    }
+
+    .audience-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+      padding: 64px 0;
+      border-top: 1px solid var(--rule);
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .audience-row:last-child {
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .audience-row:hover {
+      background: linear-gradient(90deg, var(--bg2) 0%, transparent 50%);
+    }
+
+    .audience-row:hover .audience-arrow {
+      border-color: var(--cyan-border);
+      color: var(--cyan);
+      transform: translateX(4px);
+    }
+
+    .audience-kicker {
+      font-family: var(--ui);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 12px;
+    }
+
+    .audience-title {
+      font-family: var(--display);
+      font-size: clamp(22px, 2.8vw, 34px);
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .audience-body {
+      font-family: var(--body);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--ink2);
+      line-height: 1.75;
+      max-width: 560px;
+    }
+
+    .audience-arrow {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid var(--ink3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink3);
+      flex-shrink: 0;
+      transition: border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+    }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .hero-headline {
+        font-size: clamp(52px, 11vw, 80px);
+      }
+
+      .outputs-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+
+      .outputs-sub {
+        text-align: left;
+        max-width: 100%;
+      }
+
+      .output-item {
+        grid-template-columns: 32px 1fr;
+        gap: 0 24px;
+      }
+
+      .output-desc {
+        grid-column: 2;
+        margin-top: 8px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+      }
+
+      .contact-left {
+        position: static;
+      }
+
+      .statement {
+        grid-template-columns: 40px 1fr auto;
+        gap: 0 24px;
+        padding: 40px 0;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .hero {
+        padding-bottom: 72px;
+      }
+
+      .hero-headline {
+        letter-spacing: -0.025em;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+
+      .statement {
+        grid-template-columns: 1fr auto;
+      }
+
+      .statement-num {
+        display: none;
+      }
+
+      .output-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .output-n {
+        display: none;
+      }
+
+      .audience-row {
+        padding: 48px 0;
+      }
+    }
   </style>
 </head>
 <body>
 
-<!-- ═══ NAV ═══════════════════════════════════════ -->
-<nav class="nav" id="nav">
-  <a href="index.html" class="nav-mark">Pareto Labs</a>
-  <div class="nav-links">
-    <a href="experts.html" class="nav-link">For Experts</a>
-    <a href="participants.html" class="nav-link">For Researchers</a>
-  </div>
-</nav>
+  <!-- ── Navigation ─────────────────────────────────────────── -->
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-mark">Pareto Labs</a>
+    <div class="nav-links">
+      <a href="experts.html" class="nav-link">For Experts</a>
+      <a href="participants.html" class="nav-link">For Researchers</a>
+      <a href="#contact" class="btn" style="padding: 10px 20px; font-size: 12px;">Request Access</a>
+    </div>
+  </nav>
 
+  <!-- ── Hero ───────────────────────────────────────────────── -->
+  <section class="hero dot-grid">
+    <div class="scan-line"></div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
 
-<!-- ═══ HERO ════════════════════════════════════════ -->
-<section class="hero">
-  <span class="hero-label">trypareto.ai — 2026</span>
-
-  <div class="hero-inner">
-    <div class="hero-tag" id="h-tag">Market Intelligence</div>
-
-    <h1 class="hero-hl" id="h-hl">
-      From signal<br>
-      to decision.<br>
-      <em>The loop is now closed.</em>
-    </h1>
-
-    <div class="hero-foot" id="h-foot">
-      <p class="hero-sub">
-        AI companies have extraordinary models and no market intelligence. They set prices in the dark. They hear about competitors months late. They miss the disruption before it arrives.
+    <div class="wrap hero-content">
+      <p class="hero-kicker" id="h-kicker">
+        <span class="cursor">trypareto.ai</span>
       </p>
-      <div class="hero-cta">
-        <a href="#contact" class="btn">
-          Request Access <i data-lucide="arrow-right"></i>
-        </a>
+      <h1 class="hero-headline" id="h-head">
+        The economic<br>
+        operating system<br>
+        AI never had.
+      </h1>
+      <p class="hero-sub" id="h-sub">
+        AI companies set prices in the dark. Miss competitor moves. Get blindsided by disruption. The intelligence layer is now here.
+      </p>
+      <div class="hero-cta" id="h-cta">
+        <a href="#contact" class="btn">Request Access</a>
+        <a href="#outputs" class="tlink">Learn how it works &rarr;</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
+  <!-- ── Statements ─────────────────────────────────────────── -->
+  <section class="statements">
+    <div class="wrap">
 
-<!-- ═══ STATEMENTS ════════════════════════════════ -->
-<section class="statements">
-  <div class="wrap">
-
-    <div class="statement rv">
-      <span class="statement-n">01</span>
-      <div class="statement-body">
-        <h2 class="statement-head">Prices set once a year.</h2>
-        <p class="statement-copy">No real customer data. A room, a spreadsheet, and instinct. Markets don't hold still — pricing set annually is pricing set wrong.</p>
+      <div class="statement rv">
+        <span class="statement-num">01</span>
+        <div class="statement-content">
+          <h2 class="statement-title">Prices set once a year.</h2>
+          <p class="statement-body">No real customer data. A room, a spreadsheet, and instinct. Markets don't hold still — pricing set annually is pricing set wrong.</p>
+        </div>
+        <div class="statement-dot"></div>
       </div>
-    </div>
 
-    <div class="statement rv">
-      <span class="statement-n">02</span>
-      <div class="statement-body">
-        <h2 class="statement-head">Competitor moves happen weekly.</h2>
-        <p class="statement-copy">Most companies find out months later — from a churned customer, or a news article. By then, the window has already closed.</p>
+      <div class="statement rv">
+        <span class="statement-num">02</span>
+        <div class="statement-content">
+          <h2 class="statement-title">Competitors move weekly.</h2>
+          <p class="statement-body">Most companies find out months later — from a churned customer or a news article. By then, the window has closed.</p>
+        </div>
+        <div class="statement-dot"></div>
       </div>
-    </div>
 
-    <div class="statement rv">
-      <span class="statement-n">03</span>
-      <div class="statement-body">
-        <h2 class="statement-head">Disruption is invisible<br>until it's catastrophic.</h2>
-        <p class="statement-copy">The signals are always there before the collapse. No one is synthesizing them for you — in time for it to matter.</p>
+      <div class="statement rv">
+        <span class="statement-num">03</span>
+        <div class="statement-content">
+          <h2 class="statement-title">Disruption is invisible.</h2>
+          <p class="statement-body">Until it's catastrophic. The signals were always there. Nobody was synthesizing them for you — in time to matter.</p>
+        </div>
+        <div class="statement-dot"></div>
       </div>
+
     </div>
+  </section>
 
-  </div>
-</section>
+  <!-- ── Outputs ────────────────────────────────────────────── -->
+  <section class="outputs" id="outputs">
+    <div class="wrap">
 
+      <div class="outputs-header rv">
+        <h2 class="outputs-title">What we produce.</h2>
+        <p class="outputs-sub">Four categories of intelligence. Actionable the week you receive them.</p>
+      </div>
 
-<!-- ═══ OUTPUTS ════════════════════════════════════ -->
-<section class="outputs">
-  <div class="wrap">
-
-    <div class="outputs-header rv">
-      <h2 class="outputs-title">What we<br>produce.</h2>
-      <p class="outputs-sub">Four categories of intelligence. All of them actionable the week you receive them.</p>
-    </div>
-
-    <ul class="output-list">
-
-      <li class="output-item rv">
+      <div class="output-item rv">
         <span class="output-n">01</span>
         <span class="output-title">Real customer intelligence.</span>
-        <p class="output-desc">Not surveys. The actual voice of your market, synthesized and structured — within days, not quarters. What they believe, what they resist, what would move them.</p>
-      </li>
+        <p class="output-desc">Not surveys. The actual voice of your market, synthesized and structured — within days, not quarters.</p>
+      </div>
 
-      <li class="output-item rv">
+      <div class="output-item rv">
         <span class="output-n">02</span>
         <span class="output-title">Competitive signals, explained.</span>
-        <p class="output-desc">Not just what changed — why it changed, and what you should do about it. Moves, motivations, and the gaps they've left open for you.</p>
-      </li>
+        <p class="output-desc">Not just what changed — why it changed. And precisely what you should do about it.</p>
+      </div>
 
-      <li class="output-item rv">
+      <div class="output-item rv">
         <span class="output-n">03</span>
         <span class="output-title">Pricing with conviction.</span>
-        <p class="output-desc">What your market will bear, continuously modeled. Not a spreadsheet. Not a guess. A living picture of value perception, updated as your market moves.</p>
-      </li>
+        <p class="output-desc">What your market will bear, continuously modeled. Not a spreadsheet. Not a guess.</p>
+      </div>
 
-      <li class="output-item rv">
+      <div class="output-item rv">
         <span class="output-n">04</span>
         <span class="output-title">Foresight on disruption.</span>
-        <p class="output-desc">What's coming for your market in the next 3–6 months, before your competitors see it. Pattern recognition at a scale no analyst team could sustain.</p>
-      </li>
-
-    </ul>
-
-  </div>
-</section>
-
-
-<!-- ═══ WHY NOW ════════════════════════════════════ -->
-<section class="whynow">
-  <div class="wrap">
-    <div class="whynow-inner rv">
-      <p class="whynow-kicker">Why now</p>
-      <p class="whynow-quote">
-        <strong>AI reasoning at scale. Real-time data infrastructure.</strong>
-        No incumbent has ever closed this loop — from raw market signal to a decision you can act on the same week.
-      </p>
-      <p class="whynow-follow">
-        That combination is genuinely new. And it won't stay available to only a few companies for long.
-      </p>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══ CONTACT ════════════════════════════════════ -->
-<section class="contact" id="contact">
-  <div class="wrap">
-    <div class="contact-grid">
-
-      <div class="contact-aside rv">
-        <h2 class="contact-hl">Get in touch.</h2>
-        <p class="contact-copy">Early access for AI-native companies. Tell us where you are and what you're trying to figure out.</p>
+        <p class="output-desc">What's coming for your market in the next 3–6 months, before your competitors see it.</p>
       </div>
 
-      <div class="rv">
-        <!-- REPLACE: action="https://formspree.io/f/YOUR_CONTACT_FORM_ID" -->
-        <form id="contact-form" action="https://formspree.io/f/YOUR_CONTACT_FORM_ID" method="POST" class="form-block">
+    </div>
+  </section>
 
-          <div class="form-pair">
-            <div class="field">
-              <label for="c-name">Full Name</label>
-              <input type="text" id="c-name" name="name" placeholder="Jane Smith" required>
+  <!-- ── Why Now ────────────────────────────────────────────── -->
+  <section class="why-now">
+    <div class="wrap">
+      <div class="why-now-inner">
+        <p class="why-now-kicker kicker-rule rv">Why Now</p>
+        <h2 class="why-now-headline rv">
+          AI reasoning at scale. Real-time data infrastructure. No incumbent has ever closed this loop — from raw market signal to a pricing decision you can act on the same week.
+        </h2>
+        <p class="why-now-body rv">
+          That combination is genuinely new. It won't stay available to only a few companies for long.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact ────────────────────────────────────────────── -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="contact-grid">
+
+        <!-- Left -->
+        <div class="contact-left">
+          <h2 class="contact-title rv">Get in touch.</h2>
+          <p class="contact-sub rv">Early access for AI-native companies. Tell us where you are.</p>
+          <div class="contact-details rv">
+            <div class="contact-detail">
+              <span class="contact-detail-dot">&#9679;</span>
+              <span>joseph@trypareto.ai</span>
             </div>
-            <div class="field">
-              <label for="c-email">Work Email</label>
-              <input type="email" id="c-email" name="email" placeholder="jane@company.ai" required>
+            <div class="contact-detail">
+              <span class="contact-detail-dot">&#9679;</span>
+              <span>trypareto.ai</span>
+            </div>
+            <div class="contact-detail">
+              <span class="contact-detail-dot">&#9679;</span>
+              <span>Early access, 2026</span>
             </div>
           </div>
+        </div>
 
-          <div class="form-pair">
-            <div class="field">
-              <label for="c-company">Company</label>
-              <input type="text" id="c-company" name="company" placeholder="Acme AI" required>
+        <!-- Right -->
+        <div class="contact-right">
+          <!-- REPLACE: action="https://formspree.io/f/YOUR_CONTACT_FORM_ID" -->
+          <form id="contact-form" action="https://formspree.io/f/YOUR_CONTACT_FORM_ID" method="POST" novalidate>
+            <div class="form-block">
+
+              <div class="form-pair">
+                <div class="field">
+                  <label for="c-name">Full Name</label>
+                  <input type="text" id="c-name" name="name" placeholder="Jane Smith" required>
+                </div>
+                <div class="field">
+                  <label for="c-email">Work Email</label>
+                  <input type="email" id="c-email" name="email" placeholder="jane@company.com" required>
+                </div>
+              </div>
+
+              <div class="form-pair">
+                <div class="field">
+                  <label for="c-company">Company</label>
+                  <input type="text" id="c-company" name="company" placeholder="Acme Corp">
+                </div>
+                <div class="field">
+                  <label for="c-role">Role</label>
+                  <input type="text" id="c-role" name="role" placeholder="Head of Product">
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="c-message">Message</label>
+                <textarea id="c-message" name="message" rows="4" placeholder="Tell us about what you're working on..."></textarea>
+              </div>
+
+              <div class="submit-row">
+                <span class="submit-note">We read every message personally.</span>
+                <button type="submit" class="btn">Send</button>
+              </div>
+
             </div>
-            <div class="field">
-              <label for="c-role">Role</label>
-              <input type="text" id="c-role" name="role" placeholder="Head of Product" required>
+          </form>
+
+          <div class="confirm" id="contact-confirm">
+            <div class="confirm-icon">
+              <i data-lucide="check-circle"></i>
             </div>
+            <h3 class="confirm-head">Message sent.</h3>
+            <p class="confirm-body">We read every submission personally. You'll hear from us directly.</p>
           </div>
+        </div>
 
-          <div class="field">
-            <label for="c-message">Message</label>
-            <textarea id="c-message" name="message" rows="4" placeholder="Tell us what you're trying to figure out. Where pricing decisions feel like guesswork. Where competitor moves catch you off guard."></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Audience ───────────────────────────────────────────── -->
+  <section class="audience">
+    <div class="wrap">
+
+      <a href="experts.html" class="audience-row">
+        <div class="audience-content">
+          <p class="audience-kicker">Expert Network</p>
+          <h2 class="audience-title">Are you a researcher, PhD, or industry specialist?</h2>
+          <p class="audience-body">Paid engagements for domain experts. Flexible. High-signal work that shapes real commercial decisions.</p>
+        </div>
+        <div class="audience-arrow">
+          <i data-lucide="arrow-right" width="18" height="18"></i>
+        </div>
+      </a>
+
+      <a href="participants.html" class="audience-row">
+        <div class="audience-content">
+          <p class="audience-kicker">Research Network</p>
+          <h2 class="audience-title">Help companies understand their market.</h2>
+          <p class="audience-body">We recruit real people for AI-powered research interviews. Flexible. Paid. Your insight shapes products that reach millions.</p>
+        </div>
+        <div class="audience-arrow">
+          <i data-lucide="arrow-right" width="18" height="18"></i>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-row">
+        <div>
+          <span class="footer-mark">Pareto Labs</span>
+          <div class="footer-meta">
+            <a href="https://trypareto.ai">trypareto.ai</a>
+            <a href="mailto:joseph@trypareto.ai">joseph@trypareto.ai</a>
           </div>
-
-          <div class="submit-row">
-            <span class="submit-note">We read every message personally.</span>
-            <button type="submit" class="btn">Send <i data-lucide="send"></i></button>
-          </div>
-
-        </form>
-
-        <div class="confirm" id="contact-confirm">
-          <i data-lucide="check-circle"></i>
-          <p class="confirm-head">We'll be in touch.</p>
-          <p class="confirm-body">We review every message personally and respond to the ones that fit what we're building.</p>
+        </div>
+        <div class="footer-right">
+          <span>&copy; 2026 Pareto Labs, Inc.</span>
         </div>
       </div>
-
+      <span class="footer-ghost">The closed loop no one has built yet.</span>
     </div>
-  </div>
-</section>
+  </footer>
 
+  <!-- ── Scripts ────────────────────────────────────────────── -->
+  <script>
+    // Icons
+    lucide.createIcons();
 
-<!-- ═══ AUDIENCE CALLOUTS ═════════════════════════ -->
-<section class="audience">
-  <div class="wrap">
+    // Nav stuck on scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('stuck', window.scrollY > 32);
+    }, { passive: true });
 
-    <a href="experts.html" class="audience-item rv">
-      <div>
-        <p class="audience-kicker">Expert Network</p>
-        <h3 class="audience-hl">Are you a researcher, PhD, or industry specialist?</h3>
-        <p class="audience-body">We partner with domain experts worldwide for validation engagements. Paid. Flexible. High-signal work that shapes real commercial decisions.</p>
-      </div>
-      <div class="audience-arrow">
-        <i data-lucide="arrow-right"></i>
-      </div>
-    </a>
+    // GSAP
+    gsap.registerPlugin(ScrollTrigger);
 
-    <a href="participants.html" class="audience-item rv">
-      <div>
-        <p class="audience-kicker">Research Network</p>
-        <h3 class="audience-hl">Help companies understand their market.</h3>
-        <p class="audience-body">We recruit real people for AI-powered research interviews. Flexible participation. Global. Your insight shapes products that reach millions.</p>
-      </div>
-      <div class="audience-arrow">
-        <i data-lucide="arrow-right"></i>
-      </div>
-    </a>
-
-  </div>
-</section>
-
-
-<!-- ═══ FOOTER ═════════════════════════════════════ -->
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer-row">
-      <div class="footer-left">
-        <span class="footer-mark">Pareto Labs</span>
-        <div class="footer-meta">
-          <a href="https://trypareto.ai">trypareto.ai</a>&ensp;·&ensp;<a href="mailto:joseph@trypareto.ai">joseph@trypareto.ai</a>
-        </div>
-      </div>
-      <div class="footer-copy">© 2026 Pareto Labs, Inc.</div>
-    </div>
-  </div>
-  <div class="footer-ghost">The closed loop no one has built yet.</div>
-</footer>
-
-
-<script>
-  lucide.createIcons();
-  gsap.registerPlugin(ScrollTrigger);
-
-  // Nav stuck state
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('stuck', window.scrollY > 32);
-  }, { passive: true });
-
-  // Hero entrance — clean, no bounce
-  gsap.set(['#h-tag','#h-hl','#h-foot'], { opacity: 0, y: 20 });
-  gsap.timeline({ defaults: { ease: 'power2.out' } })
-    .to('#h-tag',  { opacity: 1, y: 0, duration: 0.6, delay: 0.3 })
-    .to('#h-hl',   { opacity: 1, y: 0, duration: 0.85 }, '-=0.35')
-    .to('#h-foot', { opacity: 1, y: 0, duration: 0.7 }, '-=0.45');
-
-  // Scroll reveals
-  document.querySelectorAll('.rv').forEach(el => {
-    gsap.to(el, {
-      opacity: 1, y: 0,
-      duration: 0.7,
-      ease: 'power2.out',
-      scrollTrigger: { trigger: el, start: 'top 85%' }
+    // Hero entrance
+    const heroEls = ['#h-kicker', '#h-head', '#h-sub', '#h-cta'];
+    gsap.set(heroEls, { opacity: 0, y: 24 });
+    const heroTl = gsap.timeline({ delay: 0.1 });
+    heroEls.forEach((el, i) => {
+      heroTl.to(el, { opacity: 1, y: 0, duration: 0.75, ease: 'power2.out' }, i * 0.15);
     });
-  });
 
-  // Contact form
-  const cForm = document.getElementById('contact-form');
-  const cConf  = document.getElementById('contact-confirm');
-
-  cForm.addEventListener('submit', async e => {
-    e.preventDefault();
-    const res = await fetch(cForm.action, {
-      method: 'POST',
-      body: new FormData(cForm),
-      headers: { Accept: 'application/json' }
+    // Scroll reveals
+    document.querySelectorAll('.rv').forEach(el => {
+      gsap.to(el, {
+        opacity: 1,
+        y: 0,
+        duration: 0.65,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+        }
+      });
     });
-    if (res.ok) {
-      gsap.to(cForm, { opacity: 0, y: -12, duration: 0.35, ease: 'power2.in', onComplete: () => {
-        cForm.style.display = 'none';
-        cConf.classList.add('show');
-        lucide.createIcons();
-        gsap.from(cConf, { opacity: 0, y: 12, duration: 0.45, ease: 'power2.out' });
-      }});
-    } else {
-      alert('Something went wrong — email us at joseph@trypareto.ai');
+
+    // Contact form async submit
+    const form = document.getElementById('contact-form');
+    const confirm = document.getElementById('contact-confirm');
+
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = form.querySelector('button[type="submit"]');
+        btn.textContent = 'Sending...';
+        btn.disabled = true;
+
+        try {
+          const data = new FormData(form);
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (res.ok) {
+            gsap.to(form, { opacity: 0, y: -12, duration: 0.4, ease: 'power2.in', onComplete: () => {
+              form.style.display = 'none';
+              confirm.classList.add('show');
+              gsap.from(confirm, { opacity: 0, y: 16, duration: 0.5, ease: 'power2.out' });
+              lucide.createIcons();
+            }});
+          } else {
+            btn.textContent = 'Send';
+            btn.disabled = false;
+          }
+        } catch {
+          btn.textContent = 'Send';
+          btn.disabled = false;
+        }
+      });
     }
-  });
-</script>
+  </script>
 
 </body>
 </html>
