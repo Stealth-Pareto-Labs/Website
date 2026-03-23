@@ -3,659 +3,586 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Join the Pareto Labs expert network. Paid engagements for PhD researchers, industry specialists, and domain experts. Flexible. High-signal. Your expertise shapes real pricing and product decisions.">
-  <meta property="og:title" content="Expert Network — Pareto Labs">
-  <meta property="og:description" content="We're building a network of people who know things. Domain experts. PhD researchers. Industry veterans.">
-  <meta property="og:type" content="website">
+  <meta name="description" content="Join the Pareto Labs expert network. Paid engagements for PhD researchers, industry specialists, and domain experts.">
   <title>Expert Network — Pareto Labs</title>
 
-  <!-- Typography -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-
-  <!-- Animation -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-  <!-- Shared Design System -->
   <link rel="stylesheet" href="assets/style.css">
 
   <style>
-    /* ——— Hero ——— */
-    .expert-hero {
-      position: relative;
-      min-height: 80vh;
-      display: flex;
-      align-items: center;
-      padding: 140px 40px 100px;
-      overflow: hidden;
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 var(--pad) 80px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--amber) 40%, var(--amber) 60%, transparent 100%);
+    opacity: 0.2;
+  }
+
+  .hero { position: relative; }
+
+  .hero-inner {
+    max-width: var(--w);
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .hero-kicker {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-kicker::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--amber);
+    opacity: 0.5;
+  }
+
+  .hero-hl {
+    font-family: var(--serif);
+    font-size: clamp(52px, 7vw, 96px);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    max-width: 780px;
+    margin-bottom: 40px;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--ink-2);
+    max-width: 520px;
+  }
+
+  /* ─── THREE VALUES ─── */
+  .values {
+    padding: 120px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .values-header {
+    font-family: var(--serif);
+    font-size: clamp(34px, 4vw, 52px);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1.1;
+    max-width: 600px;
+    margin-bottom: 72px;
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+
+  .value {
+    padding: 0 48px 0 0;
+    border-right: 1px solid var(--rule);
+    margin-right: 48px;
+  }
+
+  .value:last-child {
+    padding-right: 0;
+    border-right: none;
+    margin-right: 0;
+  }
+
+  .value-n {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  .value-head {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .value-body {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--ink-2);
+    line-height: 1.65;
+  }
+
+  /* ─── PROCESS ─── */
+  .process {
+    padding: 120px 0;
+    border-bottom: 1px solid var(--rule);
+    background: var(--bg-2);
+  }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 0 100px;
+    align-items: start;
+  }
+
+  .process-aside {
+    position: sticky;
+    top: 100px;
+  }
+
+  .process-aside-hl {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .process-aside-body {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--ink-2);
+    line-height: 1.7;
+  }
+
+  .process-steps {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .process-step {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 0 32px;
+    padding: 40px 0;
+    border-top: 1px solid var(--rule);
+    align-items: baseline;
+  }
+
+  .process-step:last-child {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .ps-n {
+    font-family: var(--serif);
+    font-size: 13px;
+    color: var(--ink-3);
+    letter-spacing: 0.06em;
+  }
+
+  .ps-body {}
+
+  .ps-head {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+
+  .ps-copy {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--ink-2);
+    line-height: 1.65;
+  }
+
+  /* ─── APPLICATION FORM ─── */
+  .apply {
+    padding: 120px 0;
+  }
+
+  .apply-header {
+    max-width: 600px;
+    margin-bottom: 72px;
+  }
+
+  .apply-hl {
+    font-family: var(--serif);
+    font-size: clamp(36px, 4.5vw, 58px);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    line-height: 1.08;
+    margin-bottom: 16px;
+  }
+
+  .apply-sub {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--ink-2);
+    line-height: 1.65;
+  }
+
+  .form-section {
+    padding-top: 48px;
+    margin-top: 48px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .form-section-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 8px;
+  }
+
+  .pill-field {
+    padding: 24px 0 0;
+  }
+
+  .pill-field-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 860px) {
+    .values-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
     }
-
-    .expert-hero-bg {
-      position: absolute;
-      inset: 0;
-      background: var(--bg-primary);
+    .value {
+      padding: 0 0 40px;
+      border-right: none;
+      border-bottom: 1px solid var(--rule);
+      margin-right: 0;
     }
+    .value:last-child { border-bottom: none; padding-bottom: 0; }
 
-    .expert-hero-bg::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 10% 20%, rgba(200, 131, 26, 0.07) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 60% at 90% 80%, rgba(200, 131, 26, 0.04) 0%, transparent 60%);
-      animation: expertMesh 16s ease-in-out infinite alternate;
-    }
+    .process-grid { grid-template-columns: 1fr; gap: 48px; }
+    .process-aside { position: static; }
 
-    @keyframes expertMesh {
-      0%   { opacity: 0.7; transform: scale(1); }
-      100% { opacity: 1;   transform: scale(1.06) translateY(-10px); }
-    }
+    .process-step { grid-template-columns: 40px 1fr; gap: 0 20px; }
+  }
 
-    .expert-hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: var(--container-width);
-      margin: 0 auto;
-      width: 100%;
-    }
+  @media (max-width: 540px) {
+    .hero { padding-bottom: 60px; }
+    .process-step { grid-template-columns: 1fr; gap: 12px; }
+    .ps-n { display: none; }
+  }
 
-    .expert-hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 28px;
-      opacity: 0;
-    }
-
-    .expert-hero-eyebrow i {
-      width: 14px;
-      height: 14px;
-    }
-
-    .expert-hero-headline {
-      font-family: var(--font-display);
-      font-size: clamp(48px, 6vw, 82px);
-      font-weight: 700;
-      line-height: 1.06;
-      letter-spacing: -0.025em;
-      color: var(--text-primary);
-      max-width: 780px;
-      margin-bottom: 28px;
-      opacity: 0;
-    }
-
-    .expert-hero-sub {
-      font-size: clamp(17px, 1.5vw, 20px);
-      font-weight: 300;
-      line-height: 1.7;
-      color: var(--text-secondary);
-      max-width: 580px;
-      opacity: 0;
-    }
-
-    /* ——— Why Work With Us ——— */
-    .why-section {
-      padding: var(--section-gap) 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 48px;
-      margin-top: 56px;
-    }
-
-    .why-block {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .why-icon {
-      width: 28px;
-      height: 28px;
-      color: var(--accent);
-    }
-
-    .why-title {
-      font-family: var(--font-display);
-      font-size: 22px;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .why-body {
-      font-size: 15px;
-      color: var(--text-secondary);
-      line-height: 1.65;
-    }
-
-    /* ——— Process Section ——— */
-    .process-section {
-      padding: var(--section-gap) 0;
-      background: var(--bg-surface);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .process-inner {
-      display: grid;
-      grid-template-columns: 1fr 1.6fr;
-      gap: 100px;
-      align-items: start;
-    }
-
-    .process-label-col {
-      padding-top: 6px;
-      position: sticky;
-      top: 120px;
-    }
-
-    .process-paragraphs {
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-    }
-
-    .process-para {
-      font-size: clamp(16px, 1.4vw, 18px);
-      font-weight: 300;
-      line-height: 1.75;
-      color: var(--text-secondary);
-    }
-
-    .process-para strong {
-      color: var(--text-primary);
-      font-weight: 500;
-    }
-
-    /* ——— Application Form ——— */
-    .application-section {
-      padding: var(--section-gap) 0;
-      background: var(--bg-elevated);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .application-header {
-      margin-bottom: 52px;
-    }
-
-    .application-header h2 {
-      font-family: var(--font-display);
-      font-size: clamp(34px, 4vw, 52px);
-      font-weight: 600;
-      line-height: 1.1;
-      margin-bottom: 12px;
-    }
-
-    .application-header p {
-      font-size: 15px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    .form-section-divider {
-      height: 1px;
-      background: var(--border);
-      margin: 32px 0;
-    }
-
-    .form-section-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-    }
-
-    .submit-row {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 16px;
-      padding-top: 8px;
-    }
-
-    .submit-note {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    /* ——— Responsive ——— */
-    @media (max-width: 900px) {
-      .expert-hero {
-        padding: 120px 24px 80px;
-      }
-
-      .why-grid {
-        grid-template-columns: 1fr;
-        gap: 36px;
-      }
-
-      .process-inner {
-        grid-template-columns: 1fr;
-        gap: 36px;
-      }
-
-      .process-label-col {
-        position: static;
-      }
-
-      .submit-row {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .submit-row .btn {
-        width: 100%;
-        justify-content: center;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .expert-hero {
-        padding: 100px 20px 60px;
-      }
-
-      .application-header {
-        margin-bottom: 36px;
-      }
-    }
   </style>
 </head>
 <body>
 
-  <!-- ═══════════════════════════════════════════
-       NAVIGATION
-  ═══════════════════════════════════════════ -->
-  <nav class="nav" id="nav">
-    <a href="index.html" class="nav-link-back">
-      <i data-lucide="arrow-left"></i> Back to Pareto Labs
-    </a>
-    <div class="nav-links">
-      <a href="experts.html" class="nav-link" style="color: var(--text-primary);">For Experts</a>
-      <a href="participants.html" class="nav-link">For Researchers <i data-lucide="arrow-right"></i></a>
-    </div>
-  </nav>
+<!-- ═══ NAV ═══════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-back">
+    <i data-lucide="arrow-left"></i> Pareto Labs
+  </a>
+  <div class="nav-links">
+    <a href="experts.html" class="nav-link active">For Experts</a>
+    <a href="participants.html" class="nav-link">For Researchers</a>
+  </div>
+</nav>
 
 
-  <!-- ═══════════════════════════════════════════
-       HERO
-  ═══════════════════════════════════════════ -->
-  <section class="expert-hero">
-    <div class="expert-hero-bg"></div>
-    <div class="expert-hero-content">
+<!-- ═══ HERO ════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-kicker" id="h-kicker">Expert Network</div>
+    <h1 class="hero-hl" id="h-hl">
+      We're building a network of people who know things.
+    </h1>
+    <p class="hero-sub" id="h-sub">
+      Domain experts. PhD researchers. Industry veterans. If you've spent years earning deep expertise, we want to work with you — on questions that actually matter.
+    </p>
+  </div>
+</section>
 
-      <div class="expert-hero-eyebrow" id="hero-eyebrow">
-        <i data-lucide="flask-conical"></i> Expert Network
+
+<!-- ═══ VALUES ════════════════════════════════════ -->
+<section class="values">
+  <div class="wrap">
+    <h2 class="values-header rv">What working with us looks like.</h2>
+
+    <div class="values-grid">
+      <div class="value rv">
+        <span class="value-n">Compensation</span>
+        <h3 class="value-head">Paid engagements.</h3>
+        <p class="value-body">Rates that reflect the depth of your expertise, not the structure of a generic survey. Your time has real value — we price it accordingly.</p>
       </div>
 
-      <h1 class="expert-hero-headline" id="hero-headline">
-        We're building a network of people who know things.
-      </h1>
+      <div class="value rv">
+        <span class="value-n">Format</span>
+        <h3 class="value-head">Flexible participation.</h3>
+        <p class="value-body">Async or live. Video, audio, or written. Review the brief, accept or decline — no obligation. Fit it around your work, not the other way around.</p>
+      </div>
 
-      <p class="expert-hero-sub" id="hero-sub">
-        Domain experts. PhD researchers. Industry veterans. If you've spent years earning deep expertise in a field, we want to work with you.
-      </p>
-
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════════
-       WHY EXPERTS WORK WITH US
-  ═══════════════════════════════════════════ -->
-  <section class="why-section">
-    <div class="container">
-      <p class="section-label reveal">What the work looks like</p>
-
-      <div class="why-grid">
-
-        <div class="why-block reveal">
-          <i data-lucide="circle-dollar-sign" class="why-icon"></i>
-          <h3 class="why-title">Paid engagements.</h3>
-          <p class="why-body">Compensation for every validated interview or consultation. Rates reflect the depth of your expertise, not the shape of a generic survey. Your time has real value — we price it accordingly.</p>
-        </div>
-
-        <div class="why-block reveal">
-          <i data-lucide="calendar-clock" class="why-icon"></i>
-          <h3 class="why-title">Flexible participation.</h3>
-          <p class="why-body">Async or live. Video, audio, or written. Fit it around your work, not the other way around. Review the brief, accept or decline — no obligation either way.</p>
-        </div>
-
-        <div class="why-block reveal">
-          <i data-lucide="zap" class="why-icon"></i>
-          <h3 class="why-title">High-signal conversations.</h3>
-          <p class="why-body">You'll be matched to questions that belong in your domain. No generic surveys. No padding. The briefs are specific, the questions are real, and your answers shape how companies make decisions.</p>
-        </div>
-
+      <div class="value rv">
+        <span class="value-n">Quality</span>
+        <h3 class="value-head">High-signal conversations.</h3>
+        <p class="value-body">You'll be matched to questions that belong in your domain. No generic surveys. No wasted time. The briefs are specific and the questions are real.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
 
-  <!-- ═══════════════════════════════════════════
-       WHAT THE ENGAGEMENT LOOKS LIKE
-  ═══════════════════════════════════════════ -->
-  <section class="process-section">
-    <div class="container">
-      <div class="process-inner">
+<!-- ═══ PROCESS ════════════════════════════════════ -->
+<section class="process">
+  <div class="wrap">
+    <div class="process-grid">
 
-        <div class="process-label-col reveal">
-          <p class="section-label" style="margin-bottom: 0;">The process</p>
+      <div class="process-aside rv">
+        <h2 class="process-aside-hl">How an engagement works.</h2>
+        <p class="process-aside-body">No IP required. No long-term commitment. Just a clear brief, a matched question, and a decision.</p>
+      </div>
+
+      <div class="process-steps">
+
+        <div class="process-step rv">
+          <span class="ps-n">01</span>
+          <div class="ps-body">
+            <h3 class="ps-head">Companies bring us questions they can't answer alone.</h3>
+            <p class="ps-copy">Pricing thresholds they can't validate internally. Competitive dynamics they can't see from inside the org. Market signals they can collect but not interpret.</p>
+          </div>
         </div>
 
-        <div class="process-paragraphs">
+        <div class="process-step rv">
+          <span class="ps-n">02</span>
+          <div class="ps-body">
+            <h3 class="ps-head">We match those questions to qualified experts.</h3>
+            <p class="ps-copy">Not keyword matching — actual domain fit. The match matters. If a question isn't in your wheelhouse, it shouldn't reach you, and we work hard to ensure it doesn't.</p>
+          </div>
+        </div>
 
-          <p class="process-para reveal">
-            <strong>Companies bring us questions they can't answer alone.</strong> Pricing thresholds they can't validate internally. Competitive dynamics they can't see from inside the org. Market signals they can collect but not interpret. These are the questions that reach our expert network.
-          </p>
+        <div class="process-step rv">
+          <span class="ps-n">03</span>
+          <div class="ps-body">
+            <h3 class="ps-head">You review the brief and decide.</h3>
+            <p class="ps-copy">Every engagement comes with a clear description of the question, the context, the format, and the compensation. Accept or decline. No pressure. No obligation.</p>
+          </div>
+        </div>
 
-          <p class="process-para reveal">
-            <strong>We match those questions to qualified experts in our network.</strong> Not keyword matching — actual domain fit. If a company is trying to understand enterprise infrastructure buying behavior, that goes to people who have lived in that world. The match matters.
-          </p>
-
-          <p class="process-para reveal">
-            <strong>You review the brief and decide.</strong> Every engagement comes with a clear description of the question, the context, the format, and the compensation. You accept or decline. No obligation. No pressure. If the question isn't in your wheelhouse, it shouldn't reach you — and we work hard to make sure it doesn't.
-          </p>
-
-          <p class="process-para reveal">
-            <strong>If you engage, your insight shapes real decisions.</strong> Not academic research. Not a slide deck. The synthesis goes directly into pricing models, competitive strategy, and product roadmaps. What you know has commercial consequence — we take that seriously.
-          </p>
-
+        <div class="process-step rv">
+          <span class="ps-n">04</span>
+          <div class="ps-body">
+            <h3 class="ps-head">Your insight shapes real decisions.</h3>
+            <p class="ps-copy">Not academic research. Not a slide deck. The synthesis goes directly into pricing models, competitive strategy, and product roadmaps. What you know has commercial consequence.</p>
+          </div>
         </div>
 
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
 
-  <!-- ═══════════════════════════════════════════
-       APPLICATION FORM
-  ═══════════════════════════════════════════ -->
-  <section class="application-section" id="apply">
-    <div class="container">
+<!-- ═══ APPLICATION FORM ══════════════════════════ -->
+<section class="apply" id="apply">
+  <div class="wrap">
 
-      <div class="application-header reveal">
-        <p class="section-label">Apply to join</p>
-        <h2>Apply to join the expert network.</h2>
-        <p>We review every application and reach out to those who match active engagements.</p>
+    <div class="apply-header rv">
+      <h2 class="apply-hl">Apply to join the expert network.</h2>
+      <p class="apply-sub">We review every application personally and reach out to those who match active engagements.</p>
+    </div>
+
+    <!-- REPLACE: action="https://formspree.io/f/YOUR_EXPERT_FORM_ID" -->
+    <form id="expert-form" action="https://formspree.io/f/YOUR_EXPERT_FORM_ID" method="POST" class="form-block rv">
+
+      <div class="form-section-label">Personal information</div>
+
+      <div class="form-pair">
+        <div class="field">
+          <label for="ex-name">Full Name</label>
+          <input type="text" id="ex-name" name="name" placeholder="Dr. Jane Smith" required>
+        </div>
+        <div class="field">
+          <label for="ex-email">Email Address</label>
+          <input type="email" id="ex-email" name="email" placeholder="jane@university.edu" required>
+        </div>
       </div>
 
-      <!-- REPLACE: action="https://formspree.io/f/YOUR_EXPERT_FORM_ID" -->
-      <form
-        id="expert-form"
-        action="https://formspree.io/f/YOUR_EXPERT_FORM_ID"
-        method="POST"
-        class="form-grid reveal"
-      >
+      <div class="form-section form-section-label">Professional background</div>
 
-        <!-- Personal Info -->
-        <p class="form-section-label">Personal information</p>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" for="ex-name">
-              <i data-lucide="user"></i> Full Name
-            </label>
-            <input type="text" id="ex-name" name="name" class="form-input" placeholder="Dr. Jane Smith" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="ex-email">
-              <i data-lucide="mail"></i> Email Address
-            </label>
-            <input type="email" id="ex-email" name="email" class="form-input" placeholder="jane@university.edu" required>
-          </div>
+      <div class="form-pair">
+        <div class="field">
+          <label for="ex-title">Current Title / Role</label>
+          <input type="text" id="ex-title" name="title" placeholder="Associate Professor / VP of Product" required>
         </div>
-
-        <!-- Professional Info -->
-        <div class="form-section-divider"></div>
-        <p class="form-section-label">Professional background</p>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" for="ex-title">
-              <i data-lucide="badge"></i> Current Title / Role
-            </label>
-            <input type="text" id="ex-title" name="title" class="form-input" placeholder="Associate Professor / VP of Product" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="ex-org">
-              <i data-lucide="building-2"></i> Organization / Institution
-            </label>
-            <input type="text" id="ex-org" name="organization" class="form-input" placeholder="MIT / Stripe / Google" required>
-          </div>
+        <div class="field">
+          <label for="ex-org">Organization / Institution</label>
+          <input type="text" id="ex-org" name="organization" placeholder="MIT / Stripe / Google" required>
         </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" for="ex-linkedin">
-              <i data-lucide="linkedin"></i> LinkedIn Profile URL
-              <span style="color: var(--text-muted); font-weight: 400; font-size: 12px;">(optional)</span>
-            </label>
-            <input type="url" id="ex-linkedin" name="linkedin" class="form-input" placeholder="https://linkedin.com/in/yourname">
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="ex-location">
-              <i data-lucide="map-pin"></i> Location / Time Zone
-            </label>
-            <input type="text" id="ex-location" name="location" class="form-input" placeholder="e.g. New York, EST" required>
-          </div>
-        </div>
-
-        <!-- Domain Expertise -->
-        <div class="form-section-divider"></div>
-        <p class="form-section-label">Domain expertise</p>
-
-        <div class="form-group full">
-          <label class="form-label" for="ex-domain">
-            <i data-lucide="layers"></i> Primary Domain(s) of Expertise
-          </label>
-          <input type="text" id="ex-domain" name="domains" class="form-input" placeholder="e.g. AI infrastructure, enterprise SaaS pricing, behavioral economics, healthcare AI" required>
-        </div>
-
-        <div class="form-group full">
-          <label class="form-label" for="ex-experience">
-            <i data-lucide="clock"></i> Years of experience in your domain
-          </label>
-          <select id="ex-experience" name="experience" class="form-select" required>
-            <option value="" disabled selected>Select range</option>
-            <option value="3-5">3–5 years</option>
-            <option value="5-10">5–10 years</option>
-            <option value="10-15">10–15 years</option>
-            <option value="15+">15+ years</option>
-          </select>
-        </div>
-
-        <!-- Engagement Format -->
-        <div class="form-section-divider"></div>
-        <p class="form-section-label">Engagement preferences</p>
-
-        <div class="form-group full">
-          <label class="form-label" style="margin-bottom: 12px;">
-            <i data-lucide="sliders-horizontal"></i> Engagement format preference
-          </label>
-          <div class="pill-group">
-            <label class="pill-label">
-              <input type="checkbox" name="format" value="async">
-              <span class="pill-dot"></span>
-              Async written responses
-            </label>
-            <label class="pill-label">
-              <input type="checkbox" name="format" value="video">
-              <span class="pill-dot"></span>
-              Live video call (30–45 min)
-            </label>
-            <label class="pill-label">
-              <input type="checkbox" name="format" value="advisory">
-              <span class="pill-dot"></span>
-              Ongoing advisory relationship
-            </label>
-            <label class="pill-label">
-              <input type="checkbox" name="format" value="all">
-              <span class="pill-dot"></span>
-              Open to all formats
-            </label>
-          </div>
-        </div>
-
-        <!-- About Expertise -->
-        <div class="form-group full">
-          <label class="form-label" for="ex-bio">
-            <i data-lucide="pen-line"></i> Tell us about your expertise
-          </label>
-          <textarea
-            id="ex-bio"
-            name="bio"
-            class="form-textarea"
-            rows="5"
-            placeholder="Your background, the problems you've worked on, the industries you understand deeply. What would you bring to a research engagement?"
-            required
-          ></textarea>
-        </div>
-
-        <!-- Source -->
-        <div class="form-section-divider"></div>
-
-        <div class="form-group full">
-          <label class="form-label" for="ex-source">
-            <i data-lucide="compass"></i> How did you hear about Pareto Labs?
-          </label>
-          <select id="ex-source" name="source" class="form-select">
-            <option value="" disabled selected>Select one</option>
-            <option value="linkedin">LinkedIn</option>
-            <option value="referral">Referred by someone</option>
-            <option value="online">Found online</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-
-        <div class="submit-row">
-          <span class="submit-note">We review every application personally.</span>
-          <button type="submit" class="btn btn-accent">
-            Submit Application <i data-lucide="send"></i>
-          </button>
-        </div>
-
-      </form>
-
-      <div class="form-confirm" id="expert-confirm">
-        <i data-lucide="check-circle"></i>
-        <p class="confirm-title">Application received.</p>
-        <p class="confirm-body">We review every submission personally. If there's a match, you'll hear from us directly.</p>
       </div>
 
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════════
-       FOOTER
-  ═══════════════════════════════════════════ -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-inner">
-        <div class="footer-left">
-          <a href="index.html" class="footer-wordmark">Pareto Labs</a>
-          <div class="footer-meta">
-            <a href="https://trypareto.ai">trypareto.ai</a> &nbsp;·&nbsp;
-            <a href="mailto:joseph@trypareto.ai">joseph@trypareto.ai</a>
-          </div>
+      <div class="form-pair">
+        <div class="field">
+          <label for="ex-linkedin">LinkedIn Profile URL <span style="color:var(--ink-3);font-size:10px;letter-spacing:0.04em;">(optional)</span></label>
+          <input type="url" id="ex-linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourname">
         </div>
-        <div class="footer-right">© 2026 Pareto Labs, Inc.</div>
+        <div class="field">
+          <label for="ex-location">Location / Time Zone</label>
+          <input type="text" id="ex-location" name="location" placeholder="New York, EST" required>
+        </div>
       </div>
+
+      <div class="form-section form-section-label">Domain expertise</div>
+
+      <div class="field">
+        <label for="ex-domain">Primary Domain(s) of Expertise</label>
+        <input type="text" id="ex-domain" name="domains" placeholder="e.g. AI infrastructure, enterprise SaaS pricing, behavioral economics" required>
+      </div>
+
+      <div class="field">
+        <label for="ex-exp">Years of experience in your domain</label>
+        <select id="ex-exp" name="experience" required>
+          <option value="" disabled selected>Select range</option>
+          <option value="3-5">3–5 years</option>
+          <option value="5-10">5–10 years</option>
+          <option value="10-15">10–15 years</option>
+          <option value="15+">15+ years</option>
+        </select>
+      </div>
+
+      <div class="form-section form-section-label">Engagement preferences</div>
+
+      <div class="pill-field">
+        <span class="pill-field-label">Preferred engagement format</span>
+        <div class="pill-set">
+          <label class="pill"><input type="checkbox" name="format" value="async"> Async written responses</label>
+          <label class="pill"><input type="checkbox" name="format" value="video"> Live video call (30–45 min)</label>
+          <label class="pill"><input type="checkbox" name="format" value="advisory"> Ongoing advisory</label>
+          <label class="pill"><input type="checkbox" name="format" value="all"> Open to all formats</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="ex-bio">Tell us about your expertise</label>
+        <textarea id="ex-bio" name="bio" rows="5" placeholder="Your background, the problems you've worked on, the industries you understand deeply. What would you bring to a research engagement?" required></textarea>
+      </div>
+
+      <div class="field">
+        <label for="ex-source">How did you hear about Pareto Labs?</label>
+        <select id="ex-source" name="source">
+          <option value="" disabled selected>Select one</option>
+          <option value="linkedin">LinkedIn</option>
+          <option value="referral">Referred by someone</option>
+          <option value="online">Found online</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="submit-row">
+        <span class="submit-note">We review every application personally.</span>
+        <button type="submit" class="btn">Submit Application <i data-lucide="send"></i></button>
+      </div>
+
+    </form>
+
+    <div class="confirm" id="expert-confirm">
+      <i data-lucide="check-circle"></i>
+      <p class="confirm-head">Application received.</p>
+      <p class="confirm-body">We review every submission personally. If there's a match, you'll hear from us directly.</p>
     </div>
-    <div class="footer-tagline">
-      The closed loop no one has built yet.
+
+  </div>
+</section>
+
+
+<!-- ═══ FOOTER ═════════════════════════════════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-row">
+      <div class="footer-left">
+        <a href="index.html" class="footer-mark">Pareto Labs</a>
+        <div class="footer-meta">
+          <a href="https://trypareto.ai">trypareto.ai</a>&ensp;·&ensp;<a href="mailto:joseph@trypareto.ai">joseph@trypareto.ai</a>
+        </div>
+      </div>
+      <div class="footer-copy">© 2026 Pareto Labs, Inc.</div>
     </div>
-  </footer>
+  </div>
+  <div class="footer-ghost">The closed loop no one has built yet.</div>
+</footer>
 
 
-  <!-- ═══════════════════════════════════════════
-       SCRIPTS
-  ═══════════════════════════════════════════ -->
-  <script>
-    // ——— Lucide Icons ———
-    lucide.createIcons();
+<script>
+  lucide.createIcons();
+  gsap.registerPlugin(ScrollTrigger);
 
-    // ——— Nav Scroll State ———
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 24);
-    }, { passive: true });
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('stuck', window.scrollY > 32);
+  }, { passive: true });
 
-    // ——— GSAP ———
-    gsap.registerPlugin(ScrollTrigger);
+  // Hero
+  gsap.set(['#h-kicker','#h-hl','#h-sub'], { opacity: 0, y: 18 });
+  gsap.timeline({ defaults: { ease: 'power2.out' } })
+    .to('#h-kicker', { opacity: 1, y: 0, duration: 0.55, delay: 0.3 })
+    .to('#h-hl',     { opacity: 1, y: 0, duration: 0.8 }, '-=0.3')
+    .to('#h-sub',    { opacity: 1, y: 0, duration: 0.65 }, '-=0.4');
 
-    // Hero entrance
-    gsap.set(['#hero-eyebrow', '#hero-headline', '#hero-sub'], { y: 30 });
-
-    const heroTL = gsap.timeline({ defaults: { ease: 'power3.out' } });
-    heroTL
-      .to('#hero-eyebrow',  { opacity: 1, y: 0, duration: 0.65, delay: 0.25 })
-      .to('#hero-headline', { opacity: 1, y: 0, duration: 0.85 }, '-=0.4')
-      .to('#hero-sub',      { opacity: 1, y: 0, duration: 0.75 }, '-=0.5');
-
-    // Scroll reveals
-    gsap.utils.toArray('.reveal').forEach((el, i) => {
-      gsap.fromTo(el,
-        { opacity: 0, y: 32 },
-        {
-          opacity: 1, y: 0,
-          duration: 0.7,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 82%',
-            toggleActions: 'play none none none'
-          },
-          delay: (i % 3) * 0.1
-        }
-      );
+  // Reveals
+  document.querySelectorAll('.rv').forEach(el => {
+    gsap.to(el, {
+      opacity: 1, y: 0, duration: 0.65, ease: 'power2.out',
+      scrollTrigger: { trigger: el, start: 'top 85%' }
     });
+  });
 
-    // ——— Expert Form Submission ———
-    const expertForm    = document.getElementById('expert-form');
-    const expertConfirm = document.getElementById('expert-confirm');
-
-    expertForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const data = new FormData(expertForm);
-
-      try {
-        const res = await fetch(expertForm.action, {
-          method: 'POST',
-          body: data,
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (res.ok) {
-          gsap.to(expertForm, {
-            opacity: 0, y: -16, duration: 0.4, ease: 'power2.in',
-            onComplete: () => {
-              expertForm.style.display = 'none';
-              expertConfirm.classList.add('visible');
-              lucide.createIcons();
-              gsap.from(expertConfirm, { opacity: 0, y: 16, duration: 0.5, ease: 'power2.out' });
-            }
-          });
-        } else {
-          alert('Something went wrong. Please email us at joseph@trypareto.ai');
-        }
-      } catch (err) {
-        alert('Something went wrong. Please email us at joseph@trypareto.ai');
-      }
+  // Form
+  const eForm = document.getElementById('expert-form');
+  const eConf  = document.getElementById('expert-confirm');
+  eForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    const res = await fetch(eForm.action, {
+      method: 'POST',
+      body: new FormData(eForm),
+      headers: { Accept: 'application/json' }
     });
-  </script>
+    if (res.ok) {
+      gsap.to(eForm, { opacity: 0, y: -12, duration: 0.35, ease: 'power2.in', onComplete: () => {
+        eForm.style.display = 'none';
+        eConf.classList.add('show');
+        lucide.createIcons();
+        gsap.from(eConf, { opacity: 0, y: 12, duration: 0.45, ease: 'power2.out' });
+      }});
+    } else {
+      alert('Something went wrong — email us at joseph@trypareto.ai');
+    }
+  });
+</script>
 
 </body>
 </html>
