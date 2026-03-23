@@ -3,793 +3,848 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pareto Labs — The economic operating system AI never had.</title>
-  <meta name="description" content="AI companies set prices in the dark. Miss competitor moves. Get blindsided by disruption. The intelligence layer is now here.">
+  <title>Pareto Labs — Research network for AI companies</title>
+  <meta name="description" content="We connect AI companies with domain experts and research participants to build better products, faster.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Grotesk:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <link rel="stylesheet" href="assets/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;1,9..144,200;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    /* ── Page-specific styles ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* Hero */
+    :root {
+      --bg:    #F6F3EC;
+      --bg2:   #EDE9E0;
+      --ink:   #14120F;
+      --ink2:  #6A6760;
+      --ink3:  #B8B5AE;
+      --line:  rgba(20, 18, 15, 0.09);
+      --f-d:   'Fraunces', Georgia, serif;
+      --f-b:   'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--f-b);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      /* Subtle grain texture */
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    }
+
+    /* ── NAV ───────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 22px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s, border-color 0.4s;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      background: rgba(246, 243, 236, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-color: var(--line);
+    }
+
+    .nav-logo {
+      font-family: var(--f-d);
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--ink2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── LAYOUT ────────────────────────────────────── */
+    .wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+    .wrap-narrow {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    /* ── HERO ──────────────────────────────────────── */
     .hero {
-      position: relative;
-      min-height: 100vh;
+      min-height: 100svh;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      padding-top: 80px;
+    }
+
+    .hero-body {
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding-bottom: 100px;
-      overflow: hidden;
-      background-color: var(--bg);
+      padding: 0 48px 96px;
+      max-width: 1160px;
+      margin: 0 auto;
+      width: 100%;
     }
 
-    .hero-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-kicker {
-      font-family: var(--ui);
-      font-size: 12px;
+    .hero-eyebrow {
+      font-size: 11px;
       font-weight: 500;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
       color: var(--ink3);
-      margin-bottom: 28px;
-    }
-
-    .hero-headline {
-      font-family: var(--display);
-      font-size: clamp(64px, 9vw, 112px);
-      font-weight: 800;
-      line-height: 0.95;
-      letter-spacing: -0.04em;
-      color: var(--ink);
-      max-width: 760px;
       margin-bottom: 36px;
     }
 
-    .hero-sub {
-      font-family: var(--body);
-      font-size: 18px;
-      font-weight: 300;
-      color: var(--ink2);
-      max-width: 440px;
-      line-height: 1.75;
-      margin-bottom: 52px;
+    .hero-h1 {
+      font-family: var(--f-d);
+      font-size: clamp(58px, 7.5vw, 108px);
+      font-weight: 200;
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin-bottom: 44px;
+    }
+    .hero-h1 em {
+      font-style: italic;
+      font-weight: 200;
     }
 
-    .hero-cta {
+    .hero-bottom {
       display: flex;
-      align-items: center;
-      gap: 32px;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 40px;
       flex-wrap: wrap;
     }
 
-    /* Statements */
-    .statements {
-      padding: 0;
-    }
-
-    .statement {
-      display: grid;
-      grid-template-columns: 64px 1fr auto;
-      align-items: center;
-      gap: 0 48px;
-      padding: 52px 0;
-      border-top: 1px solid var(--rule);
-      transition: background 0.3s ease;
-      cursor: default;
-    }
-
-    .statement:last-child {
-      border-bottom: 1px solid var(--rule);
-    }
-
-    .statement:hover {
-      background: linear-gradient(90deg, var(--cyan-dim) 0%, transparent 35%);
-    }
-
-    .statement-num {
-      font-family: var(--ui);
-      font-size: 13px;
-      font-weight: 400;
-      color: var(--ink3);
-      letter-spacing: 0.06em;
-    }
-
-    .statement-content {}
-
-    .statement-title {
-      font-family: var(--display);
-      font-size: clamp(28px, 3.5vw, 44px);
-      font-weight: 700;
-      color: var(--ink);
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-      margin-bottom: 12px;
-    }
-
-    .statement-body {
-      font-family: var(--body);
-      font-size: 16px;
+    .hero-sub {
+      font-size: 17px;
       font-weight: 300;
       color: var(--ink2);
-      line-height: 1.75;
-      max-width: 560px;
-    }
-
-    .statement-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--cyan);
-      opacity: 0.4;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      flex-shrink: 0;
-    }
-
-    .statement:hover .statement-dot {
-      opacity: 1;
-      transform: scale(1.3);
-    }
-
-    /* Outputs */
-    .outputs {
-      padding: 140px 0;
-    }
-
-    .outputs-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 80px;
-      gap: 40px;
-    }
-
-    .outputs-title {
-      font-family: var(--display);
-      font-size: clamp(40px, 5vw, 60px);
-      font-weight: 700;
-      color: var(--ink);
-      letter-spacing: -0.03em;
-      line-height: 1.05;
-    }
-
-    .outputs-sub {
-      font-family: var(--body);
-      font-size: 15px;
-      font-weight: 300;
-      color: var(--ink2);
-      max-width: 260px;
+      max-width: 440px;
       line-height: 1.7;
-      text-align: right;
     }
 
-    .output-item {
-      display: grid;
-      grid-template-columns: 36px 1fr 1fr;
-      gap: 0 56px;
-      padding: 40px 0;
-      border-top: 1px solid var(--rule);
-      align-items: start;
-      transition: border-color 0.25s ease;
-    }
-
-    .output-item:last-child {
-      border-bottom: 1px solid var(--rule);
-    }
-
-    .output-item:hover {
-      border-color: var(--rule-c);
-    }
-
-    .output-item:hover .output-title {
-      color: var(--cyan);
-    }
-
-    .output-n {
-      font-family: var(--ui);
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--ink3);
-      letter-spacing: 0.08em;
-      padding-top: 3px;
-    }
-
-    .output-title {
-      font-family: var(--display);
-      font-size: 24px;
-      font-weight: 600;
-      color: var(--ink);
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      transition: color 0.25s ease;
-    }
-
-    .output-desc {
-      font-family: var(--body);
-      font-size: 15px;
-      font-weight: 300;
-      color: var(--ink2);
-      line-height: 1.75;
-    }
-
-    /* Why Now */
-    .why-now {
-      background: var(--bg2);
-      padding: 140px 0;
-    }
-
-    .why-now-inner {
-      max-width: 780px;
-    }
-
-    .why-now-kicker {
-      font-family: var(--ui);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink3);
-      margin-bottom: 32px;
-    }
-
-    .why-now-headline {
-      font-family: var(--display);
-      font-size: clamp(28px, 3.8vw, 48px);
-      font-weight: 700;
-      font-style: italic;
-      color: var(--ink);
-      line-height: 1.25;
-      letter-spacing: -0.02em;
-      margin-bottom: 32px;
-    }
-
-    .why-now-body {
-      font-family: var(--body);
-      font-size: 16px;
-      font-weight: 300;
-      color: var(--ink2);
-      line-height: 1.8;
-    }
-
-    /* Contact */
-    .contact {
-      padding: 120px 0;
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 340px 1fr;
-      gap: 0 100px;
-      align-items: start;
-    }
-
-    .contact-left {
-      position: sticky;
-      top: 100px;
-    }
-
-    .contact-title {
-      font-family: var(--display);
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 600;
-      color: var(--ink);
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-      margin-bottom: 16px;
-    }
-
-    .contact-sub {
-      font-family: var(--body);
-      font-size: 15px;
-      font-weight: 300;
-      color: var(--ink2);
-      line-height: 1.75;
-    }
-
-    .contact-details {
-      margin-top: 32px;
+    .hero-ctas {
       display: flex;
-      flex-direction: column;
       gap: 12px;
+      flex-shrink: 0;
+      flex-wrap: wrap;
     }
 
-    .contact-detail {
-      display: flex;
+    .hero-rule {
+      border: none;
+      border-top: 1px solid var(--line);
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    /* ── BUTTONS ───────────────────────────────────── */
+    .btn {
+      display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-family: var(--ui);
+      padding: 13px 26px;
+      font-family: var(--f-b);
       font-size: 13px;
-      color: var(--ink2);
-    }
-
-    .contact-detail-dot {
-      color: var(--cyan);
-      font-size: 10px;
-      flex-shrink: 0;
-    }
-
-    /* Audience rows */
-    .audience {
-      padding: 0 0 120px;
-    }
-
-    .audience-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      gap: 40px;
-      padding: 64px 0;
-      border-top: 1px solid var(--rule);
+      font-weight: 500;
       text-decoration: none;
-      transition: background 0.3s ease;
+      border: 1px solid;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .btn-dark {
+      background: var(--ink);
+      color: var(--bg);
+      border-color: var(--ink);
+    }
+    .btn-dark:hover { background: #2a2824; border-color: #2a2824; }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--line);
+    }
+    .btn-ghost:hover { border-color: var(--ink2); background: var(--bg2); }
+
+    /* ── SECTIONS ──────────────────────────────────── */
+    section {
+      padding: 112px 0;
+      border-top: 1px solid var(--line);
     }
 
-    .audience-row:last-child {
-      border-bottom: 1px solid var(--rule);
+    .section-tag {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      margin-bottom: 56px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .section-tag::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+      max-width: 80px;
     }
 
-    .audience-row:hover {
-      background: linear-gradient(90deg, var(--bg2) 0%, transparent 50%);
+    /* ── INTRO ─────────────────────────────────────── */
+    .intro-text {
+      font-family: var(--f-d);
+      font-size: clamp(24px, 3.2vw, 38px);
+      font-weight: 200;
+      line-height: 1.45;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+    }
+    .intro-text em { font-style: italic; }
+
+    /* ── NUMBERS ───────────────────────────────────── */
+    .numbers-section {
+      padding: 0;
+      border-top: 1px solid var(--line);
+    }
+    .numbers-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .number-item {
+      padding: 64px 48px;
+      border-right: 1px solid var(--line);
+    }
+    .number-item:last-child { border-right: none; }
+    .number-item:first-child { padding-left: 0; }
+    .number-val {
+      font-family: var(--f-d);
+      font-size: clamp(44px, 5vw, 68px);
+      font-weight: 200;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .number-val em { font-style: italic; }
+    .number-label {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--ink2);
+      line-height: 1.55;
     }
 
-    .audience-row:hover .audience-arrow {
-      border-color: var(--cyan-border);
-      color: var(--cyan);
-      transform: translateX(4px);
+    /* ── TWO-COL ───────────────────────────────────── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    @media (min-width: 1100px) {
+      .two-col { grid-template-columns: 5fr 6fr; }
     }
 
-    .audience-kicker {
-      font-family: var(--ui);
-      font-size: 11px;
+    .col-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      margin-bottom: 20px;
+    }
+
+    .col-h2 {
+      font-family: var(--f-d);
+      font-size: clamp(34px, 4vw, 56px);
+      font-weight: 200;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 28px;
+    }
+    .col-h2 em { font-style: italic; }
+
+    .col-body {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--ink2);
+      line-height: 1.75;
+      margin-bottom: 40px;
+    }
+
+    .benefits {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .benefits li {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--ink2);
+      padding-left: 18px;
+      position: relative;
+      line-height: 1.6;
+    }
+    .benefits li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--ink3);
+    }
+
+    /* ── FORM ──────────────────────────────────────── */
+    .form-wrap {
+      background: var(--bg2);
+      padding: 48px;
+    }
+
+    .form-title {
+      font-family: var(--f-d);
+      font-size: 22px;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      margin-bottom: 36px;
+    }
+
+    .fields {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .field {
+      border-bottom: 1px solid var(--line);
+      padding: 18px 0;
+      transition: border-color 0.2s;
+    }
+    .field:first-child { border-top: 1px solid var(--line); }
+    .field:focus-within { border-color: var(--ink2); }
+
+    .field label {
+      display: block;
+      font-size: 10px;
       font-weight: 500;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 12px;
+      color: var(--ink3);
+      margin-bottom: 6px;
     }
 
-    .audience-title {
-      font-family: var(--display);
-      font-size: clamp(22px, 2.8vw, 34px);
-      font-weight: 600;
-      color: var(--ink);
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      margin-bottom: 12px;
-    }
-
-    .audience-body {
-      font-family: var(--body);
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: var(--f-b);
       font-size: 15px;
       font-weight: 300;
-      color: var(--ink2);
-      line-height: 1.75;
-      max-width: 560px;
+      color: var(--ink);
+      padding: 0;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .field input::placeholder,
+    .field textarea::placeholder { color: var(--ink3); }
+    .field select { cursor: pointer; }
+    .field textarea { resize: none; height: 72px; line-height: 1.6; }
+
+    .form-footer {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .form-footer .btn { width: 100%; justify-content: center; }
+
+    .form-note {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--ink3);
+      line-height: 1.6;
+      text-align: center;
     }
 
-    .audience-arrow {
-      width: 48px;
-      height: 48px;
+    /* Success state */
+    .form-success {
+      display: none;
+      padding: 48px 0;
+      text-align: center;
+    }
+    .success-check {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--ink);
       border-radius: 50%;
-      border: 1px solid var(--ink3);
       display: flex;
       align-items: center;
       justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 16px;
+    }
+    .form-success h3 {
+      font-family: var(--f-d);
+      font-size: 24px;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .form-success p {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--ink2);
+    }
+
+    /* ── DIVIDER TEXT ──────────────────────────────── */
+    .divider-text {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-family: var(--f-d);
+      font-size: clamp(18px, 2vw, 24px);
+      font-weight: 200;
+      font-style: italic;
+      color: var(--ink2);
+      letter-spacing: -0.02em;
+    }
+    .divider-text::before,
+    .divider-text::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    /* ── HOW IT WORKS ──────────────────────────────── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 64px;
+    }
+    .step {
+      padding: 0 40px 0 0;
+      border-right: 1px solid var(--line);
+    }
+    .step:last-child { border-right: none; padding-right: 0; }
+    .step:not(:first-child) { padding-left: 40px; }
+    .step-num {
+      font-family: var(--f-d);
+      font-size: 13px;
+      font-weight: 300;
       color: var(--ink3);
-      flex-shrink: 0;
-      transition: border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+      margin-bottom: 20px;
+    }
+    .step-h3 {
+      font-family: var(--f-d);
+      font-size: 22px;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .step-h3 em { font-style: italic; }
+    .step-body {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--ink2);
+      line-height: 1.7;
     }
 
-    /* Responsive */
-    @media (max-width: 860px) {
-      .hero-headline {
-        font-size: clamp(52px, 11vw, 80px);
-      }
-
-      .outputs-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-      }
-
-      .outputs-sub {
-        text-align: left;
-        max-width: 100%;
-      }
-
-      .output-item {
-        grid-template-columns: 32px 1fr;
-        gap: 0 24px;
-      }
-
-      .output-desc {
-        grid-column: 2;
-        margin-top: 8px;
-      }
-
-      .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 60px;
-      }
-
-      .contact-left {
-        position: static;
-      }
-
-      .statement {
-        grid-template-columns: 40px 1fr auto;
-        gap: 0 24px;
-        padding: 40px 0;
-      }
+    /* ── FOOTER ────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 48px 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-logo {
+      font-family: var(--f-d);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--ink);
+    }
+    .footer-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--ink2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--ink); }
+    .footer-copy {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--ink3);
     }
 
-    @media (max-width: 540px) {
-      .hero {
-        padding-bottom: 72px;
-      }
+    /* ── REVEAL ────────────────────────────────────── */
+    .rv {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .rv.in { opacity: 1; transform: none; }
 
-      .hero-headline {
-        letter-spacing: -0.025em;
-      }
-
-      .hero-cta {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-      }
-
-      .statement {
-        grid-template-columns: 1fr auto;
-      }
-
-      .statement-num {
-        display: none;
-      }
-
-      .output-item {
-        grid-template-columns: 1fr;
-        gap: 8px;
-      }
-
-      .output-n {
-        display: none;
-      }
-
-      .audience-row {
-        padding: 48px 0;
-      }
+    /* ── RESPONSIVE ────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 20px 24px; }
+      .wrap, .wrap-narrow { padding: 0 24px; }
+      .hero-body { padding: 0 24px 72px; }
+      .hero-h1 { font-size: clamp(46px, 12vw, 80px); }
+      .hero-bottom { flex-direction: column; align-items: flex-start; }
+      .two-col { grid-template-columns: 1fr; gap: 48px; }
+      .numbers-row { grid-template-columns: 1fr; }
+      .number-item { border-right: none; border-bottom: 1px solid var(--line); padding: 40px 0; }
+      .number-item:first-child { padding-left: 0; }
+      .steps { grid-template-columns: 1fr; gap: 40px; }
+      .step { border-right: none; border-bottom: 1px solid var(--line); padding: 0 0 40px; }
+      .step:last-child { border-bottom: none; padding-bottom: 0; }
+      .step:not(:first-child) { padding-left: 0; }
+      .footer-inner { flex-direction: column; gap: 16px; }
+      .footer-links { flex-wrap: wrap; gap: 20px; justify-content: center; }
+      .nav-links { display: none; }
+      .form-wrap { padding: 32px 24px; }
+      section { padding: 80px 0; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ── Navigation ─────────────────────────────────────────── -->
-  <nav class="nav" id="nav">
-    <a href="index.html" class="nav-mark">Pareto Labs</a>
-    <div class="nav-links">
-      <a href="experts.html" class="nav-link">For Experts</a>
-      <a href="participants.html" class="nav-link">For Researchers</a>
-      <a href="#contact" class="btn" style="padding: 10px 20px; font-size: 12px;">Request Access</a>
-    </div>
-  </nav>
+<!-- NAV ─────────────────────────────────────────── -->
+<nav id="nav">
+  <a class="nav-logo" href="#">Pareto Labs</a>
+  <ul class="nav-links">
+    <li><a href="#experts">Join as an Expert</a></li>
+    <li><a href="#participants">Participate in Research</a></li>
+    <li><a href="mailto:hello@trypareto.ai">Contact</a></li>
+  </ul>
+</nav>
 
-  <!-- ── Hero ───────────────────────────────────────────────── -->
-  <section class="hero dot-grid">
-    <div class="scan-line"></div>
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-
-    <div class="wrap hero-content">
-      <p class="hero-kicker" id="h-kicker">
-        <span class="cursor">trypareto.ai</span>
-      </p>
-      <h1 class="hero-headline" id="h-head">
-        The economic<br>
-        operating system<br>
-        AI never had.
-      </h1>
-      <p class="hero-sub" id="h-sub">
-        AI companies set prices in the dark. Miss competitor moves. Get blindsided by disruption. The intelligence layer is now here.
-      </p>
-      <div class="hero-cta" id="h-cta">
-        <a href="#contact" class="btn">Request Access</a>
-        <a href="#outputs" class="tlink">Learn how it works &rarr;</a>
+<!-- HERO ────────────────────────────────────────── -->
+<div class="hero">
+  <div></div><!-- spacer -->
+  <div class="hero-body">
+    <p class="hero-eyebrow">Pareto Labs &mdash; Research Network</p>
+    <h1 class="hero-h1">Human knowledge.<br><em>Applied intelligently.</em></h1>
+    <div class="hero-bottom">
+      <p class="hero-sub">We connect AI companies with domain experts and research participants to build better products, faster.</p>
+      <div class="hero-ctas">
+        <a href="#experts" class="btn btn-dark">Join as an Expert</a>
+        <a href="#participants" class="btn btn-ghost">Participate in Research</a>
       </div>
     </div>
-  </section>
+  </div>
+  <hr class="hero-rule">
+</div>
 
-  <!-- ── Statements ─────────────────────────────────────────── -->
-  <section class="statements">
-    <div class="wrap">
+<!-- INTRO ───────────────────────────────────────── -->
+<section>
+  <div class="wrap-narrow rv">
+    <p class="intro-text">AI companies are making critical product decisions without the right human insight. We built Pareto Labs to close that gap &mdash; <em>connecting them with experts and participants who actually know.</em></p>
+  </div>
+</section>
 
-      <div class="statement rv">
-        <span class="statement-num">01</span>
-        <div class="statement-content">
-          <h2 class="statement-title">Prices set once a year.</h2>
-          <p class="statement-body">No real customer data. A room, a spreadsheet, and instinct. Markets don't hold still — pricing set annually is pricing set wrong.</p>
-        </div>
-        <div class="statement-dot"></div>
+<!-- NUMBERS ─────────────────────────────────────── -->
+<div class="numbers-section">
+  <div class="wrap">
+    <div class="numbers-row">
+      <div class="number-item rv">
+        <div class="number-val"><em>48h</em></div>
+        <div class="number-label">Average time to your first expert session</div>
       </div>
-
-      <div class="statement rv">
-        <span class="statement-num">02</span>
-        <div class="statement-content">
-          <h2 class="statement-title">Competitors move weekly.</h2>
-          <p class="statement-body">Most companies find out months later — from a churned customer or a news article. By then, the window has closed.</p>
-        </div>
-        <div class="statement-dot"></div>
+      <div class="number-item rv" style="transition-delay:.1s">
+        <div class="number-val">$150<em>+</em></div>
+        <div class="number-label">Average hourly rate for expert consultations</div>
       </div>
-
-      <div class="statement rv">
-        <span class="statement-num">03</span>
-        <div class="statement-content">
-          <h2 class="statement-title">Disruption is invisible.</h2>
-          <p class="statement-body">Until it's catastrophic. The signals were always there. Nobody was synthesizing them for you — in time to matter.</p>
-        </div>
-        <div class="statement-dot"></div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ── Outputs ────────────────────────────────────────────── -->
-  <section class="outputs" id="outputs">
-    <div class="wrap">
-
-      <div class="outputs-header rv">
-        <h2 class="outputs-title">What we produce.</h2>
-        <p class="outputs-sub">Four categories of intelligence. Actionable the week you receive them.</p>
-      </div>
-
-      <div class="output-item rv">
-        <span class="output-n">01</span>
-        <span class="output-title">Real customer intelligence.</span>
-        <p class="output-desc">Not surveys. The actual voice of your market, synthesized and structured — within days, not quarters.</p>
-      </div>
-
-      <div class="output-item rv">
-        <span class="output-n">02</span>
-        <span class="output-title">Competitive signals, explained.</span>
-        <p class="output-desc">Not just what changed — why it changed. And precisely what you should do about it.</p>
-      </div>
-
-      <div class="output-item rv">
-        <span class="output-n">03</span>
-        <span class="output-title">Pricing with conviction.</span>
-        <p class="output-desc">What your market will bear, continuously modeled. Not a spreadsheet. Not a guess.</p>
-      </div>
-
-      <div class="output-item rv">
-        <span class="output-n">04</span>
-        <span class="output-title">Foresight on disruption.</span>
-        <p class="output-desc">What's coming for your market in the next 3–6 months, before your competitors see it.</p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ── Why Now ────────────────────────────────────────────── -->
-  <section class="why-now">
-    <div class="wrap">
-      <div class="why-now-inner">
-        <p class="why-now-kicker kicker-rule rv">Why Now</p>
-        <h2 class="why-now-headline rv">
-          AI reasoning at scale. Real-time data infrastructure. No incumbent has ever closed this loop — from raw market signal to a pricing decision you can act on the same week.
-        </h2>
-        <p class="why-now-body rv">
-          That combination is genuinely new. It won't stay available to only a few companies for long.
-        </p>
+      <div class="number-item rv" style="transition-delay:.2s">
+        <div class="number-val">100<em>%</em></div>
+        <div class="number-label">Remote &mdash; work from anywhere, on your schedule</div>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- ── Contact ────────────────────────────────────────────── -->
-  <section class="contact" id="contact">
-    <div class="wrap">
-      <div class="contact-grid">
+<!-- EXPERTS ─────────────────────────────────────── -->
+<section id="experts">
+  <div class="wrap">
+    <div class="section-tag">Expert Network</div>
+    <div class="two-col">
 
-        <!-- Left -->
-        <div class="contact-left">
-          <h2 class="contact-title rv">Get in touch.</h2>
-          <p class="contact-sub rv">Early access for AI-native companies. Tell us where you are.</p>
-          <div class="contact-details rv">
-            <div class="contact-detail">
-              <span class="contact-detail-dot">&#9679;</span>
-              <span>joseph@trypareto.ai</span>
-            </div>
-            <div class="contact-detail">
-              <span class="contact-detail-dot">&#9679;</span>
-              <span>trypareto.ai</span>
-            </div>
-            <div class="contact-detail">
-              <span class="contact-detail-dot">&#9679;</span>
-              <span>Early access, 2026</span>
-            </div>
-          </div>
-        </div>
+      <!-- Left: Copy -->
+      <div class="rv">
+        <p class="col-label">For professionals</p>
+        <h2 class="col-h2">Share what<br>you know.<br><em>Get paid for it.</em></h2>
+        <p class="col-body">AI companies need your domain expertise to make smarter decisions. Whether you&rsquo;re in finance, healthcare, legal, engineering, or beyond &mdash; your knowledge has real market value and they&rsquo;ll pay well for it.</p>
+        <ul class="benefits">
+          <li>Flexible engagements &mdash; 1-hour calls, async surveys, or ongoing advisory roles</li>
+          <li>Competitive compensation, paid promptly after every session</li>
+          <li>Work with the most ambitious AI teams being built today</li>
+          <li>No cold outreach &mdash; we match you based on your expertise profile</li>
+          <li>Completely confidential &mdash; NDAs provided for every engagement</li>
+        </ul>
+      </div>
 
-        <!-- Right -->
-        <div class="contact-right">
-          <!-- REPLACE: action="https://formspree.io/f/YOUR_CONTACT_FORM_ID" -->
-          <form id="contact-form" action="https://formspree.io/f/YOUR_CONTACT_FORM_ID" method="POST" novalidate>
-            <div class="form-block">
-
-              <div class="form-pair">
-                <div class="field">
-                  <label for="c-name">Full Name</label>
-                  <input type="text" id="c-name" name="name" placeholder="Jane Smith" required>
-                </div>
-                <div class="field">
-                  <label for="c-email">Work Email</label>
-                  <input type="email" id="c-email" name="email" placeholder="jane@company.com" required>
-                </div>
-              </div>
-
-              <div class="form-pair">
-                <div class="field">
-                  <label for="c-company">Company</label>
-                  <input type="text" id="c-company" name="company" placeholder="Acme Corp">
-                </div>
-                <div class="field">
-                  <label for="c-role">Role</label>
-                  <input type="text" id="c-role" name="role" placeholder="Head of Product">
-                </div>
-              </div>
-
+      <!-- Right: Form -->
+      <div class="rv" style="transition-delay:.15s">
+        <div class="form-wrap">
+          <p class="form-title">Apply to the expert network</p>
+          <form id="expert-form" action="https://formspree.io/f/YOUR_EXPERT_FORM_ID" method="POST">
+            <div class="fields">
               <div class="field">
-                <label for="c-message">Message</label>
-                <textarea id="c-message" name="message" rows="4" placeholder="Tell us about what you're working on..."></textarea>
+                <label for="e-name">Full name</label>
+                <input id="e-name" name="name" type="text" placeholder="Jane Smith" required>
               </div>
-
-              <div class="submit-row">
-                <span class="submit-note">We read every message personally.</span>
-                <button type="submit" class="btn">Send</button>
+              <div class="field">
+                <label for="e-email">Work email</label>
+                <input id="e-email" name="email" type="email" placeholder="jane@company.com" required>
               </div>
-
+              <div class="field">
+                <label for="e-role">Current role &amp; company</label>
+                <input id="e-role" name="role" type="text" placeholder="e.g. Head of Risk, Goldman Sachs">
+              </div>
+              <div class="field">
+                <label for="e-domain">Area of expertise</label>
+                <select id="e-domain" name="domain">
+                  <option value="">Select your primary domain</option>
+                  <option>Finance &amp; Investment</option>
+                  <option>Healthcare &amp; Life Sciences</option>
+                  <option>Legal &amp; Compliance</option>
+                  <option>Engineering &amp; Technology</option>
+                  <option>Sales &amp; Go-to-Market</option>
+                  <option>Product &amp; Design</option>
+                  <option>Operations &amp; Supply Chain</option>
+                  <option>Marketing &amp; Brand</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="e-years">Years of experience</label>
+                <select id="e-years" name="years">
+                  <option value="">Select range</option>
+                  <option>3–5 years</option>
+                  <option>5–10 years</option>
+                  <option>10–20 years</option>
+                  <option>20+ years</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="e-linkedin">LinkedIn URL <span style="text-transform:none;letter-spacing:0;font-size:10px">(optional)</span></label>
+                <input id="e-linkedin" name="linkedin" type="url" placeholder="linkedin.com/in/yourname">
+              </div>
+            </div>
+            <div class="form-footer">
+              <button type="submit" class="btn btn-dark">Apply to Join</button>
+              <p class="form-note">We review every application and respond within 2 business days.</p>
             </div>
           </form>
+          <div class="form-success" id="expert-success">
+            <div class="success-check">✓</div>
+            <h3>Application received.</h3>
+            <p>We&rsquo;ll review your profile and be in touch within 2 business days.</p>
+          </div>
+        </div>
+      </div>
 
-          <div class="confirm" id="contact-confirm">
-            <div class="confirm-icon">
-              <i data-lucide="check-circle"></i>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER ─────────────────────────────────────── -->
+<div style="padding: 0 48px; max-width: 1160px; margin: 0 auto;">
+  <div class="divider-text">and for everyone else</div>
+</div>
+
+<!-- PARTICIPANTS ─────────────────────────────────── -->
+<section id="participants">
+  <div class="wrap">
+    <div class="section-tag">Research Participants</div>
+    <div class="two-col">
+
+      <!-- Left: Copy -->
+      <div class="rv">
+        <p class="col-label">For everyone</p>
+        <h2 class="col-h2">Your perspective<br><em>shapes the future</em><br>of AI.</h2>
+        <p class="col-body">AI products are built by the people who use them. Join our research network and help AI companies understand real needs, behaviors, and preferences &mdash; while getting compensated for your time.</p>
+        <ul class="benefits">
+          <li>30–90 minute sessions conducted remotely, on your schedule</li>
+          <li>Cash or gift card compensation for every completed study</li>
+          <li>No technical background required &mdash; all perspectives valued</li>
+          <li>Influence the products that millions of people will use every day</li>
+          <li>Privacy-first &mdash; your data is never sold or shared</li>
+        </ul>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="rv" style="transition-delay:.15s">
+        <div class="form-wrap">
+          <p class="form-title">Join the research network</p>
+          <form id="participant-form" action="https://formspree.io/f/YOUR_PARTICIPANT_FORM_ID" method="POST">
+            <div class="fields">
+              <div class="field">
+                <label for="p-name">Full name</label>
+                <input id="p-name" name="name" type="text" placeholder="Alex Johnson" required>
+              </div>
+              <div class="field">
+                <label for="p-email">Email</label>
+                <input id="p-email" name="email" type="email" placeholder="alex@email.com" required>
+              </div>
+              <div class="field">
+                <label for="p-job">What do you do?</label>
+                <input id="p-job" name="occupation" type="text" placeholder="e.g. Teacher, Nurse, Freelancer, Student">
+              </div>
+              <div class="field">
+                <label for="p-ai">How do you use AI today?</label>
+                <select id="p-ai" name="ai_usage">
+                  <option value="">Select one</option>
+                  <option>Daily &mdash; it&rsquo;s central to my work</option>
+                  <option>Weekly &mdash; for specific tasks</option>
+                  <option>Occasionally &mdash; experimenting</option>
+                  <option>Rarely &mdash; just getting started</option>
+                  <option>Not yet &mdash; but curious</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="p-topics">Topics you care about</label>
+                <input id="p-topics" name="interests" type="text" placeholder="e.g. healthcare AI, creative tools, productivity">
+              </div>
             </div>
-            <h3 class="confirm-head">Message sent.</h3>
-            <p class="confirm-body">We read every submission personally. You'll hear from us directly.</p>
+            <div class="form-footer">
+              <button type="submit" class="btn btn-dark">Join the Network</button>
+              <p class="form-note">We&rsquo;ll only contact you when there&rsquo;s a relevant study. Unsubscribe anytime.</p>
+            </div>
+          </form>
+          <div class="form-success" id="participant-success">
+            <div class="success-check">✓</div>
+            <h3>You&rsquo;re on the list.</h3>
+            <p>We&rsquo;ll reach out when there&rsquo;s a study that matches your profile.</p>
           </div>
         </div>
+      </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS ────────────────────────────────── -->
+<section>
+  <div class="wrap">
+    <div class="section-tag">How it works</div>
+    <p class="intro-text rv" style="max-width:600px">Simple, <em>respectful</em>, and designed around your time.</p>
+    <div class="steps">
+      <div class="step rv" style="transition-delay:.05s">
+        <p class="step-num">01</p>
+        <h3 class="step-h3">Apply or <em>sign up</em></h3>
+        <p class="step-body">Tell us about yourself. Experts share their domain and background. Participants share their interests and how they use AI today.</p>
+      </div>
+      <div class="step rv" style="transition-delay:.15s">
+        <p class="step-num">02</p>
+        <h3 class="step-h3">We <em>match you</em></h3>
+        <p class="step-body">Our team reviews your profile and connects you with AI companies whose research needs match your knowledge and availability.</p>
+      </div>
+      <div class="step rv" style="transition-delay:.25s">
+        <p class="step-num">03</p>
+        <h3 class="step-h3">Show up, <em>get paid</em></h3>
+        <p class="step-body">Attend a short remote session on your schedule. Compensation is sent promptly after completion. No chasing invoices.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ── Audience ───────────────────────────────────────────── -->
-  <section class="audience">
-    <div class="wrap">
-
-      <a href="experts.html" class="audience-row">
-        <div class="audience-content">
-          <p class="audience-kicker">Expert Network</p>
-          <h2 class="audience-title">Are you a researcher, PhD, or industry specialist?</h2>
-          <p class="audience-body">Paid engagements for domain experts. Flexible. High-signal work that shapes real commercial decisions.</p>
-        </div>
-        <div class="audience-arrow">
-          <i data-lucide="arrow-right" width="18" height="18"></i>
-        </div>
-      </a>
-
-      <a href="participants.html" class="audience-row">
-        <div class="audience-content">
-          <p class="audience-kicker">Research Network</p>
-          <h2 class="audience-title">Help companies understand their market.</h2>
-          <p class="audience-body">We recruit real people for AI-powered research interviews. Flexible. Paid. Your insight shapes products that reach millions.</p>
-        </div>
-        <div class="audience-arrow">
-          <i data-lucide="arrow-right" width="18" height="18"></i>
-        </div>
-      </a>
-
+<!-- FOOTER ──────────────────────────────────────── -->
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-logo">Pareto Labs</div>
+      <ul class="footer-links">
+        <li><a href="#experts">Expert Network</a></li>
+        <li><a href="#participants">Research Participants</a></li>
+        <li><a href="mailto:hello@trypareto.ai">hello@trypareto.ai</a></li>
+      </ul>
+      <p class="footer-copy">&copy; 2025 Pareto Labs</p>
     </div>
-  </section>
+  </div>
+</footer>
 
-  <!-- ── Footer ─────────────────────────────────────────────── -->
-  <footer class="footer">
-    <div class="wrap">
-      <div class="footer-row">
-        <div>
-          <span class="footer-mark">Pareto Labs</span>
-          <div class="footer-meta">
-            <a href="https://trypareto.ai">trypareto.ai</a>
-            <a href="mailto:joseph@trypareto.ai">joseph@trypareto.ai</a>
-          </div>
-        </div>
-        <div class="footer-right">
-          <span>&copy; 2026 Pareto Labs, Inc.</span>
-        </div>
-      </div>
-      <span class="footer-ghost">The closed loop no one has built yet.</span>
-    </div>
-  </footer>
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 32);
+  }, { passive: true });
 
-  <!-- ── Scripts ────────────────────────────────────────────── -->
-  <script>
-    // Icons
-    lucide.createIcons();
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.rv').forEach(el => observer.observe(el));
 
-    // Nav stuck on scroll
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('stuck', window.scrollY > 32);
-    }, { passive: true });
-
-    // GSAP
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Hero entrance
-    const heroEls = ['#h-kicker', '#h-head', '#h-sub', '#h-cta'];
-    gsap.set(heroEls, { opacity: 0, y: 24 });
-    const heroTl = gsap.timeline({ delay: 0.1 });
-    heroEls.forEach((el, i) => {
-      heroTl.to(el, { opacity: 1, y: 0, duration: 0.75, ease: 'power2.out' }, i * 0.15);
-    });
-
-    // Scroll reveals
-    document.querySelectorAll('.rv').forEach(el => {
-      gsap.to(el, {
-        opacity: 1,
-        y: 0,
-        duration: 0.65,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 85%',
-        }
-      });
-    });
-
-    // Contact form async submit
-    const form = document.getElementById('contact-form');
-    const confirm = document.getElementById('contact-confirm');
-
-    if (form) {
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const btn = form.querySelector('button[type="submit"]');
-        btn.textContent = 'Sending...';
-        btn.disabled = true;
-
-        try {
-          const data = new FormData(form);
-          const res = await fetch(form.action, {
-            method: 'POST',
-            body: data,
-            headers: { 'Accept': 'application/json' }
-          });
-
-          if (res.ok) {
-            gsap.to(form, { opacity: 0, y: -12, duration: 0.4, ease: 'power2.in', onComplete: () => {
-              form.style.display = 'none';
-              confirm.classList.add('show');
-              gsap.from(confirm, { opacity: 0, y: 16, duration: 0.5, ease: 'power2.out' });
-              lucide.createIcons();
-            }});
-          } else {
-            btn.textContent = 'Send';
-            btn.disabled = false;
-          }
-        } catch {
-          btn.textContent = 'Send';
+  // Form handler
+  function setupForm(formId, successId) {
+    const form = document.getElementById(formId);
+    const success = document.getElementById(successId);
+    if (!form) return;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]');
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          form.closest('.form-wrap').querySelector('form').style.display = 'none';
+          success.style.display = 'block';
+        } else {
+          btn.textContent = 'Try again';
           btn.disabled = false;
         }
-      });
-    }
-  </script>
+      } catch {
+        btn.textContent = 'Try again';
+        btn.disabled = false;
+      }
+    });
+  }
+
+  setupForm('expert-form', 'expert-success');
+  setupForm('participant-form', 'participant-success');
+</script>
 
 </body>
 </html>
