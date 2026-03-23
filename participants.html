@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Join the Pareto Labs research network. Participate in AI-powered interviews that shape real product decisions. Flexible. Paid. Your perspective matters.">
+  <meta property="og:title" content="Research Network — Pareto Labs">
+  <meta property="og:description" content="Your perspective is worth something. Join our research network and help companies understand their markets.">
+  <meta property="og:type" content="website">
+  <title>Research Network — Pareto Labs</title>
+
+  <!-- Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <!-- Animation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Shared Design System -->
+  <link rel="stylesheet" href="assets/style.css">
+
+  <style>
+    /* ——— Hero ——— */
+    .participant-hero {
+      position: relative;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      padding: 140px 40px 100px;
+      overflow: hidden;
+    }
+
+    .participant-hero-bg {
+      position: absolute;
+      inset: 0;
+      background: var(--bg-primary);
+    }
+
+    .participant-hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 50% at 85% 15%, rgba(200, 131, 26, 0.06) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 55% at 15% 85%, rgba(200, 131, 26, 0.04) 0%, transparent 60%);
+      animation: participantMesh 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes participantMesh {
+      0%   { opacity: 0.6; transform: scale(1) translateX(0); }
+      100% { opacity: 1;   transform: scale(1.05) translateX(8px); }
+    }
+
+    .participant-hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: var(--container-width);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .participant-hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      opacity: 0;
+    }
+
+    .participant-hero-eyebrow i {
+      width: 14px;
+      height: 14px;
+    }
+
+    .participant-hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 6vw, 82px);
+      font-weight: 700;
+      line-height: 1.06;
+      letter-spacing: -0.025em;
+      color: var(--text-primary);
+      max-width: 700px;
+      margin-bottom: 28px;
+      opacity: 0;
+    }
+
+    .participant-hero-sub {
+      font-size: clamp(17px, 1.5vw, 20px);
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      max-width: 560px;
+      opacity: 0;
+    }
+
+    /* ——— How It Works ——— */
+    .howitworks-section {
+      padding: var(--section-gap) 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 56px;
+    }
+
+    .step-block {
+      background: var(--bg-primary);
+      padding: 52px 44px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .step-number {
+      font-family: var(--font-display);
+      font-size: 72px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--text-muted);
+      opacity: 0.4;
+      letter-spacing: -0.04em;
+    }
+
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .step-body {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* ——— Who Participates ——— */
+    .who-section {
+      padding: var(--section-gap) 0;
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .who-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.8fr;
+      gap: 100px;
+      align-items: center;
+    }
+
+    .who-label-col {
+      padding-top: 6px;
+    }
+
+    .who-text {
+      font-size: clamp(18px, 1.6vw, 22px);
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    .who-text strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .who-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .who-tag {
+      padding: 7px 16px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* ——— Sign-Up Form ——— */
+    .signup-section {
+      padding: var(--section-gap) 0;
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .signup-header {
+      margin-bottom: 52px;
+    }
+
+    .signup-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(34px, 4vw, 52px);
+      font-weight: 600;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .signup-header p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .form-section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 32px 0;
+    }
+
+    .form-section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .submit-row {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 16px;
+      padding-top: 8px;
+    }
+
+    .submit-note {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ——— Privacy Note ——— */
+    .privacy-note {
+      margin-top: 32px;
+      padding: 20px 24px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .privacy-note i {
+      width: 16px;
+      height: 16px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .privacy-note p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ——— Responsive ——— */
+    @media (max-width: 900px) {
+      .participant-hero {
+        padding: 120px 24px 80px;
+      }
+
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .step-block {
+        padding: 36px 32px;
+      }
+
+      .who-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .submit-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .submit-row .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .participant-hero {
+        padding: 100px 20px 60px;
+      }
+
+      .step-number {
+        font-size: 52px;
+      }
+
+      .signup-header {
+        margin-bottom: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════════ -->
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-link-back">
+      <i data-lucide="arrow-left"></i> Back to Pareto Labs
+    </a>
+    <div class="nav-links">
+      <a href="experts.html" class="nav-link">For Experts <i data-lucide="arrow-right"></i></a>
+      <a href="participants.html" class="nav-link" style="color: var(--text-primary);">For Researchers</a>
+    </div>
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════ -->
+  <section class="participant-hero">
+    <div class="participant-hero-bg"></div>
+    <div class="participant-hero-content">
+
+      <div class="participant-hero-eyebrow" id="hero-eyebrow">
+        <i data-lucide="users"></i> Research Network
+      </div>
+
+      <h1 class="participant-hero-headline" id="hero-headline">
+        Your perspective is worth something.
+      </h1>
+
+      <p class="participant-hero-sub" id="hero-sub">
+        We run research interviews connecting real people with companies making important decisions. Flexible. Paid. Your insight shapes products that reach millions.
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       HOW IT WORKS
+  ═══════════════════════════════════════════ -->
+  <section class="howitworks-section">
+    <div class="container">
+      <p class="section-label reveal">How it works</p>
+
+      <div class="steps-grid">
+
+        <div class="step-block reveal">
+          <span class="step-number">1</span>
+          <h3 class="step-title">Sign up.</h3>
+          <p class="step-body">Tell us about yourself, your background, and what industries or topics you know well. Takes about three minutes. No resume required.</p>
+        </div>
+
+        <div class="step-block reveal">
+          <span class="step-number">2</span>
+          <h3 class="step-title">Get matched.</h3>
+          <p class="step-body">When a company is researching something relevant to your experience, we invite you to participate. You choose whether to accept — no pressure, no obligation.</p>
+        </div>
+
+        <div class="step-block reveal">
+          <span class="step-number">3</span>
+          <h3 class="step-title">Share your perspective.</h3>
+          <p class="step-body">Participate in a structured interview — async text, audio, or live video, whatever works for you. Get compensated for your time, promptly.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       WHO PARTICIPATES
+  ═══════════════════════════════════════════ -->
+  <section class="who-section">
+    <div class="container">
+      <div class="who-inner">
+
+        <div class="who-label-col reveal">
+          <p class="section-label" style="margin-bottom: 0;">Who participates</p>
+        </div>
+
+        <div class="reveal">
+          <p class="who-text">
+            We work with practitioners at every level — <strong>startup founders, enterprise operators, domain professionals, academics, and everyday users of technology.</strong> If you've had real experience with a product, an industry, or a problem someone is trying to solve, your perspective is valuable. We're not looking for credentials. We're looking for people who've actually been there.
+          </p>
+
+          <div class="who-tags">
+            <span class="who-tag">Startup founders</span>
+            <span class="who-tag">Enterprise operators</span>
+            <span class="who-tag">Product professionals</span>
+            <span class="who-tag">Domain practitioners</span>
+            <span class="who-tag">Academics &amp; researchers</span>
+            <span class="who-tag">Active tech users</span>
+            <span class="who-tag">Industry veterans</span>
+            <span class="who-tag">Buyers &amp; decision-makers</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SIGN-UP FORM
+  ═══════════════════════════════════════════ -->
+  <section class="signup-section" id="join">
+    <div class="container">
+
+      <div class="signup-header reveal">
+        <p class="section-label">Join the network</p>
+        <h2>Join the research network.</h2>
+        <p>Takes about 3 minutes. We'll reach out when there's an interview that fits your background.</p>
+      </div>
+
+      <!-- REPLACE: action="https://formspree.io/f/YOUR_PARTICIPANT_FORM_ID" -->
+      <form
+        id="participant-form"
+        action="https://formspree.io/f/YOUR_PARTICIPANT_FORM_ID"
+        method="POST"
+        class="form-grid reveal"
+      >
+
+        <!-- About You -->
+        <p class="form-section-label">About you</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="p-name">
+              <i data-lucide="user"></i> Full Name
+            </label>
+            <input type="text" id="p-name" name="name" class="form-input" placeholder="Alex Johnson" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="p-email">
+              <i data-lucide="mail"></i> Email Address
+            </label>
+            <input type="email" id="p-email" name="email" class="form-input" placeholder="alex@example.com" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="p-role">
+              <i data-lucide="briefcase"></i> Current Role / Profession
+            </label>
+            <input type="text" id="p-role" name="role" class="form-input" placeholder="Product Manager / Founder / Engineer" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="p-industry">
+              <i data-lucide="tag"></i> Industry / Field
+            </label>
+            <input type="text" id="p-industry" name="industry" class="form-input" placeholder="e.g. SaaS, healthcare, fintech, education" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="p-location">
+              <i data-lucide="map-pin"></i> Country / Region
+            </label>
+            <input type="text" id="p-location" name="location" class="form-input" placeholder="United States, Europe, APAC..." required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="p-format">
+              <i data-lucide="video"></i> Preferred participation format
+            </label>
+            <select id="p-format" name="format" class="form-select">
+              <option value="" disabled selected>Select preference</option>
+              <option value="async">Async text</option>
+              <option value="audio">Audio</option>
+              <option value="video">Live video</option>
+              <option value="any">No preference</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Experience -->
+        <div class="form-section-divider"></div>
+        <p class="form-section-label">Your experience</p>
+
+        <div class="form-group full">
+          <label class="form-label" for="p-experience">
+            <i data-lucide="pen-line"></i> Topics or industries you have real experience with
+          </label>
+          <textarea
+            id="p-experience"
+            name="experience"
+            class="form-textarea"
+            rows="3"
+            placeholder="Tell us what you know. Products you've used, industries you've worked in, problems you've lived. There's no wrong answer — just be specific."
+            required
+          ></textarea>
+        </div>
+
+        <!-- Compensation -->
+        <div class="form-section-divider"></div>
+        <p class="form-section-label">Compensation preference</p>
+
+        <div class="form-group full">
+          <label class="form-label" style="margin-bottom: 12px;">
+            <i data-lucide="wallet"></i> How would you like to be compensated?
+          </label>
+          <div class="pill-group">
+            <label class="pill-label">
+              <input type="radio" name="compensation" value="giftcard">
+              <span class="pill-dot"></span>
+              Gift cards / vouchers
+            </label>
+            <label class="pill-label">
+              <input type="radio" name="compensation" value="direct">
+              <span class="pill-dot"></span>
+              Direct payment (PayPal, Venmo, etc.)
+            </label>
+            <label class="pill-label">
+              <input type="radio" name="compensation" value="charity">
+              <span class="pill-dot"></span>
+              Charitable donation in my name
+            </label>
+            <label class="pill-label">
+              <input type="radio" name="compensation" value="any">
+              <span class="pill-dot"></span>
+              No preference
+            </label>
+          </div>
+        </div>
+
+        <!-- Source -->
+        <div class="form-section-divider"></div>
+
+        <div class="form-group full">
+          <label class="form-label" for="p-source">
+            <i data-lucide="compass"></i> How did you hear about us?
+          </label>
+          <select id="p-source" name="source" class="form-select">
+            <option value="" disabled selected>Select one</option>
+            <option value="linkedin">LinkedIn</option>
+            <option value="referral">Referred by someone</option>
+            <option value="online">Found online</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="submit-row">
+          <span class="submit-note">Takes about 3 minutes.</span>
+          <button type="submit" class="btn btn-accent">
+            Join the Network <i data-lucide="arrow-right"></i>
+          </button>
+        </div>
+
+      </form>
+
+      <!-- Privacy note -->
+      <div class="privacy-note reveal">
+        <i data-lucide="shield"></i>
+        <p>We never share your personal information with third parties. You control whether to participate in any engagement — every invitation is opt-in. Unsubscribe anytime, no questions asked.</p>
+      </div>
+
+      <div class="form-confirm" id="participant-confirm">
+        <i data-lucide="users"></i>
+        <p class="confirm-title">You're in.</p>
+        <p class="confirm-body">We'll reach out when there's an interview that's a good fit. Keep an eye on your inbox.</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-left">
+          <a href="index.html" class="footer-wordmark">Pareto Labs</a>
+          <div class="footer-meta">
+            <a href="https://trypareto.ai">trypareto.ai</a> &nbsp;·&nbsp;
+            <a href="mailto:joseph@trypareto.ai">joseph@trypareto.ai</a>
+          </div>
+        </div>
+        <div class="footer-right">© 2026 Pareto Labs, Inc.</div>
+      </div>
+    </div>
+    <div class="footer-tagline">
+      The closed loop no one has built yet.
+    </div>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════════════ -->
+  <script>
+    // ——— Lucide Icons ———
+    lucide.createIcons();
+
+    // ——— Nav Scroll State ———
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 24);
+    }, { passive: true });
+
+    // ——— GSAP ———
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero entrance
+    gsap.set(['#hero-eyebrow', '#hero-headline', '#hero-sub'], { y: 30 });
+
+    const heroTL = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    heroTL
+      .to('#hero-eyebrow',  { opacity: 1, y: 0, duration: 0.65, delay: 0.25 })
+      .to('#hero-headline', { opacity: 1, y: 0, duration: 0.85 }, '-=0.4')
+      .to('#hero-sub',      { opacity: 1, y: 0, duration: 0.75 }, '-=0.5');
+
+    // Scroll reveals
+    gsap.utils.toArray('.reveal').forEach((el, i) => {
+      gsap.fromTo(el,
+        { opacity: 0, y: 32 },
+        {
+          opacity: 1, y: 0,
+          duration: 0.7,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 82%',
+            toggleActions: 'play none none none'
+          },
+          delay: (i % 3) * 0.1
+        }
+      );
+    });
+
+    // ——— Participant Form Submission ———
+    const participantForm    = document.getElementById('participant-form');
+    const participantConfirm = document.getElementById('participant-confirm');
+
+    participantForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(participantForm);
+
+      try {
+        const res = await fetch(participantForm.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          gsap.to(participantForm, {
+            opacity: 0, y: -16, duration: 0.4, ease: 'power2.in',
+            onComplete: () => {
+              participantForm.style.display = 'none';
+              participantConfirm.classList.add('visible');
+              lucide.createIcons();
+              gsap.from(participantConfirm, { opacity: 0, y: 16, duration: 0.5, ease: 'power2.out' });
+            }
+          });
+        } else {
+          alert('Something went wrong. Please email us at joseph@trypareto.ai');
+        }
+      } catch (err) {
+        alert('Something went wrong. Please email us at joseph@trypareto.ai');
+      }
+    });
+  </script>
+
+</body>
+</html>
