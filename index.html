@@ -890,6 +890,8 @@
 </footer>
 
 <script>
+const SHEETDB_URL = 'https://sheetdb.io/api/v1/13vsrik8tjpsw';
+
 /* ── SCROLL PROGRESS ──────────────────────────── */
 const prog = document.getElementById('prog');
 window.addEventListener('scroll', () => {
@@ -924,25 +926,93 @@ const io = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.rv, .cr, .draw-line').forEach(el => io.observe(el));
 
-/* ── FORM HANDLER ─────────────────────────────── */
-function wire(fid, oid) {
+/* ── VALIDATION ───────────────────────────────── */
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+function validate(f) {
+  const name  = f.querySelector('[name=name]');
+  const email = f.querySelector('[name=email]');
+  if (!name || !name.value.trim()) { name && name.focus(); return 'Please enter your name.'; }
+  if (!email || !EMAIL_RE.test(email.value.trim())) { email && email.focus(); return 'Please enter a valid email address.'; }
+  return null;
+}
+
+function showErr(f, msg) {
+  let el = f.querySelector('.form-err');
+  if (!el) {
+    el = document.createElement('p');
+    el.className = 'form-err';
+    el.style.cssText = 'font-size:12px;color:#c0392b;margin-top:12px;text-align:center;line-height:1.5;';
+    f.querySelector('.form-ft').appendChild(el);
+  }
+  el.textContent = msg;
+}
+function clearErr(f) {
+  const el = f.querySelector('.form-err');
+  if (el) el.textContent = '';
+}
+
+/* ── SHEETDB SUBMITTERS ───────────────────────── */
+async function postSheet(sheet, data) {
+  const res = await fetch(SHEETDB_URL + '?sheet=' + encodeURIComponent(sheet), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ data: [{ Timestamp: new Date().toISOString(), ...data }] }),
+  });
+  if (!res.ok) throw new Error('SheetDB ' + res.status);
+}
+
+function wire(fid, oid, sheet, buildRow) {
   const f = document.getElementById(fid);
-  const o = document.getElementById(oid);
+  const okEl = document.getElementById(oid);
   if (!f) return;
+
   f.addEventListener('submit', async e => {
     e.preventDefault();
+    clearErr(f);
+
+    const err = validate(f);
+    if (err) { showErr(f, err); return; }
+
     const btn = f.querySelector('button[type=submit]');
+    const orig = btn.textContent;
     btn.textContent = 'Sending…'; btn.disabled = true;
+
     try {
-      const r = await fetch(f.action, { method:'POST', body:new FormData(f), headers:{'Accept':'application/json'} });
-      if (r.ok) { f.style.display='none'; o.style.display='block'; }
-      else { btn.textContent='Try again'; btn.disabled=false; }
-    } catch { btn.textContent='Try again'; btn.disabled=false; }
+      await postSheet(sheet, buildRow(f));
+      f.style.display = 'none';
+      okEl.style.display = 'block';
+    } catch {
+      btn.textContent = orig; btn.disabled = false;
+      showErr(f, 'Something went wrong. Email us at hello@trypareto.ai');
+    }
   });
 }
-wire('customer-form','customer-ok');
-wire('expert-form','expert-ok');
-wire('participant-form','participant-ok');
+
+wire('customer-form', 'customer-ok', 'Early Access', f => ({
+  'Name':         f.querySelector('[name=name]').value.trim(),
+  'Email':        f.querySelector('[name=email]').value.trim(),
+  'Company':      f.querySelector('[name=company]').value.trim(),
+  'Role':         f.querySelector('[name=role]').value,
+  'Company Size': f.querySelector('[name=size]').value,
+  'Challenge':    f.querySelector('[name=challenge]').value.trim(),
+}));
+
+wire('expert-form', 'expert-ok', 'Expert Applications', f => ({
+  'Name':              f.querySelector('[name=name]').value.trim(),
+  'Email':             f.querySelector('[name=email]').value.trim(),
+  'Role & Company':    f.querySelector('[name=role]').value.trim(),
+  'Expertise Domain':  f.querySelector('[name=domain]').value,
+  'Years Experience':  f.querySelector('[name=years]').value,
+  'LinkedIn':          f.querySelector('[name=linkedin]').value.trim(),
+}));
+
+wire('participant-form', 'participant-ok', 'Research Participants', f => ({
+  'Name':         f.querySelector('[name=name]').value.trim(),
+  'Email':        f.querySelector('[name=email]').value.trim(),
+  'What They Do': f.querySelector('[name=occupation]').value.trim(),
+  'AI Usage':     f.querySelector('[name=ai_usage]').value,
+  'Topics':       f.querySelector('[name=interests]').value.trim(),
+}));
 
 /* ── CANVAS A: HUMAN NETWORK ──────────────────── */
 (function() {
