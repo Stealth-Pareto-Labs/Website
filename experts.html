@@ -11,6 +11,7 @@
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <link rel="stylesheet" href="assets/style.css">
   <style>
     /* ── Experts-specific styles ── */
@@ -292,8 +293,7 @@
         <p class="apply-sub">We review every application personally.</p>
       </div>
 
-      <!-- REPLACE: action="https://formspree.io/f/YOUR_EXPERT_FORM_ID" -->
-      <form id="expert-form" action="https://formspree.io/f/YOUR_EXPERT_FORM_ID" method="POST" novalidate>
+      <form id="expert-form" novalidate>
         <div class="form-block rv">
 
           <span class="form-section-label first">Personal information</span>
@@ -464,7 +464,13 @@
       });
     });
 
-    // Form submit
+    // Form submit — writes to public.expert_applications via Supabase JS.
+    // The anon key is public-by-design; security is enforced by the table's RLS policy
+    // (insert-only for the anon role).
+    const SUPABASE_URL = 'https://xnanyujjzypcfgjcbzzp.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhuYW55dWpqenlwY2ZnamNienpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4Mzc5MTIsImV4cCI6MjA4NjQxMzkxMn0.64xNiO-6Bzd8gb5DCodt_cBwjZ2d-K_Qyr_YepiCS7I';
+    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
     const form = document.getElementById('expert-form');
     const confirm = document.getElementById('expert-confirm');
 
@@ -475,29 +481,35 @@
         btn.textContent = 'Submitting...';
         btn.disabled = true;
 
-        try {
-          const data = new FormData(form);
-          const res = await fetch(form.action, {
-            method: 'POST',
-            body: data,
-            headers: { 'Accept': 'application/json' }
-          });
+        const fd = new FormData(form);
+        const data = {
+          name:             fd.get('name'),
+          email:            fd.get('email'),
+          title:            fd.get('title'),
+          organization:     fd.get('organization'),
+          linkedin:         fd.get('linkedin'),
+          timezone:         fd.get('timezone'),
+          domain:           fd.get('domain'),
+          years_experience: fd.get('years_experience'),
+          format:           fd.getAll('format'),
+          background:       fd.get('background'),
+          source:           fd.get('source'),
+        };
 
-          if (res.ok) {
-            gsap.to(form, { opacity: 0, y: -12, duration: 0.4, ease: 'power2.in', onComplete: () => {
-              form.style.display = 'none';
-              confirm.classList.add('show');
-              gsap.from(confirm, { opacity: 0, y: 16, duration: 0.5, ease: 'power2.out' });
-              lucide.createIcons();
-            }});
-          } else {
-            btn.textContent = 'Submit Application';
-            btn.disabled = false;
-          }
-        } catch {
+        const { error } = await sb.from('expert_applications').insert(data);
+        if (error) {
+          console.error('Supabase insert error:', error);
           btn.textContent = 'Submit Application';
           btn.disabled = false;
+          return;
         }
+
+        gsap.to(form, { opacity: 0, y: -12, duration: 0.4, ease: 'power2.in', onComplete: () => {
+          form.style.display = 'none';
+          confirm.classList.add('show');
+          gsap.from(confirm, { opacity: 0, y: 16, duration: 0.5, ease: 'power2.out' });
+          lucide.createIcons();
+        }});
       });
     }
   </script>

@@ -751,39 +751,8 @@
           <li>Completely confidential — NDAs provided for every engagement</li>
         </ul>
       </div>
-      <div class="rv" style="transition-delay:.15s">
-        <div class="form-box">
-          <p class="form-ttl">Apply to the expert network</p>
-          <form id="expert-form" action="https://formspree.io/f/YOUR_EXPERT_FORM_ID" method="POST">
-            <div class="fields">
-              <div class="field"><label for="e-name">Full name</label><input id="e-name" name="name" type="text" placeholder="Jane Smith" required></div>
-              <div class="field"><label for="e-email">Work email</label><input id="e-email" name="email" type="email" placeholder="jane@company.com" required></div>
-              <div class="field"><label for="e-role">Current role &amp; company</label><input id="e-role" name="role" type="text" placeholder="e.g. Head of Risk, Goldman Sachs"></div>
-              <div class="field"><label for="e-dom">Area of expertise</label>
-                <select id="e-dom" name="domain">
-                  <option value="">Select your primary domain</option>
-                  <option>Finance &amp; Investment</option><option>Healthcare &amp; Life Sciences</option>
-                  <option>Legal &amp; Compliance</option><option>Engineering &amp; Technology</option>
-                  <option>Sales &amp; Go-to-Market</option><option>Product &amp; Design</option>
-                  <option>Operations &amp; Supply Chain</option><option>Other</option>
-                </select>
-              </div>
-              <div class="field"><label for="e-yrs">Years of experience</label>
-                <select id="e-yrs" name="years">
-                  <option value="">Select range</option>
-                  <option>3–5 years</option><option>5–10 years</option>
-                  <option>10–20 years</option><option>20+ years</option>
-                </select>
-              </div>
-              <div class="field"><label for="e-li">LinkedIn URL (optional)</label><input id="e-li" name="linkedin" type="url" placeholder="linkedin.com/in/yourname"></div>
-            </div>
-            <div class="form-ft">
-              <button type="submit" class="btn btn-solid">Apply to Join</button>
-              <p class="form-note">We review every application and respond within 2 business days.</p>
-            </div>
-          </form>
-          <div class="form-ok" id="expert-ok"><div class="ok-ring">✓</div><h3>Application received.</h3><p>We&rsquo;ll be in touch within 2 business days.</p></div>
-        </div>
+      <div class="rv" style="transition-delay:.15s; display:flex; align-items:center; justify-content:center;">
+        <a href="experts.html" class="btn btn-solid btn-arr" style="font-size:15px; padding:18px 28px;">Apply to join the expert network</a>
       </div>
     </div>
   </div>
@@ -996,15 +965,6 @@ wire('customer-form', 'customer-ok', 'Early Access', f => ({
   'Role':         f.querySelector('[name=role]').value,
   'Company Size': f.querySelector('[name=size]').value,
   'Challenge':    f.querySelector('[name=challenge]').value.trim(),
-}));
-
-wire('expert-form', 'expert-ok', 'Expert Applications', f => ({
-  'Name':              f.querySelector('[name=name]').value.trim(),
-  'Email':             f.querySelector('[name=email]').value.trim(),
-  'Role & Company':    f.querySelector('[name=role]').value.trim(),
-  'Expertise Domain':  f.querySelector('[name=domain]').value,
-  'Years Experience':  f.querySelector('[name=years]').value,
-  'LinkedIn':          f.querySelector('[name=linkedin]').value.trim(),
 }));
 
 wire('participant-form', 'participant-ok', 'Research Participants', f => ({
