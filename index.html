@@ -3,8 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pareto Labs — Market Intelligence for the AI Era</title>
-  <meta name="description" content="Live competitive signals, pricing intelligence, and market simulations — grounded in real human expertise.">
+  <title>Pareto Labs — The Platform for Continual Learning</title>
+  <meta name="description" content="Pareto Labs is building infrastructure for AI agents and models that learn from the world after deployment, adapt safely, and improve with reality.">
+  <link rel="canonical" href="https://www.trypareto.ai/">
+  <meta name="theme-color" content="#F5F2EB">
+
+  <!-- Icons -->
+  <link rel="icon" type="image/png" href="/assets/logo.png">
+  <link rel="apple-touch-icon" href="/assets/logo.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Pareto Labs">
+  <meta property="og:title" content="Pareto Labs — The Platform for Continual Learning">
+  <meta property="og:description" content="Pareto Labs is building infrastructure for AI agents and models that learn from the world after deployment, adapt safely, and improve with reality.">
+  <meta property="og:url" content="https://www.trypareto.ai/">
+  <meta property="og:image" content="https://www.trypareto.ai/og/pareto-labs.png">
+  <meta property="og:image:secure_url" content="https://www.trypareto.ai/og/pareto-labs.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Pareto Labs — The Platform for Continual Learning">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pareto Labs — The Platform for Continual Learning">
+  <meta name="twitter:description" content="Pareto Labs is building infrastructure for AI agents and models that learn from the world after deployment, adapt safely, and improve with reality.">
+  <meta name="twitter:image" content="https://www.trypareto.ai/og/pareto-labs.png">
+  <meta name="twitter:image:alt" content="Pareto Labs — The Platform for Continual Learning">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -12,25 +39,18 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --w:   #F5F2EB;
+    --w:   #F5F2EB;   /* cream paper */
     --w2:  #EAE6DC;
-    --wi:  #14120F;
-    --wi2: #6A6760;
-    --wi3: #B0ADA7;
-    --wl:  rgba(20,18,15,0.09);
-
-    --d:   #080C18;
-    --d2:  #0F1525;
-    --di:  #EEE9E0;
-    --di2: #7A7D8F;
-    --dl:  rgba(238,233,224,0.10);
-    --sig: #B4FF00;
-
+    --wi:  #14120F;   /* ink */
+    --wi2: #6A6760;   /* muted ink */
+    --wi3: #B0ADA7;   /* faint ink */
+    --wl:  rgba(20,18,15,0.10);
+    --gold:#A8854F;   /* network accent */
     --serif: 'IBM Plex Serif', Georgia, serif;
     --sans:  'Inter', system-ui, sans-serif;
   }
 
-  html { scroll-behavior: smooth; }
+  html, body { height: 100%; }
 
   body {
     background: var(--w);
@@ -39,971 +59,257 @@
     font-size: 16px;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+    overflow-x: hidden;
   }
 
-  /* ── SCROLL PROGRESS ─────────────────────────────── */
-  #prog {
-    position: fixed;
-    top: 0; left: 0;
-    width: 0%;
-    height: 2px;
-    background: var(--wi);
-    z-index: 200;
-    transition: width 0.05s linear;
-  }
-  .dark-zone #prog { background: var(--sig); }
-
-  /* ── NAV ─────────────────────────────────────────── */
+  /* ── NAV ─────────────────────────────────────── */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 20px 48px;
+    flex: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: background 0.5s, border-color 0.5s, color 0.5s;
-    border-bottom: 1px solid transparent;
+    padding: 22px 48px;
+    border-bottom: 1px solid var(--wl);
+    position: relative;
+    z-index: 5;
   }
-  nav.on-dark {
-    color: var(--di);
-  }
-  nav.scrolled-light {
-    background: rgba(245,242,235,0.93);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-color: var(--wl);
-  }
-  nav.scrolled-dark {
-    background: rgba(8,12,24,0.93);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-color: var(--dl);
-  }
-
   .nav-logo {
+    display: inline-flex;
+    align-items: center;
     font-family: var(--serif);
-    font-size: 17px;
-    font-weight: 400;
-    color: inherit;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--wi);
     text-decoration: none;
     letter-spacing: -0.01em;
   }
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-    list-style: none;
+  .brand-mark {
+    height: 38px;
+    width: auto;
+    display: block;
+    margin: 0 -5px 0 -8px;
   }
+  .nav-links { display: flex; align-items: center; gap: 30px; list-style: none; }
   .nav-links a {
-    font-size: 13px;
-    font-weight: 400;
-    color: inherit;
-    opacity: 0.55;
-    text-decoration: none;
-    transition: opacity 0.2s;
+    font-size: 13px; font-weight: 400; color: var(--wi2);
+    text-decoration: none; transition: color 0.2s;
   }
-  .nav-links a:hover { opacity: 1; }
+  .nav-links a:hover { color: var(--wi); }
   .nav-cta {
-    opacity: 1 !important;
-    padding: 9px 20px;
-    border: 1px solid currentColor;
-    font-size: 13px !important;
-    font-weight: 500 !important;
-    transition: background 0.2s, color 0.2s !important;
+    padding: 9px 18px; border: 1px solid var(--wi);
+    color: var(--wi) !important; font-weight: 500 !important;
+    transition: background 0.2s, color 0.2s;
   }
-  nav:not(.on-dark) .nav-cta:hover { background: var(--wi); color: var(--w); }
-  nav.on-dark .nav-cta:hover { background: var(--di); color: var(--d); }
+  .nav-cta:hover { background: var(--wi); color: var(--w) !important; }
 
-  /* ── LAYOUT ──────────────────────────────────────── */
-  .wrap      { max-width: 1160px; margin: 0 auto; padding: 0 48px; }
-  .wrap-mid  { max-width: 860px;  margin: 0 auto; padding: 0 48px; }
-  .wrap-thin { max-width: 680px;  margin: 0 auto; padding: 0 48px; }
-
-  /* ── HERO SECTIONS ───────────────────────────────── */
-  .hero-split {
-    min-height: 100svh;
+  /* ── HERO (one screen) ───────────────────────── */
+  .hero {
+    flex: 1 1 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.04fr 0.96fr;
+    min-height: 0;
     position: relative;
-    overflow: hidden;
   }
-  .hero-split.dark-panel { background: var(--d); color: var(--di); }
-
-  .hero-text-col {
+  .hero-text {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    padding: 120px 64px 80px 48px;
+    justify-content: center;
+    padding: 40px 48px 40px 48px;
+    max-width: 660px;
     position: relative;
     z-index: 2;
   }
-  .dark-panel .hero-text-col { padding: 120px 48px 80px 64px; }
-
-  .hero-canvas-col {
-    position: relative;
-    overflow: hidden;
+  .rule {
+    width: 46px; height: 2px; background: var(--wi);
+    margin-bottom: 26px;
   }
-  .hero-canvas-col canvas {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
+  .eyebrow {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--wi2); margin-bottom: 22px;
   }
-
-  .hero-eyebrow {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    opacity: 0.45;
-    margin-bottom: 32px;
-  }
-
-  .hero-h1 {
+  .title {
     font-family: var(--serif);
-    font-size: clamp(44px, 5.5vw, 80px);
+    font-size: clamp(34px, 4.4vw, 58px);
     font-weight: 400;
-    line-height: 1.08;
+    line-height: 1.07;
     letter-spacing: -0.03em;
-    margin-bottom: 36px;
+    margin-bottom: 26px;
   }
-  .hero-h1 em { font-style: italic; font-weight: 300; }
+  .title em { font-style: italic; font-weight: 300; }
+  .abstract {
+    font-size: 15px; font-weight: 300; line-height: 1.72;
+    color: var(--wi2); max-width: 480px; margin-bottom: 14px;
+  }
+  .abstract strong { font-weight: 500; color: var(--wi); }
+  .byline {
+    font-size: 12.5px; font-weight: 400; color: var(--wi3);
+    letter-spacing: 0.02em; margin: 22px 0 30px;
+    padding-top: 18px; border-top: 1px solid var(--wl);
+  }
+  .byline span { color: var(--wi2); }
+  .actions { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
 
-  .hero-body {
-    font-size: 15px;
-    font-weight: 300;
-    line-height: 1.75;
-    opacity: 0.7;
-    max-width: 420px;
-    margin-bottom: 48px;
-  }
-
-  .hero-ctas {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  /* scroll hint */
-  .scroll-hint {
-    position: absolute;
-    bottom: 32px;
-    left: 48px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.08em;
-    opacity: 0.35;
-  }
-  .scroll-line {
-    width: 32px;
-    height: 1px;
-    background: currentColor;
-    animation: scroll-pulse 2s ease-in-out infinite;
-  }
-  @keyframes scroll-pulse {
-    0%, 100% { width: 32px; opacity: 0.35; }
-    50% { width: 52px; opacity: 0.7; }
-  }
-
-  /* ── BUTTONS ─────────────────────────────────────── */
   .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 13px 26px;
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 500;
-    text-decoration: none;
-    border: 1px solid;
-    cursor: pointer;
-    letter-spacing: 0.01em;
-    transition: background 0.22s, color 0.22s, border-color 0.22s;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 24px; font-family: var(--sans); font-size: 13px;
+    font-weight: 500; text-decoration: none; border: 1px solid var(--wi);
+    background: var(--wi); color: var(--w); cursor: pointer;
+    letter-spacing: 0.01em; transition: background 0.2s, color 0.2s, border-color 0.2s;
     white-space: nowrap;
   }
-  .btn-solid { background: var(--wi); color: var(--w); border-color: var(--wi); }
-  .btn-solid:hover { background: #2C2A26; border-color: #2C2A26; }
-  .btn-outline { background: transparent; color: var(--wi); border-color: var(--wl); }
-  .btn-outline:hover { border-color: var(--wi2); background: var(--w2); }
-  .btn-sig { background: var(--sig); color: var(--d); border-color: var(--sig); font-weight: 600; }
-  .btn-sig:hover { background: #C8FF20; border-color: #C8FF20; }
-  .btn-outline-dark { background: transparent; color: var(--di); border-color: var(--dl); }
-  .btn-outline-dark:hover { border-color: rgba(238,233,224,0.35); background: rgba(238,233,224,0.06); }
+  .btn:hover { background: #2C2A26; border-color: #2C2A26; }
+  .link {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 13.5px; font-weight: 400; color: var(--wi);
+    text-decoration: none; border-bottom: 1px solid var(--wl);
+    padding-bottom: 2px; transition: border-color 0.2s, gap 0.2s;
+  }
+  .link:hover { border-color: var(--wi); gap: 11px; }
 
-  /* arrow decoration */
-  .btn-arr::after { content: '→'; font-size: 14px; }
-
-  /* ── DIVIDER BETWEEN HEROES ──────────────────────── */
-  .inter-rule {
-    height: 1px;
-    background: linear-gradient(90deg, var(--wi) 0%, rgba(20,18,15,0.15) 100%);
-  }
-
-  /* ── GENERAL SECTIONS ────────────────────────────── */
-  .section {
-    padding: 112px 0;
-    border-top: 1px solid var(--wl);
-    background: var(--w);
-    color: var(--wi);
-  }
-  .section-dark {
-    padding: 112px 0;
-    background: var(--d);
-    color: var(--di);
-    border-top: none;
-  }
-
-  .section-tag {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    opacity: 0.4;
-    margin-bottom: 56px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .section-tag::after { content: ''; flex:1; height:1px; background: currentColor; opacity:0.15; max-width: 60px; }
-
-  /* ── INTRO STATEMENT ─────────────────────────────── */
-  .statement {
-    font-family: var(--serif);
-    font-size: clamp(22px, 3vw, 36px);
-    font-weight: 400;
-    line-height: 1.45;
-    letter-spacing: -0.025em;
-  }
-  .statement em { font-style: italic; font-weight: 300; }
-
-  /* ── CAPABILITY LIST ─────────────────────────────── */
-  .cap-list { margin-top: 64px; }
-  .cap-item {
-    display: grid;
-    grid-template-columns: 44px 1fr 1fr;
-    gap: 48px;
-    padding: 36px 0;
-    border-top: 1px solid var(--dl);
-    align-items: start;
-  }
-  .section:not(.section-dark) .cap-item { border-color: var(--wl); }
-  .cap-item:last-child { border-bottom: 1px solid var(--dl); }
-  .section:not(.section-dark) .cap-item:last-child { border-color: var(--wl); }
-  .cap-n {
-    font-family: var(--serif);
-    font-size: 13px;
-    font-weight: 300;
-    opacity: 0.35;
-    padding-top: 3px;
-  }
-  .cap-h {
-    font-family: var(--serif);
-    font-size: clamp(18px, 2vw, 26px);
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 1.25;
-  }
-  .cap-h em { font-style: italic; font-weight: 300; }
-  .cap-p {
-    font-size: 14px;
-    font-weight: 300;
-    opacity: 0.65;
-    line-height: 1.75;
-  }
-
-  /* ── STATS ROW ───────────────────────────────────── */
-  .stats-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    margin-top: 72px;
-    border-top: 1px solid var(--dl);
-  }
-  .stat {
-    padding: 40px 32px 40px 0;
-    border-right: 1px solid var(--dl);
-  }
-  .stat:last-child { border-right: none; }
-  .stat-v {
-    font-family: var(--serif);
-    font-size: clamp(30px, 3.5vw, 46px);
-    font-weight: 400;
-    letter-spacing: -0.04em;
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-  .stat-v em { font-style: italic; font-weight: 300; }
-  .stat-l { font-size: 12px; font-weight: 300; opacity: 0.55; line-height: 1.55; }
-
-  /* ── TWO-COL ─────────────────────────────────────── */
-  .two-col {
-    display: grid;
-    grid-template-columns: 5fr 6fr;
-    gap: 80px;
-    align-items: start;
-  }
-  .col-label {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    opacity: 0.4;
-    margin-bottom: 18px;
-  }
-  .col-h {
-    font-family: var(--serif);
-    font-size: clamp(30px, 3.8vw, 52px);
-    font-weight: 400;
-    line-height: 1.08;
-    letter-spacing: -0.03em;
-    margin-bottom: 24px;
-  }
-  .col-h em { font-style: italic; font-weight: 300; }
-  .col-p {
-    font-size: 15px;
-    font-weight: 300;
-    opacity: 0.65;
-    line-height: 1.75;
-    margin-bottom: 36px;
-  }
-  .bens { list-style: none; display: flex; flex-direction: column; gap: 13px; }
-  .bens li {
-    font-size: 14px;
-    font-weight: 300;
-    opacity: 0.65;
-    padding-left: 18px;
+  /* ── HERO CANVAS (gold network) ──────────────── */
+  .hero-canvas {
     position: relative;
-    line-height: 1.6;
+    overflow: hidden;
+    border-left: 1px solid var(--wl);
   }
-  .bens li::before { content: '—'; position: absolute; left: 0; opacity: 0.5; }
+  .hero-canvas canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 
-  /* ── FORM ────────────────────────────────────────── */
-  .form-box {
-    background: var(--w2);
-    padding: 44px;
-  }
-  .dark-zone .form-box { background: var(--d2); }
-
-  .form-ttl {
-    font-family: var(--serif);
-    font-size: 20px;
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    margin-bottom: 32px;
-  }
-  .fields { display: flex; flex-direction: column; }
-  .field {
-    border-bottom: 1px solid var(--wl);
-    padding: 17px 0;
-    transition: border-color 0.2s;
-  }
-  .dark-zone .field { border-color: var(--dl); }
-  .field:first-child { border-top: 1px solid var(--wl); }
-  .dark-zone .field:first-child { border-color: var(--dl); }
-  .field:focus-within { border-color: var(--wi2); }
-  .dark-zone .field:focus-within { border-color: rgba(180,255,0,0.5); }
-  .field label {
-    display: block;
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
-    opacity: 0.4;
-    margin-bottom: 6px;
-  }
-  .field input, .field select, .field textarea {
-    width: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    font-family: var(--sans);
-    font-size: 15px;
-    font-weight: 300;
-    color: inherit;
-    padding: 0;
-    -webkit-appearance: none;
-    appearance: none;
-  }
-  .field input::placeholder, .field textarea::placeholder { opacity: 0.3; }
-  .field select { cursor: pointer; }
-  .field textarea { resize: none; height: 72px; line-height: 1.6; }
-  .form-ft { margin-top: 28px; display: flex; flex-direction: column; gap: 12px; }
-  .form-ft .btn { width: 100%; justify-content: center; }
-  .form-note { font-size: 11px; font-weight: 300; opacity: 0.4; line-height: 1.6; text-align: center; }
-  .form-ok { display: none; padding: 40px 0; text-align: center; }
-  .ok-ring {
-    width: 44px; height: 44px;
-    border: 1px solid currentColor;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 18px;
-    font-size: 18px;
-    opacity: 0.7;
-  }
-  .form-ok h3 {
-    font-family: var(--serif);
-    font-size: 22px;
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    margin-bottom: 6px;
-  }
-  .form-ok p { font-size: 13px; font-weight: 300; opacity: 0.55; }
-
-  /* ── STEPS ───────────────────────────────────────── */
-  .steps {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    margin-top: 64px;
-  }
-  .step { padding: 0 44px 0 0; border-right: 1px solid var(--wl); }
-  .step:last-child { border-right: none; padding-right: 0; }
-  .step:not(:first-child) { padding: 0 44px 0 44px; }
-  .step-n {
-    font-family: var(--serif);
-    font-size: 13px;
-    font-weight: 300;
-    opacity: 0.3;
-    margin-bottom: 20px;
-  }
-  .step-h {
-    font-family: var(--serif);
-    font-size: 21px;
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    margin-bottom: 10px;
-  }
-  .step-h em { font-style: italic; font-weight: 300; }
-  .step-p { font-size: 14px; font-weight: 300; opacity: 0.6; line-height: 1.7; }
-
-  /* ── FOOTER ──────────────────────────────────────── */
+  /* ── FOOTER (one line) ───────────────────────── */
   footer {
-    border-top: 1px solid var(--wl);
-    padding: 44px 0;
-    background: var(--w);
-  }
-  .foot-inner {
+    flex: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 18px;
+    gap: 12px 24px;
+    padding: 18px 48px;
+    border-top: 1px solid var(--wl);
+    font-size: 12.5px;
+    position: relative;
+    z-index: 5;
+    background: var(--w);
   }
-  .foot-logo { font-family: var(--serif); font-size: 15px; font-weight: 400; color: var(--wi); }
-  .foot-links { display: flex; gap: 28px; list-style: none; }
-  .foot-links a { font-size: 13px; font-weight: 300; color: var(--wi2); text-decoration: none; transition: color 0.2s; }
+  .foot-contact { color: var(--wi2); font-weight: 300; }
+  .foot-contact a { color: var(--wi); text-decoration: none; border-bottom: 1px solid var(--wl); transition: border-color 0.2s; }
+  .foot-contact a:hover { border-color: var(--wi); }
+  .foot-links { display: flex; gap: 22px; list-style: none; }
+  .foot-links a { color: var(--wi3); text-decoration: none; font-weight: 300; transition: color 0.2s; }
   .foot-links a:hover { color: var(--wi); }
-  .foot-copy { font-size: 12px; font-weight: 300; color: var(--wi3); }
 
-  /* ── ANIMATIONS ──────────────────────────────────── */
-  /* Clip-path wipe (runcascade style) */
-  .cr {
-    overflow: hidden;
-  }
-  .cr-inner {
-    display: block;
-    transform: translateY(100%);
-    transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .cr.in .cr-inner { transform: translateY(0); }
+  /* ── REVEAL (CSS animation — no JS gate) ─────── */
+  @keyframes rv-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .rv { opacity: 0; animation: rv-rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
-  /* Fade + rise (general) */
-  .rv {
-    opacity: 0;
-    transform: translateY(22px);
-    transition: opacity 0.75s ease, transform 0.75s ease;
+  /* ── FOCUS (a11y) ────────────────────────────── */
+  a:focus-visible, .btn:focus-visible {
+    outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 1px;
   }
-  .rv.in { opacity: 1; transform: none; }
 
-  /* Line draw */
-  .draw-line {
-    width: 0;
-    height: 1px;
-    background: var(--wl);
-    transition: width 1s ease;
-  }
-  .draw-line.in { width: 100%; }
-
-  /* ── RESPONSIVE ──────────────────────────────────── */
-  @media (max-width: 960px) {
+  /* ── RESPONSIVE ──────────────────────────────── */
+  @media (max-width: 900px) {
     nav { padding: 18px 24px; }
-    .wrap, .wrap-mid, .wrap-thin { padding: 0 24px; }
-    .nav-links { display: none; }
-    .hero-split { grid-template-columns: 1fr; min-height: auto; }
-    .hero-canvas-col { height: 40vh; order: -1; }
-    .hero-text-col { padding: 32px 24px 64px; }
-    .dark-panel .hero-text-col { padding: 32px 24px 64px; }
-    .two-col { grid-template-columns: 1fr; gap: 44px; }
-    .cap-item { grid-template-columns: 1fr; gap: 10px; }
-    .cap-n { display: none; }
-    .stats-row { grid-template-columns: 1fr 1fr; }
-    .stat:nth-child(2) { border-right: none; }
-    .stat:nth-child(n+3) { border-top: 1px solid var(--dl); }
-    .steps { grid-template-columns: 1fr; gap: 36px; }
-    .step { border-right: none; border-bottom: 1px solid var(--wl); padding: 0 0 36px; }
-    .step:last-child { border-bottom: none; padding-bottom: 0; }
-    .step:not(:first-child) { padding: 0 0 36px; }
-    .foot-inner { flex-direction: column; gap: 14px; }
-    .foot-links { flex-wrap: wrap; gap: 16px; }
-    .form-box { padding: 28px 20px; }
-    .section, .section-dark { padding: 80px 0; }
+    .nav-links { gap: 18px; }
+    .nav-links li.hide-sm { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-canvas { order: -1; height: 34vh; min-height: 220px; border-left: none; border-bottom: 1px solid var(--wl); }
+    .hero-text { padding: 40px 24px; justify-content: flex-start; max-width: 100%; }
+    footer { padding: 16px 24px; }
+    .foot-links { gap: 16px; }
+  }
+  @media (max-width: 460px) {
+    .nav-links a:not(.nav-cta) { display: none; }
+  }
+
+  /* ── REDUCED MOTION ──────────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .rv { opacity: 1 !important; transform: none !important; animation: none !important; }
   }
   </style>
 </head>
 <body>
 
-<div id="prog"></div>
-
-<!-- NAV ─────────────────────────────────────────── -->
-<nav id="nav">
-  <a class="nav-logo" href="#">Pareto Labs</a>
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="/" aria-label="Pareto Labs"><img class="brand-mark" src="/assets/logo.png" alt=""><span>areto&nbsp;Labs</span></a>
   <ul class="nav-links">
-    <li><a href="#platform">Platform</a></li>
-    <li><a href="#get-access">Early Access</a></li>
-    <li><a href="#experts">Expert Network</a></li>
-    <li><a href="#participants">Participate</a></li>
-    <li><a href="#get-access" class="nav-cta">Get Early Access</a></li>
+    <li><a href="/research/the-learning-layer">Research</a></li>
+    <li class="hide-sm"><a href="mailto:research@trypareto.ai?subject=Work%20With%20Us">Work With Us</a></li>
+    <li class="hide-sm"><a href="mailto:research@trypareto.ai">Contact</a></li>
+    <li><a class="nav-cta" href="mailto:research@trypareto.ai?subject=Request%20Access">Request Access</a></li>
   </ul>
 </nav>
 
-<!-- ═══ SECTION A — HUMAN ════════════════════════ -->
-<div id="section-human" class="hero-split">
-
-  <div class="hero-text-col">
-    <p class="hero-eyebrow">Expert &amp; Research Network</p>
-    <h1 class="hero-h1">
-      <span class="cr"><span class="cr-inner">Human knowledge.</span></span>
-      <br>
-      <span class="cr"><span class="cr-inner" style="transition-delay:.12s"><em>Applied intelligently.</em></span></span>
-    </h1>
-    <p class="hero-body rv" style="transition-delay:.3s">We connect AI companies with domain experts and research participants who provide the ground truth no algorithm can replace.</p>
-    <div class="hero-ctas rv" style="transition-delay:.42s">
-      <a href="#experts" class="btn btn-solid btn-arr">Join as an Expert</a>
-      <a href="#participants" class="btn btn-outline">Participate in Research</a>
-    </div>
-    <div class="scroll-hint rv" style="transition-delay:.55s">
-      <span class="scroll-line"></span>
-      <span>Scroll to explore</span>
+<!-- HERO — research note title page -->
+<main class="hero">
+  <div class="hero-text">
+    <div class="rule rv"></div>
+    <p class="eyebrow rv" style="animation-delay:.05s">The Platform for Continual Learning</p>
+    <h1 class="title rv" style="animation-delay:.12s">The next generation of AI<br>will not <em>be static.</em></h1>
+    <p class="abstract rv" style="animation-delay:.2s">Today&rsquo;s AI systems are powerful, but largely static — trained, shipped, monitored, and patched. The world changes faster than that. <strong>Pareto Labs</strong> is developing the infrastructure that lets agents and models learn continuously and improve themselves safely.</p>
+    <p class="byline rv" style="animation-delay:.28s"><span>Pareto Labs</span> &middot; Research Note 2026 &middot; Currently working with select AI teams, research groups, and enterprise partners.</p>
+    <div class="actions rv" style="animation-delay:.36s">
+      <a class="btn" href="mailto:research@trypareto.ai?subject=Request%20Access">Request Access</a>
+      <a class="link" href="/research/the-learning-layer">Read the research note &rarr;</a>
     </div>
   </div>
 
-  <div class="hero-canvas-col">
-    <canvas id="canvas-human"></canvas>
+  <div class="hero-canvas">
+    <canvas id="net" aria-hidden="true"></canvas>
   </div>
+</main>
 
-</div>
-
-<!-- ═══ SECTION B — SIGNALS ══════════════════════ -->
-<div id="section-signals" class="hero-split dark-panel">
-
-  <div class="hero-canvas-col">
-    <canvas id="canvas-signals"></canvas>
-  </div>
-
-  <div class="hero-text-col">
-    <p class="hero-eyebrow">Intelligence Platform</p>
-    <h1 class="hero-h1">
-      <span class="cr"><span class="cr-inner">Get signals.</span></span>
-      <br>
-      <span class="cr"><span class="cr-inner" style="transition-delay:.1s">Predict &amp; simulate</span></span>
-      <br>
-      <span class="cr"><span class="cr-inner" style="transition-delay:.2s"><em>your market.</em></span></span>
-    </h1>
-    <p class="hero-body rv" style="transition-delay:.35s">Live competitive monitoring, AI cost intelligence, customer tracking, and market simulations — all before disruption strikes.</p>
-    <div class="hero-ctas rv" style="transition-delay:.48s">
-      <a href="#get-access" class="btn btn-sig btn-arr">Get Early Access</a>
-      <a href="#platform" class="btn btn-outline-dark">See the Platform</a>
-    </div>
-  </div>
-
-</div>
-
-<!-- ═══ WHAT WE DO — STATEMENT ═══════════════════ -->
-<div class="section">
-  <div class="wrap-thin">
-    <p class="statement rv">AI companies are flying blind &mdash; pricing in the dark, missing competitor moves, getting disrupted without warning. Pareto Labs is <em>the intelligence layer they never had.</em></p>
-  </div>
-</div>
-
-<!-- ═══ PLATFORM CAPABILITIES ════════════════════ -->
-<div class="section-dark" id="platform">
-  <div class="wrap">
-    <div class="section-tag rv">The Platform</div>
-    <div class="two-col rv">
-      <h2 class="col-h" style="margin-bottom:0">Everything your competitors<br>don&rsquo;t want<br><em>you to know.</em></h2>
-      <p class="col-p" style="margin-bottom:0;align-self:end">Pareto Labs turns live market data and a human expert network into a continuous intelligence feed — price with confidence, anticipate disruption, and outmaneuver competition before they move.</p>
-    </div>
-
-    <div class="cap-list">
-      <div class="cap-item rv">
-        <span class="cap-n">01</span>
-        <h3 class="cap-h">Live Competitive <em>Signals</em></h3>
-        <p class="cap-p">We track every pricing move, product launch, and positioning shift across your competitive landscape in real time. No more discovering a competitor dropped prices after you&rsquo;ve already lost the deal.</p>
-      </div>
-      <div class="cap-item rv" style="transition-delay:.07s">
-        <span class="cap-n">02</span>
-        <h3 class="cap-h">AI Cost &amp; Pricing <em>Intelligence</em></h3>
-        <p class="cap-p">Translate raw AI cost data — inference costs, model pricing shifts, provider changes — directly into your pricing power and revenue strategy. Know exactly what margin you have and where the floor is moving.</p>
-      </div>
-      <div class="cap-item rv" style="transition-delay:.14s">
-        <span class="cap-n">03</span>
-        <h3 class="cap-h">Customer &amp; Market <em>Tracking</em></h3>
-        <p class="cap-p">Full-spectrum visibility into your customers, their behaviors, churn signals, and the competitive options they&rsquo;re evaluating. See the whole board, not just your corner of it.</p>
-      </div>
-      <div class="cap-item rv" style="transition-delay:.21s">
-        <span class="cap-n">04</span>
-        <h3 class="cap-h">Disruption <em>Simulations</em></h3>
-        <p class="cap-p">Run market simulations that model how cost curves, new entrants, and pricing shifts will reshape your category. Predict disruption before it strikes — and have your response ready in advance.</p>
-      </div>
-    </div>
-
-    <div class="stats-row rv">
-      <div class="stat">
-        <div class="stat-v">Real<em>&#8209;time</em></div>
-        <div class="stat-l">Signal monitoring, updated continuously</div>
-      </div>
-      <div class="stat">
-        <div class="stat-v"><em>4</em>×</div>
-        <div class="stat-l">Faster to insight than traditional research</div>
-      </div>
-      <div class="stat">
-        <div class="stat-v">360<em>°</em></div>
-        <div class="stat-l">View across pricing, product, customer &amp; cost</div>
-      </div>
-      <div class="stat">
-        <div class="stat-v"><em>∞</em></div>
-        <div class="stat-l">Market simulations, any scenario, any time</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ EARLY ACCESS FORM ════════════════════════ -->
-<div class="section" id="get-access">
-  <div class="wrap">
-    <div class="section-tag rv">For Companies</div>
-    <div class="two-col">
-      <div class="rv">
-        <p class="col-label">Use the platform</p>
-        <h2 class="col-h">Stop guessing.<br><em>Start knowing.</em></h2>
-        <p class="col-p">We&rsquo;re onboarding a select group of AI companies who want to move from reactive to predictive. Early access includes full platform access and direct support from our team.</p>
-        <ul class="bens">
-          <li>Live competitive monitoring across your entire category</li>
-          <li>Pricing intelligence tied to AI cost data and margins</li>
-          <li>Customer tracking and churn signal detection</li>
-          <li>On-demand market simulations and disruption forecasts</li>
-          <li>Expert network access to validate strategy in real time</li>
-        </ul>
-      </div>
-      <div class="rv" style="transition-delay:.15s">
-        <div class="form-box">
-          <p class="form-ttl">Request early access</p>
-          <form id="customer-form" action="https://formspree.io/f/YOUR_CUSTOMER_FORM_ID" method="POST">
-            <div class="fields">
-              <div class="field"><label for="c-name">Your name</label><input id="c-name" name="name" type="text" placeholder="James Wright" required></div>
-              <div class="field"><label for="c-email">Work email</label><input id="c-email" name="email" type="email" placeholder="james@company.ai" required></div>
-              <div class="field"><label for="c-co">Company</label><input id="c-co" name="company" type="text" placeholder="Your company name"></div>
-              <div class="field"><label for="c-role">Your role</label>
-                <select id="c-role" name="role">
-                  <option value="">Select your role</option>
-                  <option>Founder / CEO</option><option>Head of Product</option>
-                  <option>Head of Revenue / Sales</option><option>Head of Strategy</option>
-                  <option>CFO / Finance</option><option>Growth / Marketing</option><option>Other</option>
-                </select>
-              </div>
-              <div class="field"><label for="c-size">Company size</label>
-                <select id="c-size" name="size">
-                  <option value="">Select size</option>
-                  <option>1–10</option><option>11–50</option><option>51–200</option><option>200+</option>
-                </select>
-              </div>
-              <div class="field"><label for="c-chal">Biggest challenge right now</label><textarea id="c-chal" name="challenge" placeholder="e.g. We don't know how to price against a competitor who just dropped 40%…"></textarea></div>
-            </div>
-            <div class="form-ft">
-              <button type="submit" class="btn btn-solid">Request Early Access</button>
-              <p class="form-note">We review selectively and respond within 48 hours.</p>
-            </div>
-          </form>
-          <div class="form-ok" id="customer-ok"><div class="ok-ring">✓</div><h3>Request received.</h3><p>We&rsquo;ll be in touch within 48 hours.</p></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ EXPERTS ══════════════════════════════════ -->
-<div class="section" id="experts" style="border-top: 1px solid var(--wl);">
-  <div class="wrap">
-    <div class="section-tag rv">Expert Network</div>
-    <div class="two-col">
-      <div class="rv">
-        <p class="col-label">For professionals</p>
-        <h2 class="col-h">Share what<br>you know.<br><em>Get paid for it.</em></h2>
-        <p class="col-p">AI companies need your domain expertise to make smarter decisions. Whether you&rsquo;re in finance, healthcare, legal, or engineering &mdash; your knowledge has real market value.</p>
-        <ul class="bens">
-          <li>Flexible engagements — 1-hour calls, async surveys, or ongoing advisory</li>
-          <li>Competitive compensation, paid promptly after every session</li>
-          <li>Work with the most ambitious AI teams being built today</li>
-          <li>We match you based on your expertise — no cold outreach</li>
-          <li>Completely confidential — NDAs provided for every engagement</li>
-        </ul>
-      </div>
-      <div class="rv" style="transition-delay:.15s; display:flex; align-items:center; justify-content:center;">
-        <a href="https://expert.trypareto.ai/" class="btn btn-solid btn-arr" style="font-size:15px; padding:18px 28px;">Apply to join the expert network</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- divider -->
-<div style="max-width:1160px;margin:0 auto;padding:0 48px;">
-  <div style="display:flex;align-items:center;gap:24px;font-family:var(--serif);font-size:clamp(16px,2vw,22px);font-weight:300;font-style:italic;color:var(--wi2);letter-spacing:-0.02em;">
-    <span style="flex:1;height:1px;background:var(--wl);"></span>
-    and for research participants
-    <span style="flex:1;height:1px;background:var(--wl);"></span>
-  </div>
-</div>
-
-<!-- ═══ PARTICIPANTS ══════════════════════════════ -->
-<div class="section" id="participants">
-  <div class="wrap">
-    <div class="section-tag rv">Research Participants</div>
-    <div class="two-col">
-      <div class="rv">
-        <p class="col-label">For everyone</p>
-        <h2 class="col-h">Your perspective<br><em>shapes the future</em><br>of AI.</h2>
-        <p class="col-p">AI products are built by the people who use them. Help AI companies understand real needs, behaviors, and preferences — while getting compensated for your time.</p>
-        <ul class="bens">
-          <li>30–90 minute sessions, conducted remotely on your schedule</li>
-          <li>Cash or gift card compensation for every completed study</li>
-          <li>No technical background required — all perspectives valued</li>
-          <li>Influence the products that millions of people will use</li>
-          <li>Privacy-first — your data is never sold or shared</li>
-        </ul>
-      </div>
-      <div class="rv" style="transition-delay:.15s">
-        <div class="form-box">
-          <p class="form-ttl">Join the research network</p>
-          <form id="participant-form" action="https://formspree.io/f/YOUR_PARTICIPANT_FORM_ID" method="POST">
-            <div class="fields">
-              <div class="field"><label for="p-name">Full name</label><input id="p-name" name="name" type="text" placeholder="Alex Johnson" required></div>
-              <div class="field"><label for="p-email">Email</label><input id="p-email" name="email" type="email" placeholder="alex@email.com" required></div>
-              <div class="field"><label for="p-job">What do you do?</label><input id="p-job" name="occupation" type="text" placeholder="e.g. Teacher, Nurse, Freelancer, Student"></div>
-              <div class="field"><label for="p-ai">How do you use AI today?</label>
-                <select id="p-ai" name="ai_usage">
-                  <option value="">Select one</option>
-                  <option>Daily — it's central to my work</option>
-                  <option>Weekly — for specific tasks</option>
-                  <option>Occasionally — experimenting</option>
-                  <option>Rarely — just getting started</option>
-                  <option>Not yet — but curious</option>
-                </select>
-              </div>
-              <div class="field"><label for="p-top">Topics you care about</label><input id="p-top" name="interests" type="text" placeholder="e.g. healthcare AI, creative tools, productivity"></div>
-            </div>
-            <div class="form-ft">
-              <button type="submit" class="btn btn-solid">Join the Network</button>
-              <p class="form-note">We&rsquo;ll only contact you when there&rsquo;s a relevant study. Unsubscribe anytime.</p>
-            </div>
-          </form>
-          <div class="form-ok" id="participant-ok"><div class="ok-ring">✓</div><h3>You&rsquo;re on the list.</h3><p>We&rsquo;ll reach out when there&rsquo;s a matching study.</p></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ HOW IT WORKS ══════════════════════════════ -->
-<div class="section">
-  <div class="wrap">
-    <div class="section-tag rv">How it works</div>
-    <p class="statement rv" style="max-width:560px">Simple, <em>respectful</em>, designed around your time.</p>
-    <div class="steps">
-      <div class="step rv" style="transition-delay:.05s">
-        <p class="step-n">01</p>
-        <h3 class="step-h">Apply or <em>sign up</em></h3>
-        <p class="step-p">Tell us about yourself. Experts share domain and background. Participants share their interests and how they engage with AI today.</p>
-      </div>
-      <div class="step rv" style="transition-delay:.15s">
-        <p class="step-n">02</p>
-        <h3 class="step-h">We <em>match you</em></h3>
-        <p class="step-p">Our team reviews your profile and connects you with AI companies whose research needs match your knowledge and availability.</p>
-      </div>
-      <div class="step rv" style="transition-delay:.25s">
-        <p class="step-n">03</p>
-        <h3 class="step-h">Show up, <em>get paid</em></h3>
-        <p class="step-p">Attend a short remote session on your schedule. Compensation is sent promptly after completion. No chasing invoices.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ FOOTER ════════════════════════════════════ -->
+<!-- FOOTER -->
 <footer>
-  <div class="wrap">
-    <div class="foot-inner">
-      <div class="foot-logo">Pareto Labs</div>
-      <ul class="foot-links">
-        <li><a href="#platform">Platform</a></li>
-        <li><a href="#get-access">Early Access</a></li>
-        <li><a href="#experts">Expert Network</a></li>
-        <li><a href="#participants">Participate</a></li>
-        <li><a href="mailto:hello@trypareto.ai">hello@trypareto.ai</a></li>
-        <li><a href="privacy.html">Privacy Policy</a></li>
-      </ul>
-      <p class="foot-copy">&copy; 2026 Pareto Labs</p>
-    </div>
-  </div>
+  <p class="foot-contact">For research collaborations, contact <a href="mailto:research@trypareto.ai">research@trypareto.ai</a></p>
+  <ul class="foot-links">
+    <li><a href="/research/the-learning-layer">Research</a></li>
+    <li><a href="mailto:research@trypareto.ai?subject=Work%20With%20Us">Work With Us</a></li>
+    <li><a href="privacy.html">Privacy</a></li>
+    <li><a>&copy; 2026 Pareto Labs</a></li>
+  </ul>
 </footer>
 
 <script>
-const SHEETDB_URL = 'https://sheetdb.io/api/v1/13vsrik8tjpsw';
-
-/* ── SCROLL PROGRESS ──────────────────────────── */
-const prog = document.getElementById('prog');
-window.addEventListener('scroll', () => {
-  const p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-  prog.style.width = (p * 100) + '%';
-}, { passive: true });
-
-/* ── NAV THEME (light / dark based on current section) ── */
-const nav = document.getElementById('nav');
-const sigSection = document.getElementById('section-signals');
-function updateNav() {
-  const sy = window.scrollY;
-  const sr = sigSection.getBoundingClientRect();
-  const onDark = sr.top < window.innerHeight / 2 && sr.bottom > window.innerHeight / 2;
-  nav.classList.toggle('on-dark', onDark);
-  if (sy > 40) {
-    nav.classList.toggle('scrolled-dark', onDark);
-    nav.classList.toggle('scrolled-light', !onDark);
-    nav.classList.remove(onDark ? 'scrolled-light' : 'scrolled-dark');
-  } else {
-    nav.classList.remove('scrolled-light', 'scrolled-dark');
-  }
-}
-window.addEventListener('scroll', updateNav, { passive: true });
-
-/* ── INTERSECTION OBSERVER (reveals + clip) ───── */
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-  });
-}, { threshold: 0.12 });
-
-document.querySelectorAll('.rv, .cr, .draw-line').forEach(el => io.observe(el));
-
-/* ── VALIDATION ───────────────────────────────── */
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-function validate(f) {
-  const name  = f.querySelector('[name=name]');
-  const email = f.querySelector('[name=email]');
-  if (!name || !name.value.trim()) { name && name.focus(); return 'Please enter your name.'; }
-  if (!email || !EMAIL_RE.test(email.value.trim())) { email && email.focus(); return 'Please enter a valid email address.'; }
-  return null;
-}
-
-function showErr(f, msg) {
-  let el = f.querySelector('.form-err');
-  if (!el) {
-    el = document.createElement('p');
-    el.className = 'form-err';
-    el.style.cssText = 'font-size:12px;color:#c0392b;margin-top:12px;text-align:center;line-height:1.5;';
-    f.querySelector('.form-ft').appendChild(el);
-  }
-  el.textContent = msg;
-}
-function clearErr(f) {
-  const el = f.querySelector('.form-err');
-  if (el) el.textContent = '';
-}
-
-/* ── SHEETDB SUBMITTERS ───────────────────────── */
-async function postSheet(sheet, data) {
-  const res = await fetch(SHEETDB_URL + '?sheet=' + encodeURIComponent(sheet), {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ data: [{ Timestamp: new Date().toISOString(), ...data }] }),
-  });
-  if (!res.ok) throw new Error('SheetDB ' + res.status);
-}
-
-function wire(fid, oid, sheet, buildRow) {
-  const f = document.getElementById(fid);
-  const okEl = document.getElementById(oid);
-  if (!f) return;
-
-  f.addEventListener('submit', async e => {
-    e.preventDefault();
-    clearErr(f);
-
-    const err = validate(f);
-    if (err) { showErr(f, err); return; }
-
-    const btn = f.querySelector('button[type=submit]');
-    const orig = btn.textContent;
-    btn.textContent = 'Sending…'; btn.disabled = true;
-
-    try {
-      await postSheet(sheet, buildRow(f));
-      f.style.display = 'none';
-      okEl.style.display = 'block';
-    } catch {
-      btn.textContent = orig; btn.disabled = false;
-      showErr(f, 'Something went wrong. Email us at hello@trypareto.ai');
-    }
-  });
-}
-
-wire('customer-form', 'customer-ok', 'Early Access', f => ({
-  'Name':         f.querySelector('[name=name]').value.trim(),
-  'Email':        f.querySelector('[name=email]').value.trim(),
-  'Company':      f.querySelector('[name=company]').value.trim(),
-  'Role':         f.querySelector('[name=role]').value,
-  'Company Size': f.querySelector('[name=size]').value,
-  'Challenge':    f.querySelector('[name=challenge]').value.trim(),
-}));
-
-wire('participant-form', 'participant-ok', 'Research Participants', f => ({
-  'Name':         f.querySelector('[name=name]').value.trim(),
-  'Email':        f.querySelector('[name=email]').value.trim(),
-  'What They Do': f.querySelector('[name=occupation]').value.trim(),
-  'AI Usage':     f.querySelector('[name=ai_usage]').value,
-  'Topics':       f.querySelector('[name=interests]').value.trim(),
-}));
-
-/* ── CANVAS A: HUMAN NETWORK ──────────────────── */
+/* ── GOLD KNOWLEDGE NETWORK (production hero animation) ── */
 (function() {
-  const canvas = document.getElementById('canvas-human');
+  const canvas = document.getElementById('net');
+  if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  let nodes = [], W, H;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   const LABELS = ['Finance','Healthcare','Legal','Engineering','Strategy','Operations','Research','Product','Risk','Marketing'];
   const COLORS = ['rgba(190,155,100,', 'rgba(170,135,85,', 'rgba(210,175,120,', 'rgba(155,120,75,'];
+  let nodes = [], W, H, dpr;
 
   function resize() {
-    W = canvas.width = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = canvas.offsetWidth; H = canvas.offsetHeight;
+    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    build();
+  }
+  function build() {
+    const count = Math.max(22, Math.min(44, Math.round((W * H) / 13000)));
     nodes = [];
-    for (let i = 0; i < 38; i++) {
-      const r = Math.random() * 3.5 + 1.5;
+    for (let i = 0; i < count; i++) {
+      const r = Math.random() * 3.4 + 1.5;
       nodes.push({
         x: Math.random() * W, y: Math.random() * H,
-        vx: (Math.random()-.5)*.35, vy: (Math.random()-.5)*.35,
+        vx: (Math.random() - 0.5) * 0.32, vy: (Math.random() - 0.5) * 0.32,
         r, label: i < LABELS.length ? LABELS[i] : null,
-        col: COLORS[i % COLORS.length],
-        phase: Math.random() * Math.PI * 2,
+        col: COLORS[i % COLORS.length], phase: Math.random() * Math.PI * 2,
       });
     }
   }
   resize();
   window.addEventListener('resize', resize);
 
-  function tick() {
+  function frame(t) {
     ctx.clearRect(0, 0, W, H);
-    const t = Date.now() * 0.001;
+    const tt = t * 0.001;
 
     nodes.forEach(n => {
       n.x += n.vx; n.y += n.vy;
@@ -1011,132 +317,33 @@ wire('participant-form', 'participant-ok', 'Research Participants', f => ({
       if (n.y < 0 || n.y > H) n.vy *= -1;
     });
 
-    // Connections
     for (let i = 0; i < nodes.length; i++) {
-      for (let j = i+1; j < nodes.length; j++) {
+      for (let j = i + 1; j < nodes.length; j++) {
         const a = nodes[i], b = nodes[j];
         const dx = a.x - b.x, dy = a.y - b.y;
         const d = Math.sqrt(dx*dx + dy*dy);
-        if (d < 150) {
-          const alpha = (1 - d/150) * 0.12;
+        if (d < 152) {
+          const alpha = (1 - d / 152) * 0.13;
           ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
           ctx.strokeStyle = `rgba(160,130,85,${alpha})`; ctx.lineWidth = 0.6; ctx.stroke();
         }
       }
     }
 
-    // Nodes
     nodes.forEach(n => {
-      const pulse = 0.35 + 0.2 * Math.sin(t * 0.7 + n.phase);
+      const pulse = 0.35 + 0.2 * Math.sin(tt * 0.7 + n.phase);
       ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
       ctx.fillStyle = n.col + pulse + ')'; ctx.fill();
       if (n.label && n.r > 2.5) {
-        ctx.font = '500 10px Inter,sans-serif';
-        ctx.fillStyle = `rgba(140,110,65,${pulse * 0.7})`;
+        ctx.font = '500 10px Inter, sans-serif';
+        ctx.fillStyle = `rgba(140,110,65,${pulse * 0.75})`;
         ctx.fillText(n.label, n.x + n.r + 6, n.y + 3.5);
       }
     });
 
-    requestAnimationFrame(tick);
+    if (!reduce) requestAnimationFrame(frame);
   }
-  tick();
-})();
-
-/* ── CANVAS B: SIGNAL GRID ────────────────────── */
-(function() {
-  const canvas = document.getElementById('canvas-signals');
-  const ctx = canvas.getContext('2d');
-  let nodes = [], signals = [], W, H;
-
-  function resize() {
-    W = canvas.width = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
-    buildNodes();
-  }
-
-  function buildNodes() {
-    nodes = [];
-    const spacing = 72;
-    const cols = Math.floor(W / spacing) + 1;
-    const rows = Math.floor(H / spacing) + 1;
-    const ox = (W - (cols-1)*spacing) / 2;
-    const oy = (H - (rows-1)*spacing) / 2;
-    for (let i = 0; i < cols; i++) {
-      for (let j = 0; j < rows; j++) {
-        nodes.push({
-          x: ox + i*spacing + (Math.random()-.5)*18,
-          y: oy + j*spacing + (Math.random()-.5)*18,
-          bright: 0,
-        });
-      }
-    }
-  }
-
-  resize();
-  window.addEventListener('resize', resize);
-
-  function spawnSignal() {
-    const src = nodes[Math.floor(Math.random() * nodes.length)];
-    src.bright = 1;
-    propagate(src, 0);
-    setTimeout(spawnSignal, 600 + Math.random() * 900);
-  }
-  spawnSignal();
-
-  function propagate(src, depth) {
-    if (depth > 5) return;
-    nodes.forEach(n => {
-      if (n === src) return;
-      const dx = n.x - src.x, dy = n.y - src.y;
-      const d = Math.sqrt(dx*dx + dy*dy);
-      if (d < 110) {
-        const delay = d * 3.5 + Math.random() * 120;
-        setTimeout(() => {
-          if (n.bright < 0.3) {
-            n.bright = Math.max(n.bright, 0.6 + Math.random() * 0.4);
-            if (depth < 4) propagate(n, depth + 1);
-          }
-        }, delay);
-      }
-    });
-  }
-
-  function tick() {
-    ctx.clearRect(0, 0, W, H);
-
-    // Edges
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i+1; j < nodes.length; j++) {
-        const a = nodes[i], b = nodes[j];
-        const dx = a.x - b.x, dy = a.y - b.y;
-        const d = Math.sqrt(dx*dx + dy*dy);
-        if (d < 110) {
-          const bright = Math.max(a.bright, b.bright);
-          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
-          ctx.strokeStyle = `rgba(180,255,0,${0.04 + bright * 0.22})`; ctx.lineWidth = 0.5; ctx.stroke();
-        }
-      }
-    }
-
-    // Nodes
-    nodes.forEach(n => {
-      n.bright *= 0.965;
-      const b = n.bright;
-      if (b > 0.02) {
-        // Glow
-        const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 12 + b*10);
-        g.addColorStop(0, `rgba(180,255,0,${b * 0.18})`);
-        g.addColorStop(1, 'rgba(180,255,0,0)');
-        ctx.beginPath(); ctx.arc(n.x, n.y, 12 + b*10, 0, Math.PI*2);
-        ctx.fillStyle = g; ctx.fill();
-      }
-      ctx.beginPath(); ctx.arc(n.x, n.y, 1.5 + b*2, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(180,255,0,${0.12 + b * 0.75})`; ctx.fill();
-    });
-
-    requestAnimationFrame(tick);
-  }
-  tick();
+  frame(0);
 })();
 </script>
 </body>

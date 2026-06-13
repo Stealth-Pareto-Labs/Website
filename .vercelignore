@@ -1,0 +1,7 @@
+.git
+.gitignore
+supabase
+README.md
+.env
+.env.*
+*.tar.gz
