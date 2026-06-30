@@ -1,0 +1,68 @@
+/* ============================================================
+   Pareto Labs — "Build with Pareto" modal (scoped .bm-*)
+   Self-contained so it works on every page regardless of page CSS.
+   ============================================================ */
+.bm-root { --bm-w:#F5F2EB; --bm-w2:#EFEBE1; --bm-ink:#14120F; --bm-ink2:#6A6760; --bm-ink3:#B0ADA7; --bm-line:rgba(20,18,15,0.12); --bm-gold:#A8854F;
+  --bm-serif:'Newsreader','Tiempos Headline',Georgia,serif; --bm-sans:'Hanken Grotesk','Inter',system-ui,sans-serif; }
+
+.bm-overlay {
+  position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center;
+  padding: 24px; background: rgba(12,10,8,0.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  opacity: 0; visibility: hidden; transition: opacity 0.28s ease, visibility 0.28s ease;
+}
+.bm-overlay.open { opacity: 1; visibility: visible; }
+
+.bm-card {
+  font-family: var(--bm-sans); color: var(--bm-ink); background: var(--bm-w);
+  width: 100%; max-width: 540px; max-height: calc(100vh - 48px); overflow-y: auto;
+  border: 1px solid var(--bm-line); box-shadow: 0 30px 80px -24px rgba(12,10,8,0.5);
+  padding: 40px; position: relative; transform: translateY(16px) scale(0.985); transition: transform 0.32s cubic-bezier(0.16,1,0.3,1);
+}
+.bm-overlay.open .bm-card { transform: none; }
+
+.bm-close { position: absolute; top: 16px; right: 16px; width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center;
+  background: transparent; border: 1px solid transparent; border-radius: 50%; cursor: pointer; color: var(--bm-ink2); transition: color .2s, border-color .2s; }
+.bm-close:hover { color: var(--bm-ink); border-color: var(--bm-line); }
+.bm-close svg { width: 18px; height: 18px; }
+
+.bm-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bm-ink2); margin-bottom: 14px; display: inline-flex; align-items: center; gap: 11px; }
+.bm-eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--bm-gold); }
+.bm-title { font-family: var(--bm-serif); font-size: 28px; font-weight: 400; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 8px; }
+.bm-sub { font-size: 14px; font-weight: 300; color: var(--bm-ink2); line-height: 1.6; margin-bottom: 26px; }
+
+.bm-fields { display: flex; flex-direction: column; }
+.bm-field { border-bottom: 1px solid var(--bm-line); padding: 15px 0; transition: border-color 0.2s; }
+.bm-field:first-of-type { border-top: 1px solid var(--bm-line); }
+.bm-field:focus-within { border-color: var(--bm-ink2); }
+.bm-field label { display: block; font-size: 9px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--bm-ink3); margin-bottom: 6px; }
+.bm-field input, .bm-field select, .bm-field textarea {
+  width: 100%; background: transparent; border: none; outline: none; font-family: var(--bm-sans);
+  font-size: 15px; font-weight: 300; color: var(--bm-ink); padding: 0; -webkit-appearance: none; appearance: none;
+}
+.bm-field input::placeholder, .bm-field textarea::placeholder { color: var(--bm-ink3); }
+.bm-field textarea { resize: none; height: 64px; line-height: 1.6; }
+.bm-field select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23B0ADA7' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 2px center; padding-right: 22px; }
+.bm-field select option { color: #14120F; }
+
+.bm-foot { margin-top: 26px; display: flex; flex-direction: column; gap: 12px; }
+.bm-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 50px; padding: 14px 24px;
+  font-family: var(--bm-sans); font-size: 13px; font-weight: 500; letter-spacing: 0.01em; color: var(--bm-w); background: var(--bm-ink); border: 1px solid var(--bm-ink); cursor: pointer; transition: background 0.2s; }
+.bm-btn:hover { background: #2C2A26; }
+.bm-btn:disabled { opacity: 0.6; cursor: default; }
+.bm-note { font-size: 11px; font-weight: 300; color: var(--bm-ink3); text-align: center; line-height: 1.5; }
+.bm-err { font-size: 12px; color: #b23b2e; text-align: center; line-height: 1.5; min-height: 0; }
+
+.bm-ok { display: none; text-align: center; padding: 18px 0 6px; }
+.bm-ok.show { display: block; }
+.bm-ok .ring { width: 46px; height: 46px; border: 1px solid var(--bm-gold); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: var(--bm-gold); margin-bottom: 18px; }
+.bm-ok .ring svg { width: 20px; height: 20px; }
+.bm-ok h3 { font-family: var(--bm-serif); font-size: 24px; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 8px; }
+.bm-ok p { font-size: 14px; font-weight: 300; color: var(--bm-ink2); line-height: 1.6; max-width: 36ch; margin: 0 auto; }
+
+.bm-lock { overflow: hidden !important; }
+
+@media (max-width: 540px) { .bm-card { padding: 30px 22px; } .bm-title { font-size: 24px; } }
+@media (prefers-reduced-motion: reduce) {
+  .bm-overlay, .bm-card { transition: none; }
+  .bm-overlay.open .bm-card { transform: none; }
+}

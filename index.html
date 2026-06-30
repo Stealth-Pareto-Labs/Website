@@ -35,6 +35,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/build-modal.css">
   <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -489,7 +490,7 @@
       <div class="rv" style="transition-delay:.15s">
         <div class="form-box">
           <p class="form-ttl">Start a conversation</p>
-          <form id="partner-form" novalidate>
+          <form id="partner-form" class="build-form" data-ok="partner-ok" novalidate>
             <div class="fields">
               <div class="field"><label for="c-name">Your name</label><input id="c-name" name="name" type="text" autocomplete="name" placeholder="James Wright" required></div>
               <div class="field"><label for="c-email">Work email</label><input id="c-email" name="email" type="email" autocomplete="email" placeholder="james@company.com" required></div>
@@ -560,7 +561,6 @@
 </footer>
 
 <script>
-const SHEETDB_URL = 'https://sheetdb.io/api/v1/13vsrik8tjpsw';
 const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ── SCROLL PROGRESS ──────────────────────────── */
@@ -601,44 +601,7 @@ if (REDUCE || !('IntersectionObserver' in window)) {
   animEls.forEach(el => io.observe(el));
 }
 
-/* ── PARTNER FORM → SheetDB (graceful fallback) ── */
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-(function() {
-  const f = document.getElementById('partner-form');
-  const ok = document.getElementById('partner-ok');
-  if (!f) return;
-  function showErr(msg) {
-    let el = f.querySelector('.form-err');
-    if (!el) { el = document.createElement('p'); el.className = 'form-err'; el.style.cssText = 'font-size:12px;color:#b23b2e;margin-top:12px;text-align:center;line-height:1.5;'; f.querySelector('.form-ft').appendChild(el); }
-    el.textContent = msg;
-  }
-  f.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const name = f.name.value.trim(), email = f.email.value.trim();
-    if (!name) { showErr('Please enter your name.'); f.name.focus(); return; }
-    if (!EMAIL_RE.test(email)) { showErr('Please enter a valid work email.'); f.email.focus(); return; }
-    const btn = f.querySelector('button[type=submit]'); const orig = btn.textContent;
-    btn.textContent = 'Sending…'; btn.disabled = true;
-    const row = {
-      Timestamp: new Date().toISOString(),
-      Name: name, Email: email,
-      Company: f.company.value.trim(),
-      Type: f.type.value,
-      Challenge: f.challenge.value.trim(),
-    };
-    try {
-      const res = await fetch(SHEETDB_URL + '?sheet=' + encodeURIComponent('Partner Inquiries'), {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ data: [row] }),
-      });
-      if (!res.ok) throw new Error('SheetDB ' + res.status);
-      f.style.display = 'none'; ok.style.display = 'block';
-    } catch {
-      btn.textContent = orig; btn.disabled = false;
-      showErr('Something went wrong — please email hello@trypareto.ai and we’ll respond right away.');
-    }
-  });
-})();
+/* Build-with-Pareto form (inline + modal) handled by /assets/build-modal.js */
 
 /* ── CANVAS A: KNOWLEDGE NETWORK (gold, light hero) ── */
 (function() {
@@ -682,6 +645,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /* (dark hero now uses a premium photograph — signal-grid canvas removed) */
 </script>
+<script src="/assets/build-modal.js" defer></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

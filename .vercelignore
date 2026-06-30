@@ -5,3 +5,5 @@ README.md
 .env
 .env.*
 *.tar.gz
+backend
+docs
