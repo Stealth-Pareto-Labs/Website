@@ -34,7 +34,9 @@
     var band = holder.firstChild;
     footer.parentNode.insertBefore(band, footer);
 
-    // Full-width "Pareto Labs" end-cap (scroll-reactive), right above the footer
+    // Full-width "Pareto Labs" end-cap (marquee + scroll reveal), above the footer
+    var unit = '<span class="plm-item">Pareto&nbsp;Labs</span><span class="plm-sep" aria-hidden="true">&#10022;</span>';
+    var half = ''; for (var u = 0; u < 6; u++) half += unit;
     var cap = document.createElement('section');
     cap.className = 'plw';
     cap.setAttribute('aria-hidden', 'true');
@@ -48,35 +50,17 @@
         '</div>' +
         '<div class="plw-rule"></div>' +
       '</div>' +
-      '<div class="plw-mark"><div class="plw-mark-in">' +
-        '<svg viewBox="0 0 1000 140" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Pareto Labs">' +
-          '<text x="500" y="106" text-anchor="middle" textLength="984" lengthAdjust="spacingAndGlyphs">Pareto Labs</text>' +
-        '</svg>' +
-      '</div></div>' +
+      '<div class="plm-marquee"><div class="plm-track">' + half + half + '</div></div>' +
       '<div class="plw-tag-wrap"><span class="plw-tag">Continuous-learning AI for real-world operations</span></div>';
     footer.parentNode.insertBefore(cap, footer);
 
-    var capReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (capReduce || !('IntersectionObserver' in window)) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
       cap.classList.add('in');
     } else {
       var io2 = new IntersectionObserver(function (es) {
         es.forEach(function (e) { if (e.isIntersecting) { cap.classList.add('in'); io2.unobserve(e.target); } });
-      }, { threshold: 0.18 });
+      }, { threshold: 0.12 });
       io2.observe(cap);
-      var markEl = cap.querySelector('.plw-mark');
-      var ticking = false;
-      function park() {
-        var r = cap.getBoundingClientRect();
-        var vh = window.innerHeight || 800;
-        if (r.bottom > -120 && r.top < vh + 120) {
-          var prog = (vh - r.top) / (vh + r.height);
-          markEl.style.transform = 'translateY(' + ((0.5 - prog) * 34).toFixed(1) + 'px)';
-        }
-        ticking = false;
-      }
-      window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(park); } }, { passive: true });
-      park();
     }
 
     var form = band.querySelector('.nl-form');
