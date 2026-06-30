@@ -38,7 +38,7 @@
     var mark = document.createElement('div');
     mark.className = 'pl-bigmark';
     mark.setAttribute('aria-hidden', 'true');
-    mark.innerHTML = '<span>Pareto&nbsp;Labs</span>';
+    mark.innerHTML = '<span class="pl-rule"></span><span class="pl-word">Pareto&nbsp;Labs</span><span class="pl-tag">Continuous-learning AI for real-world operations</span>';
     footer.parentNode.insertBefore(mark, footer);
 
     var form = band.querySelector('.nl-form');

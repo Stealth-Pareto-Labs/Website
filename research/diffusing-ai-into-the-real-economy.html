@@ -38,15 +38,16 @@
   .article-body > p { font-size: 18px; font-weight: 300; line-height: 1.8; color: #2c2823; margin: 0 0 26px; }
   .article-body > p strong { font-weight: 500; color: var(--wi); }
   .article-body > p:first-of-type::first-letter { font-family: var(--serif); float: left; font-size: 64px; line-height: 0.82; font-weight: 400; padding: 6px 12px 0 0; color: var(--wi); }
-  .article-body h2 { font-family: var(--serif); font-size: clamp(24px,3vw,32px); font-weight: 400; letter-spacing: -0.025em; line-height: 1.2; margin: 48px 0 18px; }
+  .article-body h2 { font-family: var(--serif); font-size: clamp(24px,3vw,32px); font-weight: 400; letter-spacing: -0.025em; line-height: 1.2; margin: 50px 0 18px; }
   .article-body h2 em { font-style: italic; font-weight: 300; }
   .article-body blockquote { margin: 38px 0; padding: 4px 0 4px 28px; border-left: 2px solid var(--gold); }
   .article-body blockquote p { font-family: var(--serif); font-size: clamp(22px,2.6vw,28px); font-weight: 400; font-style: italic; line-height: 1.4; letter-spacing: -0.02em; color: var(--wi); margin: 0; }
   .article-body ul { margin: 0 0 26px; padding: 0; list-style: none; }
   .article-body li { font-size: 17px; font-weight: 300; line-height: 1.7; color: #2c2823; padding-left: 20px; position: relative; margin-bottom: 12px; }
   .article-body li::before { content: ''; position: absolute; left: 0; top: 12px; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+  .article-body li strong { font-weight: 500; color: var(--wi); }
   .article-body a { color: var(--gold); border-bottom: 1px solid var(--gold-soft, rgba(168,133,79,0.3)); }
-  .article-rule { width: 46px; height: 2px; background: var(--gold); margin: 48px 0; }
+  .article-rule { width: 46px; height: 2px; background: var(--gold); margin: 50px 0; }
   .article-foot { padding: 8px 0 0; }
   .article-foot p { font-size: 16px; font-weight: 300; line-height: 1.7; color: var(--wi2); }
   @media (max-width: 560px) { .article-body > p:first-of-type::first-letter { font-size: 52px; } }
@@ -68,10 +69,10 @@
 
 <article class="article">
   <header class="article-head">
-    <p class="article-eyebrow">Essay</p>
+    <p class="article-eyebrow">Perspective</p>
     <h1 class="article-title">Diffusing AI into <em>the real economy.</em></h1>
     <p class="article-dek">The next wave of productivity won&rsquo;t come from bigger models. It will come from putting continuously learning AI to work inside the operations that actually run the economy.</p>
-    <div class="article-meta"><span>Pareto Labs</span> &middot; June 2026 &middot; 7 min read</div>
+    <div class="article-meta"><span>Pareto Labs</span> &middot; June 2026 &middot; 12 min read</div>
   </header>
 
   <div class="article-body">
@@ -79,7 +80,7 @@
 
     <p>This gap is the most important fact in AI today — and it is the one the industry talks about least. We celebrate benchmarks and parameter counts. We ship demos that dazzle in a controlled setting and stall the moment they meet a real workflow. Meanwhile the operating companies that constitute the bulk of the economy — manufacturers, distributors, clinics, retailers, service firms, the portfolio companies inside every private equity fund — are still waiting for AI to show up in the only place that matters: their results.</p>
 
-    <p>Economists have a name for this pattern. Robert Solow famously quipped that the computer age was visible everywhere except in the productivity statistics. General-purpose technologies — electricity, the steam engine, the computer — do not pay off the moment they are invented. They pay off slowly, through the unglamorous work of <strong>diffusion</strong>: rewiring how work is actually organized, one factory, one office, one process at a time. AI will be no different. The gains will not accrue when a model is announced. They will accrue when it is woven into operations.</p>
+    <p>Economists have a name for this pattern. In 1987, Robert Solow observed that the computer age was visible everywhere except in the productivity statistics. The resolution to his paradox, when it finally came, is instructive: the gains arrived years later, once firms had reorganized work around the new tools rather than simply bolting them onto the old way of doing things. General-purpose technologies — electricity, the dynamo, the computer — do not pay off the moment they are invented. They pay off slowly, through the unglamorous work of <strong>diffusion</strong>: rewiring how work is actually organized, one factory, one office, one process at a time. AI will be no different. The gains will not accrue when a model is announced. They will accrue when it is woven into operations.</p>
 
     <h2>The bottleneck was never the model</h2>
 
@@ -93,25 +94,63 @@
 
     <h2>Where the economy actually lives</h2>
 
-    <p>It is tempting, from inside the technology industry, to imagine the economy as a collection of software companies. It is not. The economy runs on production lines and maintenance schedules, on dispatch and routing, on billing and scheduling and intake, on the thousand operational decisions that a service business makes before lunch. These are not frontier-AI environments. They are knowledge-dense, judgment-heavy, gloriously messy real-world operations — and they are where the overwhelming majority of output, employment, and productivity actually sit.</p>
+    <p>It is tempting, from inside the technology industry, to imagine the economy as a collection of software companies. It is not. The economy runs on production lines and maintenance schedules, on dispatch and routing, on billing and scheduling and intake, on claims and collections and field service, on the thousand operational decisions a business makes before lunch. These are not frontier-AI environments. They are knowledge-dense, judgment-heavy, gloriously messy real-world operations — and they are where the overwhelming majority of output, employment, and productivity actually sit.</p>
 
-    <p>The companies running them know their operations better than any outsider ever could. What they have often lacked is a partner who can turn that hard-won knowledge into working AI systems — and keep those systems accurate, useful, and governed as reality shifts underneath them. Close that gap, and the upside is not incremental. It is the difference between a tool that impresses and a system that compounds.</p>
+    <p>The companies running them know their operations better than any outsider ever could. What they have often lacked is a partner who can turn that hard-won knowledge into working AI systems — and keep those systems accurate, useful, and governed as reality shifts underneath them. Close that gap, and the upside is not incremental. It is the difference between a tool that impresses in a meeting and a system that compounds in production.</p>
+
+    <h2>Why pilots stall</h2>
+
+    <p>Spend time near real deployments and the failure modes start to rhyme. A pilot wins a demo, secures a budget, and then meets the operation — and quietly stalls. It is rarely because the model was not smart enough. It is because the work around it was never done.</p>
+
+    <ul>
+      <li><strong>The knowledge is scattered.</strong> What the company actually knows lives across documents, systems, policies, and people&rsquo;s heads. No model can reason well over knowledge it cannot see.</li>
+      <li><strong>The expertise is tacit.</strong> The most valuable operational judgment — the edge cases, the &ldquo;we never do it that way,&rdquo; the call a fifteen-year veteran makes without thinking — is precisely the part that never made it into a document.</li>
+      <li><strong>The pilot never reaches production.</strong> A clever prototype and a governed system trusted to touch real workflows are separated by an enormous amount of unglamorous engineering, integration, and review.</li>
+      <li><strong>The system goes stale.</strong> Prices change, products change, regulations change, customers change. A model deployed once and frozen drifts further from reality every week.</li>
+      <li><strong>No one owns the outcome.</strong> Vendors sell tools and move on. The hard, continuous work of making the tool produce a result has no clear owner — so it doesn&rsquo;t happen.</li>
+    </ul>
+
+    <p>None of these are research frontiers. They are implementation disciplines. And they are exactly the disciplines that decide whether AI shows up in a company&rsquo;s results or merely in its slide decks.</p>
 
     <h2>Why <em>continuous</em> learning is the unlock</h2>
 
-    <p>Most AI projects stop improving the day they ship. That is the quiet reason so many pilots disappoint: a static system is a depreciating asset. The world moves — prices, products, regulations, customers, edge cases — and a model trained once and frozen drifts further from reality every week.</p>
+    <p>Most AI projects stop improving the day they ship. That is the quiet reason so many pilots disappoint: a static system is a depreciating asset. The world moves, and a model trained once and frozen falls behind it.</p>
 
-    <p>The systems that actually create durable value do the opposite. They treat every workflow, every customer interaction, every expert review, and every business outcome as <strong>signal</strong>. That signal is captured, reviewed, approved by a human, and converted into trusted knowledge that improves the next decision. The result is a system that gets <em>better</em> after launch rather than worse — where each interaction makes the next one sharper. This is where the real productivity accumulates: not in a single deployment, but in the compounding.</p>
+    <p>The systems that actually create durable value do the opposite. They treat every workflow, every customer interaction, every expert review, and every business outcome as <strong>signal</strong>. That signal is captured, reviewed, approved by a human, and converted into trusted knowledge that improves the next decision. The result is a system that gets <em>better</em> after launch rather than worse — where each interaction makes the next one sharper.</p>
 
-    <p>Done responsibly, that loop is governed by design. The company defines what may change, what must be reviewed, and what a system must never do. Improvement happens inside approved boundaries, with human oversight and clear review paths — and with security that advances as the underlying models grow more capable. Productivity that cannot be trusted is not productivity a serious operator will adopt.</p>
+    <p>This is where the real productivity accumulates: not in a single deployment, but in the compounding. A one-time improvement is a step up and then a slow decline. A learning system is a curve that bends upward — small gains that build on one another, week after week, until the cumulative difference is not marginal but structural. Compounding is the most underestimated force in operations, and it is precisely the force a static deployment throws away.</p>
+
+    <h2>Documents are not enough</h2>
+
+    <p>There is a seductive idea that you can point a model at a company&rsquo;s documents and let it figure out the business. It does not work, because the documents are the smallest and least reliable part of what a company knows. The operation that matters lives in judgment — and judgment has to be brought in deliberately.</p>
+
+    <p>That is why expert intelligence and human review are not nice-to-haves; they are the mechanism. Vetted domain experts who have actually run the work surface the edge cases and the reasoning that documents omit. A human gate ensures that signal does not blindly change production behavior — that it is reviewed, approved, and converted into trusted knowledge the company controls. Forward-deployed engineers sit close to operators and turn all of it into systems that ship. The intelligence is necessary. It is nowhere near sufficient on its own.</p>
+
+    <h2>Improvement you can trust</h2>
+
+    <p>Here is the uncomfortable truth about autonomous improvement: an operator will not adopt a system they cannot trust, and they are right not to. Productivity that cannot be governed is not productivity a serious business will put near its customers, its money, or its reputation.</p>
+
+    <p>So the loop has to be governed by design. The company defines what may change, what must be reviewed, and what a system must never do. Improvement happens inside approved boundaries, with policy controls, approval gates, human oversight, and clear review paths before anything critical reaches a real workflow. And as the underlying models grow more capable, the same capabilities that help a business can be turned against it — so security has to advance in step, defending against prompt attacks, data exposure, and the misuse of tools. The goal is not only to make AI systems smarter. It is to make them safer as they get smarter. Trust is not a constraint on adoption. It is the precondition for it.</p>
+
+    <div class="article-rule"></div>
 
     <h2>From one company to the whole economy</h2>
 
     <p>Here is the part that should interest anyone who cares about growth, not just technology. Implement continuously learning AI well inside one operating company and you get a measurable result — time saved, cost reduced, service improved, errors prevented. Now do it across hundreds or thousands of mid-market and portfolio companies, each compounding its own gains, and the aggregate is no longer a collection of efficiencies. It is productivity growth of the kind that shows up in output per worker — the only kind that ultimately raises living standards.</p>
 
-    <p>This is how general-purpose technologies have always moved the economy: not through the invention itself, but through its patient diffusion into the operations of ordinary firms, accompanied by changes in how those firms organize work. The promise of AI for real GDP growth is real. But it will be realized through implementation and diffusion, not through announcements — and it will reward the operators and partners who do the unglamorous work of putting it to work, measuring it, and improving it.</p>
+    <p>This is how general-purpose technologies have always moved the economy. The economic historian Paul David showed that the electric dynamo took decades to lift productivity, not because the technology was weak, but because firms had to redesign the factory floor around it before the gains appeared. More recently, economists studying digital technology have described a &ldquo;productivity J-curve&rdquo;: a period where measured output dips as firms invest in the intangible work of reorganizing around a new capability, followed by a steep rise once that work pays off. AI is early on that curve. The dip is the pilots and the false starts. The rise is diffusion — and diffusion is a choice we make, company by company, not an event we wait for.</p>
 
-    <div class="article-rule"></div>
+    <h2>The underserved middle</h2>
+
+    <p>If diffusion is the work, the question becomes: where does it happen first, and who makes it happen? The largest, most sophisticated enterprises will build a great deal themselves. The frontier labs will keep pushing capability. But the vast middle of the economy — the mid-market operators, the vertical businesses, the private-equity portfolio companies — sits in between. They have real operational problems and deep knowledge of their own work, and they are too often left to choose between tools that don&rsquo;t own outcomes and transformation programs priced for the Fortune 500.</p>
+
+    <p>That middle is where the diffusion dividend is largest, precisely because it has been underserved. And private equity, interestingly, is one of the most efficient mechanisms for diffusion ever built: a firm that proves a practical AI implementation in one portfolio company has every incentive — and the relationships — to repeat what works across the next. Value creation, done well, is diffusion with a balance sheet behind it.</p>
+
+    <h2>What this asks of us</h2>
+
+    <p>None of this is a reason for hype, and the case does not need any. We don&rsquo;t have to overclaim a revolution to believe in a compounding one. The honest promise of AI for the real economy is not magic; it is measurable operational improvement, implemented responsibly and improved over time. The firms — and the partners — that take that seriously will be the ones who actually move the numbers, while the ones chasing demos cycle through pilots that never ship.</p>
+
+    <p>It asks for discipline over theater. For measurement over narrative. For implementation over announcement. And for a kind of patience that the technology industry is not known for — the patience to do the unglamorous work of putting intelligence to work, one operation at a time, and keeping it working.</p>
 
     <h2>What we are building</h2>
 

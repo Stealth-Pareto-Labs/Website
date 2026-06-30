@@ -37,16 +37,19 @@
   .nl-inner { grid-template-columns: 1fr; gap: 28px; padding: 64px 24px; }
 }
 
-/* ── Big wordmark above the footer ─────────────────── */
+/* ── Premium "Pareto Labs" end-cap above the footer ── */
 .pl-bigmark {
-  background: #F5F2EB; text-align: center; overflow: hidden; line-height: 0;
-  padding: clamp(44px,7vw,96px) 16px 0; border-top: 1px solid rgba(20,18,15,0.09);
+  background: linear-gradient(180deg, #F5F2EB 0%, #EFEAE0 100%);
+  border-top: 1px solid rgba(20,18,15,0.09);
+  text-align: center; overflow: hidden;
+  padding: clamp(56px,8vw,116px) 24px clamp(30px,4vw,58px);
 }
-.pl-bigmark span {
-  display: inline-block; font-family: 'Newsreader','Tiempos Headline',Georgia,serif;
-  font-weight: 400; font-size: clamp(40px,14.5vw,230px); line-height: 0.78; letter-spacing: -0.045em;
-  color: #14120F; white-space: nowrap; padding-bottom: 0.06em;
+.pl-bigmark .pl-rule { display: block; width: 40px; height: 2px; background: #A8854F; margin: 0 auto clamp(22px,3vw,34px); }
+.pl-bigmark .pl-word {
+  display: block; font-family: 'Newsreader','Tiempos Headline',Georgia,serif; font-weight: 400;
+  font-size: clamp(46px,13vw,212px); line-height: 0.84; letter-spacing: -0.045em; color: #14120F; white-space: nowrap;
 }
-@media (prefers-reduced-motion: no-preference) {
-  .pl-bigmark span { transition: opacity 0.8s ease; }
+.pl-bigmark .pl-tag {
+  display: block; margin-top: clamp(20px,3vw,32px); font-family: 'Hanken Grotesk','Inter',system-ui,sans-serif;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #6A6760;
 }
