@@ -9,7 +9,7 @@
    >>> success state but does not deliver (preview only).
    ============================================================ */
 (function () {
-  var BUILD_ENDPOINT = ''; // e.g. 'https://script.google.com/macros/s/AKfyc.../exec'
+  var BUILD_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzLfaxhbfPEGC7lk2dFMl2t8DZF-xJvD-urw2XEVJ0hSD95sbRJcc2PKrZCc5CGyLkS/exec';
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   var MODAL_HTML =
