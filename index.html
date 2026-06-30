@@ -659,7 +659,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     nodes.forEach(n => {
       const pulse = 0.35 + 0.2 * Math.sin(t*0.7 + n.phase);
       ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2); ctx.fillStyle = n.col + pulse + ')'; ctx.fill();
-      if (n.label && n.r > 2.5) { ctx.font = '500 10px 'Hanken Grotesk',Inter,sans-serif'; ctx.fillStyle = `rgba(140,110,65,${pulse*0.7})`; ctx.fillText(n.label, n.x + n.r + 6, n.y + 3.5); }
+      if (n.label && n.r > 2.5) { ctx.font = "500 10px 'Hanken Grotesk', Inter, sans-serif"; ctx.fillStyle = `rgba(140,110,65,${pulse*0.7})`; ctx.fillText(n.label, n.x + n.r + 6, n.y + 3.5); }
     });
     if (!REDUCE) requestAnimationFrame(() => draw(Date.now()*0.001));
   }
