@@ -34,6 +34,13 @@
     var band = holder.firstChild;
     footer.parentNode.insertBefore(band, footer);
 
+    // Big "Pareto Labs" wordmark, right above the footer
+    var mark = document.createElement('div');
+    mark.className = 'pl-bigmark';
+    mark.setAttribute('aria-hidden', 'true');
+    mark.innerHTML = '<span>Pareto&nbsp;Labs</span>';
+    footer.parentNode.insertBefore(mark, footer);
+
     var form = band.querySelector('.nl-form');
     var ok = band.querySelector('.nl-ok');
     function showErr(msg) {
