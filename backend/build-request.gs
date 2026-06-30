@@ -16,7 +16,8 @@
 // ───────────────────────── CONFIG ─────────────────────────
 var SHEET_ID       = '';   // the existing Google Sheet ID (from its URL: /spreadsheets/d/THIS/edit)
 var SHEET_TAB      = 'Leads Website';                // the tab in your Google Sheet (created automatically if missing)
-var SLACK_WEBHOOK  = '';    // Slack Incoming Webhook URL (reuse your existing Slack app)
+var SLACK_WEBHOOK  = '';    // one or more Slack Incoming Webhook URLs, comma-separated
+var SLACK_MENTION  = '';    // optional: your Slack member ID to @mention you (e.g. 'U0123ABCD')
 var RESEND_API_KEY = '';    // Resend API key (re_...) — paste here, not in the website repo
 var FROM_EMAIL     = 'Pareto Labs <noreply@auth.trypareto.ai>';  // a Resend-verified sender
 var NOTIFY_TEAM    = 'hello@trypareto.ai';           // internal copy of each lead ('' = skip)
@@ -120,23 +121,31 @@ function sendEmail_(to, subject, html, replyTo) {
 
 function notifySlack_(lead) {
   if (!SLACK_WEBHOOK) return;
-  var payload = {
-    text: 'New “Build with Pareto” request from ' + (lead.name || 'someone'),
-    blocks: [
-      { type: 'header', text: { type: 'plain_text', text: '🛠  New “Build with Pareto” request' } },
-      { type: 'section', fields: [
-        { type: 'mrkdwn', text: '*Name:*\n' + (lead.name || '—') },
-        { type: 'mrkdwn', text: '*Work email:*\n' + (lead.email || '—') },
-        { type: 'mrkdwn', text: '*Company:*\n' + (lead.company || '—') },
-        { type: 'mrkdwn', text: '*You are:*\n' + (lead.type || '—') }
-      ]},
-      { type: 'section', text: { type: 'mrkdwn', text: '*Where AI can help:*\n' + (lead.challenge || '—') } },
-      { type: 'context', elements: [ { type: 'mrkdwn', text: 'from ' + (lead.page || '/') + ' · ' + lead.ts } ] }
-    ]
-  };
-  UrlFetchApp.fetch(SLACK_WEBHOOK, {
-    method: 'post', contentType: 'application/json',
-    payload: JSON.stringify(payload), muteHttpExceptions: true
+  var mention = SLACK_MENTION ? '<@' + SLACK_MENTION.trim() + '> ' : '';
+  var blocks = [
+    { type: 'header', text: { type: 'plain_text', text: '🛠  New “Build with Pareto” request' } }
+  ];
+  if (mention) {
+    blocks.push({ type: 'section', text: { type: 'mrkdwn', text: mention + '— a new lead just came in.' } });
+  }
+  blocks.push(
+    { type: 'section', fields: [
+      { type: 'mrkdwn', text: '*Name:*\n' + (lead.name || '—') },
+      { type: 'mrkdwn', text: '*Work email:*\n' + (lead.email || '—') },
+      { type: 'mrkdwn', text: '*Company:*\n' + (lead.company || '—') },
+      { type: 'mrkdwn', text: '*You are:*\n' + (lead.type || '—') }
+    ]},
+    { type: 'section', text: { type: 'mrkdwn', text: '*Where AI can help:*\n' + (lead.challenge || '—') } },
+    { type: 'context', elements: [ { type: 'mrkdwn', text: 'from ' + (lead.page || '/') + ' · ' + lead.ts } ] }
+  );
+  var payload = JSON.stringify({
+    text: mention + 'New “Build with Pareto” request from ' + (lead.name || 'someone'),
+    blocks: blocks
+  });
+  SLACK_WEBHOOK.split(',').forEach(function (url) {
+    url = url.trim();
+    if (!url) return;
+    UrlFetchApp.fetch(url, { method: 'post', contentType: 'application/json', payload: payload, muteHttpExceptions: true });
   });
 }
 
