@@ -34,7 +34,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
   <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -55,7 +55,7 @@
     --gold:#A8854F;
 
     --serif: 'Newsreader', 'Tiempos Headline', Georgia, serif;
-    --sans:  'Inter', system-ui, sans-serif;
+    --sans:  'Hanken Grotesk', 'Inter', system-ui, sans-serif;
   }
 
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
@@ -659,7 +659,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     nodes.forEach(n => {
       const pulse = 0.35 + 0.2 * Math.sin(t*0.7 + n.phase);
       ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2); ctx.fillStyle = n.col + pulse + ')'; ctx.fill();
-      if (n.label && n.r > 2.5) { ctx.font = '500 10px Inter,sans-serif'; ctx.fillStyle = `rgba(140,110,65,${pulse*0.7})`; ctx.fillText(n.label, n.x + n.r + 6, n.y + 3.5); }
+      if (n.label && n.r > 2.5) { ctx.font = '500 10px 'Hanken Grotesk',Inter,sans-serif'; ctx.fillStyle = `rgba(140,110,65,${pulse*0.7})`; ctx.fillText(n.label, n.x + n.r + 6, n.y + 3.5); }
     });
     if (!REDUCE) requestAnimationFrame(() => draw(Date.now()*0.001));
   }
