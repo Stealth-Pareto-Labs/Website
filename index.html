@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pareto Labs — Continuous-Learning AI for Real Operations</title>
-  <meta name="description" content="Pareto Labs is a continuously learning AI platform and implementation partner for private equity portfolio companies, SMBs, and vertical operating businesses — building AI systems that learn from your data, customers, workflows, and vetted domain experts, and improve over time.">
+  <title>Pareto Labs — Continuous-Learning AI for Real-World Operations</title>
+  <meta name="description" content="Pareto Labs is a continuously learning AI platform and implementation partner for private equity portfolio companies, SMBs, and vertical operating businesses — AI systems that learn from your data, customers, workflows, and vetted domain experts, and improve over time.">
   <link rel="canonical" href="https://www.trypareto.ai/">
   <meta name="theme-color" content="#F5F2EB">
 
@@ -15,8 +15,8 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Pareto Labs">
-  <meta property="og:title" content="Pareto Labs — Continuous-Learning AI for Real Operations">
-  <meta property="og:description" content="A continuously learning AI platform and implementation partner for private equity portfolio companies, SMBs, and vertical operating businesses. AI systems that improve with your business.">
+  <meta property="og:title" content="Pareto Labs — Continuous-Learning AI for Real-World Operations">
+  <meta property="og:description" content="A continuously learning AI platform and implementation partner for PE portfolio companies, SMBs, and vertical operating businesses. AI systems that improve with your business.">
   <meta property="og:url" content="https://www.trypareto.ai/">
   <meta property="og:image" content="https://www.trypareto.ai/og/pareto-labs-v2.png">
   <meta property="og:image:secure_url" content="https://www.trypareto.ai/og/pareto-labs-v2.png">
@@ -27,7 +27,7 @@
 
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pareto Labs — Continuous-Learning AI for Real Operations">
+  <meta name="twitter:title" content="Pareto Labs — Continuous-Learning AI for Real-World Operations">
   <meta name="twitter:description" content="A continuously learning AI platform and implementation partner for PE portfolio companies, SMBs, and vertical operating businesses.">
   <meta name="twitter:image" content="https://www.trypareto.ai/og/pareto-labs-v2.png">
   <meta name="twitter:image:alt" content="Pareto Labs — Continuous-Learning AI">
@@ -39,22 +39,27 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --w:   #F5F2EB;   /* cream paper */
-    --w2:  #EFEBE1;   /* alt band */
-    --w3:  #EAE6DC;
-    --wi:  #14120F;   /* ink */
-    --wi2: #6A6760;   /* muted ink */
-    --wi3: #B0ADA7;   /* faint ink */
-    --wl:  rgba(20,18,15,0.10);
-    --wl2: rgba(20,18,15,0.06);
-    --gold:#A8854F;   /* network accent */
-    --gold-soft: rgba(168,133,79,0.14);
+    --w:   #F5F2EB;
+    --w2:  #EAE6DC;
+    --wi:  #14120F;
+    --wi2: #6A6760;
+    --wi3: #B0ADA7;
+    --wl:  rgba(20,18,15,0.09);
+
+    --d:   #080C18;
+    --d2:  #0F1525;
+    --di:  #EEE9E0;
+    --di2: #7A7D8F;
+    --dl:  rgba(238,233,224,0.10);
+    --sig: #B4FF00;
+    --gold:#A8854F;
+
     --serif: 'IBM Plex Serif', Georgia, serif;
     --sans:  'Inter', system-ui, sans-serif;
-    --container: 1180px;
   }
 
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
   body {
     background: var(--w);
     color: var(--wi);
@@ -68,612 +73,639 @@
   img, svg { display: block; max-width: 100%; }
   a { color: inherit; text-decoration: none; }
 
-  .container { max-width: var(--container); margin: 0 auto; padding: 0 48px; }
+  /* ── SCROLL PROGRESS ─────────────────────────────── */
+  #prog { position: fixed; top: 0; left: 0; width: 0%; height: 2px; background: var(--wi); z-index: 200; transition: width 0.05s linear; }
+  .dark-zone #prog { background: var(--sig); }
 
-  /* ── Shared type ─────────────────────────────── */
-  .eyebrow {
-    font-size: 11px; font-weight: 500; letter-spacing: 0.18em;
-    text-transform: uppercase; color: var(--wi2);
-    display: inline-flex; align-items: center; gap: 12px;
-  }
-  .eyebrow::before {
-    content: ''; width: 24px; height: 1px; background: var(--gold);
-    opacity: 0.7; flex-shrink: 0;
-  }
-  .s-title {
-    font-family: var(--serif);
-    font-size: clamp(28px, 3.6vw, 44px);
-    font-weight: 400; line-height: 1.12; letter-spacing: -0.03em;
-  }
-  .s-title em { font-style: italic; font-weight: 300; }
-  .lead {
-    font-size: clamp(15px, 1.4vw, 17px); font-weight: 300; line-height: 1.75;
-    color: var(--wi2); max-width: 60ch;
-  }
-  .lead strong { font-weight: 500; color: var(--wi); }
-
-  /* ── Buttons / links ─────────────────────────── */
-  .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    padding: 14px 26px; min-height: 48px; font-family: var(--sans); font-size: 13px;
-    font-weight: 500; text-decoration: none; border: 1px solid var(--wi);
-    background: var(--wi); color: var(--w); cursor: pointer;
-    letter-spacing: 0.01em; transition: background 0.2s, color 0.2s, border-color 0.2s;
-    white-space: nowrap;
-  }
-  .btn:hover { background: #2C2A26; border-color: #2C2A26; }
-  .btn.ghost { background: transparent; color: var(--wi); }
-  .btn.ghost:hover { background: var(--wi); color: var(--w); }
-  .btn.invert { background: var(--w); color: var(--wi); border-color: var(--w); }
-  .btn.invert:hover { background: #EAE6DC; border-color: #EAE6DC; }
-  .btn.invert-ghost { background: transparent; color: var(--w); border-color: rgba(245,242,235,0.4); }
-  .btn.invert-ghost:hover { background: var(--w); color: var(--wi); border-color: var(--w); }
-  .link {
-    display: inline-flex; align-items: center; gap: 7px;
-    font-size: 13.5px; font-weight: 400; color: var(--wi);
-    border-bottom: 1px solid var(--wl); padding-bottom: 3px; min-height: 28px;
-    transition: border-color 0.2s, gap 0.2s;
-  }
-  .link:hover { border-color: var(--wi); gap: 11px; }
-  .link.gold { color: var(--gold); border-color: var(--gold-soft); }
-  .link.gold:hover { border-color: var(--gold); }
-
-  /* ── NAV ─────────────────────────────────────── */
+  /* ── NAV ─────────────────────────────────────────── */
   nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 18px 48px;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 18px 48px;
-    border-bottom: 1px solid var(--wl);
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(245,242,235,0.86);
-    backdrop-filter: saturate(180%) blur(14px);
-    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    transition: background 0.5s, border-color 0.5s, color 0.5s; border-bottom: 1px solid transparent;
   }
-  .nav-logo {
-    display: inline-flex; align-items: center; font-family: var(--serif);
-    font-size: 18px; font-weight: 500; color: var(--wi); letter-spacing: -0.01em;
-  }
-  .brand-mark { height: 36px; width: auto; display: block; margin: 0 -5px 0 -8px; }
-  .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
-  .nav-links a { font-size: 13px; font-weight: 400; color: var(--wi2); transition: color 0.2s; }
-  .nav-links a:hover { color: var(--wi); }
-  .nav-cta {
-    padding: 9px 18px; min-height: 40px; display: inline-flex; align-items: center;
-    border: 1px solid var(--wi); color: var(--wi) !important; font-weight: 500 !important;
-    transition: background 0.2s, color 0.2s;
-  }
-  .nav-cta:hover { background: var(--wi); color: var(--w) !important; }
+  nav.on-dark { color: var(--di); }
+  nav.scrolled-light { background: rgba(245,242,235,0.93); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-color: var(--wl); }
+  nav.scrolled-dark { background: rgba(8,12,24,0.93); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-color: var(--dl); }
 
-  /* ── HERO ────────────────────────────────────── */
-  .hero {
-    display: grid; grid-template-columns: 1.04fr 0.96fr;
-    min-height: calc(100svh - 73px); position: relative;
-  }
-  .hero-text {
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 56px 48px; max-width: 680px; position: relative; z-index: 2;
-  }
-  .rule { width: 46px; height: 2px; background: var(--wi); margin-bottom: 26px; }
-  .hero .eyebrow { margin-bottom: 22px; }
-  .title {
-    font-family: var(--serif);
-    font-size: clamp(36px, 4.6vw, 60px);
-    font-weight: 400; line-height: 1.06; letter-spacing: -0.03em; margin-bottom: 24px;
-  }
-  .title em { font-style: italic; font-weight: 300; }
-  .abstract {
-    font-size: clamp(15px, 1.5vw, 16.5px); font-weight: 300; line-height: 1.74;
-    color: var(--wi2); max-width: 520px; margin-bottom: 18px;
-  }
-  .abstract strong { font-weight: 500; color: var(--wi); }
-  .byline {
-    font-size: 12.5px; font-weight: 400; color: var(--wi3); letter-spacing: 0.02em;
-    margin: 20px 0 30px; padding-top: 18px; border-top: 1px solid var(--wl);
-  }
-  .byline span { color: var(--wi2); }
-  .actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .nav-logo { display: inline-flex; align-items: center; font-family: var(--serif); font-size: 18px; font-weight: 500; color: inherit; letter-spacing: -0.01em; }
+  .brand-mark { height: 34px; width: auto; display: block; margin: 0 -5px 0 -8px; }
+  .nav-links { display: flex; align-items: center; gap: 30px; list-style: none; }
+  .nav-links a { font-size: 13px; font-weight: 400; color: inherit; opacity: 0.6; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { opacity: 1 !important; padding: 9px 18px; min-height: 40px; display: inline-flex; align-items: center; border: 1px solid currentColor; font-size: 13px !important; font-weight: 500 !important; transition: background 0.2s, color 0.2s !important; }
+  nav:not(.on-dark) .nav-cta:hover { background: var(--wi); color: var(--w); }
+  nav.on-dark .nav-cta:hover { background: var(--di); color: var(--d); }
 
-  .hero-canvas { position: relative; overflow: hidden; border-left: 1px solid var(--wl); min-height: 320px; }
-  .hero-canvas canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  /* ── LAYOUT ──────────────────────────────────────── */
+  .wrap      { max-width: 1160px; margin: 0 auto; padding: 0 48px; }
+  .wrap-thin { max-width: 720px;  margin: 0 auto; padding: 0 48px; }
 
-  /* ── SECTIONS ────────────────────────────────── */
-  section.band { padding: clamp(64px, 9vw, 116px) 0; border-bottom: 1px solid var(--wl); }
-  section.alt { background: var(--w2); }
-  .sec-head { max-width: 720px; }
-  .sec-head .eyebrow { margin-bottom: 22px; }
-  .sec-head .s-title { margin-bottom: 22px; }
+  /* ── HERO SECTIONS ───────────────────────────────── */
+  .hero-split { min-height: 100svh; display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
+  .hero-split.dark-panel { background: var(--d); color: var(--di); }
+  .hero-text-col { display: flex; flex-direction: column; justify-content: flex-end; padding: 120px 64px 84px 48px; position: relative; z-index: 2; }
+  .dark-panel .hero-text-col { padding: 120px 48px 84px 64px; }
+  .hero-canvas-col { position: relative; overflow: hidden; }
+  .hero-canvas-col canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 
-  /* Problem — big editorial statement */
-  .statement {
-    font-family: var(--serif); font-weight: 400;
-    font-size: clamp(26px, 3.4vw, 42px); line-height: 1.18; letter-spacing: -0.02em;
-    max-width: 18ch;
-  }
+  .hero-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.5; margin-bottom: 30px; display: inline-flex; align-items: center; gap: 12px; }
+  .hero-eyebrow::before { content: ''; width: 22px; height: 1px; background: currentColor; opacity: 0.6; }
+  .hero-h1 { font-family: var(--serif); font-size: clamp(40px, 5.2vw, 74px); font-weight: 400; line-height: 1.08; letter-spacing: -0.03em; margin-bottom: 32px; }
+  .hero-h1 em { font-style: italic; font-weight: 300; }
+  .hero-body { font-size: 15px; font-weight: 300; line-height: 1.75; opacity: 0.72; max-width: 440px; margin-bottom: 44px; }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .scroll-hint { position: absolute; bottom: 30px; left: 48px; display: flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: 0.08em; opacity: 0.4; }
+  .scroll-line { width: 32px; height: 1px; background: currentColor; animation: scroll-pulse 2s ease-in-out infinite; }
+  @keyframes scroll-pulse { 0%,100% { width: 32px; opacity: 0.4; } 50% { width: 52px; opacity: 0.75; } }
+
+  /* ── BUTTONS ─────────────────────────────────────── */
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 26px; min-height: 48px; font-family: var(--sans); font-size: 13px; font-weight: 500; border: 1px solid; cursor: pointer; letter-spacing: 0.01em; transition: background 0.22s, color 0.22s, border-color 0.22s; white-space: nowrap; }
+  .btn-solid { background: var(--wi); color: var(--w); border-color: var(--wi); }
+  .btn-solid:hover { background: #2C2A26; border-color: #2C2A26; }
+  .btn-outline { background: transparent; color: var(--wi); border-color: var(--wl); }
+  .btn-outline:hover { border-color: var(--wi2); background: var(--w2); }
+  .btn-sig { background: var(--sig); color: var(--d); border-color: var(--sig); font-weight: 600; }
+  .btn-sig:hover { background: #C8FF20; border-color: #C8FF20; }
+  .btn-outline-dark { background: transparent; color: var(--di); border-color: var(--dl); }
+  .btn-outline-dark:hover { border-color: rgba(238,233,224,0.35); background: rgba(238,233,224,0.06); }
+  .btn-arr::after { content: '→'; font-size: 14px; }
+
+  /* ── GENERAL SECTIONS ────────────────────────────── */
+  .section { padding: 112px 0; border-top: 1px solid var(--wl); background: var(--w); color: var(--wi); }
+  .section-dark { padding: 112px 0; background: var(--d); color: var(--di); border-top: none; }
+  .section-tag { font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.45; margin-bottom: 52px; display: flex; align-items: center; gap: 14px; }
+  .section-tag::after { content: ''; flex: 1; height: 1px; background: currentColor; opacity: 0.15; max-width: 60px; }
+
+  /* ── INTRO STATEMENT ─────────────────────────────── */
+  .statement { font-family: var(--serif); font-size: clamp(24px, 3.2vw, 40px); font-weight: 400; line-height: 1.32; letter-spacing: -0.025em; }
   .statement em { font-style: italic; font-weight: 300; color: var(--gold); }
-  .problem-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px 72px; align-items: end; }
 
-  /* Loop */
-  .loop { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin-top: 56px; }
-  .loop-step { padding: 0 26px; border-left: 1px solid var(--wl); position: relative; }
-  .loop-step:first-child { border-left: none; padding-left: 0; }
-  .loop-num {
-    font-family: var(--serif); font-size: 13px; color: var(--gold);
-    letter-spacing: 0.1em; margin-bottom: 16px;
-  }
-  .loop-step h3 { font-family: var(--serif); font-size: 21px; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 10px; }
-  .loop-step p { font-size: 13.5px; font-weight: 300; line-height: 1.65; color: var(--wi2); }
-  .loop-note { margin-top: 40px; font-size: 13.5px; color: var(--wi2); font-weight: 300; display: inline-flex; align-items: center; gap: 10px; }
-  .loop-note svg { width: 18px; height: 18px; color: var(--gold); }
+  /* ── TWO-COL ─────────────────────────────────────── */
+  .two-col { display: grid; grid-template-columns: 5fr 6fr; gap: 80px; align-items: start; }
+  .col-label { font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.45; margin-bottom: 18px; }
+  .col-h { font-family: var(--serif); font-size: clamp(28px, 3.6vw, 48px); font-weight: 400; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 24px; }
+  .col-h em { font-style: italic; font-weight: 300; }
+  .col-p { font-size: 15px; font-weight: 300; opacity: 0.68; line-height: 1.75; margin-bottom: 36px; }
+  .bens { list-style: none; display: flex; flex-direction: column; gap: 13px; }
+  .bens li { font-size: 14px; font-weight: 300; opacity: 0.7; padding-left: 18px; position: relative; line-height: 1.6; }
+  .bens li::before { content: '—'; position: absolute; left: 0; opacity: 0.5; }
 
-  /* Cards (why) */
-  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 48px; }
-  .card { padding: 0 30px; border-left: 1px solid var(--wl); }
-  .card:first-child { border-left: none; padding-left: 0; }
-  .card .ic { width: 26px; height: 26px; color: var(--gold); margin-bottom: 22px; }
-  .card h3 { font-family: var(--serif); font-size: 20px; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 12px; }
-  .card p { font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--wi2); }
+  /* ── CAPABILITY / LOOP LIST ──────────────────────── */
+  .cap-list { margin-top: 60px; }
+  .cap-item { display: grid; grid-template-columns: 44px 1fr 1.1fr; gap: 48px; padding: 34px 0; border-top: 1px solid var(--dl); align-items: start; }
+  .section:not(.section-dark) .cap-item { border-color: var(--wl); }
+  .cap-item:last-child { border-bottom: 1px solid var(--dl); }
+  .section:not(.section-dark) .cap-item:last-child { border-color: var(--wl); }
+  .cap-n { font-family: var(--serif); font-size: 13px; font-weight: 300; opacity: 0.4; padding-top: 4px; }
+  .cap-h { font-family: var(--serif); font-size: clamp(18px, 2vw, 26px); font-weight: 400; letter-spacing: -0.02em; line-height: 1.25; }
+  .cap-h em { font-style: italic; font-weight: 300; color: var(--gold); }
+  .section-dark .cap-h em { color: var(--sig); }
+  .cap-p { font-size: 14px; font-weight: 300; opacity: 0.66; line-height: 1.75; }
 
-  /* Industries */
-  .ind-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 48px; }
-  .ind-card { display: flex; flex-direction: column; border: 1px solid var(--wl); background: var(--w); overflow: hidden; }
-  .ind-img {
-    aspect-ratio: 4 / 3; position: relative; display: flex; align-items: flex-end;
-    padding: 18px; color: var(--wi);
-    background:
-      radial-gradient(120% 90% at 80% 10%, rgba(168,133,79,0.20), transparent 60%),
-      linear-gradient(150deg, #E7E1D3 0%, #D8D0BE 55%, #CFC6B0 100%);
-  }
-  .ind-img .ind-ic { width: 30px; height: 30px; color: var(--wi); opacity: 0.78; position: absolute; top: 18px; left: 18px; }
-  .ind-img .ph { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(20,18,15,0.40); font-weight: 500; }
-  .ind-body { padding: 22px; }
-  .ind-body h3 { font-family: var(--serif); font-size: 20px; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 10px; }
-  .ind-body p { font-size: 13.5px; font-weight: 300; line-height: 1.66; color: var(--wi2); }
+  /* ── PRINCIPLES ROW ──────────────────────────────── */
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 72px; border-top: 1px solid var(--dl); }
+  .stat { padding: 40px 32px 0 0; border-right: 1px solid var(--dl); }
+  .stat:last-child { border-right: none; }
+  .stat-v { font-family: var(--serif); font-size: clamp(20px, 2.2vw, 28px); font-weight: 400; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 10px; }
+  .stat-v em { font-style: italic; font-weight: 300; color: var(--sig); }
+  .stat-l { font-size: 12.5px; font-weight: 300; opacity: 0.6; line-height: 1.55; }
 
-  /* PE callout */
-  .pe { display: grid; grid-template-columns: 1fr 1fr; gap: 56px 80px; align-items: start; }
-  .pe-loop { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
-  .pe-loop span {
-    font-size: 12.5px; font-weight: 400; color: var(--wi2);
-    border: 1px solid var(--wl); border-radius: 100px; padding: 7px 15px;
-  }
-  .pe-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 36px; }
+  /* ── INDUSTRIES ──────────────────────────────────── */
+  .ind-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+  .ind { border: 1px solid var(--wl); background: var(--w); padding: 30px; display: flex; flex-direction: column; gap: 14px; }
+  .ind .ind-ic { width: 26px; height: 26px; color: var(--gold); opacity: 0.9; }
+  .ind h3 { font-family: var(--serif); font-size: 20px; font-weight: 400; letter-spacing: -0.02em; }
+  .ind p { font-size: 13.5px; font-weight: 300; opacity: 0.68; line-height: 1.66; }
+
+  /* ── PE WHERE-WE-HELP ────────────────────────────── */
+  .pe-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; }
   .pe-cols ul { list-style: none; }
-  .pe-cols li {
-    font-size: 14px; font-weight: 300; color: var(--wi); padding: 11px 0;
-    border-top: 1px solid var(--wl); display: flex; align-items: center; gap: 11px;
-  }
+  .pe-cols li { font-size: 14px; font-weight: 300; padding: 12px 0; border-top: 1px solid var(--wl); display: flex; align-items: center; gap: 11px; }
   .pe-cols li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+  .pe-loop { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 36px; }
+  .pe-loop span { font-size: 12.5px; font-weight: 400; opacity: 0.75; border: 1px solid var(--wl); border-radius: 100px; padding: 7px 15px; }
 
-  /* Experts split */
-  .experts { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px 72px; align-items: center; }
+  /* ── FORM ────────────────────────────────────────── */
+  .form-box { background: var(--w2); padding: 44px; }
+  .form-ttl { font-family: var(--serif); font-size: 20px; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 30px; }
+  .fields { display: flex; flex-direction: column; }
+  .field { border-bottom: 1px solid var(--wl); padding: 17px 0; transition: border-color 0.2s; }
+  .field:first-child { border-top: 1px solid var(--wl); }
+  .field:focus-within { border-color: var(--wi2); }
+  .field label { display: block; font-size: 9px; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; opacity: 0.45; margin-bottom: 6px; }
+  .field input, .field select, .field textarea { width: 100%; background: transparent; border: none; outline: none; font-family: var(--sans); font-size: 15px; font-weight: 300; color: inherit; padding: 0; -webkit-appearance: none; appearance: none; }
+  .field input::placeholder, .field textarea::placeholder { opacity: 0.32; }
+  .field select { cursor: pointer; }
+  .field textarea { resize: none; height: 72px; line-height: 1.6; }
+  .form-ft { margin-top: 28px; display: flex; flex-direction: column; gap: 12px; }
+  .form-ft .btn { width: 100%; justify-content: center; }
+  .form-note { font-size: 11px; font-weight: 300; opacity: 0.45; line-height: 1.6; text-align: center; }
+  .form-ok { display: none; padding: 40px 0; text-align: center; }
+  .ok-ring { width: 44px; height: 44px; border: 1px solid currentColor; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; font-size: 18px; opacity: 0.7; }
+  .form-ok h3 { font-family: var(--serif); font-size: 22px; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 6px; }
+  .form-ok p { font-size: 13px; font-weight: 300; opacity: 0.6; }
 
-  /* Final CTA — ink */
-  .cta-final { background: var(--wi); color: var(--w); padding: clamp(72px, 11vw, 132px) 0; text-align: center; }
-  .cta-final .s-title { color: var(--w); margin: 0 auto 18px; max-width: 18ch; }
-  .cta-final p { color: rgba(245,242,235,0.66); font-weight: 300; max-width: 52ch; margin: 0 auto 36px; font-size: 16px; line-height: 1.7; }
-  .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  /* ── STEPS ───────────────────────────────────────── */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 60px; }
+  .step { padding: 0 44px 0 0; border-right: 1px solid var(--wl); }
+  .step:last-child { border-right: none; padding-right: 0; }
+  .step:not(:first-child) { padding: 0 44px; }
+  .step-n { font-family: var(--serif); font-size: 13px; font-weight: 300; opacity: 0.35; margin-bottom: 18px; }
+  .step-h { font-family: var(--serif); font-size: 21px; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 10px; }
+  .step-h em { font-style: italic; font-weight: 300; }
+  .step-p { font-size: 14px; font-weight: 300; opacity: 0.62; line-height: 1.7; }
 
-  /* FOOTER */
-  footer { padding: 44px 0 38px; background: var(--w); }
-  .foot-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; flex-wrap: wrap; }
-  .foot-brand { font-family: var(--serif); font-size: 17px; font-weight: 500; color: var(--wi); margin-bottom: 8px; }
-  .foot-contact { color: var(--wi2); font-weight: 300; font-size: 13.5px; }
-  .foot-contact a { color: var(--wi); border-bottom: 1px solid var(--wl); transition: border-color 0.2s; }
-  .foot-contact a:hover { border-color: var(--wi); }
-  .foot-links { display: flex; gap: 22px; list-style: none; flex-wrap: wrap; }
-  .foot-links a { color: var(--wi2); font-weight: 300; font-size: 13px; transition: color 0.2s; }
+  /* ── FOOTER ──────────────────────────────────────── */
+  footer { border-top: 1px solid var(--wl); padding: 44px 0; background: var(--w); }
+  .foot-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 18px; }
+  .foot-logo { font-family: var(--serif); font-size: 16px; font-weight: 500; color: var(--wi); }
+  .foot-links { display: flex; gap: 26px; list-style: none; flex-wrap: wrap; }
+  .foot-links a { font-size: 13px; font-weight: 300; color: var(--wi2); transition: color 0.2s; }
   .foot-links a:hover { color: var(--wi); }
-  .foot-bottom { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--wl); font-size: 12px; color: var(--wi3); }
+  .foot-copy { font-size: 12px; font-weight: 300; color: var(--wi3); }
 
-  /* ── REVEAL ──────────────────────────────────── */
-  @keyframes rv-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-  .rv { opacity: 0; animation: rv-rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
-  .reveal.in { opacity: 1; transform: none; }
+  /* ── ANIMATIONS ──────────────────────────────────── */
+  .cr { overflow: hidden; }
+  .cr-inner { display: block; transform: translateY(100%); transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+  .cr.in .cr-inner { transform: translateY(0); }
+  .rv { opacity: 0; transform: translateY(22px); transition: opacity 0.75s ease, transform 0.75s ease; }
+  .rv.in { opacity: 1; transform: none; }
 
-  /* ── FOCUS (a11y) ────────────────────────────── */
-  a:focus-visible, .btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 1px; }
+  a:focus-visible, .btn:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  .section-dark a:focus-visible, .dark-panel a:focus-visible { outline-color: var(--sig); }
 
-  /* ── RESPONSIVE ──────────────────────────────── */
-  @media (max-width: 1040px) {
-    .cards { grid-template-columns: 1fr 1fr; gap: 36px 0; }
-    .card { padding: 0 26px; }
-    .card:nth-child(odd) { border-left: none; padding-left: 0; }
-    .loop { grid-template-columns: 1fr 1fr 1fr; row-gap: 36px; }
-    .loop-step:nth-child(3n+1) { border-left: none; padding-left: 0; }
+  /* ── RESPONSIVE ──────────────────────────────────── */
+  @media (max-width: 960px) {
+    nav { padding: 16px 24px; }
+    .wrap, .wrap-thin { padding: 0 24px; }
+    .nav-links li:not(.cta-li) { display: none; }
+    .hero-split { grid-template-columns: 1fr; min-height: auto; }
+    .hero-canvas-col { height: 42vh; min-height: 260px; order: -1; }
+    .hero-text-col { padding: 40px 24px 56px; }
+    .dark-panel .hero-text-col { padding: 40px 24px 56px; }
+    .scroll-hint { display: none; }
+    .two-col { grid-template-columns: 1fr; gap: 44px; }
+    .cap-item { grid-template-columns: 1fr; gap: 10px; }
+    .cap-n { display: none; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(n+3) { border-top: 1px solid var(--dl); padding-top: 32px; }
     .ind-grid { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 900px) {
-    nav { padding: 14px 24px; }
-    .nav-links { gap: 16px; }
-    .nav-links li.hide-sm { display: none; }
-    .container { padding: 0 24px; }
-    .hero { grid-template-columns: 1fr; }
-    .hero-canvas { order: -1; height: 36vh; min-height: 240px; border-left: none; border-bottom: 1px solid var(--wl); }
-    .hero-text { padding: 44px 24px; }
-    .problem-grid, .pe, .experts { grid-template-columns: 1fr; gap: 32px; }
-    .statement { max-width: none; }
-  }
-  @media (max-width: 680px) {
-    .loop { grid-template-columns: 1fr 1fr; }
-    .loop-step:nth-child(3n+1) { border-left: 1px solid var(--wl); padding-left: 26px; }
-    .loop-step:nth-child(2n+1) { border-left: none; padding-left: 0; }
-    .ind-grid { grid-template-columns: 1fr; }
     .pe-cols { grid-template-columns: 1fr; }
-    .cards { grid-template-columns: 1fr; }
-    .card { padding-left: 0; border-left: none; border-top: 1px solid var(--wl); padding-top: 30px; }
-    .card:first-child { border-top: none; padding-top: 0; }
+    .steps { grid-template-columns: 1fr; gap: 36px; }
+    .step, .step:not(:first-child) { border-right: none; border-bottom: 1px solid var(--wl); padding: 0 0 36px; }
+    .step:last-child { border-bottom: none; padding-bottom: 0; }
+    .foot-inner { flex-direction: column; align-items: flex-start; gap: 14px; }
+    .form-box { padding: 30px 22px; }
+    .section, .section-dark { padding: 84px 0; }
   }
-  @media (max-width: 460px) {
-    .nav-links a:not(.nav-cta) { display: none; }
-    .actions .btn, .cta-actions .btn { width: 100%; }
+  @media (max-width: 560px) {
+    .ind-grid { grid-template-columns: 1fr; }
+    .hero-ctas .btn { width: 100%; justify-content: center; }
   }
 
-  /* ── REDUCED MOTION ──────────────────────────── */
+  /* ── REDUCED MOTION ──────────────────────────────── */
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .rv, .reveal { opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important; }
+    .cr-inner, .rv { transform: none !important; opacity: 1 !important; transition: none !important; }
+    .scroll-line { animation: none; }
   }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
+<div id="prog"></div>
+
+<!-- NAV ─────────────────────────────────────────── -->
+<nav id="nav">
   <a class="nav-logo" href="/" aria-label="Pareto Labs"><img class="brand-mark" src="/assets/logo.png" alt=""><span>areto&nbsp;Labs</span></a>
   <ul class="nav-links">
-    <li class="hide-sm"><a href="#platform">Platform</a></li>
-    <li class="hide-sm"><a href="#private-equity">Private Equity</a></li>
-    <li class="hide-sm"><a href="#industries">Industries</a></li>
-    <li class="hide-sm"><a href="#experts">Experts</a></li>
-    <li class="hide-sm"><a href="/research/the-learning-layer">Research</a></li>
-    <li><a class="nav-cta" href="mailto:research@trypareto.ai?subject=Partner%20with%20Pareto">Partner with Pareto</a></li>
+    <li><a href="#platform">Platform</a></li>
+    <li><a href="#private-equity">Private Equity</a></li>
+    <li><a href="#industries">Industries</a></li>
+    <li><a href="#experts">Experts</a></li>
+    <li class="cta-li"><a href="#partner" class="nav-cta">Partner with Pareto</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
-<main class="hero">
-  <div class="hero-text">
-    <div class="rule rv"></div>
-    <p class="eyebrow rv" style="animation-delay:.05s">Continuous-Learning AI</p>
-    <h1 class="title rv" style="animation-delay:.12s">AI systems that<br><em>improve with your business.</em></h1>
-    <p class="abstract rv" style="animation-delay:.2s">Pareto helps private equity portfolio companies, SMBs, and vertical operating businesses implement AI systems that learn from <strong>internal data, customer interactions, operational workflows, and vetted domain experts</strong> — improving performance automatically over time.</p>
-    <p class="byline rv" style="animation-delay:.28s"><span>Pareto Labs</span> &middot; A continuously learning AI platform &amp; implementation partner. Currently working with select operators, PE teams, and vertical businesses.</p>
-    <div class="actions rv" style="animation-delay:.36s">
-      <a class="btn" href="mailto:research@trypareto.ai?subject=Partner%20with%20Pareto">Partner with Pareto</a>
-      <a class="link" href="#how">See how it works &rarr;</a>
+<!-- ═══ HERO A — OPERATIONS (light) ══════════════ -->
+<div id="section-human" class="hero-split">
+  <div class="hero-text-col">
+    <p class="hero-eyebrow">Continuous-Learning AI</p>
+    <h1 class="hero-h1">
+      <span class="cr"><span class="cr-inner">Continuous learning AI</span></span>
+      <span class="cr"><span class="cr-inner" style="transition-delay:.10s">solutions for</span></span>
+      <span class="cr"><span class="cr-inner" style="transition-delay:.20s"><em>real-world operations.</em></span></span>
+    </h1>
+    <p class="hero-body rv" style="transition-delay:.34s">Pareto helps private equity portfolio companies, SMBs, and vertical operating businesses implement AI systems that learn from internal data, customer interactions, operational workflows, and vetted domain experts — improving performance automatically over time.</p>
+    <div class="hero-ctas rv" style="transition-delay:.46s">
+      <a href="#partner" class="btn btn-solid btn-arr">Partner with Pareto</a>
+      <a href="#how" class="btn btn-outline">See how it works</a>
+    </div>
+    <div class="scroll-hint rv" style="transition-delay:.58s">
+      <span class="scroll-line"></span>
+      <span>Scroll to explore</span>
     </div>
   </div>
-
-  <div class="hero-canvas">
-    <canvas id="net" aria-hidden="true"></canvas>
+  <div class="hero-canvas-col">
+    <canvas id="canvas-human" aria-hidden="true"></canvas>
   </div>
-</main>
+</div>
 
-<!-- PROBLEM -->
-<section class="band" id="problem">
-  <div class="container">
-    <div class="problem-grid">
-      <div class="reveal">
-        <p class="eyebrow" style="margin-bottom:24px">The shift</p>
-        <p class="statement">AI adoption is no longer blocked by models. It&rsquo;s blocked by <em>implementation.</em></p>
-      </div>
-      <div class="reveal" style="transition-delay:.08s">
-        <p class="lead">Most companies already have access to powerful models. What they lack is the infrastructure, expertise, workflows, and internal capacity to turn that capability into <strong>measurable operational improvement</strong> — and to keep it useful as the business changes. The hard part was never the model. It&rsquo;s everything around it.</p>
-      </div>
-    </div>
+<!-- ═══ HERO B — IMPROVEMENT (dark) ══════════════ -->
+<div id="section-signals" class="hero-split dark-panel">
+  <div class="hero-canvas-col">
+    <canvas id="canvas-signals" aria-hidden="true"></canvas>
   </div>
-</section>
-
-<!-- WHAT PARETO DOES -->
-<section class="band alt" id="what">
-  <div class="container">
-    <div class="sec-head reveal">
-      <p class="eyebrow">What we do</p>
-      <h2 class="s-title">Pareto turns business operations into <em>continuously improving</em> AI systems.</h2>
-      <p class="lead">We map how your company actually works — its knowledge, workflows, customers, and the judgment of the people who run it — bring in vetted domain experts, deploy practical AI into real workflows, and then keep improving those systems as your business changes. The result isn&rsquo;t a pilot. It&rsquo;s an operating system that gets better over time.</p>
+  <div class="hero-text-col">
+    <p class="hero-eyebrow">The Continuous-Learning Engine</p>
+    <h1 class="hero-h1">
+      <span class="cr"><span class="cr-inner">Deploy into operations.</span></span>
+      <span class="cr"><span class="cr-inner" style="transition-delay:.10s">Learn from reality.</span></span>
+      <span class="cr"><span class="cr-inner" style="transition-delay:.20s"><em>Improve over time.</em></span></span>
+    </h1>
+    <p class="hero-body rv" style="transition-delay:.35s">Every workflow, customer interaction, expert review, and business outcome becomes signal. Pareto uses it to keep your AI systems accurate, useful, and aligned with real operations — long after launch.</p>
+    <div class="hero-ctas rv" style="transition-delay:.48s">
+      <a href="#partner" class="btn btn-sig btn-arr">Partner with Pareto</a>
+      <a href="#platform" class="btn btn-outline-dark">See the platform</a>
     </div>
   </div>
-</section>
+</div>
 
-<!-- THE LOOP -->
-<section class="band" id="how">
-  <div class="container">
-    <div class="sec-head reveal">
-      <p class="eyebrow">How it works</p>
-      <h2 class="s-title">A system that <em>learns after launch.</em></h2>
-      <p class="lead">Most AI projects stop improving the day they ship. Pareto&rsquo;s systems treat every workflow, customer interaction, expert review, and business outcome as signal — and use it to stay accurate, useful, and aligned with real operations.</p>
-    </div>
-
-    <div class="loop">
-      <div class="loop-step reveal"><div class="loop-num">01</div><h3>Map</h3><p>Capture company knowledge, workflows, customer signal, and expert judgment.</p></div>
-      <div class="loop-step reveal" style="transition-delay:.05s"><div class="loop-num">02</div><h3>Deploy</h3><p>Forward Deployed Engineers ship practical AI into real workflows.</p></div>
-      <div class="loop-step reveal" style="transition-delay:.1s"><div class="loop-num">03</div><h3>Measure</h3><p>Track adoption, time saved, cost, and service quality.</p></div>
-      <div class="loop-step reveal" style="transition-delay:.15s"><div class="loop-num">04</div><h3>Learn</h3><p>Every interaction, outcome, and expert review becomes signal.</p></div>
-      <div class="loop-step reveal" style="transition-delay:.2s"><div class="loop-num">05</div><h3>Improve</h3><p>Systems get more accurate and useful over time — measurably, and safely.</p></div>
-    </div>
-
-    <p class="loop-note reveal">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>
-      A continuous loop — not a one-time deployment.
-    </p>
+<!-- ═══ STATEMENT ════════════════════════════════ -->
+<div class="section">
+  <div class="wrap-thin">
+    <p class="statement rv">AI adoption is no longer blocked by model access. It&rsquo;s blocked by <em>implementation</em> — the infrastructure, expertise, and continuous improvement that turn a model into measurable operational gain.</p>
   </div>
-</section>
+</div>
 
-<!-- WHY DIFFERENT -->
-<section class="band alt" id="platform">
-  <div class="container">
-    <div class="sec-head reveal">
-      <p class="eyebrow">Why Pareto</p>
-      <h2 class="s-title">Built to keep working.</h2>
-      <p class="lead">The scarce value in AI is no longer the model. It&rsquo;s implementation, company-specific learning, expert validation, and continuous improvement after deployment. Pareto is built around exactly that.</p>
+<!-- ═══ WHAT WE DO + LOOP ════════════════════════ -->
+<div class="section" id="how">
+  <div class="wrap">
+    <div class="section-tag rv">How it works</div>
+    <div class="two-col">
+      <h2 class="col-h" style="margin-bottom:0">Pareto turns operations into <em>continuously improving</em> AI systems.</h2>
+      <p class="col-p" style="margin-bottom:0; align-self:end">We map how your company actually works, bring in vetted domain experts, deploy practical AI into real workflows, and keep improving it as the business changes. The result isn&rsquo;t a pilot — it&rsquo;s a system that gets better after launch.</p>
     </div>
 
-    <div class="cards">
-      <div class="card reveal">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>
-        <h3>Implementation-first</h3>
-        <p>We ship systems into real workflows, not slide decks. Outcomes that operators can feel — not pilots that stall.</p>
-      </div>
-      <div class="card reveal" style="transition-delay:.05s">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        <h3>Expert-powered</h3>
-        <p>Vetted domain experts validate the edge cases, judgment calls, and operational nuance that documents alone never capture.</p>
-      </div>
-      <div class="card reveal" style="transition-delay:.1s">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
-        <h3>Model-agnostic</h3>
-        <p>We use the best model for the job — open or proprietary — and swap as the frontier moves. You never get locked in.</p>
-      </div>
-      <div class="card reveal" style="transition-delay:.15s">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg>
-        <h3>Continuously improving</h3>
-        <p>Your systems learn from real operations and improve automatically over time — saving money, time, and operational issues.</p>
-      </div>
+    <div class="cap-list">
+      <div class="cap-item rv"><span class="cap-n">01</span><h3 class="cap-h">Map</h3><p class="cap-p">Capture company knowledge, workflows, customer signal, and the judgment of the people who run the operation.</p></div>
+      <div class="cap-item rv" style="transition-delay:.06s"><span class="cap-n">02</span><h3 class="cap-h">Deploy</h3><p class="cap-p">Forward Deployed Engineers ship practical AI — assistants, automations, copilots, voice or workflow systems — into real workflows.</p></div>
+      <div class="cap-item rv" style="transition-delay:.12s"><span class="cap-n">03</span><h3 class="cap-h">Measure</h3><p class="cap-p">Track adoption, time saved, cost, and service quality, so value is visible to operators and owners alike.</p></div>
+      <div class="cap-item rv" style="transition-delay:.18s"><span class="cap-n">04</span><h3 class="cap-h">Learn</h3><p class="cap-p">Every interaction, outcome, and expert review becomes signal that feeds back into the system.</p></div>
+      <div class="cap-item rv" style="transition-delay:.24s"><span class="cap-n">05</span><h3 class="cap-h"><em>Improve</em></h3><p class="cap-p">Systems get more accurate and useful over time — measurably, safely, and without a rebuild.</p></div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- INDUSTRIES -->
-<section class="band" id="industries">
-  <div class="container">
-    <div class="sec-head reveal">
-      <p class="eyebrow">Industries</p>
-      <h2 class="s-title">Practical AI for <em>real-world operations.</em></h2>
-      <p class="lead">Pareto works where practical AI saves time, reduces cost, improves service, and prevents operational issues — for operating companies that know their problems but don&rsquo;t have an internal AI team.</p>
+<!-- ═══ PLATFORM (dark) ══════════════════════════ -->
+<div class="section-dark" id="platform">
+  <div class="wrap">
+    <div class="section-tag rv">The platform</div>
+    <div class="two-col">
+      <h2 class="col-h" style="margin-bottom:0">The continuous-learning platform <em>beneath every system.</em></h2>
+      <p class="col-p" style="margin-bottom:0; align-self:end; opacity:0.72">The scarce value in AI is no longer the model — it&rsquo;s implementation, company-specific learning, expert validation, and continuous improvement after deployment. Pareto is built around exactly that.</p>
+    </div>
+
+    <div class="cap-list">
+      <div class="cap-item rv"><span class="cap-n">01</span><h3 class="cap-h">Company Knowledge <em>Map</em></h3><p class="cap-p">A structured understanding of your data, processes, policies, customers, and workflows — the foundation every system learns from.</p></div>
+      <div class="cap-item rv" style="transition-delay:.06s"><span class="cap-n">02</span><h3 class="cap-h">Expert Intelligence <em>Layer</em></h3><p class="cap-p">Vetted domain experts validate workflows, surface edge cases, and encode the operational reasoning documents never capture.</p></div>
+      <div class="cap-item rv" style="transition-delay:.12s"><span class="cap-n">03</span><h3 class="cap-h">Implementation <em>Layer</em></h3><p class="cap-p">Forward Deployed Engineers turn opportunities into working AI systems inside real workflows — model-agnostic, open or proprietary.</p></div>
+      <div class="cap-item rv" style="transition-delay:.18s"><span class="cap-n">04</span><h3 class="cap-h">Continual Learning <em>Layer</em></h3><p class="cap-p">The platform monitors feedback, outcomes, and operational change to improve systems over time — automatically and safely.</p></div>
+      <div class="cap-item rv" style="transition-delay:.24s"><span class="cap-n">05</span><h3 class="cap-h">Measurement <em>Layer</em></h3><p class="cap-p">ROI, adoption, time saved, cost reduction, and service quality — tracked so improvement is provable, not promised.</p></div>
+    </div>
+
+    <div class="stats-row rv">
+      <div class="stat"><div class="stat-v">Implementation<em>-first</em></div><div class="stat-l">We ship systems into workflows, not slide decks.</div></div>
+      <div class="stat"><div class="stat-v">Expert<em>-powered</em></div><div class="stat-l">Real domain judgment, built into every system.</div></div>
+      <div class="stat"><div class="stat-v">Model<em>-agnostic</em></div><div class="stat-l">Best model for the job — swappable as the frontier moves.</div></div>
+      <div class="stat"><div class="stat-v">Always <em>improving</em></div><div class="stat-l">Learns from real operations, over time.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ INDUSTRIES ═══════════════════════════════ -->
+<div class="section" id="industries">
+  <div class="wrap">
+    <div class="section-tag rv">Industries</div>
+    <div class="two-col">
+      <h2 class="col-h" style="margin-bottom:0">Practical AI for <em>real-world operations.</em></h2>
+      <p class="col-p" style="margin-bottom:0; align-self:end">For operating companies that know their problems but don&rsquo;t have an internal AI team — where practical AI saves time, reduces cost, improves service, and prevents operational issues.</p>
     </div>
 
     <div class="ind-grid">
-      <article class="ind-card reveal">
-        <!-- Drop final editorial photography into .ind-img (replace gradient) -->
-        <div class="ind-img" role="img" aria-label="Manufacturing operations">
-          <svg class="ind-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 20h20"/><path d="M4 20V9l5 4V9l5 4V9l5 4v7"/></svg>
-          <span class="ph">Image — Manufacturing</span>
-        </div>
-        <div class="ind-body"><h3>Manufacturing</h3><p>AI that continuously improves production, quality, maintenance, inventory, and supply-chain operations.</p></div>
-      </article>
-
-      <article class="ind-card reveal" style="transition-delay:.05s">
-        <div class="ind-img" role="img" aria-label="Consumer brands and retail operations">
-          <svg class="ind-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-          <span class="ph">Image — Retail</span>
-        </div>
-        <div class="ind-body"><h3>Consumer Brands &amp; Retail</h3><p>AI that optimizes merchandising, customer service, inventory, pricing, and omnichannel operations through continuous learning.</p></div>
-      </article>
-
-      <article class="ind-card reveal" style="transition-delay:.1s">
-        <div class="ind-img" role="img" aria-label="Business services operations">
-          <svg class="ind-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-          <span class="ph">Image — Business Services</span>
-        </div>
-        <div class="ind-body"><h3>Business Services</h3><p>AI that automates knowledge work, client operations, back-office processes, and customer support while learning from every interaction.</p></div>
-      </article>
-
-      <article class="ind-card reveal">
-        <div class="ind-img" role="img" aria-label="Healthcare services operations">
-          <svg class="ind-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          <span class="ph">Image — Healthcare Services</span>
-        </div>
-        <div class="ind-body"><h3>Healthcare Services</h3><p>AI that streamlines administrative workflows, patient operations, billing, and scheduling while continuously improving from outcomes.</p></div>
-      </article>
-
-      <article class="ind-card reveal" style="transition-delay:.05s">
-        <div class="ind-img" role="img" aria-label="Logistics and transportation operations">
-          <svg class="ind-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-          <span class="ph">Image — Logistics</span>
-        </div>
-        <div class="ind-body"><h3>Logistics &amp; Transportation</h3><p>AI that continuously optimizes routing, warehouse operations, fleet management, dispatch, and supply-chain performance through real-time learning.</p></div>
-      </article>
-
-      <article class="ind-card reveal" style="transition-delay:.1s">
-        <div class="ind-img" role="img" aria-label="Partner with Pareto" style="background:linear-gradient(150deg,#1B1813 0%,#2C2820 100%);">
-          <svg class="ind-ic" viewBox="0 0 24 24" fill="none" stroke="#E7DFCB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="opacity:.85"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
-          <span class="ph" style="color:rgba(231,223,203,0.55)">Don&rsquo;t see yours?</span>
-        </div>
-        <div class="ind-body"><h3>Your industry</h3><p>If your business runs on operations and knowledge, continuous-learning AI can help. <a class="link gold" href="mailto:research@trypareto.ai?subject=Partner%20with%20Pareto" style="margin-top:6px">Talk to us &rarr;</a></p></div>
-      </article>
+      <div class="ind rv">
+        <svg class="ind-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 20h20"/><path d="M4 20V9l5 4V9l5 4V9l5 4v7"/></svg>
+        <h3>Manufacturing</h3>
+        <p>AI that continuously improves production, quality, maintenance, inventory, and supply-chain operations.</p>
+      </div>
+      <div class="ind rv" style="transition-delay:.05s">
+        <svg class="ind-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <h3>Consumer Brands &amp; Retail</h3>
+        <p>AI that optimizes merchandising, customer service, inventory, pricing, and omnichannel operations through continuous learning.</p>
+      </div>
+      <div class="ind rv" style="transition-delay:.1s">
+        <svg class="ind-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        <h3>Business Services</h3>
+        <p>AI that automates knowledge work, client operations, back-office processes, and support while learning from every interaction.</p>
+      </div>
+      <div class="ind rv">
+        <svg class="ind-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <h3>Healthcare Services</h3>
+        <p>AI that streamlines administrative workflows, patient operations, billing, and scheduling while improving from outcomes.</p>
+      </div>
+      <div class="ind rv" style="transition-delay:.05s">
+        <svg class="ind-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        <h3>Logistics &amp; Transportation</h3>
+        <p>AI that continuously optimizes routing, warehouse operations, fleet management, dispatch, and supply-chain performance.</p>
+      </div>
+      <div class="ind rv" style="transition-delay:.1s; border-style:dashed;">
+        <svg class="ind-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        <h3>Your industry</h3>
+        <p>If your business runs on operations and knowledge, continuous-learning AI can help. <a href="#partner" style="border-bottom:1px solid var(--gold); color:var(--gold)">Talk to us →</a></p>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- PRIVATE EQUITY -->
-<section class="band alt" id="private-equity">
-  <div class="container">
-    <div class="pe">
-      <div class="reveal">
-        <p class="eyebrow" style="margin-bottom:22px">Private equity</p>
-        <h2 class="s-title" style="margin-bottom:20px">Built for portfolio <em>value creation.</em></h2>
-        <p class="lead">PE firms need practical value creation, not AI experimentation. Portfolio companies often have real operational problems but no internal AI team. Pareto helps you identify high-ROI AI opportunities, implement them into portfolio operations, and track improvement over time.</p>
+<!-- ═══ PRIVATE EQUITY ═══════════════════════════ -->
+<div class="section" id="private-equity" style="background:var(--w2);">
+  <div class="wrap">
+    <div class="section-tag rv">Private equity</div>
+    <div class="two-col">
+      <div class="rv">
+        <p class="col-label">The wedge</p>
+        <h2 class="col-h">Built for portfolio <em>value creation.</em></h2>
+        <p class="col-p">PE firms need practical value creation, not AI experimentation. Portfolio companies often have real operational problems but no internal AI team. Pareto helps you identify high-ROI opportunities, implement them into operations, and track improvement over time.</p>
         <div class="pe-loop">
           <span>Assess</span><span>Prioritize</span><span>Implement</span><span>Measure</span><span>Improve</span><span>Repeat</span>
         </div>
-        <p class="lead" style="margin-top:28px; font-size:14px">As Pareto works across companies, firms can develop reusable playbooks and implementation patterns — while each company&rsquo;s data stays <strong>separated and governed.</strong></p>
-        <div style="margin-top:32px"><a class="btn" href="mailto:research@trypareto.ai?subject=Pareto%20for%20Private%20Equity">Start with one portfolio company</a></div>
+        <p class="col-p" style="font-size:14px; margin-bottom:28px">As Pareto works across companies, firms can develop reusable playbooks and implementation patterns — while each company&rsquo;s data stays separated and governed.</p>
+        <a href="#partner" class="btn btn-solid btn-arr">Start with one portfolio company</a>
       </div>
-      <div class="reveal" style="transition-delay:.08s">
-        <p class="eyebrow" style="margin-bottom:24px">Where Pareto helps</p>
+      <div class="rv" style="transition-delay:.12s">
+        <p class="col-label">Where Pareto helps</p>
         <div class="pe-cols">
-          <ul>
-            <li>Revenue operations</li>
-            <li>Customer service</li>
-            <li>Back office</li>
-            <li>Finance operations</li>
-          </ul>
-          <ul>
-            <li>Supply chain</li>
-            <li>Healthcare administration</li>
-            <li>Manufacturing operations</li>
-            <li>Logistics &amp; dispatch</li>
-          </ul>
+          <ul><li>Revenue operations</li><li>Customer service</li><li>Back office</li><li>Finance operations</li></ul>
+          <ul><li>Supply chain</li><li>Healthcare administration</li><li>Manufacturing operations</li><li>Logistics &amp; dispatch</li></ul>
         </div>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- EXPERTS + FDE -->
-<section class="band" id="experts">
-  <div class="container">
-    <div class="experts">
-      <div class="reveal">
-        <p class="eyebrow" style="margin-bottom:22px">Expertise</p>
-        <h2 class="s-title" style="margin-bottom:20px">Real expertise, <em>built into the system.</em></h2>
-        <p class="lead">AI systems fail when they only learn from documents. Pareto brings in a growing network of vetted domain experts who understand how the work actually happens — the edge cases, judgment calls, bottlenecks, and operational nuance that rarely appear in documentation. Our Forward Deployed Engineers work close to your operators to turn that into systems that ship and keep improving.</p>
+<!-- ═══ PARTNER FORM ═════════════════════════════ -->
+<div class="section" id="partner">
+  <div class="wrap">
+    <div class="section-tag rv">Partner with Pareto</div>
+    <div class="two-col">
+      <div class="rv">
+        <p class="col-label">For companies &amp; investors</p>
+        <h2 class="col-h">Tell us where your <em>operations hurt.</em></h2>
+        <p class="col-p">We&rsquo;ll show you what continuous-learning AI can do — tailored to your company, implemented into real workflows, and improved over time. Every engagement is scoped to your operation, not a one-size-fits-all product.</p>
+        <ul class="bens">
+          <li>A practical assessment of your highest-ROI AI opportunities</li>
+          <li>Implementation by Forward Deployed Engineers, into real workflows</li>
+          <li>Vetted domain-expert validation for your industry</li>
+          <li>Continuous improvement and measurement after launch</li>
+          <li>Company data kept separated and governed</li>
+        </ul>
       </div>
-      <div class="reveal" style="transition-delay:.08s">
-        <div style="border:1px solid var(--wl); background:var(--w); padding:34px;">
-          <p class="eyebrow" style="margin-bottom:18px">For domain experts</p>
-          <p class="lead" style="font-size:15px; margin-bottom:24px">Have deep, hard-won knowledge in your field? Join the network and help shape AI systems that real companies rely on — on your terms.</p>
-          <a class="btn" href="https://expert.trypareto.ai/">Become an Expert</a>
+      <div class="rv" style="transition-delay:.15s">
+        <div class="form-box">
+          <p class="form-ttl">Start a conversation</p>
+          <form id="partner-form" novalidate>
+            <div class="fields">
+              <div class="field"><label for="c-name">Your name</label><input id="c-name" name="name" type="text" autocomplete="name" placeholder="James Wright" required></div>
+              <div class="field"><label for="c-email">Work email</label><input id="c-email" name="email" type="email" autocomplete="email" placeholder="james@company.com" required></div>
+              <div class="field"><label for="c-co">Company</label><input id="c-co" name="company" type="text" autocomplete="organization" placeholder="Your company"></div>
+              <div class="field"><label for="c-type">You are</label>
+                <select id="c-type" name="type">
+                  <option value="">Select one</option>
+                  <option>Operating company (SMB / mid-market)</option>
+                  <option>Private equity firm</option>
+                  <option>PE portfolio company</option>
+                  <option>Vertical / industry business</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="field"><label for="c-chal">Where could AI help your operations?</label><textarea id="c-chal" name="challenge" placeholder="e.g. Our customer service team is overwhelmed and our knowledge is scattered across people and docs…"></textarea></div>
+            </div>
+            <div class="form-ft">
+              <button type="submit" class="btn btn-solid">Partner with Pareto</button>
+              <p class="form-note">We review every inquiry personally and respond within two business days.</p>
+            </div>
+          </form>
+          <div class="form-ok" id="partner-ok"><div class="ok-ring">✓</div><h3>Thank you.</h3><p>We&rsquo;ll be in touch within two business days.</p></div>
         </div>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- FINAL CTA -->
-<section class="cta-final" id="contact">
-  <div class="container">
-    <div class="reveal">
-      <h2 class="s-title">Build AI systems that <em>keep improving.</em></h2>
-      <p>Tell us where your operations hurt. We&rsquo;ll show you what continuous-learning AI can do — tailored to your company, implemented into real workflows, and improved over time.</p>
-      <div class="cta-actions">
-        <a class="btn invert" href="mailto:research@trypareto.ai?subject=Partner%20with%20Pareto">Partner with Pareto</a>
-        <a class="btn invert-ghost" href="mailto:research@trypareto.ai?subject=Contact%20Pareto">Contact Pareto</a>
+<!-- ═══ EXPERTS ══════════════════════════════════ -->
+<div class="section" id="experts">
+  <div class="wrap">
+    <div class="section-tag rv">Expert network</div>
+    <div class="two-col">
+      <div class="rv">
+        <p class="col-label">For domain experts</p>
+        <h2 class="col-h">Real expertise,<br><em>built into the system.</em></h2>
+        <p class="col-p">AI fails when it only learns from documents. Pareto brings in a growing network of vetted domain experts who understand how the work actually happens — the edge cases, judgment calls, and operational nuance that rarely appear in documentation. Our Forward Deployed Engineers turn that into systems that ship and keep improving.</p>
+        <ul class="bens">
+          <li>Flexible, paid engagements matched to your domain</li>
+          <li>Shape AI systems that real operating companies rely on</li>
+          <li>No cold outreach — we match you to relevant work</li>
+        </ul>
+      </div>
+      <div class="rv" style="transition-delay:.15s; display:flex; align-items:center; justify-content:center;">
+        <a href="https://expert.trypareto.ai/" class="btn btn-solid btn-arr" style="font-size:15px; padding:18px 28px;">Become an Expert</a>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- FOOTER -->
+<!-- ═══ FOOTER ════════════════════════════════════ -->
 <footer>
-  <div class="container">
-    <div class="foot-top">
-      <div>
-        <div class="foot-brand">Pareto Labs</div>
-        <p class="foot-contact">For partnerships and inquiries, contact <a href="mailto:research@trypareto.ai">research@trypareto.ai</a></p>
-      </div>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div class="foot-logo">Pareto Labs</div>
       <ul class="foot-links">
         <li><a href="#platform">Platform</a></li>
         <li><a href="#private-equity">Private Equity</a></li>
         <li><a href="#industries">Industries</a></li>
         <li><a href="https://expert.trypareto.ai/">Experts</a></li>
-        <li><a href="/research/the-learning-layer">Research</a></li>
+        <li><a href="#partner">Partner with Pareto</a></li>
+        <li><a href="mailto:hello@trypareto.ai">Contact</a></li>
         <li><a href="privacy.html">Privacy</a></li>
       </ul>
-    </div>
-    <div class="foot-bottom">
-      <span>&copy; 2026 Pareto Labs, Inc.</span>
-      <span>Continuous-learning AI for real operations.</span>
+      <p class="foot-copy">&copy; 2026 Pareto Labs, Inc.</p>
     </div>
   </div>
 </footer>
 
 <script>
-/* ── GOLD KNOWLEDGE NETWORK (production hero animation — preserved) ── */
+const SHEETDB_URL = 'https://sheetdb.io/api/v1/13vsrik8tjpsw';
+const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ── SCROLL PROGRESS ──────────────────────────── */
+const prog = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+  const p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  prog.style.width = (p * 100) + '%';
+}, { passive: true });
+
+/* ── NAV THEME (light / dark by section under nav) ── */
+const nav = document.getElementById('nav');
+const darkEls = Array.from(document.querySelectorAll('#section-signals, #platform'));
+function updateNav() {
+  const probe = 28; // px below the top where the nav sits
+  const onDark = darkEls.some(el => {
+    const r = el.getBoundingClientRect();
+    return r.top <= probe && r.bottom >= probe;
+  });
+  nav.classList.toggle('on-dark', onDark);
+  if (window.scrollY > 40) {
+    nav.classList.toggle('scrolled-dark', onDark);
+    nav.classList.toggle('scrolled-light', !onDark);
+  } else {
+    nav.classList.remove('scrolled-light', 'scrolled-dark');
+  }
+}
+window.addEventListener('scroll', updateNav, { passive: true });
+updateNav();
+
+/* ── REVEALS (cascade + fade), respects reduced motion ── */
+const animEls = document.querySelectorAll('.rv, .cr');
+if (REDUCE || !('IntersectionObserver' in window)) {
+  animEls.forEach(el => el.classList.add('in'));
+} else {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  animEls.forEach(el => io.observe(el));
+}
+
+/* ── PARTNER FORM → SheetDB (graceful fallback) ── */
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 (function() {
-  const canvas = document.getElementById('net');
+  const f = document.getElementById('partner-form');
+  const ok = document.getElementById('partner-ok');
+  if (!f) return;
+  function showErr(msg) {
+    let el = f.querySelector('.form-err');
+    if (!el) { el = document.createElement('p'); el.className = 'form-err'; el.style.cssText = 'font-size:12px;color:#b23b2e;margin-top:12px;text-align:center;line-height:1.5;'; f.querySelector('.form-ft').appendChild(el); }
+    el.textContent = msg;
+  }
+  f.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = f.name.value.trim(), email = f.email.value.trim();
+    if (!name) { showErr('Please enter your name.'); f.name.focus(); return; }
+    if (!EMAIL_RE.test(email)) { showErr('Please enter a valid work email.'); f.email.focus(); return; }
+    const btn = f.querySelector('button[type=submit]'); const orig = btn.textContent;
+    btn.textContent = 'Sending…'; btn.disabled = true;
+    const row = {
+      Timestamp: new Date().toISOString(),
+      Name: name, Email: email,
+      Company: f.company.value.trim(),
+      Type: f.type.value,
+      Challenge: f.challenge.value.trim(),
+    };
+    try {
+      const res = await fetch(SHEETDB_URL + '?sheet=' + encodeURIComponent('Partner Inquiries'), {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ data: [row] }),
+      });
+      if (!res.ok) throw new Error('SheetDB ' + res.status);
+      f.style.display = 'none'; ok.style.display = 'block';
+    } catch {
+      btn.textContent = orig; btn.disabled = false;
+      showErr('Something went wrong — please email hello@trypareto.ai and we’ll respond right away.');
+    }
+  });
+})();
+
+/* ── CANVAS A: KNOWLEDGE NETWORK (gold, light hero) ── */
+(function() {
+  const canvas = document.getElementById('canvas-human');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
+  let nodes = [], W, H;
   const LABELS = ['Manufacturing','Retail','Healthcare Services','Logistics','Business Services','Private Equity','Customer Signals','Expert Intelligence','Operational Data','Continuous Improvement'];
   const COLORS = ['rgba(190,155,100,', 'rgba(170,135,85,', 'rgba(210,175,120,', 'rgba(155,120,75,'];
-  let nodes = [], W, H, dpr;
 
   function resize() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = canvas.offsetWidth; H = canvas.offsetHeight;
-    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    build();
-  }
-  function build() {
-    const count = Math.max(22, Math.min(44, Math.round((W * H) / 13000)));
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
     nodes = [];
-    for (let i = 0; i < count; i++) {
-      const r = Math.random() * 3.4 + 1.5;
-      nodes.push({
-        x: Math.random() * W, y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.32, vy: (Math.random() - 0.5) * 0.32,
-        r, label: i < LABELS.length ? LABELS[i] : null,
-        col: COLORS[i % COLORS.length], phase: Math.random() * Math.PI * 2,
-      });
+    for (let i = 0; i < 38; i++) {
+      const r = Math.random() * 3.5 + 1.5;
+      nodes.push({ x: Math.random()*W, y: Math.random()*H, vx: (Math.random()-.5)*.32, vy: (Math.random()-.5)*.32, r, label: i < LABELS.length ? LABELS[i] : null, col: COLORS[i % COLORS.length], phase: Math.random()*Math.PI*2 });
     }
   }
   resize();
   window.addEventListener('resize', resize);
 
-  function frame(t) {
+  function draw(t) {
     ctx.clearRect(0, 0, W, H);
-    const tt = t * 0.001;
-
-    nodes.forEach(n => {
-      n.x += n.vx; n.y += n.vy;
-      if (n.x < 0 || n.x > W) n.vx *= -1;
-      if (n.y < 0 || n.y > H) n.vy *= -1;
-    });
-
+    if (!REDUCE) nodes.forEach(n => { n.x += n.vx; n.y += n.vy; if (n.x<0||n.x>W) n.vx*=-1; if (n.y<0||n.y>H) n.vy*=-1; });
     for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const a = nodes[i], b = nodes[j];
-        const dx = a.x - b.x, dy = a.y - b.y;
-        const d = Math.sqrt(dx*dx + dy*dy);
-        if (d < 152) {
-          const alpha = (1 - d / 152) * 0.13;
-          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
-          ctx.strokeStyle = `rgba(160,130,85,${alpha})`; ctx.lineWidth = 0.6; ctx.stroke();
-        }
+      for (let j = i+1; j < nodes.length; j++) {
+        const a = nodes[i], b = nodes[j]; const dx = a.x-b.x, dy = a.y-b.y; const d = Math.sqrt(dx*dx+dy*dy);
+        if (d < 150) { const alpha = (1 - d/150) * 0.12; ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.strokeStyle = `rgba(160,130,85,${alpha})`; ctx.lineWidth = 0.6; ctx.stroke(); }
       }
     }
-
     nodes.forEach(n => {
-      const pulse = 0.35 + 0.2 * Math.sin(tt * 0.7 + n.phase);
-      ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
-      ctx.fillStyle = n.col + pulse + ')'; ctx.fill();
-      if (n.label && n.r > 2.5) {
-        ctx.font = '500 10px Inter, sans-serif';
-        ctx.fillStyle = `rgba(140,110,65,${pulse * 0.75})`;
-        ctx.fillText(n.label, n.x + n.r + 6, n.y + 3.5);
-      }
+      const pulse = 0.35 + 0.2 * Math.sin(t*0.7 + n.phase);
+      ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2); ctx.fillStyle = n.col + pulse + ')'; ctx.fill();
+      if (n.label && n.r > 2.5) { ctx.font = '500 10px Inter,sans-serif'; ctx.fillStyle = `rgba(140,110,65,${pulse*0.7})`; ctx.fillText(n.label, n.x + n.r + 6, n.y + 3.5); }
     });
-
-    if (!reduce) requestAnimationFrame(frame);
+    if (!REDUCE) requestAnimationFrame(() => draw(Date.now()*0.001));
   }
-  frame(0);
+  draw(0);
 })();
 
-/* ── Scroll reveals (respects reduced motion) ── */
+/* ── CANVAS B: SIGNAL GRID (lime, dark hero) ──── */
 (function() {
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const els = document.querySelectorAll('.reveal');
-  if (reduce || !('IntersectionObserver' in window)) {
-    els.forEach(el => el.classList.add('in'));
-    return;
+  const canvas = document.getElementById('canvas-signals');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let nodes = [], W, H;
+
+  function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; build(); }
+  function build() {
+    nodes = []; const sp = 72; const cols = Math.floor(W/sp)+1, rows = Math.floor(H/sp)+1;
+    const ox = (W-(cols-1)*sp)/2, oy = (H-(rows-1)*sp)/2;
+    for (let i=0;i<cols;i++) for (let j=0;j<rows;j++) nodes.push({ x: ox+i*sp+(Math.random()-.5)*18, y: oy+j*sp+(Math.random()-.5)*18, bright: 0 });
   }
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
-  els.forEach(el => io.observe(el));
+  resize();
+  window.addEventListener('resize', resize);
+
+  function propagate(src, depth) {
+    if (depth > 5) return;
+    nodes.forEach(n => {
+      if (n === src) return; const dx = n.x-src.x, dy = n.y-src.y; const d = Math.sqrt(dx*dx+dy*dy);
+      if (d < 110) { const delay = d*3.5 + Math.random()*120; setTimeout(() => { if (n.bright < 0.3) { n.bright = Math.max(n.bright, 0.6 + Math.random()*0.4); if (depth < 4) propagate(n, depth+1); } }, delay); }
+    });
+  }
+  function spawn() { const s = nodes[Math.floor(Math.random()*nodes.length)]; if (s) { s.bright = 1; propagate(s, 0); } setTimeout(spawn, 600 + Math.random()*900); }
+  if (!REDUCE) spawn();
+
+  function tick() {
+    ctx.clearRect(0, 0, W, H);
+    for (let i=0;i<nodes.length;i++) for (let j=i+1;j<nodes.length;j++) {
+      const a = nodes[i], b = nodes[j]; const dx = a.x-b.x, dy = a.y-b.y; const d = Math.sqrt(dx*dx+dy*dy);
+      if (d < 110) { const br = Math.max(a.bright, b.bright); ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.strokeStyle = `rgba(180,255,0,${0.04 + br*0.22})`; ctx.lineWidth = 0.5; ctx.stroke(); }
+    }
+    nodes.forEach(n => {
+      if (!REDUCE) n.bright *= 0.965; const b = n.bright;
+      if (b > 0.02) { const g = ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,12+b*10); g.addColorStop(0,`rgba(180,255,0,${b*0.18})`); g.addColorStop(1,'rgba(180,255,0,0)'); ctx.beginPath(); ctx.arc(n.x,n.y,12+b*10,0,Math.PI*2); ctx.fillStyle = g; ctx.fill(); }
+      ctx.beginPath(); ctx.arc(n.x, n.y, 1.5 + b*2, 0, Math.PI*2); ctx.fillStyle = `rgba(180,255,0,${0.12 + b*0.7})`; ctx.fill();
+    });
+    if (!REDUCE) requestAnimationFrame(tick);
+  }
+  tick();
 })();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
