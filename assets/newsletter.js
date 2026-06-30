@@ -34,24 +34,17 @@
     var band = holder.firstChild;
     footer.parentNode.insertBefore(band, footer);
 
-    // Full-width "Pareto Labs" end-cap (marquee + scroll reveal), above the footer
-    var unit = '<span class="plm-item">Pareto&nbsp;Labs</span><span class="plm-sep" aria-hidden="true">&#10022;</span>';
-    var half = ''; for (var u = 0; u < 6; u++) half += unit;
+    // AI-native end-cap: giant glowing gradient "Pareto Labs", revealed on scroll
     var cap = document.createElement('section');
     cap.className = 'plw';
-    cap.setAttribute('aria-hidden', 'true');
+    cap.setAttribute('aria-label', 'Pareto Labs');
     cap.innerHTML =
-      '<div class="plw-inner">' +
-        '<div class="plw-pillars">' +
-          '<div class="plw-pill">Implementation-first</div>' +
-          '<div class="plw-pill">Expert-powered</div>' +
-          '<div class="plw-pill">Model-agnostic</div>' +
-          '<div class="plw-pill">Always improving</div>' +
-        '</div>' +
-        '<div class="plw-rule"></div>' +
-      '</div>' +
-      '<div class="plm-marquee"><div class="plm-track">' + half + half + '</div></div>' +
-      '<div class="plw-tag-wrap"><span class="plw-tag">Continuous-learning AI for real-world operations</span></div>';
+      '<div class="plw-glow" aria-hidden="true"></div>' +
+      '<div class="plw-stage">' +
+        '<span class="plw-eyebrow">Continuous-learning AI</span>' +
+        '<h2 class="plw-word">Pareto&nbsp;Labs</h2>' +
+        '<span class="plw-tag">Diffusing AI into the real economy</span>' +
+      '</div>';
     footer.parentNode.insertBefore(cap, footer);
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
@@ -59,7 +52,7 @@
     } else {
       var io2 = new IntersectionObserver(function (es) {
         es.forEach(function (e) { if (e.isIntersecting) { cap.classList.add('in'); io2.unobserve(e.target); } });
-      }, { threshold: 0.12 });
+      }, { threshold: 0.25 });
       io2.observe(cap);
     }
 
