@@ -20,9 +20,11 @@ Pareto connects internal systems, customer interactions, operational workflows, 
 - PE is the **primary wedge**, but the site must not read as PE-only.
 - Tone: premium but accessible; serious but not cold; enterprise-grade but not Fortune-500-only; readable by a non-technical operator or PE operating partner.
 
-### CTAs
-- Primary: **Partner with Pareto** (alt: **Reach Out** — chosen because solutions are tailored per company; avoid "Request Access").
-- Expert: **Become an Expert** → https://expert.trypareto.ai/
+### CTAs (locked)
+- **Contact Pareto** — light-touch / footer / secondary.
+- **Partner with Pareto** — primary nav + hero (implies a tailored engagement; avoid "Request Access").
+- **Become an Expert** → https://expert.trypareto.ai/
+- Note: `experts.html` + `participants.html` are **orphaned leftover files** from the old dark "v3" theme — not linked from the live homepage, but still served by Vercel at their raw URLs.
 
 ---
 
