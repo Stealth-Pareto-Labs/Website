@@ -1,23 +1,25 @@
 /**
  * Pareto Labs — "Build with Pareto" request handler (Google Apps Script).
- * Free backend: logs each request to a Google Sheet, emails the requester a
- * confirmation, and posts a notification to Slack.
+ * Free backend: writes each request to your existing Google Sheet, emails the
+ * requester a confirmation (via Resend), and posts a Slack notification.
  *
- * SETUP (see backend/README.md for the full walkthrough):
- *   1. Create a standalone Apps Script project (script.google.com → New project).
- *   2. Paste this file in. Fill the CONFIG values below.
- *   3. Deploy → New deployment → type "Web app" → Execute as: Me →
- *      Who has access: "Anyone" → Deploy. Authorize when prompted.
- *   4. Copy the Web app URL (…/exec) into BUILD_ENDPOINT in
- *      /assets/build-modal.js, then redeploy the site.
+ * SETUP (see backend/README.md):
+ *   1. script.google.com → New project → paste this file in.
+ *   2. Fill the CONFIG values below (these live only in YOUR Apps Script
+ *      project — never commit real keys to the website repo).
+ *   3. Deploy → New deployment → "Web app" → Execute as: Me →
+ *      Who has access: "Anyone" → Deploy → Authorize.
+ *   4. Send the resulting /exec URL to paste into BUILD_ENDPOINT in
+ *      /assets/build-modal.js.
  */
 
 // ───────────────────────── CONFIG ─────────────────────────
-var SHEET_ID     = '';                       // optional Google Sheet ID to log leads ('' = skip)
-var SHEET_TAB    = 'Build Requests';
-var SLACK_WEBHOOK = '';                      // Slack Incoming Webhook URL (reuse your existing Slack app)
-var NOTIFY_TEAM  = 'hello@trypareto.ai';     // internal copy of each lead ('' = skip)
-var FROM_NAME    = 'Pareto Labs';
+var SHEET_ID       = '';   // the existing Google Sheet ID (from its URL: /spreadsheets/d/THIS/edit)
+var SHEET_TAB      = 'Early Access';                 // existing tab; rename to "Build with Pareto" anytime
+var SLACK_WEBHOOK  = '';    // Slack Incoming Webhook URL (reuse your existing Slack app)
+var RESEND_API_KEY = '';    // Resend API key (re_...) — paste here, not in the website repo
+var FROM_EMAIL     = 'Pareto Labs <noreply@auth.trypareto.ai>';  // a Resend-verified sender
+var NOTIFY_TEAM    = 'hello@trypareto.ai';           // internal copy of each lead ('' = skip)
 // ───────────────────────────────────────────────────────────
 
 function doPost(e) {
@@ -45,15 +47,33 @@ function doPost(e) {
 
 function doGet() { return json_({ ok: true, service: 'pareto-build-request' }); }
 
+/* Header-aware append: maps fields to whatever columns the tab already has. */
 function logToSheet_(lead) {
   if (!SHEET_ID) return;
   var ss = SpreadsheetApp.openById(SHEET_ID);
-  var sh = ss.getSheetByName(SHEET_TAB);
-  if (!sh) {
-    sh = ss.insertSheet(SHEET_TAB);
+  var sh = ss.getSheetByName(SHEET_TAB) || ss.insertSheet(SHEET_TAB);
+  var lastCol = sh.getLastColumn();
+  var headers = lastCol > 0 ? sh.getRange(1, 1, 1, lastCol).getValues()[0] : [];
+  var map = {
+    'timestamp': lead.ts, 'date': lead.ts,
+    'name': lead.name, 'full name': lead.name,
+    'email': lead.email, 'work email': lead.email,
+    'company': lead.company, 'organization': lead.company,
+    'role': lead.type, 'you are': lead.type, 'type': lead.type,
+    'company size': '', 'size': '',
+    'challenge': lead.challenge, 'where could ai help your operations?': lead.challenge, 'message': lead.challenge,
+    'page': lead.page, 'source': lead.page
+  };
+  if (headers.length && String(headers[0]).trim() !== '') {
+    var row = headers.map(function (h) {
+      var key = String(h).trim().toLowerCase();
+      return (key in map) ? map[key] : '';
+    });
+    sh.appendRow(row);
+  } else {
     sh.appendRow(['Timestamp', 'Name', 'Email', 'Company', 'Type', 'Challenge', 'Page']);
+    sh.appendRow([lead.ts, lead.name, lead.email, lead.company, lead.type, lead.challenge, lead.page]);
   }
-  sh.appendRow([lead.ts, lead.name, lead.email, lead.company, lead.type, lead.challenge, lead.page]);
 }
 
 function emailRequester_(lead) {
@@ -68,25 +88,33 @@ function emailRequester_(lead) {
       '<p style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.75;color:#3a3833;margin:0 0 22px;">If you&rsquo;d like to add anything in the meantime, just reply to this email.</p>' +
       '<p style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#6A6760;border-top:1px solid #e6e1d6;padding-top:16px;margin:0;">&mdash; The Pareto Labs team<br><a href="https://www.trypareto.ai" style="color:#A8854F;text-decoration:none;">trypareto.ai</a></p>' +
     '</div>';
-  MailApp.sendEmail({ to: lead.email, subject: subject, htmlBody: html, name: FROM_NAME, replyTo: NOTIFY_TEAM || undefined });
+
+  sendEmail_(lead.email, subject, html, NOTIFY_TEAM);
 
   if (NOTIFY_TEAM) {
-    var body = [
-      'Name: ' + lead.name,
-      'Email: ' + lead.email,
-      'Company: ' + lead.company,
-      'You are: ' + lead.type,
-      'Page: ' + lead.page,
-      '',
-      'Where AI can help:',
-      lead.challenge
-    ].join('\n');
-    MailApp.sendEmail({
-      to: NOTIFY_TEAM,
-      subject: 'New Build request: ' + lead.name + (lead.company ? ' (' + lead.company + ')' : ''),
-      body: body,
-      replyTo: lead.email || undefined
+    var teamHtml =
+      '<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#222;">' +
+      '<p><strong>New “Build with Pareto” request</strong></p>' +
+      '<p>Name: ' + escapeHtml_(lead.name) + '<br>Email: ' + escapeHtml_(lead.email) +
+      '<br>Company: ' + escapeHtml_(lead.company) + '<br>You are: ' + escapeHtml_(lead.type) +
+      '<br>Page: ' + escapeHtml_(lead.page) + '</p>' +
+      '<p><em>Where AI can help:</em><br>' + escapeHtml_(lead.challenge).replace(/\n/g, '<br>') + '</p></div>';
+    sendEmail_(NOTIFY_TEAM, 'New Build request: ' + lead.name + (lead.company ? ' (' + lead.company + ')' : ''), teamHtml, lead.email);
+  }
+}
+
+/* Resend if a key is set; otherwise fall back to Apps Script MailApp. */
+function sendEmail_(to, subject, html, replyTo) {
+  if (RESEND_API_KEY) {
+    var payload = { from: FROM_EMAIL, to: [to], subject: subject, html: html };
+    if (replyTo) payload.reply_to = replyTo;
+    UrlFetchApp.fetch('https://api.resend.com/emails', {
+      method: 'post', contentType: 'application/json',
+      headers: { Authorization: 'Bearer ' + RESEND_API_KEY },
+      payload: JSON.stringify(payload), muteHttpExceptions: true
     });
+  } else {
+    MailApp.sendEmail({ to: to, subject: subject, htmlBody: html, name: 'Pareto Labs', replyTo: replyTo || undefined });
   }
 }
 
