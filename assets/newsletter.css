@@ -1,0 +1,38 @@
+/* ============================================================
+   Pareto Labs — newsletter subscription band (scoped .nl-*)
+   Injected above the footer on every page by newsletter.js.
+   ============================================================ */
+.nl-band {
+  --nl-w:#F5F2EB; --nl-ink:#14120F; --nl-di:#EEE9E0; --nl-di2:#9a927f; --nl-gold:#C8AE7D;
+  --nl-serif:'Newsreader','Tiempos Headline',Georgia,serif; --nl-sans:'Hanken Grotesk','Inter',system-ui,sans-serif;
+  background: var(--nl-ink); color: var(--nl-di); border-top: 1px solid rgba(238,233,224,0.10);
+}
+.nl-inner { max-width: 1160px; margin: 0 auto; padding: clamp(56px,8vw,92px) 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px 72px; align-items: center; }
+.nl-eyebrow { font-family: var(--nl-sans); font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--nl-gold); margin-bottom: 16px; }
+.nl-title { font-family: var(--nl-serif); font-size: clamp(26px,3vw,38px); font-weight: 400; line-height: 1.14; letter-spacing: -0.03em; margin: 0 0 12px; }
+.nl-title em { font-style: italic; font-weight: 300; }
+.nl-sub { font-family: var(--nl-sans); font-size: 14.5px; font-weight: 300; line-height: 1.7; color: rgba(238,233,224,0.62); max-width: 46ch; margin: 0; }
+
+.nl-form { width: 100%; }
+.nl-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.nl-input {
+  flex: 1 1 220px; min-width: 0; background: transparent; border: none; border-bottom: 1px solid rgba(238,233,224,0.28);
+  color: var(--nl-di); font-family: var(--nl-sans); font-size: 16px; font-weight: 300; padding: 14px 2px; outline: none;
+}
+.nl-input::placeholder { color: rgba(238,233,224,0.4); }
+.nl-input:focus { border-color: var(--nl-gold); }
+.nl-btn {
+  flex: 0 0 auto; min-height: 50px; padding: 0 26px; background: var(--nl-di); color: var(--nl-ink); border: 1px solid var(--nl-di);
+  font-family: var(--nl-sans); font-size: 13px; font-weight: 500; letter-spacing: 0.01em; cursor: pointer; transition: background 0.2s, color 0.2s;
+}
+.nl-btn:hover { background: #fff; }
+.nl-btn:disabled { opacity: 0.6; cursor: default; }
+.nl-note { font-family: var(--nl-sans); font-size: 11.5px; font-weight: 300; color: rgba(238,233,224,0.4); margin-top: 14px; line-height: 1.5; }
+.nl-err { font-family: var(--nl-sans); font-size: 12px; color: #e7a99f; margin-top: 12px; }
+.nl-ok { font-family: var(--nl-serif); font-size: 18px; font-weight: 400; color: var(--nl-di); display: none; }
+.nl-ok.show { display: block; }
+.nl-ok span { display: block; font-family: var(--nl-sans); font-size: 13.5px; font-weight: 300; color: rgba(238,233,224,0.6); margin-top: 8px; }
+
+@media (max-width: 860px) {
+  .nl-inner { grid-template-columns: 1fr; gap: 28px; padding: 64px 24px; }
+}

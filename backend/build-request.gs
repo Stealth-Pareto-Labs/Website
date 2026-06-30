@@ -28,6 +28,7 @@ var NOTIFY_TEAM    = 'hello@trypareto.ai';           // internal copy of each le
 function doPost(e) {
   try {
     var p = (e && e.parameter) ? e.parameter : {};
+    if (p.form === 'newsletter') { subscribeNewsletter_((p.email || '').trim(), (p.page || '').trim()); return json_({ ok: true }); }
     var lead = {
       name:      (p.name || '').trim(),
       email:     (p.email || '').trim(),
@@ -49,6 +50,20 @@ function doPost(e) {
 }
 
 function doGet() { return json_({ ok: true, service: 'pareto-build-request' }); }
+
+function subscribeNewsletter_(email, page) {
+  if (!email) return;
+  if (SHEET_ID) {
+    var ss = SpreadsheetApp.openById(SHEET_ID);
+    var sh = ss.getSheetByName('Newsletter') || ss.insertSheet('Newsletter');
+    if (sh.getLastRow() === 0) sh.appendRow(['Timestamp', 'Email', 'Page']);
+    sh.appendRow([new Date(), email, page || '']);
+  }
+  if (SLACK_WEBHOOK) {
+    var payload = JSON.stringify({ text: '📰 New newsletter subscriber: ' + email + (page ? '  (' + page + ')' : '') });
+    SLACK_WEBHOOK.split(',').forEach(function (url) { url = url.trim(); if (url) UrlFetchApp.fetch(url, { method: 'post', contentType: 'application/json', payload: payload, muteHttpExceptions: true }); });
+  }
+}
 
 /* Header-aware append: maps fields to whatever columns the tab already has. */
 function logToSheet_(lead) {
@@ -83,42 +98,14 @@ function emailRequester_(lead) {
   var first = (lead.name.split(' ')[0] || lead.name);
   var subject = 'We received your request — Pareto Labs';
   var html =
-    '<!doctype html><html><body style="margin:0;padding:0;background:#EFEAE0;">' +
-    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#EFEAE0;"><tr><td align="center" style="padding:32px 16px;">' +
-      '<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#F7F4EE;border:1px solid #E2DCCE;">' +
-        '<tr><td style="font-size:0;line-height:0;height:4px;background:#A8854F;">&nbsp;</td></tr>' +
-        '<tr><td style="padding:38px 46px 0 46px;">' +
-          '<div style="font-family:Georgia,serif;font-size:21px;font-weight:bold;color:#14120F;">Pareto&nbsp;Labs</div>' +
-          '<div style="font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#9a8e78;margin-top:7px;">Continuous-Learning AI</div>' +
-        '</td></tr>' +
-        '<tr><td style="padding:30px 46px 0 46px;">' +
-          '<h1 style="margin:0;font-family:Georgia,serif;font-size:31px;font-weight:normal;line-height:1.2;color:#14120F;">Thank you, ' + escapeHtml_(first) + '.</h1>' +
-        '</td></tr>' +
-        '<tr><td style="padding:20px 46px 0 46px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.75;color:#4a463f;">' +
-          '<p style="margin:0 0 16px;">We&rsquo;ve received your request to build with Pareto. Every inquiry is reviewed personally by our team &mdash; not a queue, not an auto-responder &mdash; and we&rsquo;ll be in touch within <strong style="color:#14120F;">two business days</strong>.</p>' +
-          '<p style="margin:0;">In that first conversation we&rsquo;ll learn how your operations actually run and where continuous-learning AI can create measurable value, tailored to your business.</p>' +
-        '</td></tr>' +
-        '<tr><td style="padding:30px 46px 0 46px;">' +
-          '<div style="font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#9a8e78;border-top:1px solid #E2DCCE;padding-top:24px;">What happens next</div>' +
-          '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:14px;">' +
-            '<tr><td width="36" valign="top" style="font-family:Georgia,serif;font-size:15px;color:#A8854F;padding:10px 0;">01</td><td valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#4a463f;padding:10px 0;">We review your request and the operations you described.</td></tr>' +
-            '<tr><td width="36" valign="top" style="font-family:Georgia,serif;font-size:15px;color:#A8854F;padding:10px 0;border-top:1px solid #EDE8DC;">02</td><td valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#4a463f;padding:10px 0;border-top:1px solid #EDE8DC;">We reach out within two business days to understand your goals.</td></tr>' +
-            '<tr><td width="36" valign="top" style="font-family:Georgia,serif;font-size:15px;color:#A8854F;padding:10px 0;border-top:1px solid #EDE8DC;">03</td><td valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#4a463f;padding:10px 0;border-top:1px solid #EDE8DC;">We scope the highest-ROI AI for your operations &mdash; and how it improves over time.</td></tr>' +
-          '</table>' +
-        '</td></tr>' +
-        '<tr><td style="padding:28px 46px 0 46px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.7;color:#4a463f;">' +
-          '<p style="margin:0;">If you&rsquo;d like to add anything before we speak, just reply to this email.</p>' +
-          '<p style="margin:16px 0 0;color:#14120F;">&mdash; The Pareto Labs team</p>' +
-        '</td></tr>' +
-        '<tr><td style="padding:30px 46px 38px 46px;">' +
-          '<div style="border-top:1px solid #E2DCCE;padding-top:20px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.6;color:#9a8e78;">' +
-            '<a href="https://www.trypareto.ai" style="color:#A8854F;text-decoration:none;">trypareto.ai</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href="mailto:hello@trypareto.ai" style="color:#A8854F;text-decoration:none;">hello@trypareto.ai</a>' +
-            '<div style="margin-top:8px;">Continuous-learning AI for real-world operations.</div>' +
-          '</div>' +
-        '</td></tr>' +
-      '</table>' +
-      '<div style="font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#b3a890;margin-top:16px;">&copy; 2026 Pareto Labs, Inc.</div>' +
-    '</td></tr></table></body></html>';
+    '<div style="font-family:Georgia,\'Times New Roman\',serif;color:#14120F;max-width:520px;margin:0 auto;padding:8px 4px;">' +
+      '<p style="font-size:19px;margin:0 0 18px;">Thank you, ' + escapeHtml_(first) + '.</p>' +
+      '<p style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.75;color:#3a3833;margin:0 0 14px;">' +
+        'We&rsquo;ve received your request to build with Pareto. Our team reviews every inquiry personally and will be in touch within <strong>two business days</strong> to learn more about your operations and where continuous-learning AI can help.' +
+      '</p>' +
+      '<p style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.75;color:#3a3833;margin:0 0 22px;">If you&rsquo;d like to add anything in the meantime, just reply to this email.</p>' +
+      '<p style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#6A6760;border-top:1px solid #e6e1d6;padding-top:16px;margin:0;">&mdash; The Pareto Labs team<br><a href="https://www.trypareto.ai" style="color:#A8854F;text-decoration:none;">trypareto.ai</a></p>' +
+    '</div>';
 
   sendEmail_(lead.email, subject, html, NOTIFY_TEAM);
 
