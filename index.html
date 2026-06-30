@@ -166,9 +166,10 @@
   .cap-p { font-size: 14px; font-weight: 300; opacity: 0.66; line-height: 1.75; }
 
   /* ── PRINCIPLES ROW ──────────────────────────────── */
-  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 72px; border-top: 1px solid var(--dl); }
+  .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 72px; border-top: 1px solid var(--dl); }
   .stat { padding: 40px 32px 0 0; border-right: 1px solid var(--dl); }
-  .stat:last-child { border-right: none; }
+  .stat:nth-child(3n) { border-right: none; }
+  .stat:nth-child(n+4) { border-top: 1px solid var(--dl); padding-top: 40px; }
   .stat-v { font-family: var(--serif); font-size: clamp(20px, 2.2vw, 28px); font-weight: 400; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 10px; }
   .stat-v em { font-style: italic; font-weight: 300; color: var(--sig); }
   .stat-l { font-size: 12.5px; font-weight: 300; opacity: 0.6; line-height: 1.55; }
@@ -257,7 +258,8 @@
     .cap-item { grid-template-columns: 1fr; gap: 10px; }
     .cap-n { display: none; }
     .stats-row { grid-template-columns: 1fr 1fr; }
-    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(3n) { border-right: 1px solid var(--dl); }
+    .stat:nth-child(2n) { border-right: none; }
     .stat:nth-child(n+3) { border-top: 1px solid var(--dl); padding-top: 32px; }
     .ind-grid { grid-template-columns: 1fr 1fr; }
     .pe-cols { grid-template-columns: 1fr; }
@@ -345,7 +347,7 @@
 <!-- ═══ STATEMENT ════════════════════════════════ -->
 <div class="section">
   <div class="wrap-thin">
-    <p class="statement rv">AI adoption is no longer blocked by model access. It&rsquo;s blocked by <em>implementation</em> — the infrastructure, expertise, and continuous improvement that turn a model into measurable operational gain.</p>
+    <p class="statement rv">AI adoption is no longer blocked by model capability. It&rsquo;s blocked by <em>implementation</em> — the infrastructure, expertise, and continuous improvement that turn a model into measurable operational gain.</p>
   </div>
 </div>
 
@@ -373,23 +375,27 @@
   <div class="wrap">
     <div class="section-tag rv">The platform</div>
     <div class="two-col">
-      <h2 class="col-h" style="margin-bottom:0">The continuous-learning platform <em>beneath every system.</em></h2>
+      <h2 class="col-h" style="margin-bottom:0">The learning layer <em>behind every AI system.</em></h2>
       <p class="col-p" style="margin-bottom:0; align-self:end; opacity:0.72">The scarce value in AI is no longer the model — it&rsquo;s implementation, company-specific learning, expert validation, and continuous improvement after deployment. Pareto is built around exactly that.</p>
     </div>
 
     <div class="cap-list">
-      <div class="cap-item rv"><span class="cap-n">01</span><h3 class="cap-h">Company Knowledge <em>Map</em></h3><p class="cap-p">A structured understanding of your data, processes, policies, customers, and workflows — the foundation every system learns from.</p></div>
-      <div class="cap-item rv" style="transition-delay:.06s"><span class="cap-n">02</span><h3 class="cap-h">Expert Intelligence <em>Layer</em></h3><p class="cap-p">Vetted domain experts validate workflows, surface edge cases, and encode the operational reasoning documents never capture.</p></div>
-      <div class="cap-item rv" style="transition-delay:.12s"><span class="cap-n">03</span><h3 class="cap-h">Implementation <em>Layer</em></h3><p class="cap-p">Forward Deployed Engineers turn opportunities into working AI systems inside real workflows — model-agnostic, open or proprietary.</p></div>
-      <div class="cap-item rv" style="transition-delay:.18s"><span class="cap-n">04</span><h3 class="cap-h">Continual Learning <em>Layer</em></h3><p class="cap-p">The platform monitors feedback, outcomes, and operational change to improve systems over time — automatically and safely.</p></div>
-      <div class="cap-item rv" style="transition-delay:.24s"><span class="cap-n">05</span><h3 class="cap-h">Measurement <em>Layer</em></h3><p class="cap-p">ROI, adoption, time saved, cost reduction, and service quality — tracked so improvement is provable, not promised.</p></div>
+      <div class="cap-item rv"><span class="cap-n">01</span><h3 class="cap-h">Company <em>Brain</em></h3><p class="cap-p">The shared knowledge layer behind the company&rsquo;s AI systems: documents, workflows, policies, brand rules, customer context, approved language, operational knowledge, decisions, and edge cases.</p></div>
+      <div class="cap-item rv" style="transition-delay:.05s"><span class="cap-n">02</span><h3 class="cap-h">Evidence <em>Pipeline</em></h3><p class="cap-p">Pareto captures signal from every angle — user interviews, customer feedback, product behavior, support conversations, expert answers, internal knowledge, workflow outcomes, and AI failures.</p></div>
+      <div class="cap-item rv" style="transition-delay:.1s"><span class="cap-n">03</span><h3 class="cap-h">Human-Gated <em>Knowledge Map</em></h3><p class="cap-p">Signals don&rsquo;t blindly change production behavior. They are reviewed, approved, and converted into trusted knowledge the company can control.</p></div>
+      <div class="cap-item rv" style="transition-delay:.15s"><span class="cap-n">04</span><h3 class="cap-h">AI Improvement <em>Loop</em></h3><p class="cap-p">Trusted knowledge becomes proposed improvements to prompts, workflows, retrieval, policies, guardrails, system behavior, and specialized models — with reasoning and source evidence attached.</p></div>
+      <div class="cap-item rv" style="transition-delay:.2s"><span class="cap-n">05</span><h3 class="cap-h">Model-Agnostic <em>Execution Layer</em></h3><p class="cap-p">Pareto isn&rsquo;t locked into one model, vendor, or architecture. We use the most effective model for the outcome — open or proprietary, large or small, frontier or specialized — and keep the learning layer intact as models change.</p></div>
+      <div class="cap-item rv" style="transition-delay:.25s"><span class="cap-n">06</span><h3 class="cap-h">Governance &amp; <em>Guardrails</em></h3><p class="cap-p">The company defines what can change, what must be reviewed, and what the system should never do. Pareto keeps AI systems inside approved boundaries with policy controls, approval gates, human oversight, and clear review paths before critical changes affect real workflows.</p></div>
+      <div class="cap-item rv" style="transition-delay:.3s"><span class="cap-n">07</span><h3 class="cap-h">Frontier <em>Security Layer</em></h3><p class="cap-p">As frontier models grow more powerful, the same capabilities that help companies can also be used to probe, manipulate, or exploit AI systems. Pareto stays at the frontier of AI security too — continuously improving defenses against prompt attacks, data exposure, unauthorized tool use, workflow abuse, and emerging AI-native threats. The goal isn&rsquo;t only to make AI systems smarter, but safer as models become more capable.</p></div>
     </div>
 
     <div class="stats-row rv">
-      <div class="stat"><div class="stat-v">Implementation<em>-first</em></div><div class="stat-l">We ship systems into workflows, not slide decks.</div></div>
-      <div class="stat"><div class="stat-v">Expert<em>-powered</em></div><div class="stat-l">Real domain judgment, built into every system.</div></div>
-      <div class="stat"><div class="stat-v">Model<em>-agnostic</em></div><div class="stat-l">Best model for the job — swappable as the frontier moves.</div></div>
-      <div class="stat"><div class="stat-v">Always <em>improving</em></div><div class="stat-l">Learns from real operations, over time.</div></div>
+      <div class="stat"><div class="stat-v">Evidence<em>-driven</em></div><div class="stat-l">Every improvement starts from real company signal, not generic assumptions.</div></div>
+      <div class="stat"><div class="stat-v">Human<em>-approved</em></div><div class="stat-l">Pareto proposes changes. The company decides what becomes trusted knowledge and what ships.</div></div>
+      <div class="stat"><div class="stat-v">Outcome<em>-optimized</em></div><div class="stat-l">We&rsquo;re not tied to one model. We choose the best model, workflow, and system design for the outcome.</div></div>
+      <div class="stat"><div class="stat-v">Governed <em>by design</em></div><div class="stat-l">AI systems improve inside the company&rsquo;s rules, approval paths, and operational boundaries.</div></div>
+      <div class="stat"><div class="stat-v">Frontier<em>-safe</em></div><div class="stat-l">As AI capabilities advance, Pareto keeps improving the safeguards that protect customers, data, tools, and workflows.</div></div>
+      <div class="stat"><div class="stat-v"><em>Compounding</em></div><div class="stat-l">Every interview, support issue, expert answer, workflow outcome, and AI failure makes the next system smarter.</div></div>
     </div>
   </div>
 </div>
