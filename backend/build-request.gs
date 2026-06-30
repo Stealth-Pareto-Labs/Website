@@ -18,6 +18,8 @@ var SHEET_ID       = '';   // the existing Google Sheet ID (from its URL: /sprea
 var SHEET_TAB      = 'Leads Website';                // the tab in your Google Sheet (created automatically if missing)
 var SLACK_WEBHOOK  = '';    // one or more Slack Incoming Webhook URLs, comma-separated
 var SLACK_MENTION  = '';    // optional: your Slack member ID to @mention you (e.g. 'U0123ABCD')
+var SLACK_BOT_TOKEN = '';   // optional: xoxb-… bot token to ALSO DM you in your Slack inbox
+var SLACK_DM_USERS  = '';   // optional: comma-separated member IDs to DM (e.g. 'U0123ABCD')
 var RESEND_API_KEY = '';    // Resend API key (re_...) — paste here, not in the website repo
 var FROM_EMAIL     = 'Pareto Labs <noreply@auth.trypareto.ai>';  // a Resend-verified sender
 var NOTIFY_TEAM    = 'hello@trypareto.ai';           // internal copy of each lead ('' = skip)
@@ -120,7 +122,7 @@ function sendEmail_(to, subject, html, replyTo) {
 }
 
 function notifySlack_(lead) {
-  if (!SLACK_WEBHOOK) return;
+  if (!SLACK_WEBHOOK && !SLACK_BOT_TOKEN) return;
   var mention = SLACK_MENTION ? '<@' + SLACK_MENTION.trim() + '> ' : '';
   var blocks = [
     { type: 'header', text: { type: 'plain_text', text: '🛠  New “Build with Pareto” request' } }
@@ -138,14 +140,41 @@ function notifySlack_(lead) {
     { type: 'section', text: { type: 'mrkdwn', text: '*Where AI can help:*\n' + (lead.challenge || '—') } },
     { type: 'context', elements: [ { type: 'mrkdwn', text: 'from ' + (lead.page || '/') + ' · ' + lead.ts } ] }
   );
-  var payload = JSON.stringify({
-    text: mention + 'New “Build with Pareto” request from ' + (lead.name || 'someone'),
-    blocks: blocks
-  });
-  SLACK_WEBHOOK.split(',').forEach(function (url) {
-    url = url.trim();
-    if (!url) return;
-    UrlFetchApp.fetch(url, { method: 'post', contentType: 'application/json', payload: payload, muteHttpExceptions: true });
+  var fallback = 'New “Build with Pareto” request from ' + (lead.name || 'someone');
+
+  // 1) Post to channel webhook(s)
+  if (SLACK_WEBHOOK) {
+    var payload = JSON.stringify({ text: mention + fallback, blocks: blocks });
+    SLACK_WEBHOOK.split(',').forEach(function (url) {
+      url = url.trim();
+      if (url) UrlFetchApp.fetch(url, { method: 'post', contentType: 'application/json', payload: payload, muteHttpExceptions: true });
+    });
+  }
+
+  // 2) Direct-message user(s) in their Slack inbox (needs a bot token)
+  if (SLACK_BOT_TOKEN && SLACK_DM_USERS) {
+    SLACK_DM_USERS.split(',').forEach(function (uid) {
+      uid = uid.trim();
+      if (uid) slackDM_(uid, fallback, blocks);
+    });
+  }
+}
+
+function slackDM_(userId, text, blocks) {
+  var channel = userId;
+  try { // open the DM channel (needs im:write); fall back to raw user id
+    var open = UrlFetchApp.fetch('https://slack.com/api/conversations.open', {
+      method: 'post', contentType: 'application/json',
+      headers: { Authorization: 'Bearer ' + SLACK_BOT_TOKEN },
+      payload: JSON.stringify({ users: userId }), muteHttpExceptions: true
+    });
+    var data = JSON.parse(open.getContentText());
+    if (data.ok && data.channel && data.channel.id) channel = data.channel.id;
+  } catch (e) {}
+  UrlFetchApp.fetch('https://slack.com/api/chat.postMessage', {
+    method: 'post', contentType: 'application/json',
+    headers: { Authorization: 'Bearer ' + SLACK_BOT_TOKEN },
+    payload: JSON.stringify({ channel: channel, text: text, blocks: blocks }), muteHttpExceptions: true
   });
 }
 
