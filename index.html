@@ -51,7 +51,7 @@
     --di:  #EEE9E0;
     --di2: #7A7D8F;
     --dl:  rgba(238,233,224,0.10);
-    --sig: #B4FF00;
+    --sig: #C8AE7D;
     --gold:#A8854F;
 
     --serif: 'Newsreader', 'Tiempos Headline', Georgia, serif;
@@ -107,6 +107,8 @@
   .dark-panel .hero-text-col { padding: 120px 48px 84px 64px; }
   .hero-canvas-col { position: relative; overflow: hidden; }
   .hero-canvas-col canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero-photo-tint { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(8,12,24,0.20) 0%, rgba(8,12,24,0.52) 100%); }
 
   .hero-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.5; margin-bottom: 30px; display: inline-flex; align-items: center; gap: 12px; }
   .hero-eyebrow::before { content: ''; width: 22px; height: 1px; background: currentColor; opacity: 0.6; }
@@ -125,8 +127,8 @@
   .btn-solid:hover { background: #2C2A26; border-color: #2C2A26; }
   .btn-outline { background: transparent; color: var(--wi); border-color: var(--wl); }
   .btn-outline:hover { border-color: var(--wi2); background: var(--w2); }
-  .btn-sig { background: var(--sig); color: var(--d); border-color: var(--sig); font-weight: 600; }
-  .btn-sig:hover { background: #C8FF20; border-color: #C8FF20; }
+  .btn-sig { background: var(--di); color: var(--d); border-color: var(--di); font-weight: 600; }
+  .btn-sig:hover { background: #FFFFFF; border-color: #FFFFFF; }
   .btn-outline-dark { background: transparent; color: var(--di); border-color: var(--dl); }
   .btn-outline-dark:hover { border-color: rgba(238,233,224,0.35); background: rgba(238,233,224,0.06); }
   .btn-arr::after { content: '→'; font-size: 14px; }
@@ -173,10 +175,16 @@
 
   /* ── INDUSTRIES ──────────────────────────────────── */
   .ind-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
-  .ind { border: 1px solid var(--wl); background: var(--w); padding: 30px; display: flex; flex-direction: column; gap: 14px; }
-  .ind .ind-ic { width: 26px; height: 26px; color: var(--gold); opacity: 0.9; }
-  .ind h3 { font-family: var(--serif); font-size: 20px; font-weight: 400; letter-spacing: -0.02em; }
-  .ind p { font-size: 13.5px; font-weight: 300; opacity: 0.68; line-height: 1.66; }
+  .ind { border: 1px solid var(--wl); background: var(--w); display: flex; flex-direction: column; overflow: hidden; }
+  .ind-photo { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; border-bottom: 1px solid var(--wl); filter: saturate(0.9) contrast(1.02); }
+  .ind-text { padding: 24px 26px 28px; display: flex; flex-direction: column; gap: 10px; }
+  .ind-text h3 { font-family: var(--serif); font-size: 20px; font-weight: 400; letter-spacing: -0.02em; }
+  .ind-text p { font-size: 13.5px; font-weight: 300; opacity: 0.68; line-height: 1.66; }
+  .ind-cta { background: var(--d); border-color: var(--d); color: var(--di); justify-content: center; }
+  .ind-cta .ind-text { padding: 34px 28px; }
+  .ind-cta h3 { color: var(--di); }
+  .ind-cta p { opacity: 0.72; }
+  .ind-cta a { color: var(--sig); border-bottom: 1px solid currentColor; padding-bottom: 2px; align-self: flex-start; margin-top: 6px; font-size: 13.5px; }
 
   /* ── PE WHERE-WE-HELP ────────────────────────────── */
   .pe-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; }
@@ -315,8 +323,9 @@
 
 <!-- ═══ HERO B — IMPROVEMENT (dark) ══════════════ -->
 <div id="section-signals" class="hero-split dark-panel">
-  <div class="hero-canvas-col">
-    <canvas id="canvas-signals" aria-hidden="true"></canvas>
+  <div class="hero-canvas-col hero-photo">
+    <img src="/assets/img/hero-ops.webp" alt="Modern enterprise operations and architecture">
+    <span class="hero-photo-tint" aria-hidden="true"></span>
   </div>
   <div class="hero-text-col">
     <p class="hero-eyebrow">The Continuous-Learning Engine</p>
@@ -395,36 +404,33 @@
     </div>
 
     <div class="ind-grid">
-      <div class="ind rv">
-        <svg class="ind-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 20h20"/><path d="M4 20V9l5 4V9l5 4V9l5 4v7"/></svg>
-        <h3>Manufacturing</h3>
-        <p>AI that continuously improves production, quality, maintenance, inventory, and supply-chain operations.</p>
-      </div>
-      <div class="ind rv" style="transition-delay:.05s">
-        <svg class="ind-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        <h3>Consumer Brands &amp; Retail</h3>
-        <p>AI that optimizes merchandising, customer service, inventory, pricing, and omnichannel operations through continuous learning.</p>
-      </div>
-      <div class="ind rv" style="transition-delay:.1s">
-        <svg class="ind-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-        <h3>Business Services</h3>
-        <p>AI that automates knowledge work, client operations, back-office processes, and support while learning from every interaction.</p>
-      </div>
-      <div class="ind rv">
-        <svg class="ind-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-        <h3>Healthcare Services</h3>
-        <p>AI that streamlines administrative workflows, patient operations, billing, and scheduling while improving from outcomes.</p>
-      </div>
-      <div class="ind rv" style="transition-delay:.05s">
-        <svg class="ind-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-        <h3>Logistics &amp; Transportation</h3>
-        <p>AI that continuously optimizes routing, warehouse operations, fleet management, dispatch, and supply-chain performance.</p>
-      </div>
-      <div class="ind rv" style="transition-delay:.1s; border-style:dashed;">
-        <svg class="ind-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
-        <h3>Your industry</h3>
-        <p>If your business runs on operations and knowledge, continuous-learning AI can help. <a href="#partner" style="border-bottom:1px solid var(--gold); color:var(--gold)">Talk to us →</a></p>
-      </div>
+      <article class="ind rv">
+        <img class="ind-photo" src="/assets/img/ind-manufacturing.webp" alt="Skilled manufacturing operations" loading="lazy" width="1000" height="625">
+        <div class="ind-text"><h3>Manufacturing</h3><p>AI that continuously improves production, quality, maintenance, inventory, and supply-chain operations.</p></div>
+      </article>
+      <article class="ind rv" style="transition-delay:.05s">
+        <img class="ind-photo" src="/assets/img/ind-retail.webp" alt="Consumer brands and retail environment" loading="lazy" width="1000" height="625">
+        <div class="ind-text"><h3>Consumer Brands &amp; Retail</h3><p>AI that optimizes merchandising, customer service, inventory, pricing, and omnichannel operations through continuous learning.</p></div>
+      </article>
+      <article class="ind rv" style="transition-delay:.1s">
+        <img class="ind-photo" src="/assets/img/ind-business.webp" alt="Modern business services workplace" loading="lazy" width="1000" height="625">
+        <div class="ind-text"><h3>Business Services</h3><p>AI that automates knowledge work, client operations, back-office processes, and support while learning from every interaction.</p></div>
+      </article>
+      <article class="ind rv">
+        <img class="ind-photo" src="/assets/img/ind-healthcare.webp" alt="Healthcare administration and operations" loading="lazy" width="1000" height="625">
+        <div class="ind-text"><h3>Healthcare Services</h3><p>AI that streamlines administrative workflows, patient operations, billing, and scheduling while improving from outcomes.</p></div>
+      </article>
+      <article class="ind rv" style="transition-delay:.05s">
+        <img class="ind-photo" src="/assets/img/ind-logistics.webp" alt="Logistics and warehouse operations" loading="lazy" width="1000" height="625">
+        <div class="ind-text"><h3>Logistics &amp; Transportation</h3><p>AI that continuously optimizes routing, warehouse operations, fleet management, dispatch, and supply-chain performance.</p></div>
+      </article>
+      <article class="ind ind-cta rv" style="transition-delay:.1s">
+        <div class="ind-text">
+          <h3>Your industry</h3>
+          <p>If your business runs on operations and knowledge, continuous-learning AI can help.</p>
+          <a href="#partner">Talk to us &rarr;</a>
+        </div>
+      </article>
     </div>
   </div>
 </div>
@@ -666,47 +672,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   draw(0);
 })();
 
-/* ── CANVAS B: SIGNAL GRID (lime, dark hero) ──── */
-(function() {
-  const canvas = document.getElementById('canvas-signals');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let nodes = [], W, H;
-
-  function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; build(); }
-  function build() {
-    nodes = []; const sp = 72; const cols = Math.floor(W/sp)+1, rows = Math.floor(H/sp)+1;
-    const ox = (W-(cols-1)*sp)/2, oy = (H-(rows-1)*sp)/2;
-    for (let i=0;i<cols;i++) for (let j=0;j<rows;j++) nodes.push({ x: ox+i*sp+(Math.random()-.5)*18, y: oy+j*sp+(Math.random()-.5)*18, bright: 0 });
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  function propagate(src, depth) {
-    if (depth > 5) return;
-    nodes.forEach(n => {
-      if (n === src) return; const dx = n.x-src.x, dy = n.y-src.y; const d = Math.sqrt(dx*dx+dy*dy);
-      if (d < 110) { const delay = d*3.5 + Math.random()*120; setTimeout(() => { if (n.bright < 0.3) { n.bright = Math.max(n.bright, 0.6 + Math.random()*0.4); if (depth < 4) propagate(n, depth+1); } }, delay); }
-    });
-  }
-  function spawn() { const s = nodes[Math.floor(Math.random()*nodes.length)]; if (s) { s.bright = 1; propagate(s, 0); } setTimeout(spawn, 600 + Math.random()*900); }
-  if (!REDUCE) spawn();
-
-  function tick() {
-    ctx.clearRect(0, 0, W, H);
-    for (let i=0;i<nodes.length;i++) for (let j=i+1;j<nodes.length;j++) {
-      const a = nodes[i], b = nodes[j]; const dx = a.x-b.x, dy = a.y-b.y; const d = Math.sqrt(dx*dx+dy*dy);
-      if (d < 110) { const br = Math.max(a.bright, b.bright); ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.strokeStyle = `rgba(180,255,0,${0.04 + br*0.22})`; ctx.lineWidth = 0.5; ctx.stroke(); }
-    }
-    nodes.forEach(n => {
-      if (!REDUCE) n.bright *= 0.965; const b = n.bright;
-      if (b > 0.02) { const g = ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,12+b*10); g.addColorStop(0,`rgba(180,255,0,${b*0.18})`); g.addColorStop(1,'rgba(180,255,0,0)'); ctx.beginPath(); ctx.arc(n.x,n.y,12+b*10,0,Math.PI*2); ctx.fillStyle = g; ctx.fill(); }
-      ctx.beginPath(); ctx.arc(n.x, n.y, 1.5 + b*2, 0, Math.PI*2); ctx.fillStyle = `rgba(180,255,0,${0.12 + b*0.7})`; ctx.fill();
-    });
-    if (!REDUCE) requestAnimationFrame(tick);
-  }
-  tick();
-})();
+/* (dark hero now uses a premium photograph — signal-grid canvas removed) */
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
