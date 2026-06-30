@@ -7,7 +7,9 @@
   <meta name="description" content="Privacy Policy for Pareto Labs. How we collect, use, and protect your personal information.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/build-modal.css">
+  <link rel="stylesheet" href="/assets/newsletter.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -18,8 +20,9 @@
       --wi2:  #6A6760;
       --wi3:  #B0ADA7;
       --wl:   rgba(20, 18, 15, 0.09);
-      --serif: 'IBM Plex Serif', Georgia, serif;
-      --sans:  'Inter', system-ui, sans-serif;
+      --gold: #A8854F;
+      --serif: 'Newsreader','Tiempos Headline', Georgia, serif;
+      --sans:  'Hanken Grotesk','Inter', system-ui, sans-serif;
     }
 
     html { scroll-behavior: smooth; }
@@ -66,6 +69,34 @@
       transition: color 0.2s;
     }
     .nav-back:hover { color: var(--wi); }
+    .nav-logo img.brand-mark { height: 17px; width: auto; vertical-align: -2px; margin-right: 1px; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--wi2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--wi); }
+    .nav-cta {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--w) !important;
+      background: var(--wi);
+      padding: 9px 18px;
+      border-radius: 999px;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold); }
+    @media (max-width: 860px) {
+      .nav-links .hide-sm { display: none; }
+    }
 
     /* ── LAYOUT ──────────────────────────────────── */
     .wrap { max-width: 1160px; margin: 0 auto; padding: 0 48px; }
@@ -258,8 +289,15 @@
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="index.html">Pareto Labs</a>
-  <a class="nav-back" href="index.html">← Back to site</a>
+  <a class="nav-logo" href="/" aria-label="Pareto Labs"><img class="brand-mark" src="/assets/logo.png" alt=""><span>areto&nbsp;Labs</span></a>
+  <ul class="nav-links">
+    <li class="hide-sm"><a href="/platform.html">Platform</a></li>
+    <li class="hide-sm"><a href="/private-equity.html">Private Equity</a></li>
+    <li class="hide-sm"><a href="/industries.html">Industries</a></li>
+    <li class="hide-sm"><a href="/experts.html">Experts</a></li>
+    <li class="hide-sm"><a href="/research.html">Research</a></li>
+    <li><a class="nav-cta" href="/#partner">Build with Pareto</a></li>
+  </ul>
 </nav>
 
 <!-- PAGE HEADER -->
@@ -467,16 +505,23 @@
     <div class="foot-inner">
       <div class="foot-logo">Pareto Labs</div>
       <ul class="foot-links">
-        <li><a href="index.html#research">Research</a></li>
-        <li><a href="index.html#work-with-us">Work With Us</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
-        <li><a href="mailto:research@trypareto.ai">research@trypareto.ai</a></li>
+        <li><a href="/platform.html">Platform</a></li>
+        <li><a href="/private-equity.html">Private Equity</a></li>
+        <li><a href="/industries.html">Industries</a></li>
+        <li><a href="/experts.html">Experts</a></li>
+        <li><a href="/research.html">Research</a></li>
+        <li><a href="/work-with-us.html">Work With Us</a></li>
+        <li><a href="/#partner">Build with Pareto</a></li>
+        <li><a href="mailto:hello@trypareto.ai">Contact</a></li>
+        <li><a href="/privacy.html">Privacy</a></li>
       </ul>
-      <p class="foot-copy">&copy; 2026 Pareto Labs</p>
+      <p class="foot-copy">&copy; 2026 Pareto Labs, Inc.</p>
     </div>
   </div>
 </footer>
 
+<script src="/assets/build-modal.js" defer></script>
+<script src="/assets/newsletter.js" defer></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
