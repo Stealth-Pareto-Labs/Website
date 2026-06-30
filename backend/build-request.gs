@@ -15,7 +15,7 @@
 
 // ───────────────────────── CONFIG ─────────────────────────
 var SHEET_ID       = '';   // the existing Google Sheet ID (from its URL: /spreadsheets/d/THIS/edit)
-var SHEET_TAB      = 'Early Access';                 // existing tab; rename to "Build with Pareto" anytime
+var SHEET_TAB      = 'Leads Website';                // the tab in your Google Sheet (created automatically if missing)
 var SLACK_WEBHOOK  = '';    // Slack Incoming Webhook URL (reuse your existing Slack app)
 var RESEND_API_KEY = '';    // Resend API key (re_...) — paste here, not in the website repo
 var FROM_EMAIL     = 'Pareto Labs <noreply@auth.trypareto.ai>';  // a Resend-verified sender
