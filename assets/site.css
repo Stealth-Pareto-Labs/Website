@@ -30,7 +30,7 @@ nav.site-nav {
   border-bottom: 1px solid var(--wl);
 }
 .nav-logo { display: inline-flex; align-items: center; font-family: var(--serif); font-size: 18px; font-weight: 500; color: var(--wi); letter-spacing: -0.01em; }
-.brand-mark { height: 34px; width: auto; display: block; margin: 0 -5px 0 -8px; }
+.brand-mark { height: 34px; width: auto; display: block; margin: 0 -5px 0 -8px; transform: translateY(-5px); }
 .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
 .nav-links a { font-size: 13px; font-weight: 400; color: var(--wi2); transition: color 0.2s; }
 .nav-links a:hover, .nav-links a.active { color: var(--wi); }
