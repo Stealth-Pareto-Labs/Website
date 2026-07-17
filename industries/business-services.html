@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Services — Pareto Labs</title>
+  <meta name="description" content="AI that drafts, reconciles, and resolves, so billable hours stay billable. Pareto builds continuous-learning AI into business services operations.">
+  <link rel="canonical" href="https://www.trypareto.ai/industries/business-services.html">
+  <meta name="theme-color" content="#F5F2EB">
+  <link rel="icon" href="/assets/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="/assets/favicon-180.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Pareto Labs">
+  <meta property="og:title" content="Business Services — Pareto Labs">
+  <meta property="og:description" content="AI that drafts, reconciles, and resolves, so billable hours stay billable. Pareto builds continuous-learning AI into business services operations.">
+  <meta property="og:url" content="https://www.trypareto.ai/industries/business-services.html">
+  <meta property="og:image" content="https://www.trypareto.ai/og/pareto-labs-v2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/build-modal.css">
+  <link rel="stylesheet" href="/assets/newsletter.css">
+  <style>
+  /* responsible emphasis: italic same-colour, gold only for hairlines/accents */
+  .col-h em, .statement em, .cap-h em, .stat-v em { color: inherit; }
+
+  /* ---- industry hero (video / ken-burns still) ---- */
+  .ind-hero { position: relative; min-height: 82vh; display: flex; align-items: flex-end; overflow: hidden; background: var(--d); color: var(--di); }
+  .ind-hero__bg { position: absolute; inset: 0; overflow: hidden; }
+  .ih-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.86) contrast(1.03); }
+  @media (prefers-reduced-motion: no-preference) {
+    .ih-kb { animation: ih-kb 26s ease-in-out infinite alternate; transform-origin: 50% 45%; }
+    @keyframes ih-kb { from { transform: scale(1.03); } to { transform: scale(1.13); } }
+  }
+  .ind-hero__tint { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,12,24,0.30) 0%, rgba(8,12,24,0.66) 55%, rgba(8,12,24,0.86) 100%); }
+  .ind-hero__inner { position: relative; z-index: 2; width: 100%; padding-top: 120px; padding-bottom: clamp(52px, 7vw, 92px); }
+  .ind-hero .eyebrow { color: var(--di); opacity: 0.75; }
+  .ind-hero .eyebrow::before { background: var(--sig); opacity: 0.9; }
+  .ind-hero h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(40px, 6vw, 82px); line-height: 1.04; letter-spacing: -0.03em; margin: 22px 0 24px; max-width: 15ch; }
+  .ind-hero h1 em { font-style: italic; font-weight: 300; color: inherit; }
+  .ind-hero .ih-lead { font-size: clamp(15px, 1.5vw, 18px); font-weight: 300; line-height: 1.7; color: rgba(238,233,224,0.82); max-width: 52ch; margin-bottom: 34px; }
+  .ind-hero .actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .ind-hero .btn-cream { background: var(--di); color: var(--d); border-color: var(--di); }
+  .ind-hero .btn-cream:hover { background: #fff; border-color: #fff; }
+  .ind-hero .btn-ghost { background: transparent; color: var(--di); border: 1px solid rgba(238,233,224,0.4); }
+  .ind-hero .btn-ghost:hover { background: rgba(238,233,224,0.08); border-color: rgba(238,233,224,0.7); }
+
+  /* what we build chips */
+  .builds { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+  .builds span { font-size: 13px; font-weight: 400; border: 1px solid var(--wl); border-radius: 100px; padding: 9px 18px; opacity: 0.8; }
+
+  /* other industries */
+  .other-inds { list-style: none; display: flex; flex-wrap: wrap; gap: 10px 12px; margin-top: 40px; }
+  .other-inds a { font-size: 13.5px; border: 1px solid var(--wl); padding: 9px 16px; transition: border-color 0.2s, background 0.2s; display: inline-block; }
+  .other-inds a:hover { border-color: var(--wi2); background: var(--w2); }
+
+  @media (max-width: 700px) { .ind-hero { min-height: 78vh; } .ind-hero__inner { padding-top: 96px; } }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="nav-logo" href="/" aria-label="Pareto Labs"><img class="brand-mark" src="/assets/logo.png" alt=""><span>areto&nbsp;Labs</span></a>
+  <ul class="nav-links">
+    <li class="hide-sm"><a href="/platform.html">Platform</a></li>
+    <li class="hide-sm"><a href="/private-equity.html">Private Equity</a></li>
+    <li class="hide-sm"><a href="/industries.html" class="active">Industries</a></li>
+    <li class="hide-sm"><a href="/experts.html">Experts</a></li>
+    <li class="hide-sm"><a href="/research.html">Research</a></li>
+    <li><a class="nav-cta" href="/#partner">Build with Pareto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="ind-hero">
+  <div class="ind-hero__bg">
+    <img class="ih-media ih-kb" src="/assets/industries/business.jpg" alt="Business Services operations" width="1600" height="1000">
+    <span class="ind-hero__tint" aria-hidden="true"></span>
+  </div>
+  <div class="wrap ind-hero__inner">
+    <p class="eyebrow"><a href="/industries.html" style="color:inherit">Industries</a></p>
+    <h1>AI that drafts, reconciles, and resolves, so billable hours <em>stay billable.</em></h1>
+    <p class="ih-lead">Pareto turns your firm's know-how into systems that handle the repetitive work and surface precedent instantly, so your people spend time on the work clients actually pay for.</p>
+    <div class="actions">
+      <a class="btn btn-solid btn-arr" href="/#partner" style="background:var(--di);color:var(--d);border-color:var(--di)">Build with Pareto</a>
+      <a class="btn btn-ghost" href="#where">See where AI helps</a>
+    </div>
+  </div>
+</header>
+
+<!-- STATEMENT -->
+<section class="section">
+  <div class="wrap-thin">
+    <p class="statement rv">Your expertise is the product. Pareto makes it scale without losing the <em>judgment behind it.</em></p>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-tag rv">The approach</div>
+    <div class="two-col">
+      <h2 class="col-h rv" style="margin-bottom:0">Your know-how, <em>built into the workflow.</em></h2>
+      <p class="col-p rv" style="margin-bottom:0; align-self:end">We map how proposals, client operations, and back-office work really run, then ship AI into those workflows with a human in control. Every deliverable and correction becomes evidence the next engagement starts from.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHERE AI HELPS -->
+<section class="section" id="where">
+  <div class="wrap">
+    <div class="section-tag rv">Where AI helps</div>
+    <div class="two-col">
+      <h2 class="col-h rv" style="margin-bottom:0">Practical use cases, <em>shipped and measured.</em></h2>
+      <p class="col-p rv" style="margin-bottom:0; align-self:end">Each one is a workflow we map, deploy inside your operation, and keep improving. We start with the ones that cost you the most time or margin.</p>
+    </div>
+    <div class="cap-list">
+      <div class="cap-item rv"><span class="cap-n">01</span><h3 class="cap-h">Proposals and scoping</h3><p class="cap-p">Draft proposals and statements of work from past wins, priced against real delivery cost.</p></div>
+      <div class="cap-item rv"><span class="cap-n">02</span><h3 class="cap-h">Client intake and triage</h3><p class="cap-p">Route client requests to the right team with history and context already attached.</p></div>
+      <div class="cap-item rv"><span class="cap-n">03</span><h3 class="cap-h">Billing and time</h3><p class="cap-p">Run timesheet to invoice automatically, with unbilled work flagged before month close.</p></div>
+      <div class="cap-item rv"><span class="cap-n">04</span><h3 class="cap-h">Staffing and utilization</h3><p class="cap-p">Staff engagements from live utilization data and cut bench time to days.</p></div>
+      <div class="cap-item rv"><span class="cap-n">05</span><h3 class="cap-h">Precedent search</h3><p class="cap-p">Search every deliverable the firm has ever shipped and surface precedent in seconds.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE BUILD -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="two-col">
+      <div class="rv">
+        <div class="section-tag" style="margin-bottom:22px">What we build</div>
+        <h2 class="col-h" style="margin-bottom:20px">The right system for the <em>outcome.</em></h2>
+        <p class="col-p" style="margin-bottom:24px">We are not tied to one model or one form factor. We build whatever moves the metric, from a single assistant to a full workflow system, and keep it improving after launch.</p>
+        <div class="builds"><span>AI assistants</span><span>Automations</span><span>Copilots</span><span>Voice systems</span><span>Workflow systems</span></div>
+      </div>
+      <div class="rv" style="align-self:end">
+        <p class="col-p" style="margin-bottom:20px">Every build runs the same loop: map the workflow, deploy inside it, measure against your baseline, learn from every human correction, and improve on the next pass.</p>
+        <a class="tlink" href="/platform.html">See how the platform works &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-final">
+  <div class="wrap">
+    <div class="rv">
+      <h2>Build AI for your business operation.</h2>
+      <p>Bring one workflow that costs you time or margin. We will map it, scope it, and show you what a continuously learning version looks like.</p>
+      <div class="actions">
+        <a class="btn btn-invert" href="/#partner">Build with Pareto</a>
+        <a class="btn btn-invert-ghost" href="/industries.html">All industries</a>
+      </div>
+      <ul class="other-inds">
+        <li><a href="/industries/manufacturing.html">Manufacturing</a></li>
+        <li><a href="/industries/consumer-brands-retail.html">Consumer Brands & Retail</a></li>
+        <li><a href="/industries/healthcare.html">Healthcare Services</a></li>
+        <li><a href="/industries/logistics.html">Logistics & Transportation</a></li>
+        <li><a href="/industries/telecom.html">Telecom</a></li>
+        <li><a href="/industries/oil-gas.html">Oil & Gas</a></li>
+        <li><a href="/industries/legal.html">Legal</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-inner">
+      <div class="foot-logo">Pareto Labs</div>
+      <ul class="foot-links">
+        <li><a href="/platform.html">Platform</a></li>
+        <li><a href="/private-equity.html">Private Equity</a></li>
+        <li><a href="/industries.html">Industries</a></li>
+        <li><a href="/experts.html">Experts</a></li>
+        <li><a href="/research.html">Research</a></li>
+        <li><a href="/work-with-us.html">Work With Us</a></li>
+        <li><a href="/#partner">Build with Pareto</a></li>
+        <li><a href="mailto:hello@trypareto.ai">Contact</a></li>
+        <li><a href="/privacy.html">Privacy</a></li>
+      </ul>
+      <p class="foot-copy">&copy; 2026 Pareto Labs, Inc.</p>
+    </div>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+<script src="/assets/build-modal.js" defer></script>
+<script src="/assets/newsletter.js" defer></script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
