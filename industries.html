@@ -1,159 +1,987 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Industries — Pareto Labs</title>
-  <meta name="description" content="Practical AI for real-world operations — manufacturing, consumer brands and retail, business services, healthcare services, and logistics. Pareto builds on your knowledge of the problem to engineer continuous-learning AI for the outcomes that matter: time, cost, and service.">
-  <link rel="canonical" href="https://www.trypareto.ai/industries.html">
-  <meta name="theme-color" content="#F5F2EB">
-  <link rel="icon" href="/assets/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
-  <link rel="apple-touch-icon" href="/assets/favicon-180.png">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Pareto Labs">
-  <meta property="og:title" content="Industries — Practical AI for real-world operations">
-  <meta property="og:description" content="Pareto builds on your knowledge of the operation to engineer continuous-learning AI for the outcomes that matter most: time, cost, and service.">
-  <meta property="og:image" content="https://www.trypareto.ai/og/pareto-labs-v2.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css">
-  <link rel="stylesheet" href="/assets/build-modal.css">
-  <link rel="stylesheet" href="/assets/newsletter.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Industries &amp; Solutions | Pareto Labs</title>
+<meta name="description" content="Pareto Labs builds continuous-learning AI systems for seven operating industries. Deployed in weeks, improving for as long as they run.">
+<link rel="canonical" href="https://www.trypareto.ai/industries.html">
+<meta name="theme-color" content="#F5F2EB">
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/favicon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pareto Labs">
+<meta property="og:title" content="Industries & Solutions — Pareto Labs">
+<meta property="og:description" content="Continuous-learning AI for seven operating industries. Deployed in weeks, improving for as long as it runs.">
+<meta property="og:url" content="https://www.trypareto.ai/industries.html">
+<meta property="og:image" content="https://www.trypareto.ai/og/pareto-labs-v2.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.trypareto.ai/og/pareto-labs-v2.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/build-modal.css">
+<style>
+
+/* ============ TOKENS ============ */
+:root{
+  --w:#F5F2EB; --w2:#EFEBE1; --w3:#EAE6DC;
+  --wi:#14120F; --wi2:#6A6760; --wi3:#B0ADA7;
+  --wl:rgba(20,18,15,0.09);
+  --d:#080C18; --d2:#0F1525; --di:#EEE9E0; --dl:rgba(238,233,224,0.10);
+  --gold:#A8854F; --sig:#C8AE7D;
+  --serif:'Newsreader','Tiempos Headline',Georgia,serif;
+  --sans:'Hanken Grotesk','Inter',system-ui,sans-serif;
+  --pad:clamp(20px,5vw,64px);
+  --sect:clamp(80px,11vw,150px);
+}
+
+/* ============ RESET / BASE ============ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+html,body{overflow-x:clip}
+body{
+  font-family:var(--sans);
+  font-weight:300;
+  background:var(--w);
+  color:var(--wi);
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none;cursor:pointer}
+button{cursor:pointer;font:inherit}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.08;letter-spacing:-0.01em}
+h1 em,h2 em,h3 em,.stmt em{font-style:italic;font-weight:300;color:var(--gold)}
+.on-dark h2 em,.on-dark h1 em,.on-dark .stmt em{color:var(--sig)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+::selection{background:rgba(168,133,79,.25)}
+
+.skip{
+  position:absolute;left:-9999px;top:0;z-index:200;
+  background:var(--wi);color:var(--w);padding:10px 18px;font-size:13px;
+}
+.skip:focus-visible{left:12px;top:12px}
+
+.wrap{max-width:1280px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+
+/* Eyebrow */
+.eyebrow{
+  display:flex;align-items:center;gap:14px;
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  opacity:.55;font-weight:400;
+}
+.eyebrow::before{content:"";display:block;width:26px;height:1px;background:var(--gold);flex:none}
+.on-dark .eyebrow::before{background:var(--sig)}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--sans);font-weight:400;font-size:14px;letter-spacing:.02em;
+  padding:15px 30px;border:1px solid transparent;cursor:pointer;
+  transition:background-color .22s ease,color .22s ease,border-color .22s ease,transform .22s ease;
+  white-space:nowrap;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn-cream{background:var(--w);color:var(--wi);border-color:var(--w)}
+.btn-cream:hover{background:var(--w3)}
+.btn-ghost-cream{background:transparent;color:var(--di);border-color:rgba(238,233,224,.4)}
+.btn-ghost-cream:hover{border-color:var(--sig);color:var(--sig)}
+.btn-ink{background:var(--wi);color:var(--w);border-color:var(--wi)}
+.btn-ink:hover{background:#2A2620}
+.btn-ghost-ink{background:transparent;color:var(--wi);border-color:rgba(20,18,15,.3)}
+.btn-ghost-ink:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ============ NAV ============ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  color:var(--di);
+  transition:background-color .3s ease,color .3s ease,box-shadow .3s ease;
+}
+.nav-inner{
+  max-width:1280px;margin:0 auto;
+  padding:0 var(--pad);
+  height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px;
+}
+.wordmark{
+  font-family:var(--serif);font-size:22px;letter-spacing:.01em;line-height:1;
+}
+.wordmark em{font-style:italic;font-weight:300;color:var(--sig)}
+.nav-links{display:flex;align-items:center;gap:clamp(18px,2.5vw,36px);list-style:none}
+.nav-links a{
+  font-size:13.5px;font-weight:400;letter-spacing:.02em;opacity:.85;
+  transition:opacity .2s ease,color .2s ease;
+  padding:6px 2px;
+}
+.nav-links a:hover{opacity:1;color:var(--sig)}
+.nav-cta{
+  font-size:13px;font-weight:400;letter-spacing:.03em;
+  padding:11px 22px;border:1px solid transparent;
+  background:var(--w);color:var(--wi);
+  transition:background-color .25s ease,color .25s ease,border-color .25s ease;
+  white-space:nowrap;cursor:pointer;
+}
+.nav-cta:hover{background:var(--w3)}
+.nav.scrolled{
+  background:rgba(245,242,235,.85);
+  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+  color:var(--wi);
+  box-shadow:0 1px 0 var(--wl);
+}
+.nav.scrolled .wordmark em{color:var(--gold)}
+.nav.scrolled .nav-links a:hover{color:var(--gold)}
+.nav.scrolled .nav-cta{background:var(--wi);color:var(--w)}
+.nav.scrolled .nav-cta:hover{background:#2A2620}
+@media (max-width:900px){.nav-links{display:none}}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;min-height:100svh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  background:var(--d);color:var(--di);
+  overflow:hidden;
+}
+.hero-video{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  filter:saturate(.88) contrast(1.02);
+}
+.hero-tint{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(8,12,24,.55) 0%,rgba(8,12,24,.62) 45%,rgba(8,12,24,.78) 100%);
+}
+.hero-grain{
+  position:absolute;inset:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:240px 240px;
+}
+.hero-content{
+  position:relative;z-index:2;
+  width:100%;max-width:1280px;margin:0 auto;
+  padding:150px var(--pad) clamp(90px,13vh,150px);
+}
+.hero .eyebrow{color:var(--di);opacity:.7;margin-bottom:28px}
+.hero h1{
+  font-size:clamp(2.55rem,6.2vw,5.1rem);
+  max-width:16.5ch;
+  margin-bottom:30px;
+  color:var(--di);
+}
+.hero-lead{
+  font-size:clamp(1rem,1.35vw,1.2rem);
+  max-width:52ch;opacity:.72;margin-bottom:44px;
+}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:16px}
+.scroll-cue{
+  position:absolute;left:50%;bottom:26px;z-index:2;
+  width:1px;height:52px;transform:translateX(-50%);
+  background:rgba(238,233,224,.22);overflow:hidden;
+}
+.scroll-cue::after{
+  content:"";position:absolute;left:0;top:0;width:1px;height:100%;
+  background:var(--sig);transform:translateY(-100%);
+}
+@media (max-width:640px){.scroll-cue{display:none}}
+
+/* ============ METRICS ============ */
+.metrics{border-bottom:1px solid var(--wl);background:var(--w)}
+.metrics-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-left:1px solid var(--wl);border-right:1px solid var(--wl);
+}
+.stat{
+  padding:clamp(36px,4.5vw,60px) clamp(20px,3vw,44px);
+  border-left:1px solid var(--wl);
+}
+.stat:first-child{border-left:none}
+.stat-n{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(2.4rem,4.4vw,3.9rem);line-height:1;
+  color:var(--wi);margin-bottom:14px;
+  font-variant-numeric:lining-nums;
+}
+.stat-n em{font-style:italic;font-weight:300;color:var(--gold);font-size:.92em}
+.stat-l{font-size:13px;letter-spacing:.04em;color:var(--wi2);line-height:1.5;max-width:20ch}
+.metrics-note{
+  padding:20px var(--pad) 22px;
+  font-size:12.5px;letter-spacing:.05em;color:var(--wi2);opacity:.85;
+  text-align:center;border-top:1px solid var(--wl);
+}
+@media (max-width:900px){
+  .metrics-grid{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(3){border-left:none}
+  .stat:nth-child(n+3){border-top:1px solid var(--wl)}
+}
+@media (max-width:480px){
+  .metrics-grid{grid-template-columns:1fr}
+  .stat{border-left:none}
+  .stat:nth-child(n+2){border-top:1px solid var(--wl)}
+}
+
+/* ============ INTRO STATEMENT ============ */
+.intro{padding:var(--sect) 0;background:var(--w)}
+.stmt{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(1.75rem,3.7vw,3rem);line-height:1.28;
+  max-width:23ch;letter-spacing:-0.005em;
+}
+.intro .eyebrow{margin-bottom:34px}
+
+/* ============ INDUSTRIES ============ */
+.industries{padding:var(--sect) 0;background:var(--w2);border-top:1px solid var(--wl)}
+.sect-head{margin-bottom:clamp(44px,6vw,72px)}
+.sect-head .eyebrow{margin-bottom:26px}
+.sect-head h2{font-size:clamp(2rem,4.2vw,3.4rem);max-width:20ch;margin-bottom:20px}
+.sect-head p{max-width:52ch;opacity:.68;font-size:clamp(.95rem,1.2vw,1.1rem)}
+
+.igrid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:clamp(14px,1.8vw,22px);
+}
+.icard{
+  position:relative;display:block;overflow:hidden;
+  aspect-ratio:4/5;
+  background:var(--d);color:var(--di);
+  cursor:pointer;
+}
+.icard-media{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center 38%;
+  filter:saturate(.82) contrast(1.03);
+  transition:transform .65s cubic-bezier(.22,.61,.36,1);
+  will-change:transform;
+}
+.icard:hover .icard-media,
+.icard:focus-visible .icard-media{transform:scale(1.05)}
+.icard-scrim{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(8,12,24,.14) 0%,rgba(8,12,24,.28) 45%,rgba(8,12,24,.88) 100%);
+  transition:background-color .35s ease;
+}
+.icard::after{
+  content:"";position:absolute;inset:0;
+  background:rgba(8,12,24,0);
+  transition:background-color .35s ease;
+  pointer-events:none;
+}
+.icard:hover::after,.icard:focus-visible::after{background:rgba(8,12,24,.22)}
+.icard-body{
+  position:absolute;inset:auto 0 0 0;z-index:2;
+  padding:clamp(22px,2.6vw,34px);
+}
+.icard-num{
+  display:block;font-size:11px;letter-spacing:.16em;color:var(--sig);
+  margin-bottom:10px;font-weight:400;
+}
+.icard-body h3{font-size:clamp(1.45rem,2vw,1.85rem);margin-bottom:10px;color:var(--di)}
+.icard-promise{font-size:14px;line-height:1.55;opacity:.78;max-width:34ch}
+.icard-more{
+  display:grid;grid-template-rows:0fr;opacity:0;
+  transition:grid-template-rows .45s cubic-bezier(.22,.61,.36,1),opacity .3s ease .05s;
+}
+.icard-more-in{overflow:hidden;min-height:0}
+.icard:hover .icard-more,
+.icard:focus-visible .icard-more,
+.icard:focus-within .icard-more{grid-template-rows:1fr;opacity:1}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.chips span{
+  font-size:11px;letter-spacing:.08em;font-weight:400;
+  padding:5px 11px;border:1px solid rgba(238,233,224,.28);
+  color:var(--di);opacity:.9;border-radius:999px;white-space:nowrap;
+}
+.icard-uses{font-size:12.5px;opacity:.6;margin-top:12px;max-width:36ch;line-height:1.55}
+.icard-cta{
+  display:inline-block;margin-top:16px;
+  font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--sig);font-weight:400;
+}
+@media (hover:none){
+  .icard-more{grid-template-rows:1fr;opacity:1}
+}
+/* dark eighth card */
+.icard-dark{
+  background:var(--d);
+  display:flex;align-items:flex-end;
+}
+.icard-dark .icard-body{position:static;width:100%}
+.icard-dark-rule{width:34px;height:1px;background:var(--sig);margin-bottom:22px}
+.icard-dark p{font-size:14px;opacity:.62;max-width:30ch;margin-top:10px}
+.icard-dark .icard-cta{margin-top:22px}
+.icard-dark:hover .icard-cta{color:var(--di)}
+.icard-dark .icard-cta{transition:color .25s ease}
+@media (max-width:1023px){.igrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){
+  .igrid{grid-template-columns:1fr}
+  .icard{aspect-ratio:4/4.6}
+}
+
+/* ============ SOLUTIONS ============ */
+.solutions{padding:var(--sect) 0;background:var(--w);border-top:1px solid var(--wl)}
+.sgrid{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:1px;background:var(--wl);
+  border:1px solid var(--wl);
+}
+.scell{
+  background:var(--w);
+  padding:clamp(28px,3vw,44px) clamp(20px,2.2vw,32px);
+  transition:background-color .25s ease;
+}
+.scell:hover{background:var(--w2)}
+.scell .icon{
+  color:var(--gold);width:30px;height:30px;margin-bottom:22px;
+}
+.scell .icon svg{width:100%;height:100%;display:block}
+.scell h3{font-size:1.15rem;margin-bottom:10px}
+.scell p{font-size:13.5px;opacity:.65;line-height:1.6}
+@media (max-width:1100px){
+  .sgrid{grid-template-columns:repeat(2,1fr)}
+  .scell:last-child{grid-column:span 2}
+}
+@media (max-width:560px){
+  .sgrid{grid-template-columns:1fr}
+  .scell:last-child{grid-column:auto}
+}
+
+/* ============ PARALLAX BAND ============ */
+.band{
+  position:relative;overflow:hidden;
+  min-height:clamp(420px,68vh,640px);
+  display:flex;align-items:center;
+  color:var(--di);
+}
+.band-media{
+  position:absolute;left:0;right:0;top:-16%;bottom:-16%;
+  background-image:url(/assets/industries/logistics.jpg);
+  background-size:cover;background-position:center 60%;
+  filter:saturate(.82) contrast(1.03);
+  will-change:transform;
+}
+.band-tint{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(8,12,24,.66),rgba(8,12,24,.74));
+}
+.band-content{position:relative;z-index:2;width:100%;padding-top:80px;padding-bottom:80px}
+.band .eyebrow{color:var(--di);opacity:.65;margin-bottom:30px}
+.band .stmt{color:var(--di);max-width:24ch}
+
+/* ============ LOOP (DARK) ============ */
+.loop{padding:var(--sect) 0;background:var(--d);color:var(--di)}
+.loop-grid{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(44px,6vw,90px);align-items:center;
+  margin-bottom:clamp(56px,7vw,96px);
+}
+.loop-copy .eyebrow{color:var(--di);opacity:.6;margin-bottom:26px}
+.loop-copy h2{font-size:clamp(1.9rem,3.6vw,2.9rem);max-width:17ch;margin-bottom:24px;color:var(--di)}
+.loop-copy p{opacity:.66;max-width:50ch;font-size:clamp(.95rem,1.15vw,1.06rem)}
+.loop-copy p + p{margin-top:18px}
+.loop-viz{display:flex;justify-content:center}
+.loop-viz svg{width:min(100%,460px);height:auto;display:block}
+.loop-ring{stroke:var(--dl);stroke-width:1;fill:none}
+.loop-node{fill:var(--d2);stroke:var(--sig);stroke-width:1.25}
+.loop-node-dot{fill:var(--sig)}
+.loop-label{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.14em;
+  fill:var(--di);opacity:.8;text-transform:uppercase;font-weight:400;
+}
+.loop-center{
+  font-family:var(--serif);font-style:italic;font-weight:300;
+  font-size:17px;fill:var(--sig);
+}
+.loop-center-sub{font-family:var(--sans);font-size:11px;letter-spacing:.1em;fill:var(--di);opacity:.55}
+.pulse-ring{
+  fill:none;stroke:var(--sig);stroke-width:1;opacity:0;
+  transform-box:fill-box;transform-origin:center;
+}
+.comet{fill:var(--sig)}
+.comet-glow{fill:var(--sig);opacity:.25}
+html:not(.anim) .comet-g{display:none}
+html:not(.anim) .pulse-ring{display:none}
+
+.principles{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  border-top:1px solid var(--dl);
+}
+.principle{
+  padding:30px clamp(14px,1.8vw,26px) 6px;
+  border-left:1px solid var(--dl);
+}
+.principle:first-child{border-left:none}
+.principle h3{font-size:1.02rem;margin-bottom:10px;color:var(--di)}
+.principle h3::before{
+  content:"";display:block;width:20px;height:1px;background:var(--sig);margin-bottom:14px;
+}
+.principle p{font-size:12.5px;opacity:.55;line-height:1.6}
+@media (max-width:1023px){
+  .loop-grid{grid-template-columns:1fr}
+  .principles{grid-template-columns:repeat(2,1fr) }
+  .principle:nth-child(3){border-left:none}
+  .principle:nth-child(2n){border-left:1px solid var(--dl)}
+  .principle:nth-child(odd){border-left:none}
+  .principle{border-top:1px solid var(--dl);padding-bottom:26px}
+  .principles{border-top:none}
+}
+@media (max-width:560px){
+  .principles{grid-template-columns:1fr}
+  .principle{border-left:none !important}
+}
+
+/* ============ CLOSING CTA ============ */
+.cta{
+  padding:var(--sect) 0;
+  background:var(--d2);color:var(--di);
+  border-top:1px solid var(--dl);
+  text-align:center;
+}
+.cta .eyebrow{justify-content:center;color:var(--di);opacity:.6;margin-bottom:30px}
+.cta .eyebrow::after{content:"";display:block;width:26px;height:1px;background:var(--sig);flex:none}
+.cta .eyebrow::before{background:var(--sig)}
+.cta h2{font-size:clamp(2.1rem,4.6vw,3.6rem);color:var(--di);margin:0 auto 22px;max-width:16ch}
+.cta p{max-width:46ch;margin:0 auto 44px;opacity:.66}
+.cta-btns{display:flex;justify-content:center;flex-wrap:wrap;gap:16px}
+
+/* ============ FOOTER ============ */
+.footer{
+  background:var(--d);color:var(--di);
+  border-top:1px solid var(--dl);
+  padding:44px 0;
+}
+.footer-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:20px;flex-wrap:wrap;
+}
+.footer .wordmark{font-size:19px}
+.footer-tag{font-size:12.5px;opacity:.5;letter-spacing:.04em}
+.footer-copy{font-size:12px;opacity:.4;letter-spacing:.04em}
+
+/* ============ MOTION (gated) ============ */
+@media (prefers-reduced-motion: no-preference){
+  .anim .reveal{
+    opacity:0;transform:translateY(26px);
+    transition:opacity .8s cubic-bezier(.22,.61,.36,1),transform .8s cubic-bezier(.22,.61,.36,1);
+    transition-delay:var(--rd,0s);
+  }
+  .anim .reveal.in{opacity:1;transform:none}
+
+  .anim .hero .eyebrow,
+  .anim .hero h1,
+  .anim .hero-lead,
+  .anim .hero-ctas{
+    animation:heroUp 1.1s cubic-bezier(.22,.61,.36,1) both;
+  }
+  .anim .hero h1{animation-delay:.15s}
+  .anim .hero-lead{animation-delay:.32s}
+  .anim .hero-ctas{animation-delay:.48s}
+  @keyframes heroUp{
+    from{opacity:0;transform:translateY(30px)}
+    to{opacity:1;transform:none}
+  }
+
+  .anim .scroll-cue::after{animation:cue 2.4s cubic-bezier(.65,0,.35,1) infinite}
+  @keyframes cue{
+    0%{transform:translateY(-100%)}
+    55%{transform:translateY(0)}
+    100%{transform:translateY(100%)}
+  }
+
+  .anim .pulse-ring{animation:pulse 5s ease-out infinite}
+  .anim .pulse-ring.p2{animation-delay:1s}
+  .anim .pulse-ring.p3{animation-delay:2s}
+  .anim .pulse-ring.p4{animation-delay:3s}
+  .anim .pulse-ring.p5{animation-delay:4s}
+  @keyframes pulse{
+    0%{opacity:0;transform:scale(.6)}
+    12%{opacity:.65}
+    38%{opacity:0;transform:scale(2.1)}
+    100%{opacity:0;transform:scale(2.1)}
+  }
+}
+
+/* footer links (production integration) */
+.footer-links{display:flex;flex-wrap:wrap;gap:8px 22px;list-style:none;margin:0;padding:0;flex:1;justify-content:center}
+.footer-links a{font-size:13px;font-weight:300;color:var(--wi2);transition:color .2s}
+.footer-links a:hover{color:var(--wi)}
+@media (max-width:760px){.footer-links{justify-content:flex-start}}
+</style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-<nav class="site-nav">
-  <a class="nav-logo" href="/" aria-label="Pareto Labs"><img class="brand-mark" src="/assets/logo.png" alt=""><span>areto&nbsp;Labs</span></a>
-  <ul class="nav-links">
-    <li class="hide-sm"><a href="/platform.html">Platform</a></li>
-    <li class="hide-sm"><a href="/private-equity.html">Private Equity</a></li>
-    <li class="hide-sm"><a href="/industries.html" class="active">Industries</a></li>
-    <li class="hide-sm"><a href="/experts.html">Experts</a></li>
-    <li class="hide-sm"><a href="/research.html">Research</a></li>
-    <li><a class="nav-cta" href="/#partner">Build with Pareto</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<header class="page-hero">
-  <div class="wrap">
-    <p class="eyebrow rv">Industries</p>
-    <h1 class="rv" style="transition-delay:.05s">Practical AI for <em>real-world operations.</em></h1>
-    <p class="lead rv" style="transition-delay:.1s">You know your operations better than anyone. Pareto knows how to turn that into AI that works — building on your knowledge of the problem to engineer the right solution for your business, and the outcomes that matter most: <strong>time, cost, and service.</strong></p>
-    <div class="actions rv" style="transition-delay:.15s">
-      <a class="btn btn-solid btn-arr" href="/#partner">Build with Pareto</a>
-    </div>
-  </div>
-</header>
-
-<!-- INDUSTRY CARDS -->
-<section class="section">
-  <div class="wrap">
-    <div class="section-tag rv">Where we work</div>
-    <div class="card-grid">
-      <article class="pcard rv">
-        <img class="pcard-photo" src="/assets/img/ind-manufacturing.webp" alt="Manufacturing operations" loading="lazy" width="1000" height="625">
-        <div class="pcard-text">
-          <h3>Manufacturing</h3>
-          <p>AI that continuously improves production, quality, maintenance, inventory, and supply-chain operations. From shop-floor knowledge to demand signals, your systems get sharper with every cycle.</p>
-        </div>
-      </article>
-      <article class="pcard rv">
-        <img class="pcard-photo" src="/assets/img/ind-retail.webp" alt="Consumer brands and retail operations" loading="lazy" width="1000" height="625">
-        <div class="pcard-text">
-          <h3>Consumer Brands &amp; Retail</h3>
-          <p>AI that optimizes merchandising, customer service, inventory, pricing, and omnichannel operations through continuous learning. Every customer interaction becomes signal that improves the next one.</p>
-        </div>
-      </article>
-      <article class="pcard rv">
-        <img class="pcard-photo" src="/assets/img/ind-business.webp" alt="Business services operations" loading="lazy" width="1000" height="625">
-        <div class="pcard-text">
-          <h3>Business Services</h3>
-          <p>AI that automates knowledge work, client operations, back-office processes, and support while learning from every interaction. Your team&rsquo;s expertise becomes a system that scales.</p>
-        </div>
-      </article>
-      <article class="pcard rv">
-        <img class="pcard-photo" src="/assets/img/ind-healthcare.webp" alt="Healthcare services operations" loading="lazy" width="1000" height="625">
-        <div class="pcard-text">
-          <h3>Healthcare Services</h3>
-          <p>AI that streamlines administrative workflows, patient operations, billing, and scheduling while improving from outcomes. Built for the back office, not the bedside — accurate, governed, and compliant.</p>
-        </div>
-      </article>
-      <article class="pcard rv">
-        <img class="pcard-photo" src="/assets/img/ind-logistics.webp" alt="Logistics and transportation operations" loading="lazy" width="1000" height="625">
-        <div class="pcard-text">
-          <h3>Logistics &amp; Transportation</h3>
-          <p>AI that continuously optimizes routing, warehouse operations, fleet management, dispatch, and supply-chain performance. Real-time conditions feed systems that keep getting more efficient.</p>
-        </div>
-      </article>
-      <article class="pcard dark rv">
-        <div class="pcard-text">
-          <h3>Your industry</h3>
-          <p>Most operations can be improved with AI. Pareto implements the right solution — and keeps it learning.</p>
-          <a href="/#partner">Talk to us &rarr;</a>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- HOW WE WORK -->
-<section class="section alt">
-  <div class="wrap">
-    <div class="section-tag rv">How we work</div>
-    <div class="two-col">
-      <h2 class="col-h rv" style="margin-bottom:0">We start from your <em>knowledge of the problem.</em></h2>
-      <div class="rv">
-        <p class="col-p">Top-tier, hand-picked Forward Deployed Engineers embed with your team and map how the work actually happens. They bring in vetted domain experts for your field, deploy practical AI into real workflows, and keep improving it after launch — tailored to your operation, not a generic tool.</p>
-        <ul class="bens">
-          <li>Map how the work actually happens</li>
-          <li>Bring in vetted domain experts for your field</li>
-          <li>Deploy practical AI into real workflows</li>
-          <li>Measure and keep improving</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-final">
-  <div class="wrap">
-    <div class="rv">
-      <h2>Build AI for <em>your operations.</em></h2>
-      <p>Tell us where your operations hurt. We&rsquo;ll show you what continuous-learning AI can do — tailored to your business and improved over time.</p>
-      <div class="actions">
-        <a class="btn btn-invert" href="/#partner">Build with Pareto</a>
-        <a class="btn btn-invert-ghost" href="/platform.html">The platform</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer class="site-footer">
-  <div class="wrap">
-    <div class="foot-inner">
-      <div class="foot-logo">Pareto Labs</div>
-      <ul class="foot-links">
+<header>
+  <nav class="nav" id="nav" aria-label="Primary">
+    <div class="nav-inner">
+      <a class="wordmark" href="/" aria-label="Pareto Labs home">Pareto <em>Labs</em></a>
+      <ul class="nav-links">
         <li><a href="/platform.html">Platform</a></li>
         <li><a href="/private-equity.html">Private Equity</a></li>
-        <li><a href="/industries.html">Industries</a></li>
+        <li><a href="/industries.html" aria-current="page">Industries</a></li>
         <li><a href="/experts.html">Experts</a></li>
         <li><a href="/research.html">Research</a></li>
-        <li><a href="/work-with-us.html">Work With Us</a></li>
-        <li><a href="/#partner">Build with Pareto</a></li>
-        <li><a href="mailto:hello@trypareto.ai">Contact</a></li>
-        <li><a href="/privacy.html">Privacy</a></li>
       </ul>
-      <p class="foot-copy">&copy; 2026 Pareto Labs, Inc.</p>
+      <a class="nav-cta" href="/#partner">Build with Pareto</a>
     </div>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top" aria-label="Introduction">
+    <video class="hero-video" autoplay muted loop playsinline
+      poster="/assets/industries/oilgas.jpg"
+      aria-hidden="true" tabindex="-1">
+      <source src="/assets/industries/hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero-tint" aria-hidden="true"></div>
+    <div class="hero-grain" aria-hidden="true"></div>
+    <div class="hero-content">
+      <p class="eyebrow">Industries &amp; Solutions</p>
+      <h1>AI that runs inside the operation, <em>and gets sharper every day.</em></h1>
+      <p class="hero-lead">Pareto Labs builds continuous-learning AI systems for the industries that keep the physical economy moving. We deploy in weeks, measure everything, and keep improving for as long as the system runs.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-cream" href="#industries">Explore industries</a>
+        <a class="btn btn-ghost-cream" href="/#partner">Build with Pareto</a>
+      </div>
+    </div>
+    <div class="scroll-cue" aria-hidden="true"></div>
+  </section>
+
+  <!-- ============ METRICS ============ -->
+  <section class="metrics" aria-label="At a glance">
+    <div class="wrap">
+      <div class="metrics-grid">
+        <div class="stat reveal">
+          <div class="stat-n" data-count="7">7</div>
+          <div class="stat-l">Industries served, from the plant floor to the field</div>
+        </div>
+        <div class="stat reveal" style="--rd:.08s">
+          <div class="stat-n" data-count="5">5</div>
+          <div class="stat-l">Cross-functional solution areas in every deployment</div>
+        </div>
+        <div class="stat reveal" style="--rd:.16s">
+          <div class="stat-n"><em>Weeks</em></div>
+          <div class="stat-l">To production, not quarters</div>
+        </div>
+        <div class="stat reveal" style="--rd:.24s">
+          <div class="stat-n"><em>Continuous</em></div>
+          <div class="stat-l">Improvement after launch, by design</div>
+        </div>
+      </div>
+    </div>
+    <p class="metrics-note">Built for operators in PE portfolios, SMBs, and vertical operating businesses.</p>
+  </section>
+
+  <!-- ============ INTRO STATEMENT ============ -->
+  <section class="intro" aria-label="Our approach">
+    <div class="wrap">
+      <p class="eyebrow reveal">The Pareto difference</p>
+      <p class="stmt reveal" style="--rd:.1s">We do not sell software and walk away. We build AI that lives inside your operation <em>and improves for as long as it runs.</em></p>
+    </div>
+  </section>
+
+  <!-- ============ INDUSTRIES ============ -->
+  <section class="industries" id="industries" aria-label="Industries">
+    <div class="wrap">
+      <div class="sect-head">
+        <p class="eyebrow reveal">Industries</p>
+        <h2 class="reveal" style="--rd:.08s">Seven industries. <em>One compounding system.</em></h2>
+        <p class="reveal" style="--rd:.16s">Every vertical runs on different machinery, margins, and rhythms. We build for each one specifically, then let every deployment teach the next.</p>
+      </div>
+
+      <div class="igrid">
+
+        <a class="icard reveal" href="#contact">
+          <div class="icard-media" style="background-image:url(/assets/industries/manufacturing.jpg)" role="img" aria-label="Automated manufacturing line"></div>
+          <div class="icard-scrim" aria-hidden="true"></div>
+          <div class="icard-body">
+            <span class="icard-num">01</span>
+            <h3>Manufacturing</h3>
+            <p class="icard-promise">AI that schedules production, catches defects, and predicts the next failure.</p>
+            <div class="icard-more"><div class="icard-more-in">
+              <div class="chips"><span>Production</span><span>Quality</span><span>Maintenance</span><span>Inventory</span><span>Supply chain</span></div>
+              <p class="icard-uses">Predictive maintenance on critical assets. Vision QA on every line.</p>
+              <span class="icard-cta">Explore &rarr;</span>
+            </div></div>
+          </div>
+        </a>
+
+        <a class="icard reveal" href="#contact" style="--rd:.06s">
+          <div class="icard-media" style="background-image:url(/assets/industries/retail.jpg)" role="img" aria-label="Retail store operations"></div>
+          <div class="icard-scrim" aria-hidden="true"></div>
+          <div class="icard-body">
+            <span class="icard-num">02</span>
+            <h3>Consumer Brands &amp; Retail</h3>
+            <p class="icard-promise">AI that prices, replenishes, and answers on every channel.</p>
+            <div class="icard-more"><div class="icard-more-in">
+              <div class="chips"><span>Merchandising</span><span>Service</span><span>Inventory</span><span>Pricing</span><span>Omnichannel</span></div>
+              <p class="icard-uses">Dynamic pricing and replenishment. One AI voice across every channel.</p>
+              <span class="icard-cta">Explore &rarr;</span>
+            </div></div>
+          </div>
+        </a>
+
+        <a class="icard reveal" href="#contact" style="--rd:.12s">
+          <div class="icard-media" style="background-image:url(/assets/industries/business.jpg)" role="img" aria-label="Business services team"></div>
+          <div class="icard-scrim" aria-hidden="true"></div>
+          <div class="icard-body">
+            <span class="icard-num">03</span>
+            <h3>Business Services</h3>
+            <p class="icard-promise">AI that drafts, reconciles, and resolves, so billable hours stay billable.</p>
+            <div class="icard-more"><div class="icard-more-in">
+              <div class="chips"><span>Knowledge work</span><span>Client ops</span><span>Back office</span><span>Support</span></div>
+              <p class="icard-uses">First-draft deliverables in minutes. Automated intake and reconciliation.</p>
+              <span class="icard-cta">Explore &rarr;</span>
+            </div></div>
+          </div>
+        </a>
+
+        <a class="icard reveal" href="#contact">
+          <div class="icard-media" style="background-image:url(/assets/industries/healthcare.jpg)" role="img" aria-label="Healthcare administration"></div>
+          <div class="icard-scrim" aria-hidden="true"></div>
+          <div class="icard-body">
+            <span class="icard-num">04</span>
+            <h3>Healthcare Services</h3>
+            <p class="icard-promise">AI that schedules, codes, and follows up, and never touches clinical judgment.</p>
+            <div class="icard-more"><div class="icard-more-in">
+              <div class="chips"><span>Admin</span><span>Patient ops</span><span>Billing</span><span>Scheduling</span></div>
+              <p class="icard-uses">No-show prediction and smart scheduling. Clean claims the first time.</p>
+              <span class="icard-cta">Explore &rarr;</span>
+            </div></div>
+          </div>
+        </a>
+
+        <a class="icard reveal" href="#contact" style="--rd:.06s">
+          <div class="icard-media" style="background-image:url(/assets/industries/logistics.jpg)" role="img" aria-label="Fleet and logistics"></div>
+          <div class="icard-scrim" aria-hidden="true"></div>
+          <div class="icard-body">
+            <span class="icard-num">05</span>
+            <h3>Logistics &amp; Transportation</h3>
+            <p class="icard-promise">AI that quotes, routes, and dispatches at the pace of the dock.</p>
+            <div class="icard-more"><div class="icard-more-in">
+              <div class="chips"><span>Routing</span><span>Warehouse</span><span>Fleet</span><span>Dispatch</span></div>
+              <p class="icard-uses">Instant, margin-aware quoting. Dynamic routing and dock scheduling.</p>
+              <span class="icard-cta">Explore &rarr;</span>
+            </div></div>
+          </div>
+        </a>
+
+        <a class="icard reveal" href="#contact" style="--rd:.12s">
+          <div class="icard-media" style="background-image:url(/assets/industries/telecom.jpg)" role="img" aria-label="Telecom network operations"></div>
+          <div class="icard-scrim" aria-hidden="true"></div>
+          <div class="icard-body">
+            <span class="icard-num">06</span>
+            <h3>Telecom</h3>
+            <p class="icard-promise">AI that watches the network, deflects the ticket, and saves the subscriber.</p>
+            <div class="icard-more"><div class="icard-more-in">
+              <div class="chips"><span>Network ops</span><span>Field service</span><span>Billing</span><span>Customer care</span><span>Churn</span></div>
+              <p class="icard-uses">Network anomaly detection. Churn saves before the cancel call.</p>
+              <span class="icard-cta">Explore &rarr;</span>
+            </div></div>
+          </div>
+        </a>
+
+        <a class="icard reveal" href="#contact">
+          <div class="icard-media" style="background-image:url(/assets/industries/oilgas.jpg)" role="img" aria-label="Oil and gas facility"></div>
+          <div class="icard-scrim" aria-hidden="true"></div>
+          <div class="icard-body">
+            <span class="icard-num">07</span>
+            <h3>Oil &amp; Gas</h3>
+            <p class="icard-promise">AI that hears every asset, files every report, and keeps the field moving.</p>
+            <div class="icard-more"><div class="icard-more-in">
+              <div class="chips"><span>Asset reliability</span><span>Field ops</span><span>HSE and compliance</span><span>Production</span></div>
+              <p class="icard-uses">Acoustic asset monitoring. Automated regulatory reporting.</p>
+              <span class="icard-cta">Explore &rarr;</span>
+            </div></div>
+          </div>
+        </a>
+
+        <a class="icard icard-dark reveal" href="mailto:channels@trypareto.ai" style="--rd:.06s">
+          <div class="icard-body">
+            <div class="icard-dark-rule" aria-hidden="true"></div>
+            <span class="icard-num">08</span>
+            <h3>Your industry</h3>
+            <p>Seven verticals is where we publish, not where we stop. Tell us what your operation runs on.</p>
+            <span class="icard-cta">Start the conversation &rarr;</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SOLUTIONS ============ -->
+  <section class="solutions" id="solutions" aria-label="Solutions">
+    <div class="wrap">
+      <div class="sect-head">
+        <p class="eyebrow reveal">Solutions</p>
+        <h2 class="reveal" style="--rd:.08s">Five functions, <em>rebuilt around learning.</em></h2>
+        <p class="reveal" style="--rd:.16s">The same five functions run every operating business. We rebuild each one so it gets measurably better every week.</p>
+      </div>
+
+      <div class="sgrid reveal">
+        <div class="scell">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+          </div>
+          <h3>Revenue &amp; Sales Ops</h3>
+          <p>Lead scoring, quote generation, and pipeline hygiene that runs itself.</p>
+        </div>
+        <div class="scell">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18v-5a8 8 0 0 1 16 0v5"></path><rect x="3" y="14" width="4" height="7" rx="1.5"></rect><rect x="17" y="14" width="4" height="7" rx="1.5"></rect></svg>
+          </div>
+          <h3>Customer Service</h3>
+          <p>Deflect the routine, escalate the exceptional, keep every promise.</p>
+        </div>
+        <div class="scell">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M5 21v-9M10 21v-9M14 21v-9M19 21v-9"></path><path d="M12 3l9 6H3l9-6z"></path></svg>
+          </div>
+          <h3>Back Office &amp; Finance</h3>
+          <p>Invoices coded, statements reconciled, and the close accelerated.</p>
+        </div>
+        <div class="scell">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v8a2 2 0 0 1-1 1.73l-7 4a2 2 0 0 1-2 0l-7-4A2 2 0 0 1 3 16V8a2 2 0 0 1 1-1.73l7-4a2 2 0 0 1 2 0l7 4A2 2 0 0 1 21 8z"></path><path d="M3.3 7l8.7 5 8.7-5"></path><path d="M12 22V12"></path></svg>
+          </div>
+          <h3>Supply Chain &amp; Operations</h3>
+          <p>Demand sensing, balanced inventory, and schedules that hold.</p>
+        </div>
+        <div class="scell">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h6a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2z"></path><path d="M22 4h-6a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h7z"></path></svg>
+          </div>
+          <h3>Knowledge &amp; Support</h3>
+          <p>Institutional knowledge on demand, for every person on the team.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PARALLAX BAND ============ -->
+  <section class="band on-dark" aria-label="Signal">
+    <div class="band-media" id="bandMedia" role="img" aria-label="Fleet and logistics"></div>
+    <div class="band-tint" aria-hidden="true"></div>
+    <div class="band-content wrap">
+      <p class="eyebrow reveal">Signal</p>
+      <p class="stmt reveal" style="--rd:.1s">Every shift, every ticket, every mile produces signal. <em>We turn it into a system that compounds.</em></p>
+    </div>
+  </section>
+
+  <!-- ============ THE PARETO LOOP ============ -->
+  <section class="loop on-dark" id="loop" aria-label="The Pareto Loop">
+    <div class="wrap">
+      <div class="loop-grid">
+        <div class="loop-viz reveal">
+          <svg viewBox="0 0 460 460" role="img" aria-label="The Pareto Loop: Map, Deploy, Measure, Learn, Improve, a continuous cycle">
+            <circle class="loop-ring" cx="230" cy="230" r="160"></circle>
+            <path id="loopPath" d="M 230 70 A 160 160 0 1 1 229.9 70.001" fill="none"></path>
+
+            <!-- pulse rings -->
+            <circle class="pulse-ring p1" cx="230" cy="70" r="12"></circle>
+            <circle class="pulse-ring p2" cx="382.2" cy="180.6" r="12"></circle>
+            <circle class="pulse-ring p3" cx="324.1" cy="359.4" r="12"></circle>
+            <circle class="pulse-ring p4" cx="135.9" cy="359.4" r="12"></circle>
+            <circle class="pulse-ring p5" cx="77.8" cy="180.6" r="12"></circle>
+
+            <!-- nodes -->
+            <circle class="loop-node" cx="230" cy="70" r="9"></circle>
+            <circle class="loop-node-dot" cx="230" cy="70" r="2.5"></circle>
+            <circle class="loop-node" cx="382.2" cy="180.6" r="9"></circle>
+            <circle class="loop-node-dot" cx="382.2" cy="180.6" r="2.5"></circle>
+            <circle class="loop-node" cx="324.1" cy="359.4" r="9"></circle>
+            <circle class="loop-node-dot" cx="324.1" cy="359.4" r="2.5"></circle>
+            <circle class="loop-node" cx="135.9" cy="359.4" r="9"></circle>
+            <circle class="loop-node-dot" cx="135.9" cy="359.4" r="2.5"></circle>
+            <circle class="loop-node" cx="77.8" cy="180.6" r="9"></circle>
+            <circle class="loop-node-dot" cx="77.8" cy="180.6" r="2.5"></circle>
+
+            <!-- labels -->
+            <text class="loop-label" x="230" y="44" text-anchor="middle">Map</text>
+            <text class="loop-label" x="402" y="178" text-anchor="start">Deploy</text>
+            <text class="loop-label" x="334" y="386" text-anchor="start">Measure</text>
+            <text class="loop-label" x="126" y="386" text-anchor="end">Learn</text>
+            <text class="loop-label" x="58" y="178" text-anchor="end">Improve</text>
+
+            <!-- center caption -->
+            <text class="loop-center" x="230" y="222" text-anchor="middle">Every use case feeds</text>
+            <text class="loop-center" x="230" y="248" text-anchor="middle">one compounding system.</text>
+            <text class="loop-center-sub" x="230" y="282" text-anchor="middle">THE PARETO LOOP</text>
+
+            <!-- comet -->
+            <g class="comet-g">
+              <circle class="comet-glow" r="9">
+                <animateMotion dur="9s" repeatCount="indefinite" rotate="auto">
+                  <mpath href="#loopPath"></mpath>
+                </animateMotion>
+              </circle>
+              <circle class="comet" r="3.5">
+                <animateMotion dur="9s" repeatCount="indefinite" rotate="auto">
+                  <mpath href="#loopPath"></mpath>
+                </animateMotion>
+              </circle>
+            </g>
+          </svg>
+        </div>
+
+        <div class="loop-copy">
+          <p class="eyebrow reveal">The Pareto Loop</p>
+          <h2 class="reveal" style="--rd:.08s">Most AI projects end at deployment. <em>Ours begin there.</em></h2>
+          <p class="reveal" style="--rd:.16s">Deployment is where most vendors declare victory. It is where our system starts collecting evidence. Every decision it makes is measured against the outcome you care about, reviewed by your people, and folded back into the next version.</p>
+          <p class="reveal" style="--rd:.24s">The loop never closes because the operation never stops. That is the whole point.</p>
+        </div>
+      </div>
+
+      <div class="principles">
+        <div class="principle reveal">
+          <h3>Evidence-driven</h3>
+          <p>Every improvement traces to measured outcomes, not opinion.</p>
+        </div>
+        <div class="principle reveal" style="--rd:.06s">
+          <h3>Human-approved</h3>
+          <p>Your operators review and approve what changes, always.</p>
+        </div>
+        <div class="principle reveal" style="--rd:.12s">
+          <h3>Outcome-optimized</h3>
+          <p>Tuned to the metric that moves your P&amp;L, not a demo.</p>
+        </div>
+        <div class="principle reveal" style="--rd:.18s">
+          <h3>Governed by design</h3>
+          <p>Access, audit, and escalation built in from day one.</p>
+        </div>
+        <div class="principle reveal" style="--rd:.24s">
+          <h3>Compounding</h3>
+          <p>Each use case makes the next one faster and sharper.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLOSING CTA ============ -->
+  <section class="cta on-dark" id="contact" aria-label="Contact">
+    <div class="wrap">
+      <p class="eyebrow reveal">Get started</p>
+      <h2 class="reveal" style="--rd:.08s">Build AI for <em>your operations.</em></h2>
+      <p class="reveal" style="--rd:.16s">Bring one process that costs you time or margin. We will map it, scope it, and show you what a continuously learning version looks like.</p>
+      <div class="cta-btns reveal" style="--rd:.24s">
+        <a class="btn btn-cream" href="/#partner">Build with Pareto</a>
+        <a class="btn btn-ghost-cream" href="#industries">See the industries</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <a class="wordmark" href="/">Pareto <em>Labs</em></a>
+    <ul class="footer-links">
+      <li><a href="/platform.html">Platform</a></li>
+      <li><a href="/private-equity.html">Private Equity</a></li>
+      <li><a href="/industries.html">Industries</a></li>
+      <li><a href="/experts.html">Experts</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/work-with-us.html">Work With Us</a></li>
+      <li><a href="/#partner">Build with Pareto</a></li>
+      <li><a href="mailto:hello@trypareto.ai">Contact</a></li>
+      <li><a href="/privacy.html">Privacy</a></li>
+    </ul>
+    <p class="footer-copy">&copy; 2026 Pareto Labs, Inc.</p>
   </div>
 </footer>
-<script src="/assets/site.js" defer></script>
+
+<script>
+(function(){
+  "use strict";
+  var motionOK = window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
+  var docEl = document.documentElement;
+  if (motionOK) docEl.classList.add("anim");
+
+  /* ---- Nav: transparent over hero -> blurred cream after ~40px ---- */
+  var nav = document.getElementById("nav");
+  var navScrolled = false;
+  function onNavScroll(){
+    var s = window.scrollY > 40;
+    if (s !== navScrolled){
+      navScrolled = s;
+      nav.classList.toggle("scrolled", s);
+    }
+  }
+  window.addEventListener("scroll", onNavScroll, {passive:true});
+  onNavScroll();
+
+  /* ---- Reduced motion: pause the hero video, keep the poster frame ---- */
+  var vid = document.querySelector(".hero-video");
+  if (vid && !motionOK){
+    vid.removeAttribute("autoplay");
+    try { vid.pause(); } catch(e){}
+  }
+
+  /* ---- Scroll reveals (only when motion is allowed) ---- */
+  if (motionOK && "IntersectionObserver" in window){
+    var ro = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          en.target.classList.add("in");
+          ro.unobserve(en.target);
+        }
+      });
+    }, {threshold:0.12, rootMargin:"0px 0px -6% 0px"});
+    document.querySelectorAll(".reveal").forEach(function(el){ ro.observe(el); });
+  } else {
+    document.querySelectorAll(".reveal").forEach(function(el){ el.classList.add("in"); });
+  }
+
+  /* ---- Count-up stats (final values are already in markup for no-JS / reduced motion) ---- */
+  if (motionOK && "IntersectionObserver" in window){
+    var co = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (!en.isIntersecting) return;
+        co.unobserve(en.target);
+        var el = en.target;
+        var target = parseInt(el.getAttribute("data-count"), 10);
+        if (isNaN(target)) return;
+        var dur = 1100, t0 = null;
+        function step(ts){
+          if (t0 === null) t0 = ts;
+          var p = Math.min((ts - t0) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = String(Math.round(eased * target));
+          if (p < 1) requestAnimationFrame(step);
+          else el.textContent = String(target);
+        }
+        el.textContent = "0";
+        requestAnimationFrame(step);
+      });
+    }, {threshold:0.6});
+    document.querySelectorAll("[data-count]").forEach(function(el){ co.observe(el); });
+  }
+
+  /* ---- Parallax band (transform only, rAF, gated) ---- */
+  var band = document.querySelector(".band");
+  var bandMedia = document.getElementById("bandMedia");
+  if (motionOK && band && bandMedia){
+    var ticking = false;
+    function parallax(){
+      ticking = false;
+      var r = band.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) return;
+      var progress = (r.top + r.height/2 - window.innerHeight/2) / window.innerHeight;
+      var y = Math.max(-1, Math.min(1, progress)) * -34;
+      bandMedia.style.transform = "translate3d(0," + y.toFixed(1) + "px,0)";
+    }
+    window.addEventListener("scroll", function(){
+      if (!ticking){ ticking = true; requestAnimationFrame(parallax); }
+    }, {passive:true});
+    parallax();
+  }
+})();
+</script>
 <script src="/assets/build-modal.js" defer></script>
-<script src="/assets/newsletter.js" defer></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
