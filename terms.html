@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms &amp; Conditions — Pareto Labs</title>
+  <meta name="description" content="Terms & Conditions for Pareto Labs, including SMS messaging terms, acceptable use, and your rights.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="canonical" href="https://www.trypareto.ai/terms">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" href="/assets/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="/assets/favicon-180.png">
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/build-modal.css">
+  <link rel="stylesheet" href="/assets/newsletter.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --w:    #F5F2EB;
+      --w2:   #EAE6DC;
+      --wi:   #14120F;
+      --wi2:  #6A6760;
+      --wi3:  #B0ADA7;
+      --wl:   rgba(20, 18, 15, 0.09);
+      --gold: #A8854F;
+      --serif: 'Newsreader','Tiempos Headline', Georgia, serif;
+      --sans:  'Hanken Grotesk','Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--w);
+      color: var(--wi);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ─────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(245, 242, 235, 0.95);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--wl);
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--wi);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-back {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--wi2);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--wi); }
+    .nav-logo img.brand-mark { height: 17px; width: auto; vertical-align: -2px; margin-right: 1px; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--wi2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--wi); }
+    .nav-cta {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--w) !important;
+      background: var(--wi);
+      padding: 9px 18px;
+      border-radius: 999px;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold); }
+    @media (max-width: 860px) {
+      .nav-links .hide-sm { display: none; }
+    }
+
+    /* ── LAYOUT ──────────────────────────────────── */
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 0 48px; }
+
+    /* ── HEADER ──────────────────────────────────── */
+    .page-header {
+      padding: 80px 0 64px;
+      border-bottom: 1px solid var(--wl);
+    }
+    .page-kicker {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--wi3);
+      margin-bottom: 20px;
+    }
+    .page-h1 {
+      font-family: var(--serif);
+      font-size: clamp(38px, 5vw, 64px);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+    .page-h1 em { font-style: italic; font-weight: 300; }
+    .page-meta {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--wi3);
+    }
+
+    /* ── CONTENT ─────────────────────────────────── */
+    .content {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 80px;
+      padding: 72px 0 112px;
+      align-items: start;
+    }
+
+    /* Sidebar TOC */
+    .toc {
+      position: sticky;
+      top: 80px;
+    }
+    .toc-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--wi3);
+      margin-bottom: 20px;
+    }
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    .toc-list a {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--wi2);
+      text-decoration: none;
+      padding: 5px 0;
+      display: block;
+      border-left: 1px solid var(--wl);
+      padding-left: 14px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .toc-list a:hover { color: var(--wi); border-color: var(--wi2); }
+
+    /* Prose */
+    .prose { max-width: 680px; }
+
+    .prose section {
+      padding: 48px 0;
+      border-top: 1px solid var(--wl);
+    }
+    .prose section:first-child { border-top: none; padding-top: 0; }
+
+    .prose h2 {
+      font-family: var(--serif);
+      font-size: clamp(22px, 2.5vw, 30px);
+      font-weight: 400;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      scroll-margin-top: 100px;
+    }
+    .prose h2 em { font-style: italic; font-weight: 300; }
+
+    .prose h3 {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin-top: 28px;
+      margin-bottom: 10px;
+    }
+
+    .prose p {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--wi2);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .prose p:last-child { margin-bottom: 0; }
+
+    .prose ul, .prose ol {
+      margin: 16px 0;
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .prose ul li, .prose ol li {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--wi2);
+      line-height: 1.75;
+      padding-left: 20px;
+      position: relative;
+    }
+    .prose ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--wi3);
+    }
+    .prose ol { counter-reset: ol; }
+    .prose ol li { counter-increment: ol; }
+    .prose ol li::before {
+      content: counter(ol) '.';
+      position: absolute;
+      left: 0;
+      color: var(--wi3);
+      font-size: 13px;
+    }
+
+    .prose a {
+      color: var(--wi);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: var(--wl);
+      transition: text-decoration-color 0.2s;
+    }
+    .prose a:hover { text-decoration-color: var(--wi2); }
+
+    .prose strong {
+      font-weight: 500;
+      color: var(--wi);
+    }
+
+    /* Highlight box */
+    .callout {
+      background: var(--w2);
+      padding: 24px 28px;
+      margin: 24px 0;
+    }
+    .callout p { margin-bottom: 0; }
+
+    /* ── FOOTER ──────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--wl);
+      padding: 44px 0;
+    }
+    .foot-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+    .foot-logo { font-family: var(--serif); font-size: 15px; font-weight: 400; color: var(--wi); }
+    .foot-links { display: flex; gap: 28px; list-style: none; }
+    .foot-links a { font-size: 13px; font-weight: 300; color: var(--wi2); text-decoration: none; transition: color 0.2s; }
+    .foot-links a:hover { color: var(--wi); }
+    .foot-copy { font-size: 12px; font-weight: 300; color: var(--wi3); }
+
+    /* ── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 860px) {
+      nav { padding: 18px 24px; }
+      .wrap { padding: 0 24px; }
+      .content { grid-template-columns: 1fr; gap: 0; }
+      .toc { display: none; }
+      .page-header { padding: 56px 0 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="/" aria-label="Pareto Labs"><img class="brand-mark" src="/assets/logo.png" alt=""><span>areto&nbsp;Labs</span></a>
+  <ul class="nav-links">
+    <li class="hide-sm"><a href="/platform.html">Platform</a></li>
+    <li class="hide-sm"><a href="/private-equity.html">Private Equity</a></li>
+    <li class="hide-sm"><a href="/industries.html">Industries</a></li>
+    <li class="hide-sm"><a href="/experts.html">Experts</a></li>
+    <li class="hide-sm"><a href="/research.html">Research</a></li>
+    <li><a class="nav-cta" href="/#partner">Build with Pareto</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="wrap">
+    <p class="page-kicker">Legal</p>
+    <h1 class="page-h1">Terms &amp; <em>Conditions</em></h1>
+    <p class="page-meta">Effective date: March 26, 2026 &nbsp;&middot;&nbsp; Last updated: July 20, 2026</p>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="wrap">
+  <div class="content">
+
+    <!-- Sidebar TOC -->
+    <nav class="toc" aria-label="Table of contents">
+      <p class="toc-label">On this page</p>
+      <ul class="toc-list">
+        <li><a href="#agreement">Agreement to Terms</a></li>
+        <li><a href="#service">Use of the Service</a></li>
+        <li><a href="#accounts">Accounts &amp; Eligibility</a></li>
+        <li><a href="#sms">SMS Messaging Terms</a></li>
+        <li><a href="#acceptable-use">Acceptable Use</a></li>
+        <li><a href="#ip">Intellectual Property</a></li>
+        <li><a href="#third-party">Third-Party Services</a></li>
+        <li><a href="#disclaimers">Disclaimers</a></li>
+        <li><a href="#liability">Limitation of Liability</a></li>
+        <li><a href="#indemnification">Indemnification</a></li>
+        <li><a href="#termination">Termination</a></li>
+        <li><a href="#governing-law">Governing Law</a></li>
+        <li><a href="#changes">Changes to These Terms</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </nav>
+
+    <!-- Prose -->
+    <div class="prose">
+
+      <section id="agreement">
+        <h2>Agreement to Terms</h2>
+        <p>These Terms &amp; Conditions ("Terms") govern your access to and use of the website at <strong>trypareto.ai</strong> and the Pareto Labs platform, together with any related services, forms, and communications (collectively, the "Service"), operated by <strong>Pareto Labs, Inc.</strong> ("Pareto Labs," "we," "us," or "our").</p>
+        <p>By accessing or using the Service, submitting a form, or opting in to receive communications from us, you agree to be bound by these Terms and by our <a href="/privacy">Privacy Policy</a>. If you do not agree to these Terms, please do not use the Service.</p>
+        <div class="callout">
+          <p>Questions about these Terms? Contact us at <a href="mailto:contact@trypareto.ai">contact@trypareto.ai</a>.</p>
+        </div>
+      </section>
+
+      <section id="service">
+        <h2>Use of <em>the Service</em></h2>
+        <p>Pareto Labs is an AI platform and AI implementation company. The Service allows you to learn about our offerings, request early access, apply to our expert network, register as a research participant, and communicate with our team.</p>
+        <p>We may add, modify, or remove features of the Service at any time. We may also impose limits on certain features or restrict access to parts or all of the Service without notice or liability.</p>
+      </section>
+
+      <section id="accounts">
+        <h2>Accounts &amp; <em>Eligibility</em></h2>
+        <p>You must be at least 16 years old to use the Service. By using the Service, you represent and warrant that you meet this requirement and that the information you provide to us is accurate, current, and complete.</p>
+        <p>You are responsible for maintaining the confidentiality of any credentials associated with your use of the platform and for all activity that occurs under your account. Notify us promptly at <a href="mailto:contact@trypareto.ai">contact@trypareto.ai</a> if you suspect unauthorized use.</p>
+      </section>
+
+      <section id="sms">
+        <h2>SMS <em>Messaging Terms</em></h2>
+
+        <h3>Who is sending the messages</h3>
+        <p>SMS text messages sent in connection with the Service are sent by <strong>Pareto Labs</strong>.</p>
+
+        <h3>Types of messages you may receive</h3>
+        <p>If you provide your mobile phone number and opt in, you may receive SMS messages from Pareto Labs, which may include:</p>
+        <ul>
+          <li>Onboarding updates and account notifications</li>
+          <li>Product demo scheduling and follow-ups</li>
+          <li>Customer support communications</li>
+          <li>Appointment and meeting reminders</li>
+          <li>Expert network coordination and matching updates</li>
+          <li>Service-related notifications</li>
+        </ul>
+
+        <h3>How you consent to receive SMS</h3>
+        <p>You consent to receive SMS messages from Pareto Labs when you provide your mobile phone number and affirmatively opt in — for example, by submitting a form, checking a consent box, or otherwise agreeing to be contacted by text. Consent to receive SMS messages is not a condition of any purchase. Your consent is limited to the categories of messages described above.</p>
+
+        <h3>Message frequency</h3>
+        <p>Message frequency varies based on your relationship and interactions with Pareto Labs.</p>
+
+        <h3>Message and data rates</h3>
+        <p>Message and data rates may apply. These charges are billed by and payable to your mobile service provider. Pareto Labs is not responsible for any such charges.</p>
+
+        <h3>Opt out — STOP</h3>
+        <p>You may opt out of SMS messages at any time by replying <strong>STOP</strong> to any message you receive from us. After you send <strong>STOP</strong>, we will send a one-time confirmation message and will no longer send you SMS messages unless you opt in again.</p>
+
+        <h3>Help — HELP</h3>
+        <p>For help, reply <strong>HELP</strong> to any message, or contact us at <a href="mailto:contact@trypareto.ai">contact@trypareto.ai</a>.</p>
+
+        <h3>Carrier liability</h3>
+        <div class="callout">
+          <p>Carriers are not liable for delayed or undelivered messages. Message delivery is subject to effective transmission by your mobile network operator and is not guaranteed.</p>
+        </div>
+
+        <h3>Privacy</h3>
+        <p>No mobile information, including phone numbers, SMS opt-in data, or SMS consent, will be shared with third parties or affiliates for marketing or promotional purposes. For details on how we handle your information, see our <a href="/privacy">Privacy Policy</a>.</p>
+      </section>
+
+      <section id="acceptable-use">
+        <h2>Acceptable <em>Use</em></h2>
+        <p>You agree not to use the Service to:</p>
+        <ul>
+          <li>Violate any applicable law, regulation, or third-party right</li>
+          <li>Submit false, misleading, or fraudulent information</li>
+          <li>Transmit malware, or attempt to gain unauthorized access to the Service or its related systems</li>
+          <li>Interfere with or disrupt the integrity or performance of the Service</li>
+          <li>Scrape, harvest, or collect information about other users without authorization</li>
+          <li>Use the Service to send unsolicited or unlawful communications</li>
+        </ul>
+        <p>We reserve the right to investigate and take appropriate action against anyone who, in our sole discretion, violates this provision, including removing content and restricting access to the Service.</p>
+      </section>
+
+      <section id="ip">
+        <h2>Intellectual <em>Property</em></h2>
+        <p>The Service and all of its content, features, and functionality — including text, graphics, logos, the "Pareto Labs" name and marks, and software — are owned by Pareto Labs or its licensors and are protected by intellectual property laws.</p>
+        <p>We grant you a limited, non-exclusive, non-transferable, revocable license to access and use the Service for its intended purposes. You may not copy, modify, distribute, sell, or lease any part of the Service without our prior written consent.</p>
+      </section>
+
+      <section id="third-party">
+        <h2>Third-Party <em>Services</em></h2>
+        <p>The Service relies on and may link to third-party services — including hosting, form processing, and messaging providers — as described in our <a href="/privacy">Privacy Policy</a>. We are not responsible for the content, policies, or practices of any third-party service. Your use of those services is governed by their respective terms.</p>
+      </section>
+
+      <section id="disclaimers">
+        <h2>Disclaimers</h2>
+        <p>The Service is provided on an "as is" and "as available" basis, without warranties of any kind, whether express or implied, including implied warranties of merchantability, fitness for a particular purpose, and non-infringement.</p>
+        <p>We do not warrant that the Service will be uninterrupted, secure, error-free, or free of harmful components, or that any information provided through the Service is accurate, complete, or current.</p>
+      </section>
+
+      <section id="liability">
+        <h2>Limitation of <em>Liability</em></h2>
+        <p>To the maximum extent permitted by law, Pareto Labs and its officers, directors, employees, and agents shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits, data, goodwill, or other intangible losses, arising out of or relating to your use of — or inability to use — the Service.</p>
+        <p>To the maximum extent permitted by law, our total aggregate liability for any claim arising out of or relating to the Service or these Terms shall not exceed one hundred U.S. dollars (USD $100).</p>
+      </section>
+
+      <section id="indemnification">
+        <h2>Indemnification</h2>
+        <p>You agree to indemnify, defend, and hold harmless Pareto Labs and its affiliates from and against any claims, liabilities, damages, losses, and expenses, including reasonable legal fees, arising out of or in any way connected with your access to or use of the Service, or your violation of these Terms.</p>
+      </section>
+
+      <section id="termination">
+        <h2>Termination</h2>
+        <p>We may suspend or terminate your access to the Service at any time, with or without cause or notice, including if we believe you have violated these Terms. Upon termination, the provisions of these Terms that by their nature should survive — including intellectual property, disclaimers, limitation of liability, and indemnification — will continue to apply.</p>
+      </section>
+
+      <section id="governing-law">
+        <h2>Governing <em>Law</em></h2>
+        <p>These Terms are governed by and construed in accordance with the laws of the State of Delaware, United States, without regard to its conflict-of-law principles. Any dispute arising under these Terms shall be subject to the exclusive jurisdiction of the state and federal courts located in Delaware, and you consent to personal jurisdiction there.</p>
+      </section>
+
+      <section id="changes">
+        <h2>Changes to <em>These Terms</em></h2>
+        <p>We may update these Terms from time to time to reflect changes in our practices, technology, or legal requirements. When we make material changes, we will update the "Last updated" date at the top of this page. Your continued use of the Service after changes become effective constitutes acceptance of the updated Terms.</p>
+      </section>
+
+      <section id="contact">
+        <h2>Contact <em>Us</em></h2>
+        <p>If you have any questions about these Terms &amp; Conditions, please reach out:</p>
+        <div class="callout">
+          <p><strong>Pareto Labs</strong><br>
+          General inquiries: <a href="mailto:contact@trypareto.ai">contact@trypareto.ai</a><br>
+          Privacy inquiries: <a href="mailto:privacy@trypareto.ai">privacy@trypareto.ai</a></p>
+        </div>
+        <p>We will respond to your inquiry within 5 business days.</p>
+      </section>
+
+    </div><!-- /prose -->
+  </div><!-- /content -->
+</div><!-- /wrap -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div class="foot-logo">Pareto Labs</div>
+      <ul class="foot-links">
+        <li><a href="/platform.html">Platform</a></li>
+        <li><a href="/private-equity.html">Private Equity</a></li>
+        <li><a href="/industries.html">Industries</a></li>
+        <li><a href="/experts.html">Experts</a></li>
+        <li><a href="/research.html">Research</a></li>
+        <li><a href="/work-with-us.html">Work With Us</a></li>
+        <li><a href="/#partner">Build with Pareto</a></li>
+        <li><a href="mailto:hello@trypareto.ai">Contact</a></li>
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/terms">Terms &amp; Conditions</a></li>
+      </ul>
+      <p class="foot-copy">&copy; 2026 Pareto Labs, Inc.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/build-modal.js" defer></script>
+<script src="/assets/newsletter.js" defer></script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
