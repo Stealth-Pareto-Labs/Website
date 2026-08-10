@@ -312,6 +312,9 @@ h1 em,h2 em,h3 em,.stmt em{font-style:italic;font-weight:300;color:inherit}
 .icard-dark .icard-cta{margin-top:22px}
 .icard-dark:hover .icard-cta{color:var(--di)}
 .icard-dark .icard-cta{transition:color .25s ease}
+/* with nine industries the grid fills exactly, so the CTA closes the row full-width */
+.igrid .icard-dark{grid-column:1/-1;aspect-ratio:auto;min-height:clamp(190px,17vw,250px)}
+.igrid .icard-dark p{max-width:44ch}
 @media (max-width:1023px){.igrid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:600px){
   .igrid{grid-template-columns:1fr}

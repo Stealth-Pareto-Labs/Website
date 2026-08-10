@@ -189,6 +189,9 @@
   .ind-cta h3 { color: var(--di); }
   .ind-cta p { opacity: 0.72; }
   .ind-cta a { color: var(--sig); border-bottom: 1px solid currentColor; padding-bottom: 2px; align-self: flex-start; margin-top: 6px; font-size: 13.5px; }
+  /* with nine industries the grid fills exactly, so the CTA closes the row full-width */
+  .ind-grid .ind-cta { grid-column: 1 / -1; }
+  .ind-grid .ind-cta p { max-width: 52ch; }
 
   /* ── PE WHERE-WE-HELP ────────────────────────────── */
   .pe-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; }
