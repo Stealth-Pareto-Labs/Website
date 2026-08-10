@@ -24,7 +24,7 @@
           '<div class="bm-field"><label for="bm-name">Your name</label><input id="bm-name" name="name" type="text" autocomplete="name" placeholder="James Wright" required></div>' +
           '<div class="bm-field"><label for="bm-email">Work email</label><input id="bm-email" name="email" type="email" autocomplete="email" placeholder="james@company.com" required></div>' +
           '<div class="bm-field"><label for="bm-company">Company</label><input id="bm-company" name="company" type="text" autocomplete="organization" placeholder="Your company"></div>' +
-          '<div class="bm-field"><label for="bm-type">You are</label><select id="bm-type" name="type"><option value="">Select one</option><option>Operating company (SMB / mid-market)</option><option>Private equity firm</option><option>PE portfolio company</option><option>Vertical / industry business</option><option>Other</option></select></div>' +
+          '<div class="bm-field"><label for="bm-type">You are</label><select id="bm-type" name="type"><option value="">Select one</option><option>Operating company (SMB / mid-market)</option><option>Private equity firm</option><option>PE portfolio company</option><option>Vertical / industry business</option><option>Government / public institution</option><option>Other</option></select></div>' +
           '<div class="bm-field"><label for="bm-challenge">Where could AI help your operations?</label><textarea id="bm-challenge" name="challenge" placeholder="e.g. Our customer service team is overwhelmed and our knowledge is scattered across people and docs…"></textarea></div>' +
         '</div>' +
         '<div class="bm-foot">' +
