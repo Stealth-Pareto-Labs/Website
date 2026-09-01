@@ -12,7 +12,7 @@ No SheetDB, no paid layer — Apps Script writes to the Google Sheet directly.
 - **`SLACK_WEBHOOK`** — a Slack Incoming Webhook URL (reuse your existing Slack app — the `SLACK_WEBHOOK_EXPERTS` one).
 - **`RESEND_API_KEY`** — your Resend key (`re_…`).
 - **`FROM_EMAIL`** — a Resend‑verified sender. Default is `Pareto Labs <noreply@auth.trypareto.ai>`; change if you want a `build@`/`hello@` sender (must be verified in Resend).
-- `NOTIFY_TEAM` is already `hello@trypareto.ai` (internal copy of each lead).
+- `NOTIFY_TEAM` is already `contact@trypareto.ai` (internal copy of each lead).
 
 > Secrets live only inside your Apps Script project. The copy in this repo keeps them blank.
 

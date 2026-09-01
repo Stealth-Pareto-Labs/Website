@@ -22,7 +22,7 @@ var SLACK_BOT_TOKEN = '';   // optional: xoxb-… bot token to ALSO DM you in yo
 var SLACK_DM_USERS  = '';   // optional: comma-separated member IDs to DM (e.g. 'U0123ABCD')
 var RESEND_API_KEY = '';    // Resend API key (re_...) — paste here, not in the website repo
 var FROM_EMAIL     = 'Pareto Labs <noreply@auth.trypareto.ai>';  // a Resend-verified sender
-var NOTIFY_TEAM    = 'hello@trypareto.ai';           // internal copy of each lead ('' = skip)
+var NOTIFY_TEAM    = 'contact@trypareto.ai';           // internal copy of each lead ('' = skip)
 // ───────────────────────────────────────────────────────────
 
 function doPost(e) {
