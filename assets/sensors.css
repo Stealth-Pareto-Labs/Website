@@ -1,0 +1,135 @@
+/* ============================================================
+   The hardware — loop diagram + sensor showcase
+   Industry pages: oil-gas, telecom, manufacturing
+   Everything namespaced .sx- so it cannot collide with site.css
+   ============================================================ */
+
+/* ---------- loop diagram ---------- */
+.sx-fig { margin: 0 0 clamp(48px, 6vw, 76px); }
+.sx-canvas { overflow-x: auto; padding-bottom: 6px; }
+.sx-canvas svg { display: block; width: 100%; min-width: 660px; height: auto; }
+.sx-cap {
+  margin-top: 24px; padding-top: 17px; border-top: 1px solid var(--dl);
+  font-size: 13px; font-weight: 300; line-height: 1.7; opacity: 0.58; max-width: 74ch;
+}
+
+.sx-n-name { font-family: var(--sans); font-size: 13.5px; font-weight: 500; fill: var(--di); }
+.sx-n-sub  { font-family: var(--sans); font-size: 11px;   font-weight: 300; fill: var(--di); opacity: 0.52; }
+.sx-n-tag  { font-family: var(--sans); font-size: 10.5px; font-weight: 400; fill: var(--sig); letter-spacing: 0.04em; }
+.sx-el     { font-family: var(--sans); font-size: 12px;   font-weight: 300; fill: var(--di); opacity: 0.72; }
+.sx-zone   { font-family: var(--sans); font-size: 10px;   font-weight: 500; letter-spacing: 0.18em; fill: var(--sig); opacity: 0.9; }
+.sx-zone-s { font-family: var(--sans); font-size: 11.5px; font-weight: 300; fill: var(--di); opacity: 0.45; }
+.sx-badge  { font-family: var(--sans); font-size: 10px;   font-weight: 500; letter-spacing: 0.18em; }
+.sx-badge-s{ font-family: var(--sans); font-size: 12px;   font-weight: 300; fill: var(--di); opacity: 0.55; }
+
+.sx-node  { fill: var(--d2); stroke: rgba(238,233,224,0.18); stroke-width: 1; }
+.sx-node-k{ stroke: var(--sig); stroke-opacity: 0.55; }
+.sx-track { fill: none; stroke: var(--di); stroke-opacity: 0.17; stroke-width: 1.25; }
+.sx-seam  { stroke: var(--di); stroke-opacity: 0.13; stroke-width: 1; stroke-dasharray: 2 7; }
+.sx-arw   { stroke: var(--di); stroke-opacity: 0.45; stroke-width: 1.25; fill: none; }
+
+.sx-pulse { fill: none; stroke-width: 2.25; stroke-linecap: round; stroke-dasharray: 38 962; }
+.sx-pulse-in  { stroke: var(--sig); animation: sx-travel 2.2s linear infinite; }
+.sx-pulse-out { stroke: var(--di); stroke-opacity: 0.85; animation: sx-travel 14s linear infinite; }
+@keyframes sx-travel { to { stroke-dashoffset: -1000; } }
+
+/* ---------- showcase ---------- */
+.sx-rail {
+  display: flex; flex-wrap: wrap; gap: 0;
+  border-top: 1px solid var(--dl); margin: 0 0 0;
+}
+.sx-rail button {
+  appearance: none; background: none; border: none; border-bottom: 1px solid transparent;
+  color: var(--di); font-family: var(--sans); font-size: 12.5px; font-weight: 300;
+  padding: 15px 20px 13px; cursor: pointer; opacity: 0.5;
+  transition: opacity 0.2s, border-color 0.2s;
+  display: flex; flex-direction: column; gap: 3px; align-items: flex-start;
+}
+.sx-rail button:hover { opacity: 0.85; }
+.sx-rail button[aria-selected="true"] { opacity: 1; border-bottom-color: var(--sig); }
+.sx-rail button:focus-visible { outline: 1px solid var(--sig); outline-offset: -1px; }
+.sx-rn { font-weight: 400; letter-spacing: -0.01em; white-space: nowrap; }
+.sx-rt { font-size: 10.5px; letter-spacing: 0.06em; color: var(--sig); opacity: 0.85; }
+
+.sx-stage {
+  display: grid; grid-template-columns: 1fr 320px;
+  border-top: 1px solid var(--dl); border-bottom: 1px solid var(--dl);
+}
+
+/* CAD viewport: neutral technical grey, no blue */
+.sx-vp { position: relative; background: #DCDFE3; min-height: 0; aspect-ratio: 4 / 3; }
+.sx-vp canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+.sx-vp canvas:active { cursor: grabbing; }
+.sx-vlabel, .sx-vunits {
+  position: absolute; top: 14px; pointer-events: none;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px; letter-spacing: 0.04em; color: #3A4149;
+}
+.sx-vlabel { left: 16px; opacity: 0.75; }
+.sx-vunits { right: 16px; font-size: 10.5px; opacity: 0.45; }
+.sx-hint {
+  position: absolute; inset: 0; display: grid; place-items: center; color: #3A4149;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.5;
+}
+.sx-ctrls { position: absolute; left: 14px; bottom: 14px; display: flex; gap: 5px; flex-wrap: wrap; }
+.sx-ctrls button {
+  appearance: none; background: rgba(252,252,253,0.92); border: 1px solid #A9B0B8;
+  color: #2A3038; font-family: var(--sans); font-size: 11px; font-weight: 400;
+  letter-spacing: 0.02em; padding: 7px 12px; cursor: pointer; border-radius: 2px;
+  transition: background 0.15s, border-color 0.15s;
+}
+.sx-ctrls button:hover { background: #fff; border-color: #6E7780; }
+.sx-ctrls button:focus-visible { outline: 2px solid #4A7FB5; outline-offset: 1px; }
+.sx-ctrls button[aria-pressed="true"] { background: #2A3038; border-color: #2A3038; color: #F2F4F6; }
+
+.sx-spec { background: var(--d); border-left: 1px solid var(--dl); padding: 28px 26px 30px; }
+.sx-spec h3 { font-family: var(--serif); font-weight: 400; font-size: 24px; letter-spacing: -0.025em; margin: 0 0 4px; }
+.sx-model { font-size: 11px; letter-spacing: 0.12em; color: var(--sig); margin-bottom: 22px; }
+.sx-spec dl { margin: 0; }
+.sx-row { display: grid; grid-template-columns: 92px 1fr; gap: 14px; padding: 11px 0;
+          border-top: 1px solid var(--dl); align-items: baseline; }
+.sx-row dt { font-size: 10px; letter-spacing: 0.13em; text-transform: uppercase; opacity: 0.42; margin: 0; }
+.sx-row dd { margin: 0; font-size: 13px; font-weight: 300; line-height: 1.6; }
+.sx-feeds { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--dl); }
+.sx-feeds .sx-lab { font-size: 10px; letter-spacing: 0.13em; text-transform: uppercase; opacity: 0.42; margin-bottom: 8px; }
+.sx-feeds .sx-v { font-family: var(--serif); font-size: 17px; letter-spacing: -0.02em; }
+.sx-feeds .sx-v em { font-style: italic; font-weight: 300; color: var(--sig); }
+
+/* ---------- fullscreen / present ---------- */
+.sx-stage:fullscreen { grid-template-columns: 1fr 400px; height: 100vh; border: none; }
+.sx-stage:fullscreen .sx-vp { aspect-ratio: auto; height: 100vh; }
+.sx-stage:fullscreen .sx-spec { padding: 44px 40px; }
+.sx-stage:fullscreen .sx-spec h3 { font-size: 36px; }
+.sx-stage:fullscreen .sx-model { font-size: 14px; margin-bottom: 30px; }
+.sx-stage:fullscreen .sx-row { grid-template-columns: 130px 1fr; padding: 15px 0; }
+.sx-stage:fullscreen .sx-row dt { font-size: 12px; }
+.sx-stage:fullscreen .sx-row dd { font-size: 17px; }
+.sx-stage:fullscreen .sx-feeds .sx-v { font-size: 23px; }
+.sx-stage:fullscreen .sx-ctrls button { font-size: 14px; padding: 11px 18px; }
+.sx-stage:fullscreen .sx-vlabel { font-size: 14px; }
+.sx-stage:fullscreen .sx-vunits { font-size: 13px; }
+
+/* ---------- mobile ---------- */
+@media (max-width: 900px) {
+  .sx-stage { grid-template-columns: 1fr; }
+  .sx-vp { aspect-ratio: 1 / 1; }
+  .sx-spec { border-left: none; border-top: 1px solid var(--dl); padding: 24px 22px 26px; }
+}
+@media (max-width: 700px) {
+  /* the loop reads as a vertical stack rather than a squeezed wide figure */
+  .sx-canvas { overflow-x: visible; }
+  .sx-canvas svg { min-width: 0; }
+  .sx-canvas .sx-wide { display: none; }
+  .sx-canvas .sx-tall { display: block; }
+  .sx-rail { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
+  .sx-rail button { padding: 13px 15px 11px; }
+  .sx-cap { font-size: 12.5px; }
+}
+@media (min-width: 701px) {
+  .sx-canvas .sx-tall { display: none; }
+  .sx-canvas .sx-wide { display: block; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sx-pulse-in, .sx-pulse-out { animation: none; }
+}

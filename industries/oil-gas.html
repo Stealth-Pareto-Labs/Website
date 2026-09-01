@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="/assets/site.css">
   <link rel="stylesheet" href="/assets/build-modal.css">
   <link rel="stylesheet" href="/assets/newsletter.css">
+  <link rel="stylesheet" href="/assets/sensors.css">
   <style>
   /* responsible emphasis: italic same-colour, gold only for hairlines/accents */
   .col-h em, .statement em, .cap-h em, .stat-v em { color: inherit; }
@@ -128,6 +129,134 @@
   </div>
 </section>
 
+<!-- THE HARDWARE -->
+<section class="section dark" id="hardware">
+  <div class="wrap">
+    <div class="section-tag rv">The hardware</div>
+    <div class="two-col">
+      <h2 class="col-h rv" style="margin-bottom:0">We don't just read the signal. We build what <em>senses</em> it.</h2>
+      <p class="col-p rv" style="margin-bottom:0; align-self:end">Pareto's AI runs on live data from the wellhead, the compressor skid, and the tank farm. Much of it comes from field instruments we design and deploy ourselves, wired straight into the platform that keeps the field moving.</p>
+    </div>
+
+    <figure class="sx-fig rv" style="margin-top:56px">
+      <div class="sx-canvas">
+        <svg class="sx-wide" viewBox="0 0 1200 560" role="img" aria-label="Two feedback loops share one vertical edge. The inner loop runs entirely in the field: sensor array to edge DAQ to asset and back, in under ten milliseconds with no network. The outer loop crosses into the platform: edge DAQ to ingest to model to work order, then back to the sensor as new thresholds, over weeks.">
+          <defs><marker id="sxar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 9 5 L 0 9 z" fill="#EEE9E0" fill-opacity=".55"></path></marker></defs>
+          <line class="sx-seam" x1="700" y1="76" x2="700" y2="506"></line>
+          <text class="sx-zone" x="60" y="40">THE FIELD</text>
+          <text class="sx-zone-s" x="60" y="59">instruments we design and build</text>
+          <text class="sx-zone" x="720" y="40">THE PLATFORM</text>
+          <text class="sx-zone-s" x="720" y="59">the model that learns from them</text>
+          <path class="sx-track" d="M 390 150 L 390 430 L 145 430 L 145 150 Z"></path>
+          <path class="sx-track" d="M 390 150 L 390 430 L 1075 430 L 1075 150 Z"></path>
+          <path class="sx-pulse sx-pulse-out" pathLength="1000" d="M 390 150 L 390 430 L 1075 430 L 1075 150 Z"></path>
+          <path class="sx-pulse sx-pulse-in" pathLength="1000" d="M 390 150 L 390 430 L 145 430 L 145 150 Z"></path>
+          <path class="sx-arw" d="M 390 250 L 390 300" marker-end="url(#sxar)"></path>
+          <path class="sx-arw" d="M 300 430 L 235 430" marker-end="url(#sxar)"></path>
+          <path class="sx-arw" d="M 145 235 L 145 180" marker-end="url(#sxar)"></path>
+          <path class="sx-arw" d="M 560 430 L 660 430" marker-end="url(#sxar)"></path>
+          <path class="sx-arw" d="M 1075 400 L 1075 350" marker-end="url(#sxar)"></path>
+          <path class="sx-arw" d="M 1010 150 L 950 150" marker-end="url(#sxar)"></path>
+          <path class="sx-arw" d="M 640 150 L 550 150" marker-end="url(#sxar)"></path>
+          <text class="sx-el" x="404" y="284">raw signal</text>
+          <text class="sx-el" x="404" y="301" opacity=".5">4-20 mA, Modbus</text>
+          <text class="sx-el" x="225" y="132" text-anchor="middle">vibration, pressure, temp</text>
+          <text class="sx-el" x="225" y="452" text-anchor="middle">trip, alarm</text>
+          <text class="sx-el" x="610" y="416" text-anchor="middle">uplink, store and forward</text>
+          <text class="sx-el" x="995" y="452" text-anchor="middle">labelled signal,</text>
+          <text class="sx-el" x="995" y="468" text-anchor="middle" opacity=".5">plus crew corrections</text>
+          <text class="sx-el" x="997" y="132" text-anchor="middle">prediction, ranked by risk</text>
+          <text class="sx-el" x="610" y="132" text-anchor="middle">new thresholds, pushed to the transmitter</text>
+          <text class="sx-badge" x="290" y="238" text-anchor="middle" fill="#C8AE7D">INNER LOOP</text>
+          <text class="sx-badge-s" x="290" y="256" text-anchor="middle">10 ms, no network</text>
+          <text class="sx-badge" x="580" y="350" text-anchor="middle" fill="#EEE9E0" opacity=".8">OUTER LOOP</text>
+          <text class="sx-badge-s" x="580" y="368" text-anchor="middle">weeks. the model improves, the instrument gets the update</text>
+          <rect class="sx-node" x="60" y="257" width="170" height="66" rx="2"></rect>
+          <text class="sx-n-name" x="78" y="284">Asset</text>
+          <text class="sx-n-sub" x="78" y="303">compressor, pump</text>
+          <rect class="sx-node sx-node-k" x="305" y="117" width="170" height="66" rx="2"></rect>
+          <text class="sx-n-name" x="323" y="144">Sensor array</text>
+          <text class="sx-n-tag" x="323" y="163">PF-608 · PP-4730 · PV-100</text>
+          <rect class="sx-node sx-node-k" x="305" y="397" width="170" height="66" rx="2"></rect>
+          <text class="sx-n-name" x="323" y="424">Edge DAQ</text>
+          <text class="sx-n-tag" x="323" y="443">PE-1</text>
+          <rect class="sx-node" x="745" y="397" width="170" height="66" rx="2"></rect>
+          <text class="sx-n-name" x="763" y="424">Ingest</text>
+          <text class="sx-n-sub" x="763" y="443">buffered, time-aligned</text>
+          <rect class="sx-node" x="990" y="257" width="170" height="66" rx="2"></rect>
+          <text class="sx-n-name" x="1008" y="284">Model</text>
+          <text class="sx-n-sub" x="1008" y="303">retrained on the fleet</text>
+          <rect class="sx-node" x="745" y="117" width="170" height="66" rx="2"></rect>
+          <text class="sx-n-name" x="763" y="144">Work order</text>
+          <text class="sx-n-sub" x="763" y="163">crew dispatched</text>
+        </svg>
+
+        <svg class="sx-tall" viewBox="0 0 380 720" role="img" aria-label="The same two loops, stacked for a narrow screen. Sensor array to edge DAQ, then an inner return through the asset, and an outer return through ingest, model and work order.">
+          <defs><marker id="sxar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 9 5 L 0 9 z" fill="#EEE9E0" fill-opacity=".55"></path></marker></defs>
+          <path class="sx-track" d="M 190 100 L 190 260 M 190 320 L 190 390 M 115 290 L 50 290 L 50 70 L 115 70 M 265 180 L 330 180 L 330 420 L 265 420 M 190 450 L 190 500 M 190 560 L 190 610 M 265 640 L 355 640 L 355 70 L 265 70"></path>
+          <path class="sx-pulse sx-pulse-in" pathLength="1000" d="M 190 70 L 190 290 L 50 290 L 50 70 Z"></path>
+          <path class="sx-arw" d="M 190 120 L 190 145" marker-end="url(#sxar2)"></path>
+          <path class="sx-arw" d="M 190 225 L 190 250" marker-end="url(#sxar2)"></path>
+          <path class="sx-arw" d="M 330 300 L 330 340" marker-end="url(#sxar2)"></path>
+          <path class="sx-arw" d="M 190 465 L 190 490" marker-end="url(#sxar2)"></path>
+          <path class="sx-arw" d="M 190 575 L 190 600" marker-end="url(#sxar2)"></path>
+          <path class="sx-arw" d="M 355 400 L 355 340" marker-end="url(#sxar2)"></path>
+          <text class="sx-badge" x="50" y="330" text-anchor="middle" fill="#C8AE7D">INNER</text>
+          <text class="sx-badge-s" x="50" y="348" text-anchor="middle" font-size="10">10 ms</text>
+          <text class="sx-badge" x="330" y="490" text-anchor="middle" fill="#EEE9E0" opacity=".8">OUTER</text>
+          <text class="sx-badge-s" x="330" y="508" text-anchor="middle" font-size="10">weeks</text>
+          <rect class="sx-node sx-node-k" x="115" y="40" width="150" height="60" rx="2"></rect>
+          <text class="sx-n-name" x="131" y="66">Sensor array</text>
+          <text class="sx-n-tag" x="131" y="84">PF-608 · PP-4730</text>
+          <rect class="sx-node sx-node-k" x="115" y="150" width="150" height="60" rx="2"></rect>
+          <text class="sx-n-name" x="131" y="176">Edge DAQ</text>
+          <text class="sx-n-tag" x="131" y="194">PE-1</text>
+          <rect class="sx-node" x="115" y="260" width="150" height="60" rx="2"></rect>
+          <text class="sx-n-name" x="131" y="286">Asset</text>
+          <text class="sx-n-sub" x="131" y="304">compressor, pump</text>
+          <rect class="sx-node" x="115" y="390" width="150" height="60" rx="2"></rect>
+          <text class="sx-n-name" x="131" y="416">Ingest</text>
+          <text class="sx-n-sub" x="131" y="434">time-aligned</text>
+          <rect class="sx-node" x="115" y="500" width="150" height="60" rx="2"></rect>
+          <text class="sx-n-name" x="131" y="526">Model</text>
+          <text class="sx-n-sub" x="131" y="544">retrained on the fleet</text>
+          <rect class="sx-node" x="115" y="610" width="150" height="60" rx="2"></rect>
+          <text class="sx-n-name" x="131" y="636">Work order</text>
+          <text class="sx-n-sub" x="131" y="654">crew dispatched</text>
+        </svg>
+      </div>
+      <figcaption class="sx-cap">Both loops run down the same sensor-to-edge link. The inner one closes in the field in milliseconds and never touches the network, so a trip does not wait on a connection. The outer one takes weeks, and it ends where it began: new thresholds written back to the transmitter itself. That last arrow is the one you can only draw if you build the instrument.</figcaption>
+    </figure>
+
+    <div class="rv" data-sensor-showcase="oil-gas">
+      <div class="sx-rail" role="tablist" aria-label="Instrument family" data-sx-rail></div>
+      <div class="sx-stage" data-sx-stage>
+        <div class="sx-vp" data-sx-vp>
+          <div class="sx-vlabel" data-sx-vlabel></div>
+          <div class="sx-vunits" data-sx-vunits>shaded with edges</div>
+          <div class="sx-hint" data-sx-hint>Interactive view</div>
+          <div class="sx-ctrls">
+            <button type="button" data-sx-spin aria-pressed="true">Auto-rotate</button>
+            <button type="button" data-sx-edges aria-pressed="true">Edges</button>
+            <button type="button" data-sx-grid aria-pressed="true">Grid</button>
+            <button type="button" data-sx-reset>Reset view</button>
+            <button type="button" data-sx-full>Present</button>
+          </div>
+        </div>
+        <div class="sx-spec">
+          <h3 data-sx-name></h3>
+          <div class="sx-model" data-sx-model></div>
+          <dl data-sx-list></dl>
+          <div class="sx-feeds">
+            <div class="sx-lab">Feeds use-case</div>
+            <div class="sx-v" data-sx-feeds></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- WHAT WE BUILD -->
 <section class="section alt">
   <div class="wrap">
@@ -192,6 +321,7 @@
 <script src="/assets/site.js" defer></script>
 <script src="/assets/build-modal.js" defer></script>
 <script src="/assets/newsletter.js" defer></script>
+<script type="module" src="/assets/sensors.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
