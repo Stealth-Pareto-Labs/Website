@@ -335,6 +335,8 @@
     .osx-pill, .osx-pill.is-on { transform: none; width: auto; }
     .osx-head { white-space: normal; }
     .osx-body, .osx-pill.is-on .osx-body, .osx-body-in { width: auto; }
+    /* nothing closes here, so do not offer a close affordance */
+    .osx-plus { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     .osx-pill, .osx-plate, .osx-plus, .osx-body { transition: none; }
