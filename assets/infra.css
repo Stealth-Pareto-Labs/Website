@@ -39,9 +39,9 @@
   linear-gradient(180deg, rgba(8,12,24,0.52) 0%, rgba(8,12,24,0.70) 46%, rgba(8,12,24,0.94) 100%),
   linear-gradient(90deg, rgba(8,12,24,0.80) 0%, rgba(8,12,24,0.46) 52%, rgba(8,12,24,0.22) 100%); }
 .ih .eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.16em;
-  text-transform: uppercase; color: var(--ac-d); margin-bottom: 26px;
+  text-transform: uppercase; color: var(--sig); margin-bottom: 26px;
   display: flex; align-items: center; gap: 13px; }
-.ih .eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--ac-d); opacity: 0.6; }
+.ih .eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--sig); opacity: 0.8; }
 .ih h1 { font-family: var(--serif); font-weight: 400;
   font-size: clamp(38px, 5.6vw, 76px); line-height: 1.05; letter-spacing: -0.03em;
   max-width: 17ch; margin-bottom: 26px; }
@@ -110,9 +110,9 @@
 .lrow { display: grid; grid-template-columns: 94px 1fr 92px; align-items: center;
   gap: 18px; padding: 11px 0; border-top: 1px solid var(--dl); }
 .lrow:last-child { border-bottom: 1px solid var(--dl); }
-.lrow .lp { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--ac-d); }
+.lrow .lp { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--sig); }
 .lbar { height: 10px; background: rgba(238,233,224,0.13); position: relative; }
-.lbar span { position: absolute; inset: 0 auto 0 0; background: var(--ac-d); opacity: 0.7; }
+.lbar span { position: absolute; inset: 0 auto 0 0; background: var(--sig); opacity: 0.62; }
 .lrow:first-of-type .lbar span { opacity: 0.85; }
 .lrow .lw { font-size: 12.5px; font-weight: 300; text-align: right;
   font-variant-numeric: tabular-nums; opacity: 0.72; }
@@ -125,7 +125,7 @@
 .codewrap pre { margin: 0; padding: 22px 18px 24px; overflow-x: auto;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 13px; line-height: 1.75; color: rgba(238,233,224,0.88); }
-.codewrap .c-key { color: var(--ac-d); }
+.codewrap .c-key { color: var(--sig); }
 .codewrap .c-com { opacity: 0.45; }
 
 /* ── capability groups (cloud) ───────────────────── */

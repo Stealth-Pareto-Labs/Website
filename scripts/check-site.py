@@ -42,9 +42,14 @@ DASH_EXEMPT = {'research/diffusing-ai-into-the-real-economy.html',
                'research/the-learning-layer/index.html',
                'privacy.html', 'terms.html', 'private-equity.html'}
 
-# Gold is retired everywhere except the industry sensor showcase, whose markers
-# were not part of the redesign.
+# Gold belongs on DARK backgrounds, where it measures 9.11:1 and is the brand.
+# On cream it measured 1.92:1 and never passed, so cream uses the slate accent.
+# A gold rule is allowed when its selector names a dark context or an illustration.
 GOLD_OK_FILES = {'assets/sensors.css'}
+DARK_CONTEXT = ('dark', 'on-dark', 'cta-final', 'ih ', '.ih', 'ind-hero', 'ind-cta',
+                'icard-dark', 'nav-links a:hover', 'btn-ghost-cream', 'c-key',
+                'lrow', 'lbar', 'plw', 'eyebrow', 'cta ', 'prog',
+                'icard-num', 'icard-cta', 'principle', 'scroll-cue', 'os-')
 
 # Selectors allowed to keep gold: the animated comet/orbit illustration on
 # industries.html and the sensor markers. Both are illustration, not UI.
@@ -194,11 +199,11 @@ def check_gold(path, text):
         brace = head.rfind('{')
         sel = head[head.rfind('}', 0, brace) + 1:brace] if brace > 0 else ''
         sel = sel.replace(chr(10), ' ').strip()[-90:]
-        if not any(tok in sel for tok in GOLD_OK_SELECTORS):
+        if not any(tok in sel for tok in GOLD_OK_SELECTORS + DARK_CONTEXT):
             bad.append(sel or m.group(0))
     n = len(bad)
     if n:
-        fail(path, '%d gold reference%s left; use --ac / --ac-d: %s'
+        fail(path, '%d gold reference%s on a light context; use --ac: %s'
              % (n, '' if n == 1 else 's', bad[0].strip()[:70]))
 
 

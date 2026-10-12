@@ -80,7 +80,7 @@
 
   /* ── SCROLL PROGRESS ─────────────────────────────── */
   #prog { position: fixed; top: 0; left: 0; width: 0%; height: 2px; background: var(--wi); z-index: 200; transition: width 0.05s linear; }
-  .dark-zone #prog { background: var(--ac-d); }
+  .dark-zone #prog { background: var(--sig); }
 
   /* ── NAV ─────────────────────────────────────────── */
   nav {
@@ -147,7 +147,7 @@
   /* ── INTRO STATEMENT ─────────────────────────────── */
   .statement { font-family: var(--serif); font-size: clamp(24px, 3.2vw, 40px); font-weight: 400; line-height: 1.32; letter-spacing: -0.025em; }
   .statement em { font-style: italic; font-weight: 300; color: var(--ac); }
-  .section-dark .statement em { color: var(--ac-d); }
+  .section-dark .statement em { color: var(--sig); }
 
   /* ── TWO-COL ─────────────────────────────────────── */
   .two-col { display: grid; grid-template-columns: 5fr 6fr; gap: 80px; align-items: start; }
@@ -168,7 +168,7 @@
   .cap-n { font-family: var(--serif); font-size: 13px; font-weight: 300; opacity: 0.4; padding-top: 4px; }
   .cap-h { font-family: var(--serif); font-size: clamp(18px, 2vw, 26px); font-weight: 400; letter-spacing: -0.02em; line-height: 1.25; }
   .cap-h em { font-style: italic; font-weight: 300; color: var(--ac); }
-  .section-dark .cap-h em { color: var(--ac-d); }
+  .section-dark .cap-h em { color: var(--sig); }
   .cap-p { font-size: 14px; font-weight: 300; opacity: 0.66; line-height: 1.75; }
 
   /* ── PRINCIPLES ROW ──────────────────────────────── */
@@ -177,7 +177,7 @@
   .stat:nth-child(3n) { border-right: none; }
   .stat:nth-child(n+4) { border-top: 1px solid var(--dl); padding-top: 40px; }
   .stat-v { font-family: var(--serif); font-size: clamp(20px, 2.2vw, 28px); font-weight: 400; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 10px; }
-  .stat-v em { font-style: italic; font-weight: 300; color: var(--ac-d); }
+  .section-dark .stat-v em { font-style: italic; font-weight: 300; color: var(--sig); }
   .stat-l { font-size: 12.5px; font-weight: 300; opacity: 0.6; line-height: 1.55; }
 
   /* ── INDUSTRIES ──────────────────────────────────── */
@@ -191,7 +191,7 @@
   .ind-cta .ind-text { padding: 34px 28px; }
   .ind-cta h3 { color: var(--di); }
   .ind-cta p { opacity: 0.72; }
-  .ind-cta a { color: var(--ac-d); border-bottom: 1px solid currentColor; padding-bottom: 2px; align-self: flex-start; margin-top: 6px; font-size: 13.5px; }
+  .ind-cta a { color: var(--sig); border-bottom: 1px solid currentColor; padding-bottom: 2px; align-self: flex-start; margin-top: 6px; font-size: 13.5px; }
   /* with nine industries the grid fills exactly, so the CTA closes the row full-width */
   .ind-grid .ind-cta { grid-column: span 2; }
   .ind-grid .ind-cta p { max-width: 52ch; }
@@ -245,25 +245,63 @@
   .foot-links a:hover { color: var(--wi); }
   .foot-copy { font-size: 12px; font-weight: 300; color: var(--wi3); }
 
-  /* ── PARETO OS STACK ─────────────────────────── */
-  .os { list-style: none; margin-top: 56px; border-top: 1px solid var(--wl); }
-  .os-l { display: grid; grid-template-columns: 76px minmax(0,1fr) auto; gap: 0 28px; align-items: start;
-          padding: 26px 0; border-bottom: 1px solid var(--wl); position: relative; }
-  .os-l::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: transparent; }
-  .os-own::before { background: var(--ac); opacity: .55; }
-  .os-n { font-size: 11px; font-weight: 500; letter-spacing: .14em; color: var(--ac); padding-top: 5px; padding-left: 18px; }
-  .os-l:not(.os-own) .os-n { color: var(--wi); opacity: .4; }
-  .os-b h3 { font-family: var(--serif); font-size: 21px; font-weight: 400; letter-spacing: -.02em; margin-bottom: 5px; }
-  .os-b p { font-size: 14px; font-weight: 300; line-height: 1.65; opacity: .66; max-width: 62ch; }
-  .os-go { align-self: center; font-size: 12.5px; color: var(--ac); white-space: nowrap;
-           border-bottom: 1px solid rgba(44,60,96,.3); padding-bottom: 2px; transition: border-color .2s; }
-  .os-go:hover { border-color: var(--ac); }
-  .os-foot { margin-top: 26px; font-size: 13.5px; font-weight: 300; opacity: .6; }
+  /* ── PARETO OS: glass layers over the machines ───── */
+  .os-sec { position: relative; overflow: hidden; padding: clamp(96px,12vw,150px) 0;
+            background: var(--d); color: var(--di); border-top: none; }
+  .os-bg { position: absolute; inset: 0; }
+  .os-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+            filter: saturate(.7) contrast(1.05); }
+  .os-veil { position: absolute; inset: 0; display: block; background:
+    linear-gradient(180deg, rgba(8,12,24,.86) 0%, rgba(8,12,24,.74) 42%, rgba(8,12,24,.9) 100%); }
+  .os-inner { position: relative; z-index: 1; }
+  .os-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase;
+                color: var(--sig); margin-bottom: 20px; }
+  .os-title { font-family: var(--serif); font-weight: 400; font-size: clamp(34px,4.6vw,62px);
+              line-height: 1.06; letter-spacing: -.03em; margin-bottom: 18px; }
+  .os-title em { font-style: italic; font-weight: 300; color: var(--sig); }
+  .os-sub { font-size: 15px; font-weight: 300; line-height: 1.72; max-width: 62ch;
+            color: rgba(238,233,224,.74); margin-bottom: clamp(44px,5vw,64px); }
+
+  /* the capsules */
+  .os-stack { list-style: none; display: flex; flex-direction: column; gap: 10px; max-width: 760px; }
+  .os-pill { border-radius: 26px; overflow: hidden;
+    background: rgba(10,14,26,.46); backdrop-filter: blur(22px) saturate(1.3);
+    -webkit-backdrop-filter: blur(22px) saturate(1.3);
+    border: 1px solid rgba(238,233,224,.12);
+    transition: background .3s ease, border-color .3s ease, transform .3s cubic-bezier(.16,1,.3,1);
+    transform: translateX(calc(var(--i) * 7px)); }
+  .os-pill:hover, .os-pill:focus-within { background: rgba(14,19,34,.62); border-color: rgba(238,233,224,.26); }
+  .os-head { width: 100%; display: flex; align-items: center; gap: 16px; background: none; border: 0;
+    padding: 15px 22px; cursor: pointer; color: inherit; font-family: var(--sans); text-align: left; }
+  .os-head:focus-visible { outline: 2px solid var(--sig); outline-offset: -3px; border-radius: 26px; }
+  .os-n { font-size: 10.5px; font-weight: 500; letter-spacing: .14em; color: rgba(238,233,224,.42); }
+  .os-own .os-n { color: var(--sig); }
+  .os-name { flex: 1; font-size: 15px; font-weight: 400; letter-spacing: -.01em; }
+  .os-plus { position: relative; width: 15px; height: 15px; flex: none; opacity: .62;
+             transition: transform .35s cubic-bezier(.16,1,.3,1); }
+  .os-plus::before, .os-plus::after { content: ''; position: absolute; inset: 50% 0 auto 0;
+             height: 1px; background: currentColor; }
+  .os-plus::after { transform: rotate(90deg); transition: opacity .3s ease; }
+  .os-pill:hover .os-plus, .os-pill:focus-within .os-plus { transform: rotate(45deg); opacity: 1; }
+
+  .os-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .42s cubic-bezier(.16,1,.3,1); }
+  .os-panel-in { overflow: hidden; min-height: 0; }
+  .os-pill:hover .os-panel, .os-pill:focus-within .os-panel { grid-template-rows: 1fr; }
+  .os-panel p { font-size: 13.5px; font-weight: 300; line-height: 1.7;
+    color: rgba(238,233,224,.72); padding: 0 22px 16px 60px; max-width: 58ch; }
+  .os-link { display: inline-block; margin: 0 22px 18px 60px; font-size: 12.5px; color: var(--sig);
+    border-bottom: 1px solid rgba(200,174,125,.4); padding-bottom: 2px; }
+  .os-link:hover { border-color: var(--sig); }
+
   @media (max-width: 760px) {
-    .os-l { grid-template-columns: 54px minmax(0,1fr); gap: 0 14px; }
-    .os-n { padding-left: 12px; }
-    .os-go { grid-column: 2; margin-top: 12px; justify-self: start; }
+    .os-pill { transform: none; }
+    .os-panel p, .os-link { padding-left: 22px; margin-left: 22px; }
   }
+  @media (prefers-reduced-motion: reduce) {
+    .os-pill, .os-plus, .os-panel { transition: none; }
+    .os-pill { transform: none; }
+  }
+
 
   /* ── TWO ENGINES ────────────────────────────── */
   .eng-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; }
@@ -287,7 +325,7 @@
   .rv.in { opacity: 1; transform: none; }
 
   a:focus-visible, .btn:focus-visible, button:focus-visible { outline: 2px solid var(--ac); outline-offset: 3px; }
-  .section-dark a:focus-visible, .dark-panel a:focus-visible { outline-color: var(--ac-d); }
+  .section-dark a:focus-visible, .dark-panel a:focus-visible { outline-color: var(--sig); }
 
   /* ── RESPONSIVE ──────────────────────────────────── */
   @media (max-width: 960px) {
@@ -402,29 +440,80 @@
 </div>
 
 <!-- PARETO OS -->
-<div class="section" id="how">
-  <div class="wrap">
-    <div class="section-tag rv">The stack</div>
-    <div class="two-col">
-      <h2 class="col-h" style="margin-bottom:0">Introducing <em>Pareto OS.</em></h2>
-      <div class="rv" style="align-self:end">
-        <p class="col-p" style="margin-bottom:16px">One system, from the machines up: the compute, the models that run on it, and the operating knowledge that makes them useful to a specific business.</p>
-        <p class="col-p" style="margin-bottom:0; opacity:.78">Most AI companies start at layer 04. We start at layer 01, because we own the machines.</p>
-      </div>
+<div class="section-dark os-sec" id="how">
+  <div class="os-bg" aria-hidden="true">
+    <video class="os-vid" autoplay muted loop playsinline poster="/assets/infra/hero.jpg">
+      <source src="/assets/infra/vid-hero.mp4" type="video/mp4">
+    </video>
+    <span class="os-veil"></span>
+  </div>
+  <div class="wrap os-inner">
+    <div class="os-head-block">
+      <p class="os-eyebrow rv">The stack</p>
+      <h2 class="os-title rv">Introducing <em>Pareto&nbsp;OS.</em></h2>
+      <p class="os-sub rv">A single system that connects the machines, the models and the operating knowledge of a business. Most AI companies start at layer 04. We start at 01, because we own the machines.</p>
     </div>
-
-    <ol class="os">
-      <li class="os-l os-own rv"><span class="os-n">01</span><div class="os-b"><h3>Sovereign compute</h3><p>The machines themselves, running in your own country rather than a region on another continent.</p></div><a class="os-go" href="/infrastructure.html">Infrastructure &rarr;</a></li>
-      <li class="os-l os-own rv"><span class="os-n">02</span><div class="os-b"><h3>Inference</h3><p>Open-source models, optimized and quantized, served behind one OpenAI-compatible API.</p></div><a class="os-go" href="/inference.html">Inference &rarr;</a></li>
-      <li class="os-l os-own rv"><span class="os-n">03</span><div class="os-b"><h3>Cloud</h3><p>Apps, jobs, databases and storage on the same nodes as the models they call.</p></div><a class="os-go" href="/cloud.html">Cloud &rarr;</a></li>
-      <li class="os-l rv"><span class="os-n">04</span><div class="os-b"><h3>Company Brain</h3><p>What the business actually knows: documents, workflows, policies, customer context, and the judgment of the people who run it.</p></div></li>
-      <li class="os-l rv"><span class="os-n">05</span><div class="os-b"><h3>Evidence loop</h3><p>Every correction, outcome and expert review becomes signal, reviewed before it changes anything.</p></div></li>
-      <li class="os-l rv"><span class="os-n">06</span><div class="os-b"><h3>Governance</h3><p>Human-gated change, approval paths, guardrails and an audit trail the company controls.</p></div></li>
-      <li class="os-l rv"><span class="os-n">07</span><div class="os-b"><h3>Industry systems</h3><p>The AI your operators actually use, in telecom, mining, oil and gas, health, legal and government.</p></div><a class="os-go" href="/industries.html">Industries &rarr;</a></li>
-    </ol>
-    <p class="os-foot rv">Layers 01 to 03 are ours. That is the part almost no one else can offer.</p>
+    <ul class="os-stack rv">
+        <li class="os-pill os-own" style="--i:0">
+          <button class="os-head" type="button" aria-expanded="false">
+            <span class="os-n">01</span>
+            <span class="os-name">Sovereign compute</span>
+            <span class="os-plus" aria-hidden="true"></span>
+          </button>
+          <div class="os-panel"><div class="os-panel-in"><p>The machines themselves, running in your own country rather than a region on another continent.</p><a class="os-link" href="/infrastructure.html" tabindex="-1">Infrastructure &rarr;</a></div></div>
+        </li>
+        <li class="os-pill os-own" style="--i:1">
+          <button class="os-head" type="button" aria-expanded="false">
+            <span class="os-n">02</span>
+            <span class="os-name">Inference</span>
+            <span class="os-plus" aria-hidden="true"></span>
+          </button>
+          <div class="os-panel"><div class="os-panel-in"><p>Open-source models, optimized and quantized, served behind one OpenAI-compatible API.</p><a class="os-link" href="/inference.html" tabindex="-1">Inference &rarr;</a></div></div>
+        </li>
+        <li class="os-pill os-own" style="--i:2">
+          <button class="os-head" type="button" aria-expanded="false">
+            <span class="os-n">03</span>
+            <span class="os-name">Cloud</span>
+            <span class="os-plus" aria-hidden="true"></span>
+          </button>
+          <div class="os-panel"><div class="os-panel-in"><p>Apps, jobs, databases and storage on the same nodes as the models they call.</p><a class="os-link" href="/cloud.html" tabindex="-1">Cloud &rarr;</a></div></div>
+        </li>
+        <li class="os-pill" style="--i:3">
+          <button class="os-head" type="button" aria-expanded="false">
+            <span class="os-n">04</span>
+            <span class="os-name">Company Brain</span>
+            <span class="os-plus" aria-hidden="true"></span>
+          </button>
+          <div class="os-panel"><div class="os-panel-in"><p>What the business actually knows: documents, workflows, policies, customer context, and the judgment of the people who run it.</p></div></div>
+        </li>
+        <li class="os-pill" style="--i:4">
+          <button class="os-head" type="button" aria-expanded="false">
+            <span class="os-n">05</span>
+            <span class="os-name">Evidence loop</span>
+            <span class="os-plus" aria-hidden="true"></span>
+          </button>
+          <div class="os-panel"><div class="os-panel-in"><p>Every correction, outcome and expert review becomes signal, reviewed before it changes anything.</p></div></div>
+        </li>
+        <li class="os-pill" style="--i:5">
+          <button class="os-head" type="button" aria-expanded="false">
+            <span class="os-n">06</span>
+            <span class="os-name">Governance</span>
+            <span class="os-plus" aria-hidden="true"></span>
+          </button>
+          <div class="os-panel"><div class="os-panel-in"><p>Human-gated change, approval paths, guardrails and an audit trail the company controls.</p></div></div>
+        </li>
+        <li class="os-pill" style="--i:6">
+          <button class="os-head" type="button" aria-expanded="false">
+            <span class="os-n">07</span>
+            <span class="os-name">Industry systems</span>
+            <span class="os-plus" aria-hidden="true"></span>
+          </button>
+          <div class="os-panel"><div class="os-panel-in"><p>The AI your operators actually use, in telecom, mining, oil and gas, health, legal and government.</p><a class="os-link" href="/industries.html" tabindex="-1">Industries &rarr;</a></div></div>
+        </li>
+    </ul>
   </div>
 </div>
+
 
 
 <!-- TWO ENGINES -->

@@ -12,7 +12,7 @@
       '<div>' +
         '<p class="nl-eyebrow">Research &amp; Notes</p>' +
         '<h2 class="nl-title" id="nl-title">The latest from <em>Pareto Labs.</em></h2>' +
-        '<p class="nl-sub">Research notes, field lessons, and what we&rsquo;re learning as we deploy continuous-learning AI into the real economy. No noise — a few emails a quarter.</p>' +
+        '<p class="nl-sub">Research notes, field lessons, and what we&rsquo;re learning as we deploy continuous-learning AI into the real economy. No noise, a few emails a quarter.</p>' +
       '</div>' +
       '<div>' +
         '<form class="nl-form" novalidate>' +
