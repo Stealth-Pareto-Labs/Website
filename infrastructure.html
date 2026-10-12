@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Infrastructure — Pareto Labs</title>
-  <meta name="description" content="Sovereign AI inference and cloud for emerging markets. Open-source models and managed compute, served inside your own country instead of rented from a region on another continent.">
+  <title>Infrastructure · Pareto Labs</title>
+  <meta name="description" content="Sovereign inference and cloud. Open-source models and managed compute, served inside your own country instead of rented from a region on another continent.">
   <link rel="canonical" href="https://www.trypareto.ai/infrastructure.html">
   <meta name="theme-color" content="#F5F2EB">
   <link rel="icon" href="/assets/favicon.ico" sizes="any">
@@ -12,8 +12,8 @@
   <link rel="apple-touch-icon" href="/assets/favicon-180.png">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Pareto Labs">
-  <meta property="og:title" content="Infrastructure — The AI, and the machines it runs on">
-  <meta property="og:description" content="Sovereign AI inference and cloud for emerging markets. Open-source models and managed compute, served inside your own country.">
+  <meta property="og:title" content="Infrastructure · The AI, and the machines it runs on">
+  <meta property="og:description" content="Sovereign inference and cloud. Open-source models and managed compute, served inside your own country.">
   <meta property="og:url" content="https://www.trypareto.ai/infrastructure.html">
   <meta property="og:image" content="https://www.trypareto.ai/og/pareto-labs-v2.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,11 +39,17 @@
 </nav>
 
 <!-- HERO -->
-<header class="ih">
+<header class="ih ih-film">
+  <div class="ih-bg" aria-hidden="true">
+    <video class="ih-vid" autoplay muted loop playsinline poster="/assets/infra/hero.jpg">
+      <source src="/assets/infra/vid-hero.mp4" type="video/mp4">
+    </video>
+    <span class="ih-tint"></span>
+  </div>
   <div class="wrap">
     <p class="eyebrow rv">Infrastructure</p>
     <h1 class="rv" style="transition-delay:.05s">The AI, and the machines it <em>runs on.</em></h1>
-    <p class="lead rv" style="transition-delay:.1s">Pareto runs sovereign inference and cloud for emerging markets. Open-source models, optimized and served on infrastructure we operate &mdash; inside your own country, under your own law. Anyone can use it: one developer with an API key, a startup, a team, a ministry.</p>
+    <p class="lead rv" style="transition-delay:.1s">Pareto builds sovereign infrastructure and AI. Open-source models, optimized and served on infrastructure we operate, inside your own country and under your own law. Anyone can build on it: a developer with an API key, a startup, a company running critical operations, a government.</p>
     <div class="actions rv" style="transition-delay:.15s">
       <a class="btn btn-cream btn-arr" href="/#partner">Get access</a>
       <a class="btn btn-wire" href="#engines">See both engines</a>
@@ -69,7 +75,7 @@
     <div class="cap-list">
       <div class="cap-item rv"><span class="cap-n">01</span><h3 class="cap-h">The model is no longer the <em>moat</em></h3><p class="cap-p">Open-source weights are a commodity input. Value moves to whoever tunes them to a domain, serves them fast, and keeps them running cheaply.</p></div>
       <div class="cap-item rv"><span class="cap-n">02</span><h3 class="cap-h">Inference is the <em>recurring</em> cost</h3><p class="cap-p">Training happens once. Inference happens on every request, every day, forever. That is where the spend concentrates, and where it compounds.</p></div>
-      <div class="cap-item rv"><span class="cap-n">03</span><h3 class="cap-h">Emerging markets rent all of it</h3><p class="cap-p">Teams across Africa, Latin America, South and Southeast Asia build on compute they do not own, in regions they cannot reach, billed in a currency they do not earn.</p></div>
+      <div class="cap-item rv"><span class="cap-n">03</span><h3 class="cap-h">Most of the world <em>rents</em> all of it</h3><p class="cap-p">Teams across Africa, Latin America, South and Southeast Asia build on compute they do not own, in regions they cannot reach, billed in a currency they do not earn.</p></div>
       <div class="cap-item rv"><span class="cap-n">04</span><h3 class="cap-h">Data has a <em>jurisdiction</em></h3><p class="cap-p">Where a workload runs decides whose law reaches it. For a hospital, a bank or a ministry that is not a preference. It is the requirement.</p></div>
     </div>
   </div>
@@ -86,7 +92,9 @@
 
     <div class="isplit">
       <a class="icard2 rv" href="/inference.html">
-        <div class="n">01 &mdash; Inference</div>
+        <div class="icard2-film" aria-hidden="true"><video autoplay muted loop playsinline poster="/assets/infra/inference.jpg"><source src="/assets/infra/vid-inference.mp4" type="video/mp4"></video></div>
+        <div class="icard2-body">
+        <div class="n">01 / Inference</div>
         <h3>Open models, <em>served.</em></h3>
         <p>Open-source models, optimized and quantized, behind an OpenAI-compatible API. Point your existing client at a different base URL and keep your code.</p>
         <div class="rule" aria-hidden="true"></div>
@@ -97,10 +105,13 @@
           <li>Retrieval over your own documents</li>
         </ul>
         <span class="go">Explore inference &rarr;</span>
+        </div>
       </a>
 
       <a class="icard2 rv" href="/cloud.html" style="transition-delay:.06s">
-        <div class="n">02 &mdash; Cloud</div>
+        <div class="icard2-film" aria-hidden="true"><video autoplay muted loop playsinline poster="/assets/infra/cloud.jpg"><source src="/assets/infra/vid-cloud.mp4" type="video/mp4"></video></div>
+        <div class="icard2-body">
+        <div class="n">02 / Cloud</div>
         <h3>Everything <em>around</em> the model.</h3>
         <p>Apps, jobs, databases and storage on the same nodes as the models, so your retrieval and your inference are not an ocean apart.</p>
         <div class="rule" aria-hidden="true"></div>
@@ -111,6 +122,7 @@
           <li>Logs, metrics, traces and alerts per project</li>
         </ul>
         <span class="go">Explore cloud &rarr;</span>
+        </div>
       </a>
     </div>
   </div>

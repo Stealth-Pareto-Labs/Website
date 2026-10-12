@@ -35,6 +35,21 @@ FOOTER_MUST_HAVE = ['/infrastructure.html', '/inference.html', '/cloud.html']
 # Standalone pages that deliberately carry no site nav or footer.
 NO_CHROME = {'research/the-learning-layer/index.html'}
 
+# Em dashes are banned in body copy on the marketing and product pages. The two
+# research essays and the legal pages are long-form authored prose where the dash
+# is a legitimate choice, so they are exempt until the owner says otherwise.
+DASH_EXEMPT = {'research/diffusing-ai-into-the-real-economy.html',
+               'research/the-learning-layer/index.html',
+               'privacy.html', 'terms.html', 'private-equity.html'}
+
+# Gold is retired everywhere except the industry sensor showcase, whose markers
+# were not part of the redesign.
+GOLD_OK_FILES = {'assets/sensors.css'}
+
+# Selectors allowed to keep gold: the animated comet/orbit illustration on
+# industries.html and the sensor markers. Both are illustration, not UI.
+GOLD_OK_SELECTORS = ('loop-', 'comet', 'orbit', 'pulse-ring', 'sx-')
+
 # Models the catalogue marks blocked, or whose licence forbids commercial use.
 # Advertising these is a factual error and, for NLLB, a licence exposure.
 BLOCKED_MODELS = ['NLLB', 'LLaVA']
@@ -154,6 +169,39 @@ def check_api_host(path, live):
             fail(path, 'API base URL on a host Pareto may not control: %s' % host)
 
 
+def check_dashes(path, src):
+    if path in DASH_EXEMPT:
+        return
+    src = re.sub(r'<!--.*?-->', '', src, flags=re.S)   # code comments are not copy
+    n = src.count('—') + src.count('&mdash;')
+    if n:
+        m = re.search(r'.{45}(?:—|&mdash;).{45}', src, re.S)
+        fail(path, '%d em dash%s in copy, e.g. ...%s...'
+             % (n, '' if n == 1 else 'es',
+                (m.group(0).replace(chr(10), chr(32)) if m else '')))
+
+
+def check_gold(path, text):
+    if path in GOLD_OK_FILES:
+        return
+    live = re.sub(r'/\*.*?\*/', '', text, flags=re.S)
+    live = re.sub(r'<!--.*?-->', '', live, flags=re.S)
+    # walk back from each hit to the selector that owns it, so multi-line
+    # rules are judged by their selector and not by the line of the hit
+    bad = []
+    for m in re.finditer(r'var\(--(?:gold|sig)\)', live):
+        head = live[:m.start()]
+        brace = head.rfind('{')
+        sel = head[head.rfind('}', 0, brace) + 1:brace] if brace > 0 else ''
+        sel = sel.replace(chr(10), ' ').strip()[-90:]
+        if not any(tok in sel for tok in GOLD_OK_SELECTORS):
+            bad.append(sel or m.group(0))
+    n = len(bad)
+    if n:
+        fail(path, '%d gold reference%s left; use --ac / --ac-d: %s'
+             % (n, '' if n == 1 else 's', bad[0].strip()[:70]))
+
+
 def check_editorial(path, live):
     text = re.sub(r'<(script|style)[^>]*>.*?</\1>', '', live, flags=re.S | re.I)
     for pattern, why in FORBIDDEN:
@@ -178,6 +226,8 @@ def main():
         src = open(path, encoding='utf-8').read()
         live = strip_comments(src)
         check_balance(path, src)
+        check_dashes(path, src)
+        check_gold(path, src)
         check_assets(path, live)
         check_retired(path, live)
         check_nav(path, live)
@@ -188,6 +238,11 @@ def main():
         if path in NEW_PAGES or path == 'index.html':
             check_models(path, live)
             check_api_host(path, live)
+
+    # stylesheets carry colour too
+    for css in ('assets/site.css', 'assets/infra.css', 'assets/newsletter.css'):
+        checked['checks'] += 1
+        check_gold(css, open(css, encoding='utf-8').read())
 
     # the modal every CTA opens is shared markup in JS, not in any page
     checked['checks'] += 1

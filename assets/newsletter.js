@@ -34,15 +34,32 @@
     var band = holder.firstChild;
     footer.parentNode.insertBefore(band, footer);
 
-    // AI-native end-cap: giant glowing gradient "Pareto Labs", revealed on scroll
+    // End-cap: the wordmark, flat and quiet. Hovering lifts the letters away in a
+    // staggered wave and raises the stack we actually own into their place.
+    var LAYERS = ['Silicon', 'Inference', 'Cloud', 'Knowledge', 'Governance', 'Workflow'];
+    var WORD = 'Pareto Labs';
+
+    var letters = '';
+    for (var i = 0; i < WORD.length; i++) {
+      var ch = WORD.charAt(i);
+      letters += '<span class="plw-l" style="--i:' + i + '">' +
+                 (ch === ' ' ? '&nbsp;' : ch) + '</span>';
+    }
+
     var cap = document.createElement('section');
     cap.className = 'plw';
-    cap.setAttribute('aria-label', 'Pareto Labs');
+    cap.setAttribute('aria-label', 'Pareto Labs. Silicon, inference, cloud, knowledge, governance, workflow.');
     cap.innerHTML =
-      '<div class="plw-glow" aria-hidden="true"></div>' +
       '<div class="plw-stage">' +
-        '<span class="plw-eyebrow">Continuous-learning AI</span>' +
-        '<h2 class="plw-word">Pareto&nbsp;Labs</h2>' +
+        '<span class="plw-eyebrow">Sovereign infrastructure and AI</span>' +
+        '<div class="plw-swap" aria-hidden="true">' +
+          '<div class="plw-word">' + letters + '</div>' +
+          '<div class="plw-layers">' +
+            LAYERS.map(function (l, n) {
+              return '<span style="--i:' + n + '">' + l + '</span>';
+            }).join('') +
+          '</div>' +
+        '</div>' +
         '<span class="plw-tag">Diffusing AI into the real economy</span>' +
       '</div>';
     footer.parentNode.insertBefore(cap, footer);

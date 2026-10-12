@@ -28,11 +28,20 @@
           mask-image: radial-gradient(ellipse 80% 60% at 70% 0%, #000 0%, transparent 72%);
   opacity: 0.6;
 }
-.ih > .wrap { position: relative; z-index: 1; }
+.ih > .wrap { position: relative; z-index: 2; }
+
+/* hero with footage behind it */
+.ih-film::before { display: none; }
+.ih-bg { position: absolute; inset: 0; overflow: hidden; }
+.ih-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  filter: saturate(0.78) contrast(1.04); }
+.ih-tint { position: absolute; inset: 0; display: block; background:
+  linear-gradient(180deg, rgba(8,12,24,0.52) 0%, rgba(8,12,24,0.70) 46%, rgba(8,12,24,0.94) 100%),
+  linear-gradient(90deg, rgba(8,12,24,0.80) 0%, rgba(8,12,24,0.46) 52%, rgba(8,12,24,0.22) 100%); }
 .ih .eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.16em;
-  text-transform: uppercase; color: var(--sig); margin-bottom: 26px;
+  text-transform: uppercase; color: var(--ac-d); margin-bottom: 26px;
   display: flex; align-items: center; gap: 13px; }
-.ih .eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--sig); }
+.ih .eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--ac-d); opacity: 0.6; }
 .ih h1 { font-family: var(--serif); font-weight: 400;
   font-size: clamp(38px, 5.6vw, 76px); line-height: 1.05; letter-spacing: -0.03em;
   max-width: 17ch; margin-bottom: 26px; }
@@ -49,25 +58,32 @@
 /* ── the two-engine split (hub) ──────────────────── */
 .isplit { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2vw, 24px);
   margin-top: 52px; }
-.icard2 { position: relative; display: flex; flex-direction: column;
-  border: 1px solid var(--wl); background: var(--w); padding: clamp(28px, 3.4vw, 44px);
+.icard2 { position: relative; display: flex; flex-direction: column; overflow: hidden;
+  border: 1px solid var(--wl); background: var(--w);
   transition: border-color .25s ease, transform .25s ease, background .25s ease; }
+.icard2-film { position: relative; aspect-ratio: 16 / 9; overflow: hidden;
+  background: var(--d); border-bottom: 1px solid var(--wl); }
+.icard2-film video { width: 100%; height: 100%; object-fit: cover; display: block;
+  filter: saturate(0.74) contrast(1.05); transition: transform .9s cubic-bezier(.22,.61,.36,1); }
+.icard2:hover .icard2-film video { transform: scale(1.035); }
+.icard2-body { display: flex; flex-direction: column; flex: 1;
+  padding: clamp(26px, 3vw, 40px); }
 .icard2:hover { border-color: var(--wi3); transform: translateY(-2px); background: var(--w2); }
-.icard2:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
-.icard2 .n { font-size: 10px; font-weight: 500; letter-spacing: 0.16em;
-  text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
-.icard2 h3 { font-family: var(--serif); font-size: clamp(25px, 2.7vw, 34px);
+.icard2:focus-visible { outline: 2px solid var(--ac); outline-offset: 3px; }
+.icard2-body .n { font-size: 10px; font-weight: 500; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--ac); margin-bottom: 20px; }
+.icard2-body h3 { font-family: var(--serif); font-size: clamp(25px, 2.7vw, 34px);
   font-weight: 400; letter-spacing: -0.02em; margin-bottom: 14px; }
 .icard2 h3 em { font-style: italic; font-weight: 300; }
-.icard2 p { font-size: 14.5px; font-weight: 300; line-height: 1.7; opacity: 0.72;
+.icard2-body p { font-size: 14.5px; font-weight: 300; line-height: 1.7; opacity: 0.72;
   margin-bottom: 22px; }
-.icard2 .rule { height: 1px; background: var(--wl); margin: 0 0 22px; }
-.icard2 ul { list-style: none; margin-bottom: 26px; }
-.icard2 li { font-size: 13.5px; font-weight: 300; padding: 9px 0;
+.icard2-body .rule { height: 1px; background: var(--wl); margin: 0 0 22px; }
+.icard2-body ul { list-style: none; margin-bottom: 26px; }
+.icard2-body li { font-size: 13.5px; font-weight: 300; padding: 9px 0;
   border-top: 1px solid var(--wl2); display: flex; align-items: baseline; gap: 11px; }
-.icard2 li::before { content: ''; width: 4px; height: 4px; border-radius: 50%;
-  background: var(--sig); flex-shrink: 0; transform: translateY(-2px); }
-.icard2 .go { margin-top: auto; font-size: 13px; font-weight: 400; color: var(--gold); }
+.icard2-body li::before { content: ''; width: 4px; height: 4px; border-radius: 50%;
+  background: var(--ac); flex-shrink: 0; transform: translateY(-2px); }
+.icard2-body .go { margin-top: auto; font-size: 13px; font-weight: 400; color: var(--ac); }
 
 /* ── model catalogue ─────────────────────────────── */
 .mgroup { margin-top: 46px; }
@@ -94,9 +110,9 @@
 .lrow { display: grid; grid-template-columns: 94px 1fr 92px; align-items: center;
   gap: 18px; padding: 11px 0; border-top: 1px solid var(--dl); }
 .lrow:last-child { border-bottom: 1px solid var(--dl); }
-.lrow .lp { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--sig); }
+.lrow .lp { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--ac-d); }
 .lbar { height: 10px; background: rgba(238,233,224,0.13); position: relative; }
-.lbar span { position: absolute; inset: 0 auto 0 0; background: var(--sig); opacity: 0.55; }
+.lbar span { position: absolute; inset: 0 auto 0 0; background: var(--ac-d); opacity: 0.7; }
 .lrow:first-of-type .lbar span { opacity: 0.85; }
 .lrow .lw { font-size: 12.5px; font-weight: 300; text-align: right;
   font-variant-numeric: tabular-nums; opacity: 0.72; }
@@ -109,7 +125,7 @@
 .codewrap pre { margin: 0; padding: 22px 18px 24px; overflow-x: auto;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 13px; line-height: 1.75; color: rgba(238,233,224,0.88); }
-.codewrap .c-key { color: var(--sig); }
+.codewrap .c-key { color: var(--ac-d); }
 .codewrap .c-com { opacity: 0.45; }
 
 /* ── capability groups (cloud) ───────────────────── */
@@ -118,7 +134,7 @@
 .fgroup-h h3 { font-family: var(--serif); font-size: 23px; font-weight: 400;
   letter-spacing: -0.02em; }
 .fgroup-h .fn { font-size: 10px; font-weight: 500; letter-spacing: 0.14em;
-  color: var(--gold); }
+  color: var(--ac); }
 .fitems { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px 30px; }
 .fitem { padding: 13px 0; border-top: 1px solid var(--wl2); }
 .fitem b { display: block; font-size: 14px; font-weight: 400; margin-bottom: 3px; }
@@ -145,6 +161,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .icard2 { transition: none; }
+  .icard2, .icard2-film video { transition: none; }
   .icard2:hover { transform: none; }
+  .icard2:hover .icard2-film video { transform: none; }
 }
