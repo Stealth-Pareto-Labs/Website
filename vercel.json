@@ -2,5 +2,10 @@
   "rewrites": [
     { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/terms", "destination": "/terms.html" }
+  ],
+  "redirects": [
+    { "source": "/industries/consumer-brands-retail.html", "destination": "/industries.html", "permanent": false },
+    { "source": "/industries/healthcare.html", "destination": "/industries.html", "permanent": false },
+    { "source": "/industries/legal.html", "destination": "/industries.html", "permanent": false }
   ]
 }

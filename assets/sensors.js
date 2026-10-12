@@ -39,46 +39,46 @@ const FAMILY = {
             body:'DIN-rail enclosure, 16 terminals, dual antenna', glb:null },
 };
 
-/* ---------- per-industry scoping ---------- */
+/* ---------- per-industry scoping ----------
+   Each industry shows ONLY the instruments it actually runs, plus Edge,
+   which always closes the family. Keep these lists tight: if every
+   industry lists every sensor the rail stops saying anything.
+   `feeds` must match that page's numbered "Where AI helps" cap-list.   */
 const INDUSTRY = {
   'oil-gas': {
-    asset:'compressor, pump', assetSig:'vibration, pressure, temp',
-    action:'Work order', actionSub:'crew dispatched',
-    tags:'PF-608 · PP-4730 · PV-100',
     list:[
       {k:'flow',   measures:'Production fluid and fuel-gas mass flow', mounts:'Separator outlet, fuel-gas skid, LACT unit', feeds:'02 Production accounting'},
       {k:'pulse',  measures:'Wellhead, pipeline and compressor pressure', mounts:'Wellhead, pipeline, compressor discharge', feeds:'01 Asset reliability'},
       {k:'level',  measures:'Separator and storage-tank level', mounts:'Separator, stock tank, produced-water tank', feeds:'02 Production accounting'},
-      {k:'therm',  measures:'Compressor and pump bearing, exhaust temperature', mounts:'Bearing housing, exhaust stack', feeds:'01 Asset reliability'},
       {k:'vibra',  measures:'Pump and compressor vibration signature', mounts:'Bearing cap, motor frame, skid rail', feeds:'01 Asset reliability'},
-      {k:'torque', measures:'Shaft power and torque on rotating equipment', mounts:'Inline on the drive shaft', feeds:'01 Asset reliability'},
       {k:'edge',   measures:'Field DAQ aggregating the array', mounts:'Skid panel or field junction box', feeds:'Ties the family to the platform'},
     ],
   },
   'telecom': {
-    asset:'generator, rectifier plant', assetSig:'power, temp, vibration',
-    action:'Field dispatch', actionSub:'tech rolled with the part',
-    tags:'PP-4730 · PT-4831 · PV-100',
     list:[
-      {k:'pulse',  measures:'Rectifier and battery-plant line pressure and power', mounts:'Power plant, rectifier shelf', feeds:'02 Outage deflection'},
       {k:'therm',  measures:'Equipment-shelter and cabinet temperature', mounts:'Shelter wall, cabinet interior, battery string', feeds:'02 Outage deflection'},
+      {k:'pulse',  measures:'Rectifier and battery-plant line pressure', mounts:'Power plant, rectifier shelf', feeds:'02 Outage deflection'},
       {k:'vibra',  measures:'Tower, mast and generator vibration', mounts:'Mast leg, generator frame', feeds:'04 Field dispatch'},
-      {k:'flow',   measures:'Backup-generator fuel flow', mounts:'Generator fuel line', feeds:'04 Field dispatch'},
-      {k:'level',  measures:'Generator fuel-tank level', mounts:'Day tank, bulk fuel tank', feeds:'04 Field dispatch'},
+      {k:'level',  measures:'Backup-generator fuel-tank level', mounts:'Day tank, bulk fuel tank', feeds:'04 Field dispatch'},
       {k:'edge',   measures:'Site DAQ aggregating the array', mounts:'Shelter DIN rail', feeds:'Ties the family to the platform'},
     ],
   },
   'manufacturing': {
-    asset:'spindle, motor, line', assetSig:'vibration, temp, torque',
-    action:'Maintenance window', actionSub:'scheduled inside the gap',
-    tags:'PV-100 · PT-4831 · PQ-200',
     list:[
       {k:'vibra',  measures:'Motor, spindle and line vibration', mounts:'Motor frame, spindle housing, gearbox', feeds:'03 Predictive maintenance'},
       {k:'therm',  measures:'Bearing, motor and process-oven temperature', mounts:'Bearing housing, oven wall, motor winding', feeds:'03 Predictive maintenance'},
-      {k:'pulse',  measures:'Hydraulic and pneumatic line pressure', mounts:'Hydraulic manifold, pneumatic header', feeds:'02 Quality and defects'},
-      {k:'flow',   measures:'Process-fluid and coolant flow', mounts:'Coolant loop, process feed line', feeds:'02 Quality and defects'},
       {k:'torque', measures:'Drive-shaft and conveyor torque', mounts:'Inline on the drive shaft', feeds:'03 Predictive maintenance'},
+      {k:'pulse',  measures:'Hydraulic and pneumatic line pressure', mounts:'Hydraulic manifold, pneumatic header', feeds:'02 Quality and defects'},
       {k:'edge',   measures:'Plant-floor DAQ aggregating the array', mounts:'Control-panel DIN rail', feeds:'Ties the family to the platform'},
+    ],
+  },
+  'mining': {
+    list:[
+      {k:'vibra',  measures:'Mill, crusher and conveyor-idler vibration', mounts:'Mill trunnion bearing, crusher frame, idler roller', feeds:'01 Asset reliability'},
+      {k:'torque', measures:'Mill pinion and conveyor drive torque', mounts:'Inline on the mill pinion and conveyor drive', feeds:'01 Asset reliability'},
+      {k:'level',  measures:'Fine-ore bin, stockpile and thickener level', mounts:'Fine-ore bin, surge pile, thickener tank', feeds:'04 Metallurgical accounting'},
+      {k:'flow',   measures:'Slurry and reagent mass flow', mounts:'Cyclone feed, reagent dosing line, tailings line', feeds:'02 Grade and recovery'},
+      {k:'edge',   measures:'Plant and pit DAQ aggregating the array', mounts:'MCC panel DIN rail or pit junction box', feeds:'Ties the family to the platform'},
     ],
   },
 };

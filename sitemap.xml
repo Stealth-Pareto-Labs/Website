@@ -45,21 +45,25 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- TEMPORARILY HIDDEN (consumer-brands-retail)
   <url>
     <loc>https://www.trypareto.ai/industries/consumer-brands-retail.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  -->
   <url>
     <loc>https://www.trypareto.ai/industries/business-services.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- TEMPORARILY HIDDEN (healthcare)
   <url>
     <loc>https://www.trypareto.ai/industries/healthcare.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  -->
   <url>
     <loc>https://www.trypareto.ai/industries/logistics.html</loc>
     <changefreq>monthly</changefreq>
@@ -76,10 +80,17 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.trypareto.ai/industries/mining.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- TEMPORARILY HIDDEN (legal)
+  <url>
     <loc>https://www.trypareto.ai/industries/legal.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  -->
   <url>
     <loc>https://www.trypareto.ai/industries/government.html</loc>
     <changefreq>monthly</changefreq>

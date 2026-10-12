@@ -313,9 +313,9 @@ h1 em,h2 em,h3 em,.stmt em{font-style:italic;font-weight:300;color:inherit}
 .icard-dark:hover .icard-cta{color:var(--di)}
 .icard-dark .icard-cta{transition:color .25s ease}
 /* with nine industries the grid fills exactly, so the CTA closes the row full-width */
-.igrid .icard-dark{grid-column:1/-1;aspect-ratio:auto;min-height:clamp(190px,17vw,250px)}
+.igrid .icard-dark{grid-column:span 2;aspect-ratio:auto;min-height:clamp(190px,17vw,250px)}
 .igrid .icard-dark p{max-width:44ch}
-@media (max-width:1023px){.igrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:1023px){.igrid{grid-template-columns:repeat(2,1fr)}.igrid .icard-dark{grid-column:span 1}}
 @media (max-width:600px){
   .igrid{grid-template-columns:1fr}
   .icard{aspect-ratio:4/4.6}
@@ -612,7 +612,9 @@ html:not(.anim) .pulse-ring{display:none}
           </div>
         </a>
 
-        <a class="icard reveal" href="/industries/consumer-brands-retail.html" style="--rd:.06s">
+        <!-- TEMPORARILY HIDDEN (consumer-brands-retail) — restore by removing this comment wrapper;
+     renumber .icard-num across the grid afterwards.
+<a class="icard reveal" href="/industries/consumer-brands-retail.html" style="--rd:.06s">
           <div class="icard-media" style="background-image:url(/assets/industries/retail.jpg)" role="img" aria-label="Retail store operations"></div>
           <div class="icard-scrim" aria-hidden="true"></div>
           <div class="icard-body">
@@ -626,12 +628,13 @@ html:not(.anim) .pulse-ring{display:none}
             </div></div>
           </div>
         </a>
+-->
 
-        <a class="icard reveal" href="/industries/business-services.html" style="--rd:.12s">
+        <a class="icard reveal" href="/industries/business-services.html" style="--rd:.06s">
           <div class="icard-media" style="background-image:url(/assets/industries/business.jpg)" role="img" aria-label="Business services team"></div>
           <div class="icard-scrim" aria-hidden="true"></div>
           <div class="icard-body">
-            <span class="icard-num">03</span>
+            <span class="icard-num">02</span>
             <h3>Business Services</h3>
             <p class="icard-promise">AI that drafts, reconciles, and resolves, so billable hours stay billable.</p>
             <div class="icard-more"><div class="icard-more-in">
@@ -642,7 +645,9 @@ html:not(.anim) .pulse-ring{display:none}
           </div>
         </a>
 
-        <a class="icard reveal" href="/industries/healthcare.html">
+        <!-- TEMPORARILY HIDDEN (healthcare) — restore by removing this comment wrapper;
+     renumber .icard-num across the grid afterwards.
+<a class="icard reveal" href="/industries/healthcare.html">
           <div class="icard-media" style="background-image:url(/assets/industries/healthcare.jpg)" role="img" aria-label="Healthcare administration"></div>
           <div class="icard-scrim" aria-hidden="true"></div>
           <div class="icard-body">
@@ -656,12 +661,13 @@ html:not(.anim) .pulse-ring{display:none}
             </div></div>
           </div>
         </a>
+-->
 
-        <a class="icard reveal" href="/industries/logistics.html" style="--rd:.06s">
+        <a class="icard reveal" href="/industries/logistics.html" style="--rd:.12s">
           <div class="icard-media" style="background-image:url(/assets/industries/logistics.jpg)" role="img" aria-label="Fleet and logistics"></div>
           <div class="icard-scrim" aria-hidden="true"></div>
           <div class="icard-body">
-            <span class="icard-num">05</span>
+            <span class="icard-num">03</span>
             <h3>Logistics &amp; Transportation</h3>
             <p class="icard-promise">AI that quotes, routes, and dispatches at the pace of the dock.</p>
             <div class="icard-more"><div class="icard-more-in">
@@ -672,11 +678,11 @@ html:not(.anim) .pulse-ring{display:none}
           </div>
         </a>
 
-        <a class="icard reveal" href="/industries/telecom.html" style="--rd:.12s">
+        <a class="icard reveal" href="/industries/telecom.html">
           <div class="icard-media" style="background-image:url(/assets/industries/telecom.jpg)" role="img" aria-label="Telecom network operations"></div>
           <div class="icard-scrim" aria-hidden="true"></div>
           <div class="icard-body">
-            <span class="icard-num">06</span>
+            <span class="icard-num">04</span>
             <h3>Telecom</h3>
             <p class="icard-promise">AI that watches the network, deflects the ticket, and saves the subscriber.</p>
             <div class="icard-more"><div class="icard-more-in">
@@ -687,11 +693,11 @@ html:not(.anim) .pulse-ring{display:none}
           </div>
         </a>
 
-        <a class="icard reveal" href="/industries/oil-gas.html">
+        <a class="icard reveal" href="/industries/oil-gas.html" style="--rd:.06s">
           <div class="icard-media" style="background-image:url(/assets/industries/oilgas.jpg)" role="img" aria-label="Oil and gas facility"></div>
           <div class="icard-scrim" aria-hidden="true"></div>
           <div class="icard-body">
-            <span class="icard-num">07</span>
+            <span class="icard-num">05</span>
             <h3>Oil &amp; Gas</h3>
             <p class="icard-promise">AI that hears every asset, files every report, and keeps the field moving.</p>
             <div class="icard-more"><div class="icard-more-in">
@@ -702,7 +708,25 @@ html:not(.anim) .pulse-ring{display:none}
           </div>
         </a>
 
-        <a class="icard reveal" href="/industries/legal.html">
+        <a class="icard reveal" href="/industries/mining.html" style="--rd:.12s">
+          <div class="icard-media" style="background-image:url(/assets/industries/mining.jpg)" role="img" aria-label="Mining operations"></div>
+          <div class="icard-scrim" aria-hidden="true"></div>
+          <div class="icard-body">
+            <span class="icard-num">06</span>
+            <h3>Mining</h3>
+            <p class="icard-promise">AI that hears the mill, moves the fleet, and accounts for every tonne.</p>
+            <div class="icard-more"><div class="icard-more-in">
+              <div class="chips"><span>Asset reliability</span><span>Grade and recovery</span><span>Haulage</span><span>HSE</span><span>Maintenance</span></div>
+              <p class="icard-uses">Failure prediction on mills and crushers. Grade and recovery tuned shift by shift.</p>
+              <span class="icard-cta">Explore &rarr;</span>
+            </div></div>
+          </div>
+        </a>
+
+
+        <!-- TEMPORARILY HIDDEN (legal) — restore by removing this comment wrapper;
+     renumber .icard-num across the grid afterwards.
+<a class="icard reveal" href="/industries/legal.html">
           <div class="icard-media" style="background-image:url(/assets/industries/legal.jpg)" role="img" aria-label="Legal operations"></div>
           <div class="icard-scrim" aria-hidden="true"></div>
           <div class="icard-body">
@@ -716,12 +740,13 @@ html:not(.anim) .pulse-ring{display:none}
             </div></div>
           </div>
         </a>
+-->
 
-        <a class="icard reveal" href="/industries/government.html" style="--rd:.06s">
+        <a class="icard reveal" href="/industries/government.html">
           <div class="icard-media" style="background-image:url(/assets/industries/government.jpg)" role="img" aria-label="Government service operations"></div>
           <div class="icard-scrim" aria-hidden="true"></div>
           <div class="icard-body">
-            <span class="icard-num">09</span>
+            <span class="icard-num">07</span>
             <h3>Government</h3>
             <p class="icard-promise">AI that serves the public, and stays under your control.</p>
             <div class="icard-more"><div class="icard-more-in">
@@ -735,7 +760,7 @@ html:not(.anim) .pulse-ring{display:none}
         <a class="icard icard-dark reveal" href="mailto:contact@trypareto.ai" style="--rd:.06s">
           <div class="icard-body">
             <div class="icard-dark-rule" aria-hidden="true"></div>
-            <span class="icard-num">10</span>
+            <span class="icard-num">08</span>
             <h3>Your industry</h3>
             <p>These are where we publish, not where we stop. Tell us what your operation runs on.</p>
             <span class="icard-cta">Start the conversation &rarr;</span>
