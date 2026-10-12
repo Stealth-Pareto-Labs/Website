@@ -34,9 +34,11 @@
     var band = holder.firstChild;
     footer.parentNode.insertBefore(band, footer);
 
-    // End-cap: the wordmark, flat and quiet. Hovering lifts the letters away in a
-    // staggered wave and raises the stack we actually own into their place.
-    var LAYERS = ['Silicon', 'Inference', 'Cloud', 'Knowledge', 'Governance', 'Workflow'];
+    // End-cap: a quiet ghost wordmark, in the manner of legalpareto.com. Moving
+    // the pointer across it writes letters wherever the cursor goes; each one
+    // lands, holds for a beat and fades. The word spells itself out under your
+    // hand instead of being animated at you.
+    var TRAIL = 'PARETOLABS';
     var WORD = 'Pareto Labs';
 
     var letters = '';
@@ -48,21 +50,61 @@
 
     var cap = document.createElement('section');
     cap.className = 'plw';
-    cap.setAttribute('aria-label', 'Pareto Labs. Silicon, inference, cloud, knowledge, governance, workflow.');
+    cap.setAttribute('aria-label', 'Pareto Labs');
     cap.innerHTML =
       '<div class="plw-stage">' +
         '<span class="plw-eyebrow">Sovereign infrastructure and AI</span>' +
-        '<div class="plw-swap" aria-hidden="true">' +
-          '<div class="plw-word">' + letters + '</div>' +
-          '<div class="plw-layers">' +
-            LAYERS.map(function (l, n) {
-              return '<span style="--i:' + n + '">' + l + '</span>';
-            }).join('') +
-          '</div>' +
-        '</div>' +
+        '<div class="plw-word" aria-hidden="true">' + letters + '</div>' +
         '<span class="plw-tag">Diffusing AI into the real economy</span>' +
-      '</div>';
+      '</div>' +
+      '<div class="plw-ink" aria-hidden="true"></div>';
     footer.parentNode.insertBefore(cap, footer);
+
+    // --- letters that follow the cursor -------------------------------------
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (!window.matchMedia('(hover: hover)').matches) return;
+
+      var ink = cap.querySelector('.plw-ink');
+      var n = 0, lastX = null, lastY = null, queued = null;
+      var GAP = 46;        // px of travel between letters, so it writes rather than smears
+      var LIFE = 1500;     // ms before a letter is gone
+
+      function drop(x, y) {
+        var el = document.createElement('span');
+        el.className = 'plw-c';
+        el.textContent = TRAIL.charAt(n % TRAIL.length);
+        n++;
+        // a little scatter so a straight sweep does not read as a ruler
+        el.style.left = x + 'px';
+        el.style.top = y + 'px';
+        el.style.setProperty('--r', (Math.random() * 16 - 8).toFixed(2) + 'deg');
+        el.style.setProperty('--dx', (Math.random() * 14 - 7).toFixed(1) + 'px');
+        ink.appendChild(el);
+        // next frame, so the entry transition actually runs
+        requestAnimationFrame(function () { el.classList.add('on'); });
+        setTimeout(function () { el.classList.add('off'); }, LIFE * 0.45);
+        setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, LIFE);
+      }
+
+      cap.addEventListener('pointermove', function (e) {
+        if (e.pointerType === 'touch') return;
+        if (queued) return;
+        queued = requestAnimationFrame(function () {
+          queued = null;
+          var r = cap.getBoundingClientRect();
+          var x = e.clientX - r.left, y = e.clientY - r.top;
+          if (lastX !== null) {
+            var dx = x - lastX, dy = y - lastY;
+            if (dx * dx + dy * dy < GAP * GAP) return;
+          }
+          lastX = x; lastY = y;
+          drop(x, y);
+        });
+      });
+
+      cap.addEventListener('pointerleave', function () { lastX = lastY = null; });
+    })();
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
       cap.classList.add('in');

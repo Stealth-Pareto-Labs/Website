@@ -245,62 +245,88 @@
   .foot-links a:hover { color: var(--wi); }
   .foot-copy { font-size: 12px; font-weight: 300; color: var(--wi3); }
 
-  /* ── PARETO OS: glass layers over the machines ───── */
-  .os-sec { position: relative; overflow: hidden; padding: clamp(96px,12vw,150px) 0;
-            background: var(--d); color: var(--di); border-top: none; }
-  .os-bg { position: absolute; inset: 0; }
-  .os-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-            filter: saturate(.7) contrast(1.05); }
-  .os-veil { position: absolute; inset: 0; display: block; background:
-    linear-gradient(180deg, rgba(8,12,24,.86) 0%, rgba(8,12,24,.74) 42%, rgba(8,12,24,.9) 100%); }
-  .os-inner { position: relative; z-index: 1; }
-  .os-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase;
-                color: var(--sig); margin-bottom: 20px; }
-  .os-title { font-family: var(--serif); font-weight: 400; font-size: clamp(34px,4.6vw,62px);
-              line-height: 1.06; letter-spacing: -.03em; margin-bottom: 18px; }
-  .os-title em { font-style: italic; font-weight: 300; color: var(--sig); }
-  .os-sub { font-size: 15px; font-weight: 300; line-height: 1.72; max-width: 62ch;
-            color: rgba(238,233,224,.74); margin-bottom: clamp(44px,5vw,64px); }
+  /* ── PARETO OS: a pinned stack that assembles as you scroll ─── */
+  .osx { position: relative; height: 560vh; background: var(--d); }
+  .osx-pin { position: sticky; top: 0; height: 100vh; overflow: hidden;
+             display: flex; align-items: center; color: var(--di); }
+  .osx-bg { position: absolute; inset: 0; }
+  .osx-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+             filter: saturate(.62) contrast(1.06); }
+  .osx-veil { position: absolute; inset: 0; display: block; background:
+    linear-gradient(90deg, rgba(8,12,24,.95) 0%, rgba(8,12,24,.86) 46%, rgba(8,12,24,.62) 100%); }
+  .osx-inner { position: relative; z-index: 1; width: 100%;
+    display: grid; grid-template-columns: minmax(0,440px) minmax(0,1fr); gap: clamp(30px,5vw,80px);
+    align-items: center; }
 
-  /* the capsules */
-  .os-stack { list-style: none; display: flex; flex-direction: column; gap: 10px; max-width: 760px; }
-  .os-pill { border-radius: 26px; overflow: hidden;
-    background: rgba(10,14,26,.46); backdrop-filter: blur(22px) saturate(1.3);
-    -webkit-backdrop-filter: blur(22px) saturate(1.3);
-    border: 1px solid rgba(238,233,224,.12);
-    transition: background .3s ease, border-color .3s ease, transform .3s cubic-bezier(.16,1,.3,1);
-    transform: translateX(calc(var(--i) * 7px)); }
-  .os-pill:hover, .os-pill:focus-within { background: rgba(14,19,34,.62); border-color: rgba(238,233,224,.26); }
-  .os-head { width: 100%; display: flex; align-items: center; gap: 16px; background: none; border: 0;
-    padding: 15px 22px; cursor: pointer; color: inherit; font-family: var(--sans); text-align: left; }
-  .os-head:focus-visible { outline: 2px solid var(--sig); outline-offset: -3px; border-radius: 26px; }
-  .os-n { font-size: 10.5px; font-weight: 500; letter-spacing: .14em; color: rgba(238,233,224,.42); }
-  .os-own .os-n { color: var(--sig); }
-  .os-name { flex: 1; font-size: 15px; font-weight: 400; letter-spacing: -.01em; }
-  .os-plus { position: relative; width: 15px; height: 15px; flex: none; opacity: .62;
-             transition: transform .35s cubic-bezier(.16,1,.3,1); }
-  .os-plus::before, .os-plus::after { content: ''; position: absolute; inset: 50% 0 auto 0;
-             height: 1px; background: currentColor; }
-  .os-plus::after { transform: rotate(90deg); transition: opacity .3s ease; }
-  .os-pill:hover .os-plus, .os-pill:focus-within .os-plus { transform: rotate(45deg); opacity: 1; }
+  .osx-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase;
+                 color: var(--sig); margin-bottom: 16px; }
+  .osx-title { font-family: var(--serif); font-weight: 400; font-size: clamp(32px,3.6vw,52px);
+               line-height: 1.06; letter-spacing: -.03em; margin-bottom: 14px; }
+  .osx-title em { font-style: italic; font-weight: 300; color: var(--sig); }
+  .osx-sub { font-size: 14px; font-weight: 300; line-height: 1.7; max-width: 46ch;
+             color: rgba(238,233,224,.7); margin-bottom: 30px; }
 
-  .os-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .42s cubic-bezier(.16,1,.3,1); }
-  .os-panel-in { overflow: hidden; min-height: 0; }
-  .os-pill:hover .os-panel, .os-pill:focus-within .os-panel { grid-template-rows: 1fr; }
-  .os-panel p { font-size: 13.5px; font-weight: 300; line-height: 1.7;
-    color: rgba(238,233,224,.72); padding: 0 22px 16px 60px; max-width: 58ch; }
-  .os-link { display: inline-block; margin: 0 22px 18px 60px; font-size: 12.5px; color: var(--sig);
-    border-bottom: 1px solid rgba(200,174,125,.4); padding-bottom: 2px; }
-  .os-link:hover { border-color: var(--sig); }
+  .osx-pills { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .osx-pill { border-radius: 22px; overflow: hidden;
+    background: rgba(12,17,30,.44); backdrop-filter: blur(24px) saturate(1.25);
+    -webkit-backdrop-filter: blur(24px) saturate(1.25);
+    border: 1px solid rgba(238,233,224,.11);
+    transition: background .45s ease, border-color .45s ease, transform .5s cubic-bezier(.16,1,.3,1);
+    transform: translateX(0); }
+  .osx-pill.is-on { background: rgba(18,24,42,.72); border-color: rgba(238,233,224,.3);
+                    transform: translateX(14px); }
+  .osx-head { width: 100%; display: flex; align-items: center; gap: 13px; background: none;
+    border: 0; padding: 12px 18px; color: inherit; font-family: var(--sans); text-align: left;
+    cursor: default; }
+  .osx-n { font-size: 10px; font-weight: 500; letter-spacing: .14em; color: rgba(238,233,224,.4);
+           transition: color .4s ease; }
+  .osx-own .osx-n { color: var(--sig); }
+  .osx-name { flex: 1; font-size: 14px; font-weight: 400; }
+  .osx-plus { position: relative; width: 13px; height: 13px; flex: none; opacity: .5;
+              transition: transform .45s cubic-bezier(.16,1,.3,1), opacity .4s ease; }
+  .osx-plus::before, .osx-plus::after { content: ''; position: absolute; inset: 50% 0 auto 0;
+              height: 1px; background: currentColor; }
+  .osx-plus::after { transform: rotate(90deg); }
+  .osx-pill.is-on .osx-plus { transform: rotate(45deg); opacity: .95; }
+  .osx-body { display: grid; grid-template-rows: 0fr;
+              transition: grid-template-rows .5s cubic-bezier(.16,1,.3,1); }
+  .osx-body-in { overflow: hidden; min-height: 0; }
+  .osx-pill.is-on .osx-body { grid-template-rows: 1fr; }
+  .osx-body p { font-size: 13px; font-weight: 300; line-height: 1.68;
+                color: rgba(238,233,224,.74); padding: 0 18px 15px 49px; max-width: 46ch; }
 
-  @media (max-width: 760px) {
-    .os-pill { transform: none; }
-    .os-panel p, .os-link { padding-left: 22px; margin-left: 22px; }
+  /* the deck: one translucent plate per layer, assembling in 3D */
+  .osx-right { perspective: 1400px; height: min(72vh, 620px); position: relative; }
+  .osx-deck { position: absolute; inset: 0; transform-style: preserve-3d;
+              transform: rotateX(52deg) rotateZ(-38deg) translateZ(-40px); }
+  .osx-plate { position: absolute; left: 12%; top: 26%; width: 62%; height: 30%;
+    border-radius: 14px; transform-style: preserve-3d;
+    background: linear-gradient(135deg, rgba(238,233,224,.13), rgba(238,233,224,.045));
+    border: 1px solid rgba(238,233,224,.22);
+    box-shadow: 0 18px 50px rgba(0,0,0,.42);
+    backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+    opacity: 0; transform: translateZ(0px) translateY(26px);
+    transition: opacity .7s ease, transform .9s cubic-bezier(.16,1,.3,1); }
+  .osx-plate span { position: absolute; left: 16px; bottom: 10px;
+    font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+    color: rgba(238,233,224,.5); transform: translateZ(1px); }
+  .osx-plate.is-in { opacity: 1; transform: translateZ(calc(var(--z) * 1px)) translateY(0); }
+  .osx-plate.is-live { border-color: rgba(200,174,125,.55);
+    background: linear-gradient(135deg, rgba(200,174,125,.17), rgba(238,233,224,.05)); }
+  .osx-plate.is-live span { color: var(--sig); }
+
+  @media (max-width: 1000px) {
+    .osx { height: auto; }
+    .osx-pin { position: static; height: auto; padding: 86px 0; }
+    .osx-inner { grid-template-columns: 1fr; }
+    .osx-right { display: none; }
+    .osx-pill { transform: none; }
+    .osx-pill.is-on { transform: none; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .os-pill, .os-plus, .os-panel { transition: none; }
-    .os-pill { transform: none; }
+    .osx-pill, .osx-plate, .osx-plus, .osx-body { transition: none; }
   }
+
 
 
   /* ── TWO ENGINES ────────────────────────────── */
@@ -440,79 +466,86 @@
 </div>
 
 <!-- PARETO OS -->
-<div class="section-dark os-sec" id="how">
-  <div class="os-bg" aria-hidden="true">
-    <video class="os-vid" autoplay muted loop playsinline poster="/assets/infra/hero.jpg">
-      <source src="/assets/infra/vid-hero.mp4" type="video/mp4">
-    </video>
-    <span class="os-veil"></span>
-  </div>
-  <div class="wrap os-inner">
-    <div class="os-head-block">
-      <p class="os-eyebrow rv">The stack</p>
-      <h2 class="os-title rv">Introducing <em>Pareto&nbsp;OS.</em></h2>
-      <p class="os-sub rv">A single system that connects the machines, the models and the operating knowledge of a business. Most AI companies start at layer 04. We start at 01, because we own the machines.</p>
+<section class="osx" id="how" aria-label="Pareto OS">
+  <div class="osx-pin">
+    <div class="osx-bg" aria-hidden="true">
+      <video class="osx-vid" autoplay muted loop playsinline poster="/assets/infra/hero.jpg">
+        <source src="/assets/infra/vid-hero.mp4" type="video/mp4">
+      </video>
+      <span class="osx-veil"></span>
     </div>
-    <ul class="os-stack rv">
-        <li class="os-pill os-own" style="--i:0">
-          <button class="os-head" type="button" aria-expanded="false">
-            <span class="os-n">01</span>
-            <span class="os-name">Sovereign compute</span>
-            <span class="os-plus" aria-hidden="true"></span>
-          </button>
-          <div class="os-panel"><div class="os-panel-in"><p>The machines themselves, running in your own country rather than a region on another continent.</p><a class="os-link" href="/infrastructure.html" tabindex="-1">Infrastructure &rarr;</a></div></div>
-        </li>
-        <li class="os-pill os-own" style="--i:1">
-          <button class="os-head" type="button" aria-expanded="false">
-            <span class="os-n">02</span>
-            <span class="os-name">Inference</span>
-            <span class="os-plus" aria-hidden="true"></span>
-          </button>
-          <div class="os-panel"><div class="os-panel-in"><p>Open-source models, optimized and quantized, served behind one OpenAI-compatible API.</p><a class="os-link" href="/inference.html" tabindex="-1">Inference &rarr;</a></div></div>
-        </li>
-        <li class="os-pill os-own" style="--i:2">
-          <button class="os-head" type="button" aria-expanded="false">
-            <span class="os-n">03</span>
-            <span class="os-name">Cloud</span>
-            <span class="os-plus" aria-hidden="true"></span>
-          </button>
-          <div class="os-panel"><div class="os-panel-in"><p>Apps, jobs, databases and storage on the same nodes as the models they call.</p><a class="os-link" href="/cloud.html" tabindex="-1">Cloud &rarr;</a></div></div>
-        </li>
-        <li class="os-pill" style="--i:3">
-          <button class="os-head" type="button" aria-expanded="false">
-            <span class="os-n">04</span>
-            <span class="os-name">Company Brain</span>
-            <span class="os-plus" aria-hidden="true"></span>
-          </button>
-          <div class="os-panel"><div class="os-panel-in"><p>What the business actually knows: documents, workflows, policies, customer context, and the judgment of the people who run it.</p></div></div>
-        </li>
-        <li class="os-pill" style="--i:4">
-          <button class="os-head" type="button" aria-expanded="false">
-            <span class="os-n">05</span>
-            <span class="os-name">Evidence loop</span>
-            <span class="os-plus" aria-hidden="true"></span>
-          </button>
-          <div class="os-panel"><div class="os-panel-in"><p>Every correction, outcome and expert review becomes signal, reviewed before it changes anything.</p></div></div>
-        </li>
-        <li class="os-pill" style="--i:5">
-          <button class="os-head" type="button" aria-expanded="false">
-            <span class="os-n">06</span>
-            <span class="os-name">Governance</span>
-            <span class="os-plus" aria-hidden="true"></span>
-          </button>
-          <div class="os-panel"><div class="os-panel-in"><p>Human-gated change, approval paths, guardrails and an audit trail the company controls.</p></div></div>
-        </li>
-        <li class="os-pill" style="--i:6">
-          <button class="os-head" type="button" aria-expanded="false">
-            <span class="os-n">07</span>
-            <span class="os-name">Industry systems</span>
-            <span class="os-plus" aria-hidden="true"></span>
-          </button>
-          <div class="os-panel"><div class="os-panel-in"><p>The AI your operators actually use, in telecom, mining, oil and gas, health, legal and government.</p><a class="os-link" href="/industries.html" tabindex="-1">Industries &rarr;</a></div></div>
-        </li>
-    </ul>
+    <div class="wrap osx-inner">
+      <div class="osx-left">
+        <p class="osx-eyebrow">The stack</p>
+        <h2 class="osx-title">Introducing <em>Pareto&nbsp;OS.</em></h2>
+        <p class="osx-sub">A single system that connects the machines, the models and the operating knowledge of a business. Most AI companies start at layer 04. We start at 01.</p>
+        <ul class="osx-pills">
+          <li class="osx-pill osx-own" data-i="0">
+            <button class="osx-head" type="button">
+              <span class="osx-n">01</span><span class="osx-name">Sovereign compute</span>
+              <span class="osx-plus" aria-hidden="true"></span>
+            </button>
+            <div class="osx-body"><div class="osx-body-in"><p>The machines themselves, in your own country rather than a region on another continent. We own them, which is why layer 02 can cost what it does.</p></div></div>
+          </li>
+          <li class="osx-pill osx-own" data-i="1">
+            <button class="osx-head" type="button">
+              <span class="osx-n">02</span><span class="osx-name">Inference</span>
+              <span class="osx-plus" aria-hidden="true"></span>
+            </button>
+            <div class="osx-body"><div class="osx-body-in"><p>Open-source models, optimized and quantized, served behind one OpenAI-compatible API. Several precisions per model, each one labelled.</p></div></div>
+          </li>
+          <li class="osx-pill osx-own" data-i="2">
+            <button class="osx-head" type="button">
+              <span class="osx-n">03</span><span class="osx-name">Cloud</span>
+              <span class="osx-plus" aria-hidden="true"></span>
+            </button>
+            <div class="osx-body"><div class="osx-body-in"><p>Apps, jobs, databases and object storage running on the same nodes as the models they call, so retrieval is a local hop.</p></div></div>
+          </li>
+          <li class="osx-pill" data-i="3">
+            <button class="osx-head" type="button">
+              <span class="osx-n">04</span><span class="osx-name">Company Brain</span>
+              <span class="osx-plus" aria-hidden="true"></span>
+            </button>
+            <div class="osx-body"><div class="osx-body-in"><p>What the business actually knows: documents, workflows, policies, customer context, and the judgment of the people who run it.</p></div></div>
+          </li>
+          <li class="osx-pill" data-i="4">
+            <button class="osx-head" type="button">
+              <span class="osx-n">05</span><span class="osx-name">Evidence loop</span>
+              <span class="osx-plus" aria-hidden="true"></span>
+            </button>
+            <div class="osx-body"><div class="osx-body-in"><p>Every correction, outcome and expert review becomes signal, reviewed and approved before it changes anything in production.</p></div></div>
+          </li>
+          <li class="osx-pill" data-i="5">
+            <button class="osx-head" type="button">
+              <span class="osx-n">06</span><span class="osx-name">Governance</span>
+              <span class="osx-plus" aria-hidden="true"></span>
+            </button>
+            <div class="osx-body"><div class="osx-body-in"><p>Human-gated change, approval paths, guardrails and an audit trail the company controls, not us.</p></div></div>
+          </li>
+          <li class="osx-pill" data-i="6">
+            <button class="osx-head" type="button">
+              <span class="osx-n">07</span><span class="osx-name">Industry systems</span>
+              <span class="osx-plus" aria-hidden="true"></span>
+            </button>
+            <div class="osx-body"><div class="osx-body-in"><p>The AI your operators actually use, in telecom, mining, oil and gas, health, legal and government.</p></div></div>
+          </li>
+        </ul>
+      </div>
+      <div class="osx-right" aria-hidden="true">
+        <div class="osx-deck">
+          <div class="osx-plate" data-i="0"><span>Sovereign compute</span></div>
+          <div class="osx-plate" data-i="1"><span>Inference</span></div>
+          <div class="osx-plate" data-i="2"><span>Cloud</span></div>
+          <div class="osx-plate" data-i="3"><span>Company Brain</span></div>
+          <div class="osx-plate" data-i="4"><span>Evidence loop</span></div>
+          <div class="osx-plate" data-i="5"><span>Governance</span></div>
+          <div class="osx-plate" data-i="6"><span>Industry systems</span></div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</section>
+
 
 
 
@@ -859,6 +892,54 @@ if (REDUCE || !('IntersectionObserver' in window)) {
 })();
 
 /* (dark hero now uses a premium photograph; signal-grid canvas removed) */
+</script>
+<script>
+/* ── Pareto OS: scroll drives which layer is open and how much of the deck
+   has assembled. One rAF-throttled read per scroll, no layout thrash. ── */
+(function () {
+  var sec = document.querySelector('.osx');
+  if (!sec) return;
+  var pills  = [].slice.call(sec.querySelectorAll('.osx-pill'));
+  var plates = [].slice.call(sec.querySelectorAll('.osx-plate'));
+  var n = pills.length, active = -1, ticking = false;
+
+  // plates sit at even depths so the stack reads as a stack
+  plates.forEach(function (p, i) { p.style.setProperty('--z', (i - (n - 1) / 2) * 58); });
+
+  function paint(i) {
+    if (i === active) return;
+    active = i;
+    pills.forEach(function (p, k) { p.classList.toggle('is-on', k === i); });
+    plates.forEach(function (p, k) {
+      p.classList.toggle('is-in', k <= i);
+      p.classList.toggle('is-live', k === i);
+    });
+  }
+
+  function read() {
+    ticking = false;
+    var r = sec.getBoundingClientRect();
+    var travel = sec.offsetHeight - window.innerHeight;
+    if (travel <= 0) { paint(0); return; }
+    var t = Math.min(1, Math.max(0, -r.top / travel));
+    // a short lead-in and run-out so the first and last layers get a beat
+    var eased = Math.min(1, Math.max(0, (t - 0.04) / 0.9));
+    paint(Math.min(n - 1, Math.floor(eased * n)));
+  }
+
+  function onScroll() {
+    if (!ticking) { ticking = true; requestAnimationFrame(read); }
+  }
+
+  if (window.matchMedia('(max-width: 1000px)').matches) {
+    pills.forEach(function (p) { p.classList.add('is-on'); });
+    plates.forEach(function (p) { p.classList.add('is-in'); });
+  } else {
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    read();
+  }
+})();
 </script>
 <script src="/assets/build-modal.js" defer></script>
 <script src="/assets/newsletter.js" defer></script>
