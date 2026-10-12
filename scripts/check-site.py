@@ -38,9 +38,10 @@ NO_CHROME = {'research/the-learning-layer/index.html'}
 # Em dashes are banned in body copy on the marketing and product pages. The two
 # research essays and the legal pages are long-form authored prose where the dash
 # is a legitimate choice, so they are exempt until the owner says otherwise.
-DASH_EXEMPT = {'research/diffusing-ai-into-the-real-economy.html',
-               'research/the-learning-layer/index.html',
-               'privacy.html', 'terms.html', 'private-equity.html'}
+# Only the retired page is exempt now. The two research essays and the legal
+# pages were done last, by hand, one dash at a time; private-equity.html is
+# unreachable (307 to /) and kept only so restoring it stays a one-line change.
+DASH_EXEMPT = {'private-equity.html'}
 
 # Gold belongs on DARK backgrounds, where it measures 9.11:1 and is the brand.
 # On cream it measured 1.92:1 and never passed, so cream uses the slate accent.
@@ -161,6 +162,147 @@ def check_footer(path, live):
             fail(path, 'footer missing %s' % needed)
 
 
+def _mp4_tables(b):
+    """Return (sample_sizes, chunk_offsets, samples_per_chunk, nal_len) or None."""
+    import struct
+
+    def walk(start, end, want, depth=0):
+        i = start
+        while i + 8 <= end:
+            size, typ = struct.unpack_from('>I4s', b, i)
+            hs = 8
+            if size == 1:
+                size = struct.unpack_from('>Q', b, i + 8)[0]
+                hs = 16
+            elif size == 0:
+                size = end - i
+            if size < hs or i + size > end:
+                return
+            typ = typ.decode('latin1')
+            if typ == want:
+                yield i + hs, i + size
+            elif typ in ('moov', 'trak', 'mdia', 'minf', 'stbl'):
+                for r in walk(i + hs, i + size, want, depth + 1):
+                    yield r
+            elif typ == 'stsd':
+                for r in walk(i + hs + 8, i + size, want, depth + 1):
+                    yield r
+            elif typ == 'avc1':
+                for r in walk(i + hs + 78, i + size, want, depth + 1):
+                    yield r
+            i += size
+
+    end = len(b)
+    nal = None
+    for o, e in walk(0, end, 'avcC'):
+        nal = (b[o + 4] & 3) + 1
+        break
+    if nal is None:
+        return None
+    sizes = []
+    for o, e in walk(0, end, 'stsz'):
+        import struct as st
+        uniform, count = st.unpack_from('>II', b, o + 4)
+        if uniform:
+            sizes = [uniform] * count
+        else:
+            sizes = list(st.unpack_from('>%dI' % count, b, o + 12))
+        break
+    offs = []
+    for o, e in walk(0, end, 'stco'):
+        import struct as st
+        n = st.unpack_from('>I', b, o + 4)[0]
+        offs = list(st.unpack_from('>%dI' % n, b, o + 8))
+        break
+    if not offs:
+        for o, e in walk(0, end, 'co64'):
+            import struct as st
+            n = st.unpack_from('>I', b, o + 4)[0]
+            offs = list(st.unpack_from('>%dQ' % n, b, o + 8))
+            break
+    spc = []
+    for o, e in walk(0, end, 'stsc'):
+        import struct as st
+        n = st.unpack_from('>I', b, o + 4)[0]
+        spc = [st.unpack_from('>III', b, o + 8 + 12 * k) for k in range(n)]
+        break
+    if not (sizes and offs and spc):
+        return None
+    return sizes, offs, spc, nal
+
+
+def check_media(path):
+    """A sample whose NAL prefixes do not chain to its size is a shifted file.
+
+    This is what core.autocrlf did to every background video: each CRLF in the
+    stream lost a byte, every offset after it moved, and Chrome decoded a
+    handful of frames before giving up. The page still looked right in a still.
+    """
+    import struct
+    b = open(path, 'rb').read()
+    t = _mp4_tables(b)
+    if t is None:
+        fail(path, 'no readable H.264 sample table')
+        return
+    sizes, offs, spc, nal = t
+
+    # expand stsc into samples-per-chunk for the chunks we are going to test
+    per = []
+    for k, (first, count, _desc) in enumerate(spc):
+        last = spc[k + 1][0] - 1 if k + 1 < len(spc) else len(offs)
+        per.extend([count] * max(0, last - first + 1))
+    if not per:
+        fail(path, 'empty chunk table')
+        return
+
+    si = 0
+    checked = 0
+    for ci, off in enumerate(offs):
+        n = per[ci] if ci < len(per) else per[-1]
+        for _ in range(n):
+            if si >= len(sizes):
+                break
+            size = sizes[si]
+            p, remaining = off, size
+            while remaining > nal:
+                ln = int.from_bytes(b[p:p + nal], 'big')
+                if ln <= 0 or ln > remaining - nal:
+                    fail(path, 'sample %d: NAL length %d does not fit in %d bytes '
+                               '(file shifted; re-copy it in binary mode)'
+                         % (si, ln, remaining - nal))
+                    return
+                p += nal + ln
+                remaining -= nal + ln
+            if remaining != 0:
+                fail(path, 'sample %d: %d bytes left over after its NAL units'
+                     % (si, remaining))
+                return
+            off += size
+            si += 1
+            checked += 1
+        if checked >= 40:        # the damage shows up in the first chunk or two
+            break
+    if checked == 0:
+        fail(path, 'no samples to check')
+
+
+def check_endcap(path, live):
+    """Every page that carries the long footer must also carry the end-cap.
+
+    The end-cap and the subscription band are injected by newsletter.js, so a
+    page that forgets the tag simply stops at the footer while every other page
+    closes on the wordmark. industries.html did exactly that and nothing caught
+    it, because the omission is invisible in the markup.
+    """
+    if '<ul class="foot-links">' not in live and '<ul class="footer-links">' not in live:
+        return
+    for asset, what in (('/assets/newsletter.css', 'stylesheet'),
+                        ('/assets/newsletter.js', 'script')):
+        if asset not in live:
+            fail(path, 'has the long footer but not the end-cap %s (%s)'
+                 % (what, asset))
+
+
 def check_models(path, live):
     for m in BLOCKED_MODELS:
         if re.search(r'\b%s' % re.escape(m), live):
@@ -237,12 +379,19 @@ def main():
         check_retired(path, live)
         check_nav(path, live)
         check_footer(path, live)
+        check_endcap(path, live)
         if path in NEW_PAGES or path in ('index.html', 'platform.html',
                                          'industries/government.html'):
             check_editorial(path, live)
         if path in NEW_PAGES or path == 'index.html':
             check_models(path, live)
             check_api_host(path, live)
+
+    # every background video, byte-shifted or whole
+    import glob as _glob
+    for mp4 in sorted(_glob.glob('assets/**/*.mp4', recursive=True)):
+        checked['checks'] += 1
+        check_media(mp4)
 
     # stylesheets carry colour too
     for css in ('assets/site.css', 'assets/infra.css', 'assets/newsletter.css'):

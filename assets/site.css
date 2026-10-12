@@ -85,7 +85,7 @@ nav.site-nav {
 .col-p { font-size: 15px; font-weight: 300; opacity: 0.7; line-height: 1.75; margin-bottom: 32px; }
 .bens { list-style: none; display: flex; flex-direction: column; gap: 13px; }
 .bens li { font-size: 14px; font-weight: 300; opacity: 0.72; padding-left: 18px; position: relative; line-height: 1.6; }
-.bens li::before { content: '—'; position: absolute; left: 0; opacity: 0.5; }
+.bens li::before { content: '·'; position: absolute; left: 0; opacity: 0.5; }
 
 /* cap-list (numbered layers / steps) */
 .cap-list { margin-top: 56px; }

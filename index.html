@@ -266,18 +266,24 @@
   .osx-sub { font-size: 14px; font-weight: 300; line-height: 1.7; max-width: 46ch;
              color: rgba(238,233,224,.7); margin-bottom: 30px; }
 
-  .osx-pills { list-style: none; display: flex; flex-direction: column; gap: 7px; }
-  .osx-pill { border-radius: 22px; overflow: hidden;
-    background: rgba(12,17,30,.44); backdrop-filter: blur(24px) saturate(1.25);
-    -webkit-backdrop-filter: blur(24px) saturate(1.25);
+  /* Capsules, measured off legora.com: each one only as wide as its own label
+     when closed, opening to a fixed 480px as it takes its turn. A column of
+     equal-width bars reads as a list; a ragged column reads as a stack. */
+  .osx-pills { list-style: none; display: flex; flex-direction: column;
+               align-items: flex-start; gap: 7px; }
+  .osx-pill { border-radius: 24px; overflow: hidden;
+    width: max-content; max-width: 100%;
+    background: rgba(12,17,30,.44); backdrop-filter: blur(26px) saturate(1.25);
+    -webkit-backdrop-filter: blur(26px) saturate(1.25);
     border: 1px solid rgba(238,233,224,.11);
-    transition: background .45s ease, border-color .45s ease, transform .5s cubic-bezier(.16,1,.3,1);
+    transition: background .45s ease, border-color .45s ease, width .55s cubic-bezier(.16,1,.3,1),
+                transform .5s cubic-bezier(.16,1,.3,1);
     transform: translateX(0); }
   .osx-pill.is-on { background: rgba(18,24,42,.72); border-color: rgba(238,233,224,.3);
-                    transform: translateX(14px); }
+                    width: 480px; transform: translateX(14px); }
   .osx-head { width: 100%; display: flex; align-items: center; gap: 13px; background: none;
-    border: 0; padding: 12px 18px; color: inherit; font-family: var(--sans); text-align: left;
-    cursor: default; }
+    border: 0; padding: 11px 19px; color: inherit; font-family: var(--sans); text-align: left;
+    white-space: nowrap; cursor: default; }
   .osx-n { font-size: 10px; font-weight: 500; letter-spacing: .14em; color: rgba(238,233,224,.4);
            transition: color .4s ease; }
   .osx-own .osx-n { color: var(--sig); }
@@ -288,12 +294,17 @@
               height: 1px; background: currentColor; }
   .osx-plus::after { transform: rotate(90deg); }
   .osx-pill.is-on .osx-plus { transform: rotate(45deg); opacity: .95; }
-  .osx-body { display: grid; grid-template-rows: 0fr;
-              transition: grid-template-rows .5s cubic-bezier(.16,1,.3,1); }
-  .osx-body-in { overflow: hidden; min-height: 0; }
-  .osx-pill.is-on .osx-body { grid-template-rows: 1fr; }
-  .osx-body p { font-size: 13px; font-weight: 300; line-height: 1.68;
-                color: rgba(238,233,224,.74); padding: 0 18px 15px 49px; max-width: 46ch; }
+  /* A closed capsule must be as wide as its label and no wider, but its hidden
+     description still counts toward the capsule's intrinsic width and was
+     quietly making every pill the same size. Zero the body's width while it is
+     closed and give the paragraph a fixed one, so nothing in there votes. */
+  .osx-body { display: grid; grid-template-rows: 0fr; width: 0; max-width: 100%;
+              transition: grid-template-rows .5s cubic-bezier(.16,1,.3,1), width 0s .5s; }
+  .osx-body-in { overflow: hidden; min-height: 0; width: 100%; }
+  .osx-pill.is-on .osx-body { grid-template-rows: 1fr; width: 478px;
+              transition: grid-template-rows .5s cubic-bezier(.16,1,.3,1), width 0s; }
+  .osx-body p { font-size: 13px; font-weight: 300; line-height: 1.68; white-space: normal;
+                color: rgba(238,233,224,.74); padding: 0 24px 15px 50px; }
 
   /* the deck: one translucent plate per layer, assembling in 3D */
   .osx-right { perspective: 1400px; height: min(72vh, 620px); position: relative; }
@@ -320,8 +331,10 @@
     .osx-pin { position: static; height: auto; padding: 86px 0; }
     .osx-inner { grid-template-columns: 1fr; }
     .osx-right { display: none; }
-    .osx-pill { transform: none; }
-    .osx-pill.is-on { transform: none; }
+    .osx-pills { align-items: stretch; }
+    .osx-pill, .osx-pill.is-on { transform: none; width: auto; }
+    .osx-head { white-space: normal; }
+    .osx-body, .osx-pill.is-on .osx-body, .osx-body-in { width: auto; }
   }
   @media (prefers-reduced-motion: reduce) {
     .osx-pill, .osx-plate, .osx-plus, .osx-body { transition: none; }

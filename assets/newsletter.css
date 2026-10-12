@@ -41,8 +41,8 @@
 /* ── END-CAP ──────────────────────────────────────────────────────────────
    Modelled on legalpareto.com: a cream field continuous with the footer, the
    wordmark set oversized and almost invisible, allowed to bleed off the right
-   edge, closed by a hairline. A watermark, not a stage. Hovering lifts the
-   letters and raises the stack underneath.
+   edge, closed by a hairline. A watermark, not a stage. Behind it, the
+   runbook the platform is built from, lit where the pointer passes.
    ──────────────────────────────────────────────────────────────────────── */
 .plw {
   position: relative; overflow: hidden;
@@ -92,16 +92,11 @@
   .plw-l, .plw-eyebrow, .plw-tag { opacity: 1 !important; }
 }
 
-/* letters the cursor writes */
-.plw-ink { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
-.plw-c {
-  position: absolute; transform: translate(-50%, -50%) scale(.7) rotate(var(--r, 0deg));
-  font-family: 'Newsreader','Tiempos Headline',Georgia,serif;
-  font-size: clamp(26px, 3.2vw, 46px); line-height: 1; font-weight: 400;
-  color: var(--wi, #14120F); opacity: 0; will-change: transform, opacity;
-  transition: opacity .18s ease, transform .5s cubic-bezier(.16,1,.3,1);
+/* The character field. A monospace grid of the platform runbook, drawn on a
+   canvas and lit only where the pointer is, in the manner of
+   legora.com/product/skills. Sits under everything and takes no clicks. */
+.plw-field {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
 }
-.plw-c.on  { opacity: .78; transform: translate(-50%, -50%) scale(1) rotate(var(--r, 0deg)); }
-.plw-c.off { opacity: 0;
-  transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% - 16px)) scale(1) rotate(var(--r, 0deg));
-  transition: opacity .75s ease, transform .9s cubic-bezier(.16,1,.3,1); }
+.plw-stage { z-index: 1; }
