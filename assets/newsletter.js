@@ -116,6 +116,31 @@
       '</div>';
     footer.parentNode.insertBefore(cap, footer);
 
+    // Size the wordmark to the stage rather than to the viewport. A vw-based
+    // clamp cannot know how wide "Pareto Labs" actually is in Newsreader, and
+    // at 1440 it overflowed the right edge by 89px, clipping the final letter.
+    // Solve it: measure the word at a probe size, then scale to the stage.
+    function fitWord() {
+      var stage = cap.querySelector('.plw-stage');
+      var word = cap.querySelector('.plw-word');
+      if (!stage || !word) return;
+      var cs = getComputedStyle(stage);
+      var avail = stage.clientWidth -
+                  parseFloat(cs.paddingLeft || 0) - parseFloat(cs.paddingRight || 0);
+      if (!(avail > 0)) return;
+      var probe = 200;
+      word.style.fontSize = probe + 'px';
+      // scrollWidth on a block-level flex box reports the box, not the content,
+      // so a word narrower than the stage measures as exactly the stage and the
+      // fit never moves. max-content gives the width the letters actually need.
+      word.style.width = 'max-content';
+      var natural = word.offsetWidth;
+      word.style.width = '';
+      if (!natural) { word.style.fontSize = ''; return; }
+      word.style.fontSize = (probe * (avail / natural)).toFixed(2) + 'px';
+    }
+    fitWord();
+
     // --- the character field ------------------------------------------------
     (function () {
       var cv = cap.querySelector('.plw-field');
@@ -230,17 +255,17 @@
         var rt;
         new ResizeObserver(function () {
           clearTimeout(rt);
-          rt = setTimeout(function () { if (layout()) wake(); }, 80);
+          rt = setTimeout(function () { fitWord(); if (layout()) wake(); }, 80);
         }).observe(cap);
       } else {
         var rt2;
         window.addEventListener('resize', function () {
           clearTimeout(rt2);
-          rt2 = setTimeout(function () { if (layout()) wake(); }, 150);
+          rt2 = setTimeout(function () { fitWord(); if (layout()) wake(); }, 150);
         });
       }
       if (document.fonts && document.fonts.ready)
-        document.fonts.ready.then(function () { if (layout()) wake(); });
+        document.fonts.ready.then(function () { fitWord(); if (layout()) wake(); });
     })();
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {

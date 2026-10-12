@@ -50,7 +50,8 @@ GOLD_OK_FILES = {'assets/sensors.css'}
 DARK_CONTEXT = ('dark', 'on-dark', 'cta-final', 'ih ', '.ih', 'ind-hero', 'ind-cta',
                 'icard-dark', 'nav-links a:hover', 'btn-ghost-cream', 'c-key',
                 'lrow', 'lbar', 'plw', 'eyebrow', 'cta ', 'prog',
-                'icard-num', 'icard-cta', 'principle', 'scroll-cue', 'os-')
+                'icard-num', 'icard-cta', 'principle', 'scroll-cue', 'os-',
+                'section-ink')
 
 # Selectors allowed to keep gold: the animated comet/orbit illustration on
 # industries.html and the sensor markers. Both are illustration, not UI.

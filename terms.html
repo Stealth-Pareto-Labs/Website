@@ -12,8 +12,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
   <link rel="apple-touch-icon" href="/assets/favicon-180.png">
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/build-modal.css">
-  <link rel="stylesheet" href="/assets/newsletter.css">
+  <link rel="stylesheet" href="/assets/build-modal.css?v=20261012b">
+  <link rel="stylesheet" href="/assets/newsletter.css?v=20261012b">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -277,7 +277,8 @@
     .foot-links { display: flex; gap: 28px; list-style: none; }
     .foot-links a { font-size: 13px; font-weight: 300; color: var(--wi2); text-decoration: none; transition: color 0.2s; }
     .foot-links a:hover { color: var(--wi); }
-    .foot-copy { font-size: 12px; font-weight: 300; color: var(--wi3); }
+    .foot-copy { font-size: 12px; font-weight: 300; color: var(--wi3);
+  flex: 1 0 100%; text-align: center; margin-top: 6px; }
 
     /* ── RESPONSIVE ──────────────────────────────── */
     @media (max-width: 860px) {
@@ -501,8 +502,8 @@
   </div>
 </footer>
 
-<script src="/assets/build-modal.js" defer></script>
-<script src="/assets/newsletter.js" defer></script>
+<script src="/assets/build-modal.js?v=20261012b" defer></script>
+<script src="/assets/newsletter.js?v=20261012b" defer></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

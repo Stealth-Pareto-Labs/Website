@@ -36,8 +36,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/build-modal.css">
-  <link rel="stylesheet" href="/assets/newsletter.css">
+  <link rel="stylesheet" href="/assets/build-modal.css?v=20261012b">
+  <link rel="stylesheet" href="/assets/newsletter.css?v=20261012b">
   <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -141,6 +141,28 @@
   /* ── GENERAL SECTIONS ────────────────────────────── */
   .section { padding: 112px 0; border-top: 1px solid var(--wl); background: var(--w); color: var(--wi); }
   .section-dark { padding: 112px 0; background: var(--d); color: var(--di); border-top: none; }
+  /* The Build-with-Pareto block sits on the same ink as the Research & Notes
+     band, so the page closes on dark panels rather than one more cream one.
+     The blue-black --d is the site's one dark, shared with the platform
+     section, the dark hero and the newsletter band. */
+  .section-ink { background: var(--d); color: var(--di); border-top: none; }
+  .section-ink .form-box { background: rgba(238,233,224,0.045); border: 1px solid rgba(238,233,224,0.10); }
+  .section-ink .field { border-bottom-color: rgba(238,233,224,0.22); }
+  .section-ink .field:focus-within { border-color: rgba(238,233,224,0.55); }
+  .section-ink .field select option { background: var(--d); color: var(--di); }
+  .section-ink .btn-solid { background: var(--di); color: var(--d); border-color: var(--di); }
+  .section-ink .btn-solid:hover { background: #FFFFFF; border-color: #FFFFFF; }
+  .section-ink a:focus-visible, .section-ink .btn:focus-visible,
+  .section-ink button:focus-visible, .section-ink input:focus-visible,
+  .section-ink select:focus-visible, .section-ink textarea:focus-visible { outline-color: var(--sig); }
+  /* Chrome paints an autofilled field white, which would punch a hole in the panel */
+  .section-ink .field input:-webkit-autofill,
+  .section-ink .field input:-webkit-autofill:hover,
+  .section-ink .field input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--di);
+    -webkit-box-shadow: 0 0 0 1000px var(--d) inset;
+    caret-color: var(--di);
+  }
   .section-tag { font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.45; margin-bottom: 52px; display: flex; align-items: center; gap: 14px; }
   .section-tag::after { content: ''; flex: 1; height: 1px; background: currentColor; opacity: 0.15; max-width: 60px; }
 
@@ -243,17 +265,13 @@
   .foot-links { display: flex; gap: 26px; list-style: none; flex-wrap: wrap; }
   .foot-links a { font-size: 13px; font-weight: 300; color: var(--wi2); transition: color 0.2s; }
   .foot-links a:hover { color: var(--wi); }
-  .foot-copy { font-size: 12px; font-weight: 300; color: var(--wi3); }
+  .foot-copy { font-size: 12px; font-weight: 300; color: var(--wi3);
+  flex: 1 0 100%; text-align: center; margin-top: 6px; }
 
   /* ── PARETO OS: a pinned stack that assembles as you scroll ─── */
   .osx { position: relative; height: 560vh; background: var(--d); }
   .osx-pin { position: sticky; top: 0; height: 100vh; overflow: hidden;
              display: flex; align-items: center; color: var(--di); }
-  .osx-bg { position: absolute; inset: 0; }
-  .osx-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-             filter: saturate(.62) contrast(1.06); }
-  .osx-veil { position: absolute; inset: 0; display: block; background:
-    linear-gradient(90deg, rgba(8,12,24,.95) 0%, rgba(8,12,24,.86) 46%, rgba(8,12,24,.62) 100%); }
   .osx-inner { position: relative; z-index: 1; width: 100%;
     display: grid; grid-template-columns: minmax(0,440px) minmax(0,1fr); gap: clamp(30px,5vw,80px);
     align-items: center; }
@@ -307,24 +325,48 @@
                 color: rgba(238,233,224,.74); padding: 0 24px 15px 50px; }
 
   /* the deck: one translucent plate per layer, assembling in 3D */
-  .osx-right { perspective: 1400px; height: min(72vh, 620px); position: relative; }
-  .osx-deck { position: absolute; inset: 0; transform-style: preserve-3d;
-              transform: rotateX(52deg) rotateZ(-38deg) translateZ(-40px); }
-  .osx-plate { position: absolute; left: 12%; top: 26%; width: 62%; height: 30%;
-    border-radius: 14px; transform-style: preserve-3d;
-    background: linear-gradient(135deg, rgba(238,233,224,.13), rgba(238,233,224,.045));
-    border: 1px solid rgba(238,233,224,.22);
-    box-shadow: 0 18px 50px rgba(0,0,0,.42);
-    backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
-    opacity: 0; transform: translateZ(0px) translateY(26px);
-    transition: opacity .7s ease, transform .9s cubic-bezier(.16,1,.3,1); }
-  .osx-plate span { position: absolute; left: 16px; bottom: 10px;
-    font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
-    color: rgba(238,233,224,.5); transform: translateZ(1px); }
-  .osx-plate.is-in { opacity: 1; transform: translateZ(calc(var(--z) * 1px)) translateY(0); }
-  .osx-plate.is-live { border-color: rgba(200,174,125,.55);
-    background: linear-gradient(135deg, rgba(200,174,125,.17), rgba(238,233,224,.05)); }
-  .osx-plate.is-live span { color: var(--sig); }
+  .osx-right { height: min(78vh, 680px); position: relative; }
+  /* The stack is one generated glass slab used seven times. Rendered on
+     black, composited with screen, so it sits on the section's blue without
+     an alpha channel. The live layer's gold is a filter on the same image,
+     which keeps it pixel-aligned with the others. */
+  .osx-deck { position: absolute; inset: 0; }
+  .osx-stack { position: absolute; inset: 0; }
+  .osx-plate, .osx-case {
+    position: absolute; left: 50%; top: 50%; width: 70%; aspect-ratio: 1;
+    --y: calc((3 - var(--i, 0)) * 42px);
+    transform: translate(-50%, -50%) translateY(calc(var(--y) - 44px));
+    opacity: 0; z-index: calc(var(--i, 0) + 1);
+    transition: opacity .62s ease, transform .9s cubic-bezier(.16,1,.3,1),
+                filter .5s ease; }
+  .osx-plate img, .osx-case img {
+    display: block; width: 100%; height: 100%; }
+  .osx-plate.is-in { opacity: 1;
+    transform: translate(-50%, -50%) translateY(var(--y)); }
+  .osx-plate.is-live img {
+    filter: sepia(.58) saturate(2.5) hue-rotate(-14deg) brightness(1.1); }
+  /* the last beat: a wider slab closes over everything beneath it */
+  .osx-case { width: 86%; --i: 9; z-index: 20;
+    transform: translate(-50%, -50%) translateY(-172px) scale(.94); }
+  .osx-case.is-in { opacity: .9;
+    transform: translate(-50%, -50%) translateY(-158px) scale(1); }
+  .osx-case img { filter: brightness(1.06) saturate(.9); }
+  /* the layer name, lying on the slab's top face. The matrix is the render's
+     own isometric projection, so the text sits in the glass rather than on
+     top of the picture. Only the topmost landed layer is ever legible, which
+     is the point: the stack hides what is underneath it. */
+  .osx-lbl { position: absolute; left: 50%; top: 45%; white-space: nowrap;
+    font-family: var(--sans); font-size: 11px; font-weight: 500;
+    letter-spacing: .17em; text-transform: uppercase;
+    color: rgba(238,233,224,.5); pointer-events: none;
+    transform: translate(-50%,-50%) matrix(.809,.587,-.822,.569,0,0);
+    transform-origin: 50% 50%;
+    opacity: 0; transition: opacity .5s ease, color .4s ease; }
+  .osx-plate.is-in .osx-lbl { opacity: .3; }
+  .osx-plate.is-live .osx-lbl { opacity: 1; color: var(--sig); }
+  .osx-case .osx-lbl { font-size: 15px; letter-spacing: .2em;
+    color: rgba(238,233,224,.88); }
+  .osx-case.is-in .osx-lbl { opacity: 1; }
 
   @media (max-width: 1000px) {
     .osx { height: auto; }
@@ -483,12 +525,6 @@
 <!-- PARETO OS -->
 <section class="osx" id="how" aria-label="Pareto OS">
   <div class="osx-pin">
-    <div class="osx-bg" aria-hidden="true">
-      <video class="osx-vid" autoplay muted loop playsinline poster="/assets/infra/hero.jpg">
-        <source src="/assets/infra/vid-hero.mp4" type="video/mp4">
-      </video>
-      <span class="osx-veil"></span>
-    </div>
     <div class="wrap osx-inner">
       <div class="osx-left">
         <p class="osx-eyebrow">The stack</p>
@@ -500,7 +536,7 @@
               <span class="osx-n">01</span><span class="osx-name">Sovereign compute</span>
               <span class="osx-plus" aria-hidden="true"></span>
             </button>
-            <div class="osx-body"><div class="osx-body-in"><p>The machines themselves, in your own country rather than a region on another continent. We own them, which is why layer 02 can cost what it does.</p></div></div>
+            <div class="osx-body"><div class="osx-body-in"><p>The machines themselves, in your own country rather than a region on another continent. Every layer above this one runs on them.</p></div></div>
           </li>
           <li class="osx-pill osx-own" data-i="1">
             <button class="osx-head" type="button">
@@ -547,15 +583,18 @@
         </ul>
       </div>
       <div class="osx-right" aria-hidden="true">
-        <div class="osx-deck">
-          <div class="osx-plate" data-i="0"><span>Sovereign compute</span></div>
-          <div class="osx-plate" data-i="1"><span>Inference</span></div>
-          <div class="osx-plate" data-i="2"><span>Cloud</span></div>
-          <div class="osx-plate" data-i="3"><span>Company Brain</span></div>
-          <div class="osx-plate" data-i="4"><span>Evidence loop</span></div>
-          <div class="osx-plate" data-i="5"><span>Governance</span></div>
-          <div class="osx-plate" data-i="6"><span>Industry systems</span></div>
+      <div class="osx-deck">
+        <div class="osx-stack" aria-hidden="true">
+          <div class="osx-plate" data-i="0" style="--i:0"><img src="/assets/os-slab.webp" alt="" width="840" height="840" loading="lazy" decoding="async"><span class="osx-lbl">Sovereign compute</span></div>
+          <div class="osx-plate" data-i="1" style="--i:1"><img src="/assets/os-slab.webp" alt="" width="840" height="840" loading="lazy" decoding="async"><span class="osx-lbl">Inference</span></div>
+          <div class="osx-plate" data-i="2" style="--i:2"><img src="/assets/os-slab.webp" alt="" width="840" height="840" loading="lazy" decoding="async"><span class="osx-lbl">Cloud</span></div>
+          <div class="osx-plate" data-i="3" style="--i:3"><img src="/assets/os-slab.webp" alt="" width="840" height="840" loading="lazy" decoding="async"><span class="osx-lbl">Company Brain</span></div>
+          <div class="osx-plate" data-i="4" style="--i:4"><img src="/assets/os-slab.webp" alt="" width="840" height="840" loading="lazy" decoding="async"><span class="osx-lbl">Evidence loop</span></div>
+          <div class="osx-plate" data-i="5" style="--i:5"><img src="/assets/os-slab.webp" alt="" width="840" height="840" loading="lazy" decoding="async"><span class="osx-lbl">Governance</span></div>
+          <div class="osx-plate" data-i="6" style="--i:6"><img src="/assets/os-slab.webp" alt="" width="840" height="840" loading="lazy" decoding="async"><span class="osx-lbl">Industry systems</span></div>
+          <div class="osx-case"><img src="/assets/os-slab.webp" alt="" width="840" height="840" loading="lazy" decoding="async"><span class="osx-lbl">Pareto OS</span></div>
         </div>
+      </div>
       </div>
     </div>
   </div>
@@ -727,7 +766,7 @@
 
 
 <!-- ═══ PARTNER FORM ═════════════════════════════ -->
-<div class="section" id="partner">
+<div class="section section-ink" id="partner">
   <div class="wrap">
     <div class="section-tag rv">Build with Pareto</div>
     <div class="two-col">
@@ -918,8 +957,7 @@ if (REDUCE || !('IntersectionObserver' in window)) {
   var plates = [].slice.call(sec.querySelectorAll('.osx-plate'));
   var n = pills.length, active = -1, ticking = false;
 
-  // plates sit at even depths so the stack reads as a stack
-  plates.forEach(function (p, i) { p.style.setProperty('--z', (i - (n - 1) / 2) * 58); });
+  var shell = sec.querySelector('.osx-case');
 
   function paint(i) {
     if (i === active) return;
@@ -929,6 +967,7 @@ if (REDUCE || !('IntersectionObserver' in window)) {
       p.classList.toggle('is-in', k <= i);
       p.classList.toggle('is-live', k === i);
     });
+    if (shell) shell.classList.toggle('is-in', i >= n - 1);
   }
 
   function read() {
@@ -956,8 +995,8 @@ if (REDUCE || !('IntersectionObserver' in window)) {
   }
 })();
 </script>
-<script src="/assets/build-modal.js" defer></script>
-<script src="/assets/newsletter.js" defer></script>
+<script src="/assets/build-modal.js?v=20261012b" defer></script>
+<script src="/assets/newsletter.js?v=20261012b" defer></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

@@ -19,10 +19,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css">
-  <link rel="stylesheet" href="/assets/infra.css">
-  <link rel="stylesheet" href="/assets/build-modal.css">
-  <link rel="stylesheet" href="/assets/newsletter.css">
+  <link rel="stylesheet" href="/assets/site.css?v=20261012b">
+  <link rel="stylesheet" href="/assets/infra.css?v=20261012b">
+  <link rel="stylesheet" href="/assets/build-modal.css?v=20261012b">
+  <link rel="stylesheet" href="/assets/newsletter.css?v=20261012b">
 </head>
 <body>
 
@@ -39,7 +39,13 @@
 </nav>
 
 <!-- HERO -->
-<header class="ih">
+<header class="ih ih-film">
+  <div class="ih-bg" aria-hidden="true">
+    <video class="ih-vid" autoplay muted loop playsinline poster="/assets/infra/inference.jpg">
+      <source src="/assets/infra/vid-inference.mp4" type="video/mp4">
+    </video>
+    <span class="ih-tint"></span>
+  </div>
   <div class="wrap">
     <p class="eyebrow rv"><a href="/infrastructure.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Infrastructure</a> &nbsp;/&nbsp; Inference</p>
     <h1 class="rv" style="transition-delay:.05s">Open models, served <em>where you are.</em></h1>
@@ -67,7 +73,7 @@
       <p class="col-p rv" style="margin-bottom:0; align-self:end">Three steps, each one a lever on quality or cost. We run all three ourselves, which is why the same model costs less to serve here than it does rented by the hour somewhere else.</p>
     </div>
     <div class="cap-list">
-      <div class="cap-item rv"><span class="cap-n">01</span><h3 class="cap-h">Optimize</h3><p class="cap-p">Models tuned to the language, domain and data they will actually serve, including French and the regional languages that global defaults handle poorly. Fine-tune on your own corpus and keep the weights yours.</p></div>
+      <div class="cap-item rv"><span class="cap-n">01</span><h3 class="cap-h">Optimize</h3><p class="cap-p">Models tuned to the language, the domain and the data they will actually serve. That means French and the regional languages global defaults handle poorly, and it means the vocabulary of the industries we work in, where a mining grade, a drilling term or a network fault code has one correct reading and a general model guesses. Fine-tune on your own corpus and keep the weights yours.</p></div>
       <div class="cap-item rv"><span class="cap-n">02</span><h3 class="cap-h">Quantize</h3><p class="cap-p">The same model at lower precision needs a fraction of the memory and a fraction of the hardware. We publish every precision we serve so you choose the trade-off instead of inheriting it.</p></div>
       <div class="cap-item rv"><span class="cap-n">03</span><h3 class="cap-h"><em>Host</em></h3><p class="cap-p">Endpoints run on whole GPUs (one, two, four or eight) and scale to zero when idle, so an endpoint you are not using is not an endpoint you are paying to keep warm.</p></div>
     </div>
@@ -115,89 +121,42 @@
     <div class="section-tag rv">The catalogue</div>
     <div class="two-col">
       <h2 class="col-h rv" style="margin-bottom:0">Chat, vision, speech, <em>embeddings.</em></h2>
-      <p class="col-p rv" style="margin-bottom:0; align-self:end">Open-weight models across the modalities most products need, each served at the precisions listed. Need one that is not here? We add models on request.</p>
+      <p class="col-p rv" style="margin-bottom:0; align-self:end">Open-weight models across the modalities most products need, alongside the ones we train ourselves, each served at the precision you choose. Tell us the job and we will tell you which model does it. If the one you want is not running yet, we add it.</p>
     </div>
 
-    <div class="mgroup rv">
-      <h3>Chat and reasoning</h3>
-      <table class="mtable">
-        <thead><tr><th scope="col">Model</th><th scope="col">Context</th><th scope="col">Served at</th></tr></thead>
-        <tbody>
-          <tr>
-            <td data-l="Model"><span class="m-name">Llama 3.3 70B Instruct</span><span class="m-prov">Meta &middot; tuned for French and regional languages</span></td>
-            <td data-l="Context" class="m-ctx">131K</td>
-            <td data-l="Served at"><span class="prec">BF16</span><span class="prec">FP8</span><span class="prec">FP4</span><span class="prec">W4A16</span></td>
-          </tr>
-          <tr>
-            <td data-l="Model"><span class="m-name">Llama 3.1 8B Instruct</span><span class="m-prov">Meta &middot; fast general-purpose</span></td>
-            <td data-l="Context" class="m-ctx">131K</td>
-            <td data-l="Served at"><span class="prec">BF16</span><span class="prec">FP8</span><span class="prec">FP4</span><span class="prec">INT4</span></td>
-          </tr>
-          <tr>
-            <td data-l="Model"><span class="m-name">Mixtral 8x7B Instruct</span><span class="m-prov">Mistral AI &middot; mixture of experts, strong at multilingual reasoning</span></td>
-            <td data-l="Context" class="m-ctx">32K</td>
-            <td data-l="Served at"><span class="prec">BF16</span><span class="prec">FP8</span><span class="prec">INT4</span></td>
-          </tr>
-          <tr>
-            <td data-l="Model"><span class="m-name">DeepSeek R1 Distill 14B</span><span class="m-prov">DeepSeek &middot; step-by-step reasoning</span></td>
-            <td data-l="Context" class="m-ctx">65K</td>
-            <td data-l="Served at"><span class="prec">BF16</span><span class="prec">FP8</span><span class="prec">INT4</span></td>
-          </tr>
-          <tr>
-            <td data-l="Model"><span class="m-name">Qwen2.5 0.5B Instruct</span><span class="m-prov">Qwen &middot; a small chat model, for development and small deployments</span></td>
-            <td data-l="Context" class="m-ctx">32K</td>
-            <td data-l="Served at"><span class="prec">BF16</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="mgroup rv">
-      <h3>Vision</h3>
-      <table class="mtable">
-        <thead><tr><th scope="col">Model</th><th scope="col">Context</th><th scope="col">Served at</th></tr></thead>
-        <tbody>
-          <tr>
-            <td data-l="Model"><span class="m-name">Mistral Small 3.2</span><span class="m-prov">Mistral AI &middot; strong price-performance for summarisation and classification</span></td>
-            <td data-l="Context" class="m-ctx">128K</td>
-            <td data-l="Served at"><span class="prec">BF16</span><span class="prec">FP8</span><span class="prec">FP4</span><span class="prec">W4A16</span></td>
-          </tr>
-          <tr>
-            <td data-l="Model"><span class="m-name">Qwen 2.5 VL 7B</span><span class="m-prov">Alibaba &middot; document understanding and data extraction from images</span></td>
-            <td data-l="Context" class="m-ctx">32K</td>
-            <td data-l="Served at"><span class="prec">BF16</span><span class="prec">FP8</span><span class="prec">FP4</span><span class="prec">INT4</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="mgroup rv">
-      <h3>Speech and embeddings</h3>
-      <table class="mtable">
-        <thead><tr><th scope="col">Model</th><th scope="col">Context</th><th scope="col">Served at</th></tr></thead>
-        <tbody>
-          <tr>
-            <td data-l="Model"><span class="m-name">Whisper Large v3</span><span class="m-prov">OpenAI &middot; multilingual transcription, including Ivorian French</span></td>
-            <td data-l="Context" class="m-ctx">n/a</td>
-            <td data-l="Served at"><span class="prec">FP16</span></td>
-          </tr>
-          <tr>
-            <td data-l="Model"><span class="m-name">Whisper Large v3 Turbo</span><span class="m-prov">OpenAI &middot; faster transcription</span></td>
-            <td data-l="Context" class="m-ctx">n/a</td>
-            <td data-l="Served at"><span class="prec">FP16</span></td>
-          </tr>
-          <tr>
-            <td data-l="Model"><span class="m-name">BGE-M3</span><span class="m-prov">BAAI &middot; multilingual embeddings</span></td>
-            <td data-l="Context" class="m-ctx">8K</td>
-            <td data-l="Served at"><span class="prec">FP32</span></td>
-          </tr>
-          <tr>
-            <td data-l="Model"><span class="m-name">BGE Small EN v1.5</span><span class="m-prov">BAAI &middot; compact English embeddings</span></td>
-            <td data-l="Context" class="m-ctx">512</td>
-            <td data-l="Served at"><span class="prec">FP32</span></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="mcards">
+      <article class="mcard rv">
+        <img class="mcard-img" src="/assets/infra/cap-chat.jpg" alt="A dispatcher working at night in an operations room, wearing a headset" width="1200" height="675" loading="lazy" decoding="async">
+        <div class="mcard-b">
+          <h3>Chat and <em>reasoning</em></h3>
+          <p>Assistants that answer from your own material, drafting, classification, extraction, and models that work a problem through step by step instead of guessing at it. Context windows long enough to take a whole file, a whole case or a whole shift at once.</p>
+          <div class="mtags"><span class="mtag">Long context</span><span class="mtag">Tool calling</span><span class="mtag">Fine-tunable</span></div>
+        </div>
+      </article>
+      <article class="mcard rv" style="transition-delay:.08s">
+        <img class="mcard-img" src="/assets/infra/cap-vision.jpg" alt="An industrial robot arm with an inspection camera examining a metal part" width="1200" height="675" loading="lazy" decoding="async">
+        <div class="mcard-b">
+          <h3><em>Vision</em></h3>
+          <p>Read what a camera or a scanner sees. A delivery note, a damaged part, a meter, a form somebody filled in by hand, a photograph of a site. The answer comes back as structured data you can put straight into a system, not as a description.</p>
+          <div class="mtags"><span class="mtag">Documents</span><span class="mtag">Inspection</span><span class="mtag">Data extraction</span></div>
+        </div>
+      </article>
+      <article class="mcard rv" style="transition-delay:.16s">
+        <img class="mcard-img" src="/assets/infra/cap-speech.jpg" alt="A field technician in a hard hat speaking into a handheld radio at an industrial site" width="1200" height="675" loading="lazy" decoding="async">
+        <div class="mcard-b">
+          <h3><em>Speech</em></h3>
+          <p>99 languages in one model. Turn what people actually say into text that can be searched, checked and acted on: calls, handovers, site radio and voice notes. For the regional languages a global default mishears, we serve dedicated fine-tuned models.</p>
+          <div class="mtags"><span class="mtag">Transcription</span><span class="mtag">99 languages</span><span class="mtag">Noisy audio</span></div>
+        </div>
+      </article>
+      <article class="mcard rv" style="transition-delay:.24s">
+        <img class="mcard-img" src="/assets/infra/cap-retrieval.jpg" alt="A deep archive of ledgers and document boxes on steel shelving" width="1200" height="675" loading="lazy" decoding="async">
+        <div class="mcard-b">
+          <h3>Retrieval and <em>embeddings</em></h3>
+          <p>Search everything the business has ever written down by meaning rather than by keyword, so the right procedure surfaces even when nobody remembers what it was called. The vectors live on the same nodes as the models that read them.</p>
+          <div class="mtags"><span class="mtag">Vector search</span><span class="mtag">Multilingual</span><span class="mtag">On the node</span></div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -240,6 +199,7 @@ response = client.chat.completions.create(
       <div class="cap-item rv"><span class="cap-n">02</span><h3 class="cap-h">Evaluations</h3><p class="cap-p">Score a model against your own test set before it reaches production, and again after every change, so "it got better" is a measurement rather than a feeling.</p></div>
       <div class="cap-item rv"><span class="cap-n">03</span><h3 class="cap-h">Model <em>registry</em></h3><p class="cap-p">Every model, variant and fine-tune you run, versioned, with what it scored and what is currently serving traffic.</p></div>
       <div class="cap-item rv"><span class="cap-n">04</span><h3 class="cap-h">Retrieval</h3><p class="cap-p">Vector storage and embeddings sit on the same nodes as the models, so retrieval-augmented answers are a local call rather than a round trip across an ocean.</p></div>
+      <div class="cap-item rv"><span class="cap-n">05</span><h3 class="cap-h">Our own <em>models</em></h3><p class="cap-p">We are not only serving other people&rsquo;s weights. We train our own models for the work these industries actually do, and we build the reinforcement-learning environments and the benchmarks that prove whether they do it. What those runs teach us goes back into everything we serve you.</p></div>
     </div>
   </div>
 </section>
@@ -280,9 +240,9 @@ response = client.chat.completions.create(
     </div>
   </div>
 </footer>
-<script src="/assets/site.js" defer></script>
-<script src="/assets/build-modal.js" defer></script>
-<script src="/assets/newsletter.js" defer></script>
+<script src="/assets/site.js?v=20261012b" defer></script>
+<script src="/assets/build-modal.js?v=20261012b" defer></script>
+<script src="/assets/newsletter.js?v=20261012b" defer></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

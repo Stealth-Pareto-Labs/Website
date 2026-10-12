@@ -85,7 +85,34 @@ stops when nothing is left fading. The band is re-laid-out by a `ResizeObserver`
 and on `document.fonts.ready`, because at injection time the wordmark's `clamp()`
 has not resolved and the grid would otherwise be five rows deep in a 545px band.
 
-### Pareto OS (`index.html`, `.osx*`)
+### Pareto OS (`index.html`, `.osx*`, `assets/paretoos.js`)
+
+**Legora's aOS is a pre-rendered mp4, scrubbed by scroll.** Inspected over CDP:
+their section holds one video, 1920x1245, `autoplay:false`, `loop:false`, inside
+a 4968px `track`, and its `currentTime` is driven by scroll position (0 to 11.03s
+across the section). There is no canvas, no SVG and no CSS 3D anywhere on that
+page. A baked film buys them photoreal refraction and costs them a multi-megabyte
+download, a fixed resolution and text that cannot be restyled.
+
+Ours is live WebGL instead, on the same pattern the sensor viewer already uses
+(three.js 0.160.1 from jsDelivr, dynamically imported on intersection). Seven
+rounded glass slabs land one per scroll beat, the one that just landed carries a
+gold cut edge and the only legible label, and a frosted case closes over the
+whole stack at the end, which is the beat the owner noticed on the reference.
+
+Two things that are deliberate and will look wrong if "fixed": the slabs do not
+use `transmission`, and neither does the case. The section is black, so a
+transmissive material samples a black backdrop and the glass goes to mud; worse,
+three.js excludes other transmissive meshes from that backdrop, so a stack of
+them shows nothing through itself. Low-opacity `MeshPhysicalMaterial` with a
+strong clearcoat, bright procedural studio environment and explicit
+`renderOrder` is what makes glass read on black: edges and speculars.
+
+It degrades to the CSS deck still in the markup under reduced motion, below
+1000px, or with no WebGL; `.osx-has-gl` hides that deck only once the canvas is
+actually up.
+
+### The old CSS deck
 
 Legora's aOS is not a hover list. It is a **scroll-pinned sequence**: a 5670px
 section with a sticky inner frame, capsules that open one at a time as you
@@ -141,6 +168,28 @@ with lanczos; it measures better than a native 1080p encode and is smaller.
 and crop them, or they ship into the hero and the card art. `vid-mining.mp4` and
 `mining.jpg` both did.
 
+**Veo also returns clips with a camera cut inside them.** A hard angle change
+mid-clip is invisible in a still and survives every integrity check, but a
+looping background that flips angle every few seconds reads as a glitch. Detect
+it before shipping:
+
+```
+ffprobe -v error -f lavfi -i "movie=CLIP.mp4,select=gt(scene\,0.25)" \
+  -show_entries frame=pts_time:frame_tags=lavfi.scene_score -of csv=p=0
+```
+
+Anything it prints is a cut. `vid-manufacturing` (0.40 at 1.875s) and
+`vid-logistics` (0.33 at 1.833s) both had one and were rebuilt: keep the longest
+cut-free run **from the start of the clip** (so frame zero, and therefore the
+poster and the homepage card art, do not change), slow it with
+`setpts=2.0*PTS,minterpolate=fps=24:mi_mode=mci:mc_mode=aobmc:vsbmc=1` to win
+the duration back, then re-loop with `seamless.sh`. Both came out shorter but
+better on every other axis: manufacturing 4.46s/1.11MB/seam 0.918 to
+3.33s/0.47MB/seam 0.951, logistics 4.46s/1.44MB/seam 0.813 to
+3.25s/0.47MB/seam 0.878, and the worst frame-to-frame jump measured in the
+browser fell from 48.5 to 7.8 and from 41.1 to 4.3. Interpolation was checked on
+the welding sparks, the hardest case, with no ghosting.
+
 Loop seams: `scratchpad/seamless.sh <master> <out> <T> <d> <crf>` builds
 `body + xfade(tail, head)` so the clip ends on the frame it starts on. Seams were
 0.16 to 0.58 SSIM before, 0.71 to 0.99 now. **A longer crossfade measures worse**,
@@ -168,7 +217,11 @@ tested at d = 0.75, 1.00 and 1.25 on vid-cloud; 0.5 stands.
    index.html's 0.6-opacity rule is 4.69:1 on cream, 6.20:1 on ink. Both pass AA.
    An earlier note claiming 3.90:1 was measuring the nav transparent over a bright
    patch of hero video, before it gains its background.
-6. **Mixed line endings.** `index.html`, `industries.html` and `industries/*.html`
+6. **Two retired clips still carry a camera cut**, `vid-consumer-brands-retail`
+   (0.43 at 2.333s) and `vid-legal` (0.27 at 2.333s). Both pages are
+   307-redirected and not reachable, so they were left alone. Rebuild them the
+   same way if those industries ever come back.
+7. **Mixed line endings.** `index.html`, `industries.html` and `industries/*.html`
    are CRLF; `assets/*`, `sitemap.xml` and the rest are LF. Preserve each file's
    existing endings after any scripted edit, or a four-line change shows up as a
    whole-file diff.
