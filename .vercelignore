@@ -7,3 +7,8 @@ README.md
 *.tar.gz
 backend
 docs
+HANDOFF.md
+scripts
+.superpowers
+.gitattributes
+_m.png
