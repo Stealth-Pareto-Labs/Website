@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inference — Pareto Labs</title>
-  <meta name="description" content="Open-source models, optimized and quantized, served from infrastructure in your own country behind one OpenAI-compatible API. Chat, vision, transcription, embeddings and translation, with fine-tuning, evaluations and retrieval.">
+  <meta name="description" content="Open-source models, optimized and quantized, served from infrastructure in your own country behind one OpenAI-compatible API. Chat, vision, transcription and embeddings, with fine-tuning, evaluations and retrieval.">
   <link rel="canonical" href="https://www.trypareto.ai/inference.html">
   <meta name="theme-color" content="#F5F2EB">
   <link rel="icon" href="/assets/favicon.ico" sizes="any">
@@ -41,7 +41,7 @@
 <!-- HERO -->
 <header class="ih">
   <div class="wrap">
-    <p class="eyebrow rv"><a href="/infrastructure.html" style="color:inherit">Infrastructure</a> &nbsp;/&nbsp; Inference</p>
+    <p class="eyebrow rv"><a href="/infrastructure.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Infrastructure</a> &nbsp;/&nbsp; Inference</p>
     <h1 class="rv" style="transition-delay:.05s">Open models, served <em>where you are.</em></h1>
     <p class="lead rv" style="transition-delay:.1s">We optimize and quantize open-source models and serve them on infrastructure we operate, behind one OpenAI-compatible API. Change a base URL and your existing code keeps working &mdash; except the tokens are generated in your own country.</p>
     <div class="actions rv" style="transition-delay:.15s">
@@ -67,7 +67,7 @@
       <p class="col-p rv" style="margin-bottom:0; align-self:end">Three steps, each one a lever on quality or cost. We run all three ourselves, which is why the same model costs less to serve here than it does rented by the hour somewhere else.</p>
     </div>
     <div class="cap-list">
-      <div class="cap-item rv"><span class="cap-n">01</span><h3 class="cap-h">Optimize</h3><p class="cap-p">Models tuned to the language, domain and data they will actually serve &mdash; including French, Portuguese, Bahasa and regional languages that global defaults handle poorly. Fine-tune on your own corpus and keep the weights yours.</p></div>
+      <div class="cap-item rv"><span class="cap-n">01</span><h3 class="cap-h">Optimize</h3><p class="cap-p">Models tuned to the language, domain and data they will actually serve &mdash; including French and the regional languages that global defaults handle poorly. Fine-tune on your own corpus and keep the weights yours.</p></div>
       <div class="cap-item rv"><span class="cap-n">02</span><h3 class="cap-h">Quantize</h3><p class="cap-p">The same model at lower precision needs a fraction of the memory and a fraction of the hardware. We publish every precision we serve so you choose the trade-off instead of inheriting it.</p></div>
       <div class="cap-item rv"><span class="cap-n">03</span><h3 class="cap-h"><em>Host</em></h3><p class="cap-p">Endpoints run on whole GPUs &mdash; one, two, four or eight &mdash; and scale to zero when idle, so an endpoint you are not using is not an endpoint you are paying to keep warm.</p></div>
     </div>
@@ -115,7 +115,7 @@
     <div class="section-tag rv">The catalogue</div>
     <div class="two-col">
       <h2 class="col-h rv" style="margin-bottom:0">Chat, vision, speech, <em>embeddings.</em></h2>
-      <p class="col-p rv" style="margin-bottom:0; align-self:end">Open-weight models across every modality most products need, each served at the precisions listed. Need one that is not here? We add models on request.</p>
+      <p class="col-p rv" style="margin-bottom:0; align-self:end">Open-weight models across the modalities most products need, each served at the precisions listed. Need one that is not here? We add models on request.</p>
     </div>
 
     <div class="mgroup rv">
@@ -134,7 +134,7 @@
             <td data-l="Served at"><span class="prec">BF16</span><span class="prec">FP8</span><span class="prec">FP4</span><span class="prec">INT4</span></td>
           </tr>
           <tr>
-            <td data-l="Model"><span class="m-name">Mixtral 8x7B</span><span class="m-prov">Mistral &middot; mixture of experts</span></td>
+            <td data-l="Model"><span class="m-name">Mixtral 8x7B Instruct</span><span class="m-prov">Mistral AI &middot; mixture of experts, strong at multilingual reasoning</span></td>
             <td data-l="Context" class="m-ctx">32K</td>
             <td data-l="Served at"><span class="prec">BF16</span><span class="prec">FP8</span><span class="prec">INT4</span></td>
           </tr>
@@ -144,7 +144,7 @@
             <td data-l="Served at"><span class="prec">BF16</span><span class="prec">FP8</span><span class="prec">INT4</span></td>
           </tr>
           <tr>
-            <td data-l="Model"><span class="m-name">Qwen 2.5 0.5B Instruct</span><span class="m-prov">Alibaba &middot; small and cheap, for classification and routing</span></td>
+            <td data-l="Model"><span class="m-name">Qwen2.5 0.5B Instruct</span><span class="m-prov">Qwen &middot; a small chat model, for development and small deployments</span></td>
             <td data-l="Context" class="m-ctx">32K</td>
             <td data-l="Served at"><span class="prec">BF16</span></td>
           </tr>
@@ -158,31 +158,26 @@
         <thead><tr><th scope="col">Model</th><th scope="col">Context</th><th scope="col">Served at</th></tr></thead>
         <tbody>
           <tr>
-            <td data-l="Model"><span class="m-name">Mistral Small 3.2</span><span class="m-prov">Mistral &middot; text and images</span></td>
+            <td data-l="Model"><span class="m-name">Mistral Small 3.2</span><span class="m-prov">Mistral AI &middot; strong price-performance for summarisation and classification</span></td>
             <td data-l="Context" class="m-ctx">128K</td>
             <td data-l="Served at"><span class="prec">BF16</span><span class="prec">FP8</span><span class="prec">FP4</span><span class="prec">W4A16</span></td>
           </tr>
           <tr>
-            <td data-l="Model"><span class="m-name">Qwen 2.5 VL 7B</span><span class="m-prov">Alibaba &middot; documents, charts and screenshots</span></td>
+            <td data-l="Model"><span class="m-name">Qwen 2.5 VL 7B</span><span class="m-prov">Alibaba &middot; document understanding and data extraction from images</span></td>
             <td data-l="Context" class="m-ctx">32K</td>
             <td data-l="Served at"><span class="prec">BF16</span><span class="prec">FP8</span><span class="prec">FP4</span><span class="prec">INT4</span></td>
-          </tr>
-          <tr>
-            <td data-l="Model"><span class="m-name">LLaVA 1.6 13B</span><span class="m-prov">Open vision-language</span></td>
-            <td data-l="Context" class="m-ctx">4K</td>
-            <td data-l="Served at"><span class="prec">FP16</span></td>
           </tr>
         </tbody>
       </table>
     </div>
 
     <div class="mgroup rv">
-      <h3>Speech, embeddings and translation</h3>
+      <h3>Speech and embeddings</h3>
       <table class="mtable">
         <thead><tr><th scope="col">Model</th><th scope="col">Context</th><th scope="col">Served at</th></tr></thead>
         <tbody>
           <tr>
-            <td data-l="Model"><span class="m-name">Whisper Large v3</span><span class="m-prov">OpenAI &middot; transcription</span></td>
+            <td data-l="Model"><span class="m-name">Whisper Large v3</span><span class="m-prov">OpenAI &middot; multilingual transcription, including Ivorian French</span></td>
             <td data-l="Context" class="m-ctx">&mdash;</td>
             <td data-l="Served at"><span class="prec">FP16</span></td>
           </tr>
@@ -199,11 +194,6 @@
           <tr>
             <td data-l="Model"><span class="m-name">BGE Small EN v1.5</span><span class="m-prov">BAAI &middot; compact English embeddings</span></td>
             <td data-l="Context" class="m-ctx">512</td>
-            <td data-l="Served at"><span class="prec">FP32</span></td>
-          </tr>
-          <tr>
-            <td data-l="Model"><span class="m-name">NLLB-200 1.3B</span><span class="m-prov">Meta &middot; translation across 200 languages</span></td>
-            <td data-l="Context" class="m-ctx">1K</td>
             <td data-l="Served at"><span class="prec">FP32</span></td>
           </tr>
         </tbody>
@@ -223,9 +213,9 @@
 
     <div class="codewrap rv">
       <div class="codebar"><span>Python</span><span>chat completions</span></div>
-<pre><code><span class="c-com"># the only line that changes</span>
+<pre tabindex="0"><code><span class="c-com"># the only line that changes</span>
 client = OpenAI(
-    <span class="c-key">base_url</span> = <span class="c-key">"https://api.pareto.ai/v1"</span>,
+    <span class="c-key">base_url</span> = <span class="c-key">"https://api.trypareto.ai/v1"</span>,
     <span class="c-key">api_key</span>  = os.environ[<span class="c-key">"PARETO_API_KEY"</span>],
 )
 

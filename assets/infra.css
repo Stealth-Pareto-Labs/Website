@@ -1,8 +1,14 @@
 /* ============================================================
    Pareto Labs — infrastructure pages (Infrastructure, Inference, Cloud)
    Shared because all three use the same hero, split and table idioms.
-   Colour only through the tokens in site.css — never a literal hex here,
-   so these pages follow the rest of the site if the palette moves.
+
+   Colour comes from the site.css tokens wherever a token exists. Two
+   exceptions, both deliberate and both matching what site.css already does:
+   rgba(238,233,224,…) where an alpha of the cream is needed (there is no
+   token for a translucent --di), and #fff / #000 for a pure hover and a mask
+   alpha, which are not theme colours. If --di or --d move, those literals
+   need updating with them — grep this file for rgba(238 before a palette
+   change.
    ============================================================ */
 
 /* ── dark hero ───────────────────────────────────── */
@@ -66,18 +72,18 @@
 /* ── model catalogue ─────────────────────────────── */
 .mgroup { margin-top: 46px; }
 .mgroup > h3 { font-size: 10px; font-weight: 500; letter-spacing: 0.15em;
-  text-transform: uppercase; opacity: 0.5; margin-bottom: 14px; }
+  text-transform: uppercase; opacity: 0.62; margin-bottom: 14px; }
 .mtable { width: 100%; border-collapse: collapse; }
 .mtable caption { text-align: left; font-size: 13px; font-weight: 300;
   opacity: 0.6; padding-bottom: 12px; }
 .mtable th { text-align: left; font-size: 10.5px; font-weight: 500;
-  letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.45;
+  letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.62;
   padding: 0 16px 11px 0; border-bottom: 1px solid var(--wl); }
 .mtable td { padding: 15px 16px 15px 0; border-bottom: 1px solid var(--wl2);
   font-size: 14px; font-weight: 300; vertical-align: top; }
 .mtable tr:last-child td { border-bottom: none; }
 .mtable .m-name { font-weight: 400; opacity: 1; }
-.mtable .m-prov { display: block; font-size: 12px; opacity: 0.5; margin-top: 3px; }
+.mtable .m-prov { display: block; font-size: 12px; opacity: 0.62; margin-top: 3px; }
 .mtable .m-ctx { font-variant-numeric: tabular-nums; white-space: nowrap; opacity: 0.75; }
 .prec { display: inline-block; font-size: 11px; font-weight: 400; letter-spacing: 0.04em;
   border: 1px solid var(--wl); border-radius: 100px; padding: 3px 10px;

@@ -200,6 +200,7 @@
   .pe-cols li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
   .pe-loop { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 36px; }
   .pe-loop span { font-size: 12.5px; font-weight: 400; opacity: 0.75; border: 1px solid var(--wl); border-radius: 100px; padding: 7px 15px; }
+  @media (max-width: 900px) { .pe-cols { grid-template-columns: 1fr; } }
   */
 
   /* ── FORM ────────────────────────────────────────── */
@@ -409,7 +410,7 @@
       <a class="eng rv" href="/inference.html">
         <div class="eng-n">01 &mdash; Inference</div>
         <h3>Open models, <em>served.</em></h3>
-        <p>Chat, vision, transcription, embeddings and translation behind one OpenAI-compatible API, with fine-tuning, evaluations and retrieval on the same platform.</p>
+        <p>Chat, vision, transcription and embeddings behind one OpenAI-compatible API, with fine-tuning, evaluations and retrieval on the same platform.</p>
         <span class="eng-go">Explore inference &rarr;</span>
       </a>
       <a class="eng rv" style="transition-delay:.06s" href="/cloud.html">
@@ -594,7 +595,7 @@
                   <option>Other</option>
                 </select>
               </div>
-              <div class="field"><label for="c-chal">Where could AI help your operations?</label><textarea id="c-chal" name="challenge" placeholder="e.g. Our customer service team is overwhelmed and our knowledge is scattered across people and docs…"></textarea></div>
+              <div class="field"><label for="c-chal">What do you want to build or improve?</label><textarea id="c-chal" name="challenge" placeholder="e.g. Our customer service team is overwhelmed and our knowledge is scattered across people and docs…"></textarea></div>
             </div>
             <div class="form-ft">
               <button type="submit" class="btn btn-solid">Build with Pareto</button>

@@ -35,6 +35,13 @@ FOOTER_MUST_HAVE = ['/infrastructure.html', '/inference.html', '/cloud.html']
 # Standalone pages that deliberately carry no site nav or footer.
 NO_CHROME = {'research/the-learning-layer/index.html'}
 
+# Models the catalogue marks blocked, or whose licence forbids commercial use.
+# Advertising these is a factual error and, for NLLB, a licence exposure.
+BLOCKED_MODELS = ['NLLB', 'LLaVA']
+
+# The inference gateway must only ever be shown on a domain Pareto controls.
+ALLOWED_API_HOSTS = ['trypareto.ai', 'pareto.ci']
+
 # Editorial rules for the infrastructure pages + the homepage.
 FORBIDDEN = [
     (r'ci-abj', 'internal region code'),
@@ -125,13 +132,26 @@ def check_nav(path, live):
 
 
 def check_footer(path, live):
-    foot = re.search(r'<ul class="footer?-links">(.*?)</ul>', live, re.S)
+    foot = re.search(r'<ul class="foot(?:er)?-links">(.*?)</ul>', live, re.S)
     if not foot:
         return  # not every page carries the long footer
     hrefs = set(re.findall(r'href="([^"]+)"', foot.group(1)))
     for needed in FOOTER_MUST_HAVE:
         if needed not in hrefs:
             fail(path, 'footer missing %s' % needed)
+
+
+def check_models(path, live):
+    for m in BLOCKED_MODELS:
+        if re.search(r'\b%s' % re.escape(m), live):
+            fail(path, 'advertises %s, which the catalogue blocks' % m)
+
+
+def check_api_host(path, live):
+    for m in re.finditer(r'https://([a-z0-9.\-]+)/v1', live):
+        host = m.group(1)
+        if not any(host.endswith(d) for d in ALLOWED_API_HOSTS):
+            fail(path, 'API base URL on a host Pareto may not control: %s' % host)
 
 
 def check_editorial(path, live):
@@ -162,8 +182,22 @@ def main():
         check_retired(path, live)
         check_nav(path, live)
         check_footer(path, live)
-        if path in NEW_PAGES or path == 'index.html':
+        if path in NEW_PAGES or path in ('index.html', 'platform.html',
+                                         'industries/government.html'):
             check_editorial(path, live)
+        if path in NEW_PAGES or path == 'index.html':
+            check_models(path, live)
+            check_api_host(path, live)
+
+    # the modal every CTA opens is shared markup in JS, not in any page
+    checked['checks'] += 1
+    try:
+        modal = open('assets/build-modal.js', encoding='utf-8').read()
+        if re.search(r'(?i)private[ -]equity|PE portfolio', modal):
+            fail('assets/build-modal.js',
+                 'modal still offers Private Equity after its removal')
+    except FileNotFoundError:
+        fail('assets/build-modal.js', 'missing')
 
     # sitemap: valid, and retired pages absent
     checked['checks'] += 1
