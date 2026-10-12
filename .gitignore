@@ -10,3 +10,6 @@ Thumbs.db
 .temp/
 # Vercel
 .vercel
+
+.vercel
+.env*
