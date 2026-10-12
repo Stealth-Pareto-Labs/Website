@@ -1,0 +1,144 @@
+/* ============================================================
+   Pareto Labs — infrastructure pages (Infrastructure, Inference, Cloud)
+   Shared because all three use the same hero, split and table idioms.
+   Colour only through the tokens in site.css — never a literal hex here,
+   so these pages follow the rest of the site if the palette moves.
+   ============================================================ */
+
+/* ── dark hero ───────────────────────────────────── */
+.ih {
+  position: relative; overflow: hidden;
+  background: var(--d); color: var(--di);
+  padding: clamp(132px, 15vw, 190px) 0 clamp(68px, 8vw, 104px);
+}
+/* a faint survey grid: compute as ground, not as neon */
+.ih::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--dl) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--dl) 1px, transparent 1px);
+  background-size: 72px 72px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 70% 0%, #000 0%, transparent 72%);
+          mask-image: radial-gradient(ellipse 80% 60% at 70% 0%, #000 0%, transparent 72%);
+  opacity: 0.6;
+}
+.ih > .wrap { position: relative; z-index: 1; }
+.ih .eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--sig); margin-bottom: 26px;
+  display: flex; align-items: center; gap: 13px; }
+.ih .eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--sig); }
+.ih h1 { font-family: var(--serif); font-weight: 400;
+  font-size: clamp(38px, 5.6vw, 76px); line-height: 1.05; letter-spacing: -0.03em;
+  max-width: 17ch; margin-bottom: 26px; }
+.ih h1 em { font-style: italic; font-weight: 300; color: inherit; }
+.ih .lead { font-size: clamp(15px, 1.5vw, 18px); font-weight: 300; line-height: 1.72;
+  color: rgba(238,233,224,0.80); max-width: 60ch; margin-bottom: 34px; }
+.ih .actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+.ih .btn-cream { background: var(--di); color: var(--d); border-color: var(--di); }
+.ih .btn-cream:hover { background: #fff; border-color: #fff; }
+.ih .btn-wire { background: transparent; color: var(--di);
+  border: 1px solid rgba(238,233,224,0.38); }
+.ih .btn-wire:hover { background: rgba(238,233,224,0.08); border-color: rgba(238,233,224,0.7); }
+
+/* ── the two-engine split (hub) ──────────────────── */
+.isplit { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2vw, 24px);
+  margin-top: 52px; }
+.icard2 { position: relative; display: flex; flex-direction: column;
+  border: 1px solid var(--wl); background: var(--w); padding: clamp(28px, 3.4vw, 44px);
+  transition: border-color .25s ease, transform .25s ease, background .25s ease; }
+.icard2:hover { border-color: var(--wi3); transform: translateY(-2px); background: var(--w2); }
+.icard2:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.icard2 .n { font-size: 10px; font-weight: 500; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.icard2 h3 { font-family: var(--serif); font-size: clamp(25px, 2.7vw, 34px);
+  font-weight: 400; letter-spacing: -0.02em; margin-bottom: 14px; }
+.icard2 h3 em { font-style: italic; font-weight: 300; }
+.icard2 p { font-size: 14.5px; font-weight: 300; line-height: 1.7; opacity: 0.72;
+  margin-bottom: 22px; }
+.icard2 .rule { height: 1px; background: var(--wl); margin: 0 0 22px; }
+.icard2 ul { list-style: none; margin-bottom: 26px; }
+.icard2 li { font-size: 13.5px; font-weight: 300; padding: 9px 0;
+  border-top: 1px solid var(--wl2); display: flex; align-items: baseline; gap: 11px; }
+.icard2 li::before { content: ''; width: 4px; height: 4px; border-radius: 50%;
+  background: var(--sig); flex-shrink: 0; transform: translateY(-2px); }
+.icard2 .go { margin-top: auto; font-size: 13px; font-weight: 400; color: var(--gold); }
+
+/* ── model catalogue ─────────────────────────────── */
+.mgroup { margin-top: 46px; }
+.mgroup > h3 { font-size: 10px; font-weight: 500; letter-spacing: 0.15em;
+  text-transform: uppercase; opacity: 0.5; margin-bottom: 14px; }
+.mtable { width: 100%; border-collapse: collapse; }
+.mtable caption { text-align: left; font-size: 13px; font-weight: 300;
+  opacity: 0.6; padding-bottom: 12px; }
+.mtable th { text-align: left; font-size: 10.5px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.45;
+  padding: 0 16px 11px 0; border-bottom: 1px solid var(--wl); }
+.mtable td { padding: 15px 16px 15px 0; border-bottom: 1px solid var(--wl2);
+  font-size: 14px; font-weight: 300; vertical-align: top; }
+.mtable tr:last-child td { border-bottom: none; }
+.mtable .m-name { font-weight: 400; opacity: 1; }
+.mtable .m-prov { display: block; font-size: 12px; opacity: 0.5; margin-top: 3px; }
+.mtable .m-ctx { font-variant-numeric: tabular-nums; white-space: nowrap; opacity: 0.75; }
+.prec { display: inline-block; font-size: 11px; font-weight: 400; letter-spacing: 0.04em;
+  border: 1px solid var(--wl); border-radius: 100px; padding: 3px 10px;
+  margin: 0 5px 5px 0; opacity: 0.8; white-space: nowrap; }
+
+/* ── precision ladder ────────────────────────────── */
+.ladder { margin-top: 44px; display: flex; flex-direction: column; gap: 2px; }
+.lrow { display: grid; grid-template-columns: 94px 1fr 92px; align-items: center;
+  gap: 18px; padding: 11px 0; border-top: 1px solid var(--dl); }
+.lrow:last-child { border-bottom: 1px solid var(--dl); }
+.lrow .lp { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--sig); }
+.lbar { height: 10px; background: rgba(238,233,224,0.13); position: relative; }
+.lbar span { position: absolute; inset: 0 auto 0 0; background: var(--sig); opacity: 0.55; }
+.lrow:first-of-type .lbar span { opacity: 0.85; }
+.lrow .lw { font-size: 12.5px; font-weight: 300; text-align: right;
+  font-variant-numeric: tabular-nums; opacity: 0.72; }
+
+/* ── code block ──────────────────────────────────── */
+.codewrap { margin-top: 40px; border: 1px solid var(--dl); background: var(--d2); }
+.codebar { display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; padding: 12px 18px; border-bottom: 1px solid var(--dl);
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.5; }
+.codewrap pre { margin: 0; padding: 22px 18px 24px; overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px; line-height: 1.75; color: rgba(238,233,224,0.88); }
+.codewrap .c-key { color: var(--sig); }
+.codewrap .c-com { opacity: 0.45; }
+
+/* ── capability groups (cloud) ───────────────────── */
+.fgroup { border-top: 1px solid var(--wl); padding-top: 30px; margin-top: 40px; }
+.fgroup-h { display: flex; align-items: baseline; gap: 14px; margin-bottom: 24px; }
+.fgroup-h h3 { font-family: var(--serif); font-size: 23px; font-weight: 400;
+  letter-spacing: -0.02em; }
+.fgroup-h .fn { font-size: 10px; font-weight: 500; letter-spacing: 0.14em;
+  color: var(--gold); }
+.fitems { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px 30px; }
+.fitem { padding: 13px 0; border-top: 1px solid var(--wl2); }
+.fitem b { display: block; font-size: 14px; font-weight: 400; margin-bottom: 3px; }
+.fitem span { font-size: 13px; font-weight: 300; line-height: 1.6; opacity: 0.62; }
+
+/* ── responsive ──────────────────────────────────── */
+@media (max-width: 900px) {
+  .isplit { grid-template-columns: 1fr; }
+  .fitems { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 700px) {
+  .ih { padding-top: 118px; }
+  .fitems { grid-template-columns: 1fr; }
+  .lrow { grid-template-columns: 74px 1fr 78px; gap: 12px; }
+  /* the catalogue stops being a table and becomes a list of cards */
+  .mtable, .mtable tbody, .mtable tr, .mtable td { display: block; width: 100%; }
+  .mtable thead { position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+  .mtable tr { padding: 16px 0; border-bottom: 1px solid var(--wl); }
+  .mtable tr:last-child { border-bottom: none; }
+  .mtable td { border: none; padding: 2px 0; }
+  .mtable td[data-l]::before { content: attr(data-l) '  ';
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.45; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icard2 { transition: none; }
+  .icard2:hover { transform: none; }
+}

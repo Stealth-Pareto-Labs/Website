@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inference — Pareto Labs</title>
+  <meta name="description" content="Open-source models, optimized and quantized, served from infrastructure in your own country behind one OpenAI-compatible API. Chat, vision, transcription, embeddings and translation, with fine-tuning, evaluations and retrieval.">
+  <link rel="canonical" href="https://www.trypareto.ai/inference.html">
+  <meta name="theme-color" content="#F5F2EB">
+  <link rel="icon" href="/assets/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="/assets/favicon-180.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Pareto Labs">
+  <meta property="og:title" content="Inference — Open models, served where you are">
+  <meta property="og:description" content="Open-source models, optimized and quantized, behind one OpenAI-compatible API — served inside your own country.">
+  <meta property="og:url" content="https://www.trypareto.ai/inference.html">
+  <meta property="og:image" content="https://www.trypareto.ai/og/pareto-labs-v2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/infra.css">
+  <link rel="stylesheet" href="/assets/build-modal.css">
+  <link rel="stylesheet" href="/assets/newsletter.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="nav-logo" href="/" aria-label="Pareto Labs"><img class="brand-mark" src="/assets/logo.png" alt=""><span>areto&nbsp;Labs</span></a>
+  <ul class="nav-links">
+    <li class="hide-sm"><a href="/infrastructure.html" class="active">Infrastructure</a></li>
+    <li class="hide-sm"><a href="/platform.html">Platform</a></li>
+    <li class="hide-sm"><a href="/industries.html">Industries</a></li>
+    <li class="hide-sm"><a href="/experts.html">Experts</a></li>
+    <li class="hide-sm"><a href="/research.html">Research</a></li>
+    <li><a class="nav-cta" href="/#partner">Build with Pareto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="ih">
+  <div class="wrap">
+    <p class="eyebrow rv"><a href="/infrastructure.html" style="color:inherit">Infrastructure</a> &nbsp;/&nbsp; Inference</p>
+    <h1 class="rv" style="transition-delay:.05s">Open models, served <em>where you are.</em></h1>
+    <p class="lead rv" style="transition-delay:.1s">We optimize and quantize open-source models and serve them on infrastructure we operate, behind one OpenAI-compatible API. Change a base URL and your existing code keeps working &mdash; except the tokens are generated in your own country.</p>
+    <div class="actions rv" style="transition-delay:.15s">
+      <a class="btn btn-cream btn-arr" href="/#partner">Get an API key</a>
+      <a class="btn btn-wire" href="#models">See the models</a>
+    </div>
+  </div>
+</header>
+
+<!-- STATEMENT -->
+<section class="section">
+  <div class="wrap-thin">
+    <p class="statement rv">The model is a commodity. What matters is how well it is tuned, how cheaply it is served, and <em>whose law it answers to.</em></p>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="section alt" id="how">
+  <div class="wrap">
+    <div class="section-tag rv">How it works</div>
+    <div class="two-col">
+      <h2 class="col-h rv" style="margin-bottom:0">Optimize. Quantize. <em>Host.</em></h2>
+      <p class="col-p rv" style="margin-bottom:0; align-self:end">Three steps, each one a lever on quality or cost. We run all three ourselves, which is why the same model costs less to serve here than it does rented by the hour somewhere else.</p>
+    </div>
+    <div class="cap-list">
+      <div class="cap-item rv"><span class="cap-n">01</span><h3 class="cap-h">Optimize</h3><p class="cap-p">Models tuned to the language, domain and data they will actually serve &mdash; including French, Portuguese, Bahasa and regional languages that global defaults handle poorly. Fine-tune on your own corpus and keep the weights yours.</p></div>
+      <div class="cap-item rv"><span class="cap-n">02</span><h3 class="cap-h">Quantize</h3><p class="cap-p">The same model at lower precision needs a fraction of the memory and a fraction of the hardware. We publish every precision we serve so you choose the trade-off instead of inheriting it.</p></div>
+      <div class="cap-item rv"><span class="cap-n">03</span><h3 class="cap-h"><em>Host</em></h3><p class="cap-p">Endpoints run on whole GPUs &mdash; one, two, four or eight &mdash; and scale to zero when idle, so an endpoint you are not using is not an endpoint you are paying to keep warm.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRECISION (dark) -->
+<section class="section dark" id="precision">
+  <div class="wrap">
+    <div class="section-tag rv">Precision</div>
+    <div class="two-col">
+      <h2 class="col-h rv" style="margin-bottom:0">A quantized model and a full-precision one <em>answer differently.</em></h2>
+      <p class="col-p rv" style="margin-bottom:0; align-self:end; opacity:0.72">So we tell you which one you are calling. Every model in the catalogue lists the precisions it is served at, with the memory each one needs. Most platforms quietly pick for you and never say which.</p>
+    </div>
+
+    <div class="ladder rv" role="img" aria-label="Llama 3.3 70B Instruct served at four precisions: BF16 needs about 141 gigabytes of weights, FP8 about 73, FP4 about 43, and W4A16 about 40.">
+      <div class="lrow">
+        <span class="lp">BF16</span>
+        <span class="lbar"><span style="width:100%"></span></span>
+        <span class="lw">141 GB</span>
+      </div>
+      <div class="lrow">
+        <span class="lp">FP8</span>
+        <span class="lbar"><span style="width:51.5%"></span></span>
+        <span class="lw">73 GB</span>
+      </div>
+      <div class="lrow">
+        <span class="lp">FP4</span>
+        <span class="lbar"><span style="width:30.3%"></span></span>
+        <span class="lw">43 GB</span>
+      </div>
+      <div class="lrow">
+        <span class="lp">W4A16</span>
+        <span class="lbar"><span style="width:28%"></span></span>
+        <span class="lw">40 GB</span>
+      </div>
+    </div>
+    <p class="col-p rv" style="margin-top:22px; opacity:0.6; font-size:13.5px; max-width:70ch">Llama 3.3 70B Instruct, weights only. The same model, four ways &mdash; from a full-precision copy that needs a small cluster down to a 4-bit one that fits on a single card. Choosing is yours; knowing is ours to tell you.</p>
+  </div>
+</section>
+
+<!-- MODELS -->
+<section class="section" id="models">
+  <div class="wrap">
+    <div class="section-tag rv">The catalogue</div>
+    <div class="two-col">
+      <h2 class="col-h rv" style="margin-bottom:0">Chat, vision, speech, <em>embeddings.</em></h2>
+      <p class="col-p rv" style="margin-bottom:0; align-self:end">Open-weight models across every modality most products need, each served at the precisions listed. Need one that is not here? We add models on request.</p>
+    </div>
+
+    <div class="mgroup rv">
+      <h3>Chat and reasoning</h3>
+      <table class="mtable">
+        <thead><tr><th scope="col">Model</th><th scope="col">Context</th><th scope="col">Served at</th></tr></thead>
+        <tbody>
+          <tr>
+            <td data-l="Model"><span class="m-name">Llama 3.3 70B Instruct</span><span class="m-prov">Meta &middot; tuned for French and regional languages</span></td>
+            <td data-l="Context" class="m-ctx">131K</td>
+            <td data-l="Served at"><span class="prec">BF16</span><span class="prec">FP8</span><span class="prec">FP4</span><span class="prec">W4A16</span></td>
+          </tr>
+          <tr>
+            <td data-l="Model"><span class="m-name">Llama 3.1 8B Instruct</span><span class="m-prov">Meta &middot; fast general-purpose</span></td>
+            <td data-l="Context" class="m-ctx">131K</td>
+            <td data-l="Served at"><span class="prec">BF16</span><span class="prec">FP8</span><span class="prec">FP4</span><span class="prec">INT4</span></td>
+          </tr>
+          <tr>
+            <td data-l="Model"><span class="m-name">Mixtral 8x7B</span><span class="m-prov">Mistral &middot; mixture of experts</span></td>
+            <td data-l="Context" class="m-ctx">32K</td>
+            <td data-l="Served at"><span class="prec">BF16</span><span class="prec">FP8</span><span class="prec">INT4</span></td>
+          </tr>
+          <tr>
+            <td data-l="Model"><span class="m-name">DeepSeek R1 Distill 14B</span><span class="m-prov">DeepSeek &middot; step-by-step reasoning</span></td>
+            <td data-l="Context" class="m-ctx">65K</td>
+            <td data-l="Served at"><span class="prec">BF16</span><span class="prec">FP8</span><span class="prec">INT4</span></td>
+          </tr>
+          <tr>
+            <td data-l="Model"><span class="m-name">Qwen 2.5 0.5B Instruct</span><span class="m-prov">Alibaba &middot; small and cheap, for classification and routing</span></td>
+            <td data-l="Context" class="m-ctx">32K</td>
+            <td data-l="Served at"><span class="prec">BF16</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mgroup rv">
+      <h3>Vision</h3>
+      <table class="mtable">
+        <thead><tr><th scope="col">Model</th><th scope="col">Context</th><th scope="col">Served at</th></tr></thead>
+        <tbody>
+          <tr>
+            <td data-l="Model"><span class="m-name">Mistral Small 3.2</span><span class="m-prov">Mistral &middot; text and images</span></td>
+            <td data-l="Context" class="m-ctx">128K</td>
+            <td data-l="Served at"><span class="prec">BF16</span><span class="prec">FP8</span><span class="prec">FP4</span><span class="prec">W4A16</span></td>
+          </tr>
+          <tr>
+            <td data-l="Model"><span class="m-name">Qwen 2.5 VL 7B</span><span class="m-prov">Alibaba &middot; documents, charts and screenshots</span></td>
+            <td data-l="Context" class="m-ctx">32K</td>
+            <td data-l="Served at"><span class="prec">BF16</span><span class="prec">FP8</span><span class="prec">FP4</span><span class="prec">INT4</span></td>
+          </tr>
+          <tr>
+            <td data-l="Model"><span class="m-name">LLaVA 1.6 13B</span><span class="m-prov">Open vision-language</span></td>
+            <td data-l="Context" class="m-ctx">4K</td>
+            <td data-l="Served at"><span class="prec">FP16</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mgroup rv">
+      <h3>Speech, embeddings and translation</h3>
+      <table class="mtable">
+        <thead><tr><th scope="col">Model</th><th scope="col">Context</th><th scope="col">Served at</th></tr></thead>
+        <tbody>
+          <tr>
+            <td data-l="Model"><span class="m-name">Whisper Large v3</span><span class="m-prov">OpenAI &middot; transcription</span></td>
+            <td data-l="Context" class="m-ctx">&mdash;</td>
+            <td data-l="Served at"><span class="prec">FP16</span></td>
+          </tr>
+          <tr>
+            <td data-l="Model"><span class="m-name">Whisper Large v3 Turbo</span><span class="m-prov">OpenAI &middot; faster transcription</span></td>
+            <td data-l="Context" class="m-ctx">&mdash;</td>
+            <td data-l="Served at"><span class="prec">FP16</span></td>
+          </tr>
+          <tr>
+            <td data-l="Model"><span class="m-name">BGE-M3</span><span class="m-prov">BAAI &middot; multilingual embeddings</span></td>
+            <td data-l="Context" class="m-ctx">8K</td>
+            <td data-l="Served at"><span class="prec">FP32</span></td>
+          </tr>
+          <tr>
+            <td data-l="Model"><span class="m-name">BGE Small EN v1.5</span><span class="m-prov">BAAI &middot; compact English embeddings</span></td>
+            <td data-l="Context" class="m-ctx">512</td>
+            <td data-l="Served at"><span class="prec">FP32</span></td>
+          </tr>
+          <tr>
+            <td data-l="Model"><span class="m-name">NLLB-200 1.3B</span><span class="m-prov">Meta &middot; translation across 200 languages</span></td>
+            <td data-l="Context" class="m-ctx">1K</td>
+            <td data-l="Served at"><span class="prec">FP32</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- COMPATIBLE (dark) -->
+<section class="section dark" id="api">
+  <div class="wrap">
+    <div class="section-tag rv">The API</div>
+    <div class="two-col">
+      <h2 class="col-h rv" style="margin-bottom:0">Change the base URL. <em>Keep your code.</em></h2>
+      <p class="col-p rv" style="margin-bottom:0; align-self:end; opacity:0.72">The gateway speaks the OpenAI protocol, so the SDK you already use works unchanged. No new client, no rewrite, no lock-in in either direction &mdash; the same code points back at anyone else just as easily.</p>
+    </div>
+
+    <div class="codewrap rv">
+      <div class="codebar"><span>Python</span><span>chat completions</span></div>
+<pre><code><span class="c-com"># the only line that changes</span>
+client = OpenAI(
+    <span class="c-key">base_url</span> = <span class="c-key">"https://api.pareto.ai/v1"</span>,
+    <span class="c-key">api_key</span>  = os.environ[<span class="c-key">"PARETO_API_KEY"</span>],
+)
+
+response = client.chat.completions.create(
+    <span class="c-key">model</span> = <span class="c-key">"meta-llama/Llama-3.3-70B-Instruct"</span>,
+    <span class="c-key">messages</span> = [{<span class="c-key">"role"</span>: <span class="c-key">"user"</span>, <span class="c-key">"content"</span>: <span class="c-key">"Bonjour"</span>}],
+)</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- BEYOND SERVING -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-tag rv">Beyond serving</div>
+    <div class="two-col">
+      <h2 class="col-h rv" style="margin-bottom:0">A model you can <em>make your own.</em></h2>
+      <p class="col-p rv" style="margin-bottom:0; align-self:end">Serving an open model is the floor. The work that makes it useful &mdash; teaching it your domain, proving it got better, keeping track of which version is live &mdash; runs on the same platform.</p>
+    </div>
+    <div class="cap-list">
+      <div class="cap-item rv"><span class="cap-n">01</span><h3 class="cap-h">Fine-<em>tuning</em></h3><p class="cap-p">Train an open model on your own data and serve the result as your own endpoint. The weights stay in your project.</p></div>
+      <div class="cap-item rv"><span class="cap-n">02</span><h3 class="cap-h">Evaluations</h3><p class="cap-p">Score a model against your own test set before it reaches production, and again after every change, so "it got better" is a measurement rather than a feeling.</p></div>
+      <div class="cap-item rv"><span class="cap-n">03</span><h3 class="cap-h">Model <em>registry</em></h3><p class="cap-p">Every model, variant and fine-tune you run, versioned, with what it scored and what is currently serving traffic.</p></div>
+      <div class="cap-item rv"><span class="cap-n">04</span><h3 class="cap-h">Retrieval</h3><p class="cap-p">Vector storage and embeddings sit on the same nodes as the models, so retrieval-augmented answers are a local call rather than a round trip across an ocean.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-final">
+  <div class="wrap">
+    <div class="rv">
+      <h2>Point your client <em>somewhere closer.</em></h2>
+      <p>Tell us what you are building and which models you need. We will get you a key and a project.</p>
+      <div class="actions">
+        <a class="btn btn-invert" href="/#partner">Get an API key</a>
+        <a class="btn btn-invert-ghost" href="/cloud.html">See the cloud &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-inner">
+      <div class="foot-logo">Pareto Labs</div>
+      <ul class="foot-links">
+        <li><a href="/infrastructure.html">Infrastructure</a></li>
+        <li><a href="/inference.html">Inference</a></li>
+        <li><a href="/cloud.html">Cloud</a></li>
+        <li><a href="/platform.html">Platform</a></li>
+        <li><a href="/industries.html">Industries</a></li>
+        <li><a href="/experts.html">Experts</a></li>
+        <li><a href="/research.html">Research</a></li>
+        <li><a href="/work-with-us.html">Work With Us</a></li>
+        <li><a href="/#partner">Build with Pareto</a></li>
+        <li><a href="mailto:contact@trypareto.ai">Contact</a></li>
+        <li><a href="/privacy.html">Privacy</a></li>
+        <li><a href="/terms.html">Terms</a></li>
+      </ul>
+      <p class="foot-copy">&copy; 2026 Pareto Labs, Inc.</p>
+    </div>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+<script src="/assets/build-modal.js" defer></script>
+<script src="/assets/newsletter.js" defer></script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

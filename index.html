@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pareto Labs — Continuous-Learning AI for Real-World Operations</title>
-  <meta name="description" content="Pareto Labs is a continuously learning AI platform and implementation partner for emerging markets, SMBs, vertical operating businesses and governments — sovereign AI systems that learn from your data, customers, workflows, and vetted domain experts, and improve over time.">
+  <title>Pareto Labs — Sovereign Inference and Cloud for Real-World Operations</title>
+  <meta name="description" content="Pareto Labs runs sovereign AI inference and cloud infrastructure for emerging markets — open-source models and managed compute served inside your own country — and builds continuously learning AI systems on top of it.">
   <link rel="canonical" href="https://www.trypareto.ai/">
   <meta name="theme-color" content="#F5F2EB">
 
@@ -16,8 +16,8 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Pareto Labs">
-  <meta property="og:title" content="Pareto Labs — Continuous-Learning AI for Real-World Operations">
-  <meta property="og:description" content="A continuously learning AI platform and implementation partner for emerging markets, SMBs, vertical operating businesses and governments. Sovereign AI systems that improve with your business.">
+  <meta property="og:title" content="Pareto Labs — Sovereign Inference and Cloud for Real-World Operations">
+  <meta property="og:description" content="Sovereign AI inference and cloud infrastructure for emerging markets. Open-source models and managed compute, served inside your own country — with continuously learning AI systems built on top.">
   <meta property="og:url" content="https://www.trypareto.ai/">
   <meta property="og:image" content="https://www.trypareto.ai/og/pareto-labs-v2.png">
   <meta property="og:image:secure_url" content="https://www.trypareto.ai/og/pareto-labs-v2.png">
@@ -193,13 +193,14 @@
   .ind-grid .ind-cta { grid-column: span 2; }
   .ind-grid .ind-cta p { max-width: 52ch; }
 
-  /* ── PE WHERE-WE-HELP ────────────────────────────── */
+  /* REMOVED (private equity) — delete this wrapper to restore
   .pe-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; }
   .pe-cols ul { list-style: none; }
   .pe-cols li { font-size: 14px; font-weight: 300; padding: 12px 0; border-top: 1px solid var(--wl); display: flex; align-items: center; gap: 11px; }
   .pe-cols li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
   .pe-loop { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 36px; }
   .pe-loop span { font-size: 12.5px; font-weight: 400; opacity: 0.75; border: 1px solid var(--wl); border-radius: 100px; padding: 7px 15px; }
+  */
 
   /* ── FORM ────────────────────────────────────────── */
   .form-box { background: var(--w2); padding: 44px; }
@@ -240,6 +241,20 @@
   .foot-links a:hover { color: var(--wi); }
   .foot-copy { font-size: 12px; font-weight: 300; color: var(--wi3); }
 
+  /* ── TWO ENGINES ────────────────────────────── */
+  .eng-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; }
+  .eng { display: flex; flex-direction: column; border: 1px solid var(--wl); background: var(--w); padding: 38px 34px 32px; transition: border-color .25s ease, transform .25s ease, background .25s ease; }
+  .eng:hover { border-color: var(--wi3); transform: translateY(-2px); background: var(--w2); }
+  .eng:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  .eng-n { font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+  .eng h3 { font-family: var(--serif); font-size: 30px; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 12px; }
+  .eng h3 em { font-style: italic; font-weight: 300; }
+  .eng p { font-size: 14.5px; font-weight: 300; line-height: 1.7; opacity: 0.7; margin-bottom: 22px; }
+  .eng-go { margin-top: auto; font-size: 13px; color: var(--gold); }
+  @media (max-width: 860px) { .eng-grid { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) { .eng { transition: none; } .eng:hover { transform: none; } }
+
+
   /* ── ANIMATIONS ──────────────────────────────────── */
   .cr { overflow: hidden; }
   .cr-inner { display: block; transform: translateY(100%); transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -269,7 +284,6 @@
     .stat:nth-child(n+3) { border-top: 1px solid var(--dl); padding-top: 32px; }
     .ind-grid { grid-template-columns: 1fr 1fr; }
     .ind-grid .ind-cta { grid-column: span 1; }
-    .pe-cols { grid-template-columns: 1fr; }
     .steps { grid-template-columns: 1fr; gap: 36px; }
     .step, .step:not(:first-child) { border-right: none; border-bottom: 1px solid var(--wl); padding: 0 0 36px; }
     .step:last-child { border-bottom: none; padding-bottom: 0; }
@@ -300,8 +314,9 @@
 <nav id="nav">
   <a class="nav-logo" href="/" aria-label="Pareto Labs"><img class="brand-mark" src="/assets/logo.png" alt=""><span>areto&nbsp;Labs</span></a>
   <ul class="nav-links">
+    <li><a href="/infrastructure.html">Infrastructure</a></li>
     <li><a href="/platform.html">Platform</a></li>
-    <li><a href="/private-equity.html">Private Equity</a></li>
+    <!-- REMOVED (private equity) <li><a href="/private-equity.html">Private Equity</a></li> -->
     <li><a href="/industries.html">Industries</a></li>
     <li><a href="/experts.html">Experts</a></li>
     <li><a href="/research.html">Research</a></li>
@@ -312,13 +327,14 @@
 <!-- ═══ HERO A — OPERATIONS (light) ══════════════ -->
 <div id="section-human" class="hero-split">
   <div class="hero-text-col">
-    <p class="hero-eyebrow">Continuous-Learning AI</p>
+    <p class="hero-eyebrow">Inference · Cloud · Continuous-Learning AI</p>
     <h1 class="hero-h1">
-      <span class="cr"><span class="cr-inner">Sovereign AI</span></span>
-      <span class="cr"><span class="cr-inner" style="transition-delay:.10s">solutions for</span></span>
-      <span class="cr"><span class="cr-inner" style="transition-delay:.20s"><em>real-world operations.</em></span></span>
+      <span class="cr"><span class="cr-inner">Sovereign</span></span>
+      <span class="cr"><span class="cr-inner" style="transition-delay:.08s">Inference</span></span>
+      <span class="cr"><span class="cr-inner" style="transition-delay:.16s">and Cloud for</span></span>
+      <span class="cr"><span class="cr-inner" style="transition-delay:.24s"><em>real-world operations.</em></span></span>
     </h1>
-    <p class="hero-body rv" style="transition-delay:.34s">Pareto helps emerging markets, SMBs, vertical operating businesses and governments implement sovereign AI systems that learn from internal data, customer interactions, operational workflows, and vetted domain experts — improving performance automatically over time.</p>
+    <p class="hero-body rv" style="transition-delay:.34s">Pareto runs the inference and cloud infrastructure that emerging markets run on — open-source models and managed compute, served inside your own country instead of rented from a region on another continent. On top of it we build AI systems that keep learning from the operations they serve.</p>
     <div class="hero-ctas rv" style="transition-delay:.46s">
       <a href="#partner" class="btn btn-solid btn-arr">Build with Pareto</a>
       <a href="#how" class="btn btn-outline">See how it works</a>
@@ -379,6 +395,33 @@
     </div>
   </div>
 </div>
+
+<!-- TWO ENGINES -->
+<div class="section" id="engines">
+  <div class="wrap">
+    <div class="section-tag rv">Infrastructure</div>
+    <div class="two-col">
+      <h2 class="col-h" style="margin-bottom:0">We don&rsquo;t rent the compute. <em>We run it.</em></h2>
+      <p class="col-p" style="margin-bottom:0; align-self:end">Pareto operates its own inference and cloud platform for emerging markets — open-source models and managed compute, served inside your own country rather than from a region on another continent. Our AI systems are its first workload, and it is open to anyone building on it.</p>
+    </div>
+
+    <div class="eng-grid">
+      <a class="eng rv" href="/inference.html">
+        <div class="eng-n">01 &mdash; Inference</div>
+        <h3>Open models, <em>served.</em></h3>
+        <p>Chat, vision, transcription, embeddings and translation behind one OpenAI-compatible API, with fine-tuning, evaluations and retrieval on the same platform.</p>
+        <span class="eng-go">Explore inference &rarr;</span>
+      </a>
+      <a class="eng rv" style="transition-delay:.06s" href="/cloud.html">
+        <div class="eng-n">02 &mdash; Cloud</div>
+        <h3>Everything <em>around</em> the model.</h3>
+        <p>Apps, jobs, Postgres, vector, key-value and object storage, with logs, metrics and traces — running on the same nodes as the models they call.</p>
+        <span class="eng-go">Explore cloud &rarr;</span>
+      </a>
+    </div>
+  </div>
+</div>
+
 
 <!-- ═══ PLATFORM (dark) ══════════════════════════ -->
 <div class="section-dark" id="platform">
@@ -486,7 +529,7 @@
   </div>
 </div>
 
-<!-- ═══ PRIVATE EQUITY ═══════════════════════════ -->
+<!-- REMOVED (private equity) — delete this wrapper to restore the section
 <div class="section" id="private-equity" style="background:var(--w2);">
   <div class="wrap">
     <div class="section-tag rv">Private equity</div>
@@ -512,6 +555,8 @@
     </div>
   </div>
 </div>
+-->
+
 
 <!-- ═══ PARTNER FORM ═════════════════════════════ -->
 <div class="section" id="partner">
@@ -542,8 +587,8 @@
                 <select id="c-type" name="type">
                   <option value="">Select one</option>
                   <option>Operating company (SMB / mid-market)</option>
-                  <option>Private equity firm</option>
-                  <option>PE portfolio company</option>
+                  <option>Developer / startup (inference)</option>
+                  <option>Team deploying workloads (cloud)</option>
                   <option>Vertical / industry business</option>
                   <option>Government / public institution</option>
                   <option>Other</option>
@@ -591,8 +636,11 @@
     <div class="foot-inner">
       <div class="foot-logo">Pareto Labs</div>
       <ul class="foot-links">
+        <li><a href="/infrastructure.html">Infrastructure</a></li>
+        <li><a href="/inference.html">Inference</a></li>
+        <li><a href="/cloud.html">Cloud</a></li>
         <li><a href="/platform.html">Platform</a></li>
-        <li><a href="/private-equity.html">Private Equity</a></li>
+        <!-- REMOVED (private equity) <li><a href="/private-equity.html">Private Equity</a></li> -->
         <li><a href="/industries.html">Industries</a></li>
         <li><a href="/experts.html">Experts</a></li>
         <li><a href="/research.html">Research</a></li>
@@ -656,7 +704,7 @@ if (REDUCE || !('IntersectionObserver' in window)) {
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   let nodes = [], W, H;
-  const LABELS = ['Manufacturing','Retail','Healthcare Services','Logistics','Business Services','Private Equity','Sovereign AI','Customer Signals','Expert Intelligence','Operational Data','Continuous Improvement'];
+  const LABELS = ['Manufacturing','Retail','Healthcare Services','Logistics','Business Services','Sovereign AI','Customer Signals','Expert Intelligence','Operational Data','Continuous Improvement'];
   const COLORS = ['rgba(190,155,100,', 'rgba(170,135,85,', 'rgba(210,175,120,', 'rgba(155,120,75,'];
 
   function resize() {
