@@ -1,32 +1,37 @@
-# "Build with Pareto" form — backend setup (free, no SheetDB)
+# Website intake setup
 
-The site's contact form (modal + homepage inline form) posts to a **Google Apps Script web app** that:
-1. writes each request to your **existing Google Sheet** (the same one SheetDB used), into the **"Early Access"** tab,
-2. emails the requester a confirmation via **Resend**, and
-3. posts a notification to **Slack**.
+The Website posts to `/api/site-intake` (a same-origin Vercel function), which validates the form and forwards it to this Google Apps Script. Apps Script writes the HubSpot contact and form-specific note, logs to Sheets, notifies Slack, and optionally adds explicit newsletter opt-ins to a Resend audience. Requester receipts use Resend but stay disabled until both email drafts are approved.
 
-No SheetDB, no paid layer — Apps Script writes to the Google Sheet directly.
+## Vercel environment variables
 
-## What I need from you (paste into the Apps Script CONFIG, not the website repo)
-- **`SHEET_ID`** — open your existing leads Google Sheet; copy the ID from the URL: `docs.google.com/spreadsheets/d/`**`THIS_PART`**`/edit`.
-- **`SLACK_WEBHOOK`** — a Slack Incoming Webhook URL (reuse your existing Slack app — the `SLACK_WEBHOOK_EXPERTS` one).
-- **`RESEND_API_KEY`** — your Resend key (`re_…`).
-- **`FROM_EMAIL`** — a Resend‑verified sender. Default is `Pareto Labs <noreply@auth.trypareto.ai>`; change if you want a `build@`/`hello@` sender (must be verified in Resend).
-- `NOTIFY_TEAM` is already `contact@trypareto.ai` (internal copy of each lead).
+Set these for the Website project in Vercel. The matching shared secret must also be set in Apps Script Script Properties.
 
-> Secrets live only inside your Apps Script project. The copy in this repo keeps them blank.
+- `APPS_SCRIPT_URL` — deployed Apps Script web app URL ending in `/exec`.
+- `SITE_INTAKE_SHARED_SECRET` — a random secret shared only by Vercel and Apps Script.
 
-## Deploy (~3 min)
-1. **script.google.com → New project** → paste in `build-request.gs` → fill CONFIG.
-2. **Deploy → New deployment → ⚙ → Web app** → **Execute as: Me** → **Who has access: Anyone** → **Deploy** → **Authorize**.
-3. Copy the **Web app URL** (ends in `/exec`).
-4. **Send me that `/exec` URL** → I paste it into `assets/build-modal.js` → `BUILD_ENDPOINT` and redeploy the site. Live.
+## Apps Script Script Properties
 
-## Test
-- Open the `/exec` URL in a browser → `{"ok":true,"service":"pareto-build-request"}`.
-- After wiring, submit the form → confirmation email + Slack message + new "Early Access" row.
+Open the Apps Script project that owns the existing `/exec` endpoint, then **Project Settings → Script Properties**. Add:
 
-## Notes
-- Front-end posts `application/x-www-form-urlencoded` with `mode:'no-cors'` (no CORS preflight). Apps Script reads `e.parameter`.
-- `logToSheet_` is header-aware: it maps fields to whatever column headers your tab already has, so renaming the tab to "Build with Pareto" or adjusting columns won't break it.
-- Email copy/branding lives in `emailRequester_()`.
+- `SITE_INTAKE_SHARED_SECRET` — same value as Vercel.
+- `HUBSPOT_ACCESS_TOKEN` — private app token with contact read/write and note create/association access.
+- `SHEET_ID` — existing intake spreadsheet ID.
+- `SLACK_WEBHOOK` — optional comma-separated incoming webhook URLs.
+- `SLACK_MENTION`, `SLACK_BOT_TOKEN`, `SLACK_DM_USERS` — optional Slack notifications.
+- `RESEND_API_KEY` — Resend API key; required for receipts or audience opt-ins.
+- `RESEND_AUDIENCE_ID` — audience ID. Configure this before release because the questionnaire forms offer an optional newsletter opt-in; only checked submissions are added.
+- `FROM_EMAIL` — verified sender, for example `Pareto Labs <noreply@auth.trypareto.ai>`.
+- `ENABLE_RECEIPT_EMAILS` — keep unset or `false` until both drafts in `docs/email-templates/` are approved; set `true` only after approval.
+
+Do not put credential values into this repository. Apps Script returns an error to the Website if HubSpot is not configured, so a submission is never reported as successful before the contact and note are stored. Sheet, Slack, audience, and receipt errors are logged server-side after CRM success. If an opted-in submission cannot be added to Resend, the confirmation page tells the visitor.
+
+## Deploy and verify
+
+1. Update the existing Apps Script project with `build-request.gs` and configure Script Properties.
+2. Deploy a new version of the existing web app as **Execute as: Me** and **Who has access: Anyone**. Keep the current `/exec` URL if possible.
+3. Add the two Vercel environment variables and redeploy the Website preview.
+4. Submit company and expert test entries with an authorized test address. Confirm each contact and its corresponding note in HubSpot, a row in the appropriate sheet tab, and the Slack notification.
+5. Confirm with newsletter consent checked and unchecked that only checked test entries appear in the Resend audience.
+6. Review both receipt drafts. Enable `ENABLE_RECEIPT_EMAILS` only after approval, then verify delivery to an authorized test inbox.
+
+The existing newsletter signup uses the same Apps Script endpoint and remains separate from questionnaire submissions.

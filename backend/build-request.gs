@@ -1,201 +1,256 @@
-/**
- * Pareto Labs — "Build with Pareto" request handler (Google Apps Script).
- * Free backend: writes each request to your existing Google Sheet, emails the
- * requester a confirmation (via Resend), and posts a Slack notification.
- *
- * SETUP (see backend/README.md):
- *   1. script.google.com → New project → paste this file in.
- *   2. Fill the CONFIG values below (these live only in YOUR Apps Script
- *      project — never commit real keys to the website repo).
- *   3. Deploy → New deployment → "Web app" → Execute as: Me →
- *      Who has access: "Anyone" → Deploy → Authorize.
- *   4. Send the resulting /exec URL to paste into BUILD_ENDPOINT in
- *      /assets/build-modal.js.
- */
-
-// ───────────────────────── CONFIG ─────────────────────────
-var SHEET_ID       = '';   // the existing Google Sheet ID (from its URL: /spreadsheets/d/THIS/edit)
-var SHEET_TAB      = 'Leads Website';                // the tab in your Google Sheet (created automatically if missing)
-var SLACK_WEBHOOK  = '';    // one or more Slack Incoming Webhook URLs, comma-separated
-var SLACK_MENTION  = '';    // optional: your Slack member ID to @mention you (e.g. 'U0123ABCD')
-var SLACK_BOT_TOKEN = '';   // optional: xoxb-… bot token to ALSO DM you in your Slack inbox
-var SLACK_DM_USERS  = '';   // optional: comma-separated member IDs to DM (e.g. 'U0123ABCD')
-var RESEND_API_KEY = '';    // Resend API key (re_...) — paste here, not in the website repo
-var FROM_EMAIL     = 'Pareto Labs <noreply@auth.trypareto.ai>';  // a Resend-verified sender
-var NOTIFY_TEAM    = 'contact@trypareto.ai';           // internal copy of each lead ('' = skip)
-// ───────────────────────────────────────────────────────────
+/* Pareto Labs website intake endpoint. Configure all secrets in Script Properties. */
+var PROP = PropertiesService.getScriptProperties();
+var SHEET_ID = PROP.getProperty('SHEET_ID') || '';
+var SLACK_WEBHOOK = PROP.getProperty('SLACK_WEBHOOK') || '';
+var SLACK_MENTION = PROP.getProperty('SLACK_MENTION') || '';
+var SLACK_BOT_TOKEN = PROP.getProperty('SLACK_BOT_TOKEN') || '';
+var SLACK_DM_USERS = PROP.getProperty('SLACK_DM_USERS') || '';
+var HUBSPOT_ACCESS_TOKEN = PROP.getProperty('HUBSPOT_ACCESS_TOKEN') || '';
+var SITE_INTAKE_SHARED_SECRET = PROP.getProperty('SITE_INTAKE_SHARED_SECRET') || '';
+var RESEND_API_KEY = PROP.getProperty('RESEND_API_KEY') || '';
+var RESEND_AUDIENCE_ID = PROP.getProperty('RESEND_AUDIENCE_ID') || '';
+var FROM_EMAIL = PROP.getProperty('FROM_EMAIL') || 'Pareto Labs <noreply@auth.trypareto.ai>';
+var ENABLE_RECEIPT_EMAILS = PROP.getProperty('ENABLE_RECEIPT_EMAILS') === 'true';
 
 function doPost(e) {
   try {
     var p = (e && e.parameter) ? e.parameter : {};
-    if (p.form === 'newsletter') { subscribeNewsletter_((p.email || '').trim(), (p.page || '').trim()); return json_({ ok: true }); }
-    var lead = {
-      name:      (p.name || '').trim(),
-      email:     (p.email || '').trim(),
-      company:   (p.company || '').trim(),
-      type:      (p.type || '').trim(),
-      challenge: (p.challenge || '').trim(),
-      page:      (p.page || '').trim(),
-      ts:        new Date()
-    };
-    if (lead.name && lead.email) {
-      logToSheet_(lead);
-      emailRequester_(lead);
-      notifySlack_(lead);
+    if (p.form === 'newsletter') {
+      if (!SITE_INTAKE_SHARED_SECRET || !constantTimeEqual_(p.shared_secret || '', SITE_INTAKE_SHARED_SECRET)) return json_({ ok: false, code: 'unauthorized' });
+      var newsletterEmail = trim_(p.email).toLowerCase();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newsletterEmail)) return json_({ ok: false, code: 'invalid_email' });
+      subscribeNewsletter_(newsletterEmail, trim_(p.page));
+      return json_({ ok: true });
     }
-    return json_({ ok: true });
+    if (!SITE_INTAKE_SHARED_SECRET || !constantTimeEqual_(p.shared_secret || '', SITE_INTAKE_SHARED_SECRET)) return json_({ ok: false, code: 'unauthorized' });
+    var form = p.form || '';
+    if (form !== 'company_inquiry' && form !== 'expert_application') return json_({ ok: false, code: 'invalid_form' });
+    var lead = normalizeLead_(p, form);
+    var validation = validateLead_(lead);
+    if (validation) return json_({ ok: false, code: 'invalid_submission', message: validation });
+    if (!HUBSPOT_ACCESS_TOKEN) return json_({ ok: false, code: 'hubspot_not_configured' });
+    if (!lead.submissionId || !/^[A-Za-z0-9_-]{8,100}$/.test(lead.submissionId)) return json_({ ok: false, code: 'invalid_submission_id' });
+    var lock = LockService.getScriptLock();
+    lock.waitLock(25000);
+    var cached = PROP.getProperty('intake_' + lead.submissionId);
+    if (cached) {
+      var previous = {};
+      try { previous = JSON.parse(cached); } catch (ignored) { previous = {}; }
+      lock.releaseLock();
+      return json_({ ok: true, emailStatus: 'already_processed', newsletterStatus: previous.newsletterStatus || 'already_processed', duplicate: true });
+    }
+    var contactId, newsletterStatus = 'not_requested';
+    try {
+      contactId = upsertHubSpotContact_(lead);
+      createHubSpotNote_(lead, contactId);
+      if (p.newsletter_consent === 'true') {
+        if (!RESEND_AUDIENCE_ID) {
+          newsletterStatus = 'not_configured';
+          console.error('Newsletter consent received but RESEND_AUDIENCE_ID is not configured.');
+        } else {
+          try { addResendAudienceContact_(lead); newsletterStatus = 'subscribed'; }
+          catch (audienceError) { newsletterStatus = 'failed'; console.error('Resend audience add failed: ' + String(audienceError)); }
+        }
+      }
+      PROP.setProperty('intake_' + lead.submissionId, JSON.stringify({ contactId: contactId, newsletterStatus: newsletterStatus }));
+    } finally {
+      lock.releaseLock();
+    }
+    try { logToSheet_(lead); } catch (sheetError) { console.error('Website intake sheet logging failed: ' + String(sheetError)); }
+    try { notifySlack_(lead); } catch (slackError) { console.error('Website intake Slack notification failed: ' + String(slackError)); }
+    var emailStatus = 'awaiting_approval';
+    if (ENABLE_RECEIPT_EMAILS) {
+      try {
+        if (!RESEND_API_KEY) throw new Error('Resend is enabled but RESEND_API_KEY is missing.');
+        sendReceipt_(lead);
+        emailStatus = 'sent';
+      } catch (emailError) {
+        console.error('Website intake Resend receipt failed: ' + String(emailError));
+        emailStatus = 'failed';
+      }
+    }
+    return json_({ ok: true, emailStatus: emailStatus, newsletterStatus: newsletterStatus });
   } catch (err) {
-    return json_({ ok: false, error: String(err) });
+    console.error('Website intake failed: ' + String(err));
+    return json_({ ok: false, code: 'processing_failed' });
   }
 }
 
-function doGet() { return json_({ ok: true, service: 'pareto-build-request' }); }
+function doGet() { return json_({ ok: true, service: 'pareto-site-intake' }); }
+
+function normalizeLead_(p, form) {
+  var expert = form === 'expert_application';
+  return {
+    form: form, submissionId: trim_(p.submission_id), name: trim_(p.name), email: trim_(p.email).toLowerCase(),
+    company: trim_(expert ? p.organization : p.company), role: trim_(expert ? p.current_role : p.type),
+    challenge: trim_(expert ? p.background : p.challenge), page: trim_(p.page), ts: new Date(),
+    domain: trim_(p.domain), years: trim_(p.years_experience), linkedin: trim_(p.linkedin),
+    organization: trim_(p.organization), currentRole: trim_(p.current_role),
+    newsletterConsent: p.newsletter_consent === 'true'
+  };
+}
+
+function validateLead_(lead) {
+  if (!lead.name || lead.name.length > 120 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email) || lead.email.length > 254) return 'Invalid name or email.';
+  var companyRoles = ['Operating company (SMB / mid-market)', 'Developer / startup (inference)', 'Team deploying workloads (cloud)', 'Vertical / industry business', 'Government / public institution', 'Other'];
+  if (lead.form === 'company_inquiry' && (!lead.company || companyRoles.indexOf(lead.role) === -1 || !lead.challenge)) return 'Missing company inquiry fields.';
+  if (lead.form === 'expert_application') {
+    if (!lead.role || !lead.domain || ['0–4', '5–10', '11–15', '16–20', '21+'].indexOf(lead.years) === -1 || !lead.challenge) return 'Missing expert questionnaire fields.';
+    if (lead.linkedin && !/^https:\/\/(www\.)?linkedin\.com\/in\/[A-Za-z0-9_%-]+\/?(?:\?.*)?$/.test(lead.linkedin)) return 'Invalid LinkedIn profile URL.';
+  }
+  return '';
+}
+
+function upsertHubSpotContact_(lead) {
+  var name = lead.name.split(/\s+/);
+  var props = { email: lead.email, firstname: name.shift() || '', lastname: name.join(' ') };
+  if (lead.company) props.company = lead.company;
+  if (lead.form === 'expert_application' && lead.role) props.jobtitle = lead.role;
+  var response = hubspotFetch_('/crm/v3/objects/contacts/batch/upsert', 'post', {
+    inputs: [{ id: lead.email, idProperty: 'email', properties: props }]
+  });
+  if (response.status >= 400) throw new Error('HubSpot contact upsert failed (' + response.status + ').');
+  var body = JSON.parse(response.body || '{}');
+  var result = (body.results && body.results[0]) || body;
+  if (!result.id) throw new Error('HubSpot did not return a contact ID.');
+  return String(result.id);
+}
+
+function createHubSpotNote_(lead, contactId) {
+  var lines = [lead.form === 'company_inquiry' ? 'Website company inquiry' : 'Website expert application', 'Name: ' + lead.name, 'Email: ' + lead.email];
+  if (lead.company) lines.push('Company / organization: ' + lead.company);
+  if (lead.role) lines.push(lead.form === 'company_inquiry' ? 'Role: ' + lead.role : 'Current role: ' + lead.role);
+  if (lead.domain) lines.push('Domain: ' + lead.domain);
+  if (lead.years) lines.push('Years of experience: ' + lead.years);
+  if (lead.linkedin) lines.push('LinkedIn: ' + lead.linkedin);
+  lines.push('Newsletter updates: ' + (lead.newsletterConsent ? 'explicitly opted in' : 'not opted in'));
+  lines.push(lead.form === 'company_inquiry' ? 'What they want to build or improve:' : 'Expertise background:', lead.challenge, 'Source page: ' + lead.page, 'Submission ID: ' + lead.submissionId);
+  var response = hubspotFetch_('/crm/v3/objects/notes', 'post', {
+    properties: { hs_timestamp: String(lead.ts.getTime()), hs_note_body: escapeHtml_(lines.join('\n')).replace(/\n/g, '<br>') },
+    associations: [{ to: { id: contactId }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 202 }] }]
+  });
+  if (response.status >= 400) throw new Error('HubSpot note creation failed (' + response.status + ').');
+}
+
+function hubspotFetch_(path, method, payload) {
+  var response = UrlFetchApp.fetch('https://api.hubapi.com' + path, {
+    method: method, contentType: 'application/json', headers: { Authorization: 'Bearer ' + HUBSPOT_ACCESS_TOKEN },
+    payload: JSON.stringify(payload), muteHttpExceptions: true
+  });
+  return { status: response.getResponseCode(), body: response.getContentText() };
+}
+
+function logToSheet_(lead) {
+  if (!SHEET_ID) throw new Error('SHEET_ID is not configured.');
+  var ss = SpreadsheetApp.openById(SHEET_ID);
+  var tab = lead.form === 'company_inquiry' ? 'Leads Website' : 'Expert Requests';
+  var sh = ss.getSheetByName(tab) || ss.insertSheet(tab);
+  var headers = sh.getLastRow() > 0 ? sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0] : [];
+  var defaults = ['Timestamp', 'Submission ID', 'Name', 'Email', 'Company / Organization', 'Role', 'Domain', 'Years Experience', 'LinkedIn', 'Challenge / Background', 'Newsletter Consent', 'Page'];
+  var map = {
+    'timestamp': lead.ts, 'date': lead.ts, 'submission id': lead.submissionId,
+    'name': lead.name, 'full name': lead.name, 'email': lead.email, 'work email': lead.email,
+    'company': lead.company, 'organization': lead.company, 'company / organization': lead.company,
+    'role': lead.role, 'you are': lead.role, 'type': lead.role, 'current role': lead.role,
+    'domain': lead.domain, 'primary domain': lead.domain,
+    'years experience': lead.years, 'years of experience': lead.years,
+    'linkedin': lead.linkedin, 'linkedin profile': lead.linkedin,
+    'challenge': lead.challenge, 'challenge / background': lead.challenge,
+    'where could ai help your operations?': lead.challenge, 'message': lead.challenge, 'background': lead.challenge,
+    'newsletter consent': lead.newsletterConsent ? 'yes' : 'no',
+    'page': lead.page, 'source': lead.page
+  };
+  if (!headers.length || !String(headers[0]).trim()) {
+    sh.appendRow(defaults);
+    headers = defaults;
+  } else {
+    ['Submission ID', 'Newsletter Consent'].forEach(function (requiredHeader) {
+      var exists = headers.some(function (header) { return String(header).trim().toLowerCase() === requiredHeader.toLowerCase(); });
+      if (!exists) {
+        sh.getRange(1, headers.length + 1).setValue(requiredHeader);
+        headers.push(requiredHeader);
+      }
+    });
+  }
+  sh.appendRow(headers.map(function (header) {
+    var key = String(header).trim().toLowerCase();
+    return Object.prototype.hasOwnProperty.call(map, key) ? map[key] : '';
+  }));
+}
 
 function subscribeNewsletter_(email, page) {
-  if (!email) return;
+  if (!RESEND_AUDIENCE_ID || !RESEND_API_KEY) throw new Error('Resend audience is not configured.');
+  addResendNewsletterContact_(email);
   if (SHEET_ID) {
     var ss = SpreadsheetApp.openById(SHEET_ID);
     var sh = ss.getSheetByName('Newsletter') || ss.insertSheet('Newsletter');
     if (sh.getLastRow() === 0) sh.appendRow(['Timestamp', 'Email', 'Page']);
     sh.appendRow([new Date(), email, page || '']);
   }
-  if (SLACK_WEBHOOK) {
-    var payload = JSON.stringify({ text: '📰 New newsletter subscriber: ' + email + (page ? '  (' + page + ')' : '') });
-    SLACK_WEBHOOK.split(',').forEach(function (url) { url = url.trim(); if (url) UrlFetchApp.fetch(url, { method: 'post', contentType: 'application/json', payload: payload, muteHttpExceptions: true }); });
-  }
+  if (SLACK_WEBHOOK) SLACK_WEBHOOK.split(',').forEach(function (url) { url = url.trim(); if (url) UrlFetchApp.fetch(url, { method: 'post', contentType: 'application/json', payload: JSON.stringify({ text: '📰 New newsletter subscriber: ' + email + (page ? '  (' + page + ')' : '') }), muteHttpExceptions: true }); });
 }
 
-/* Header-aware append: maps fields to whatever columns the tab already has. */
-function logToSheet_(lead) {
-  if (!SHEET_ID) return;
-  var ss = SpreadsheetApp.openById(SHEET_ID);
-  var sh = ss.getSheetByName(SHEET_TAB) || ss.insertSheet(SHEET_TAB);
-  var lastCol = sh.getLastColumn();
-  var headers = lastCol > 0 ? sh.getRange(1, 1, 1, lastCol).getValues()[0] : [];
-  var map = {
-    'timestamp': lead.ts, 'date': lead.ts,
-    'name': lead.name, 'full name': lead.name,
-    'email': lead.email, 'work email': lead.email,
-    'company': lead.company, 'organization': lead.company,
-    'role': lead.type, 'you are': lead.type, 'type': lead.type,
-    'company size': '', 'size': '',
-    'challenge': lead.challenge, 'where could ai help your operations?': lead.challenge, 'message': lead.challenge,
-    'page': lead.page, 'source': lead.page
-  };
-  if (headers.length && String(headers[0]).trim() !== '') {
-    var row = headers.map(function (h) {
-      var key = String(h).trim().toLowerCase();
-      return (key in map) ? map[key] : '';
-    });
-    sh.appendRow(row);
-  } else {
-    sh.appendRow(['Timestamp', 'Name', 'Email', 'Company', 'Type', 'Challenge', 'Page']);
-    sh.appendRow([lead.ts, lead.name, lead.email, lead.company, lead.type, lead.challenge, lead.page]);
-  }
+function addResendNewsletterContact_(email, firstName) {
+  var response = UrlFetchApp.fetch('https://api.resend.com/audiences/' + encodeURIComponent(RESEND_AUDIENCE_ID) + '/contacts', {
+    method: 'post', contentType: 'application/json', headers: { Authorization: 'Bearer ' + RESEND_API_KEY },
+    payload: JSON.stringify({ email: email, first_name: firstName || undefined, unsubscribed: false }), muteHttpExceptions: true
+  });
+  var code = response.getResponseCode();
+  if (code < 200 || code >= 300 && code !== 409) throw new Error('Resend audience API returned ' + code + '.');
 }
 
-function emailRequester_(lead) {
-  var first = (lead.name.split(' ')[0] || lead.name);
-  var subject = 'We received your request — Pareto Labs';
-  var html =
-    '<div style="font-family:Georgia,\'Times New Roman\',serif;color:#14120F;max-width:520px;margin:0 auto;padding:8px 4px;">' +
-      '<p style="font-size:19px;margin:0 0 18px;">Thank you, ' + escapeHtml_(first) + '.</p>' +
-      '<p style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.75;color:#3a3833;margin:0 0 14px;">' +
-        'We&rsquo;ve received your request to build with Pareto. Our team reviews every inquiry personally and will be in touch within <strong>two business days</strong> to learn more about your operations and where continuous-learning AI can help.' +
-      '</p>' +
-      '<p style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.75;color:#3a3833;margin:0 0 22px;">If you&rsquo;d like to add anything in the meantime, just reply to this email.</p>' +
-      '<p style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#6A6760;border-top:1px solid #e6e1d6;padding-top:16px;margin:0;">&mdash; The Pareto Labs team<br><a href="https://www.trypareto.ai" style="color:#A8854F;text-decoration:none;">trypareto.ai</a></p>' +
-    '</div>';
-
-  sendEmail_(lead.email, subject, html, NOTIFY_TEAM);
-
-  if (NOTIFY_TEAM) {
-    var teamHtml =
-      '<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#222;">' +
-      '<p><strong>New “Build with Pareto” request</strong></p>' +
-      '<p>Name: ' + escapeHtml_(lead.name) + '<br>Email: ' + escapeHtml_(lead.email) +
-      '<br>Company: ' + escapeHtml_(lead.company) + '<br>You are: ' + escapeHtml_(lead.type) +
-      '<br>Page: ' + escapeHtml_(lead.page) + '</p>' +
-      '<p><em>Where AI can help:</em><br>' + escapeHtml_(lead.challenge).replace(/\n/g, '<br>') + '</p></div>';
-    sendEmail_(NOTIFY_TEAM, 'New Build request: ' + lead.name + (lead.company ? ' (' + lead.company + ')' : ''), teamHtml, lead.email);
-  }
+function addResendAudienceContact_(lead) {
+  if (!RESEND_API_KEY) throw new Error('RESEND_API_KEY is missing.');
+  var first = lead.name.split(/\s+/)[0] || lead.name;
+  addResendNewsletterContact_(lead.email, first);
 }
 
-/* Resend if a key is set; otherwise fall back to Apps Script MailApp. */
-function sendEmail_(to, subject, html, replyTo) {
-  if (RESEND_API_KEY) {
-    var payload = { from: FROM_EMAIL, to: [to], subject: subject, html: html };
-    if (replyTo) payload.reply_to = replyTo;
-    UrlFetchApp.fetch('https://api.resend.com/emails', {
-      method: 'post', contentType: 'application/json',
-      headers: { Authorization: 'Bearer ' + RESEND_API_KEY },
-      payload: JSON.stringify(payload), muteHttpExceptions: true
-    });
-  } else {
-    MailApp.sendEmail({ to: to, subject: subject, htmlBody: html, name: 'Pareto Labs', replyTo: replyTo || undefined });
-  }
+function sendReceipt_(lead) {
+  var first = lead.name.split(/\s+/)[0] || lead.name;
+  var isExpert = lead.form === 'expert_application';
+  var title = isExpert ? 'Thank you for your interest in Pareto Labs' : 'We received your message — Pareto Labs';
+  var body = isExpert
+    ? 'We have received your expert network questionnaire. Our team will review your experience and follow up if there is a fit for upcoming work.'
+    : 'We have received your message. Our team reviews each inquiry and will be in touch within two business days.';
+  var html = '<div style="font-family:Arial,Helvetica,sans-serif;color:#1b1a17;max-width:560px;margin:32px auto;padding:36px;border:1px solid #e8e3d9;background:#fffdf9"><p style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#a8854f">PARETO LABS</p><h1 style="font-family:Georgia,serif;font-size:30px;font-weight:400;line-height:1.2">Thank you, ' + escapeHtml_(first) + '.</h1><p style="font-size:15px;line-height:1.7;color:#55524c">' + escapeHtml_(body) + '</p><p style="font-size:14px;line-height:1.7;color:#55524c">You can reply to this email if you would like to add anything.</p><p style="border-top:1px solid #e8e3d9;padding-top:20px;font-size:13px;color:#777">The Pareto Labs team · <a href="https://www.trypareto.ai" style="color:#a8854f">trypareto.ai</a></p></div>';
+  var payload = { from: FROM_EMAIL, to: [lead.email], subject: title, html: html };
+  var result = UrlFetchApp.fetch('https://api.resend.com/emails', {
+    method: 'post', contentType: 'application/json', headers: { Authorization: 'Bearer ' + RESEND_API_KEY, 'Idempotency-Key': 'site-intake-' + lead.submissionId },
+    payload: JSON.stringify(payload), muteHttpExceptions: true
+  });
+  if (result.getResponseCode() < 200 || result.getResponseCode() >= 300) throw new Error('Resend receipt failed (' + result.getResponseCode() + ').');
 }
 
 function notifySlack_(lead) {
   if (!SLACK_WEBHOOK && !SLACK_BOT_TOKEN) return;
-  var mention = SLACK_MENTION ? '<@' + SLACK_MENTION.trim() + '> ' : '';
+  var title = lead.form === 'company_inquiry' ? 'New company inquiry' : 'New expert network application';
+  var text = title + ': ' + lead.name;
   var blocks = [
-    { type: 'header', text: { type: 'plain_text', text: '🛠  New “Build with Pareto” request' } }
-  ];
-  if (mention) {
-    blocks.push({ type: 'section', text: { type: 'mrkdwn', text: mention + '— a new lead just came in.' } });
-  }
-  blocks.push(
+    { type: 'header', text: { type: 'plain_text', text: title } },
     { type: 'section', fields: [
-      { type: 'mrkdwn', text: '*Name:*\n' + (lead.name || '—') },
-      { type: 'mrkdwn', text: '*Work email:*\n' + (lead.email || '—') },
-      { type: 'mrkdwn', text: '*Company:*\n' + (lead.company || '—') },
-      { type: 'mrkdwn', text: '*You are:*\n' + (lead.type || '—') }
-    ]},
-    { type: 'section', text: { type: 'mrkdwn', text: '*Where AI can help:*\n' + (lead.challenge || '—') } },
-    { type: 'context', elements: [ { type: 'mrkdwn', text: 'from ' + (lead.page || '/') + ' · ' + lead.ts } ] }
-  );
-  var fallback = 'New “Build with Pareto” request from ' + (lead.name || 'someone');
-
-  // 1) Post to channel webhook(s)
-  if (SLACK_WEBHOOK) {
-    var payload = JSON.stringify({ text: mention + fallback, blocks: blocks });
-    SLACK_WEBHOOK.split(',').forEach(function (url) {
-      url = url.trim();
-      if (url) UrlFetchApp.fetch(url, { method: 'post', contentType: 'application/json', payload: payload, muteHttpExceptions: true });
-    });
-  }
-
-  // 2) Direct-message user(s) in their Slack inbox (needs a bot token)
-  if (SLACK_BOT_TOKEN && SLACK_DM_USERS) {
-    SLACK_DM_USERS.split(',').forEach(function (uid) {
-      uid = uid.trim();
-      if (uid) slackDM_(uid, fallback, blocks);
-    });
-  }
+      { type: 'mrkdwn', text: '*Name:*\n' + lead.name },
+      { type: 'mrkdwn', text: '*Email:*\n' + lead.email },
+      { type: 'mrkdwn', text: '*Company / organization:*\n' + (lead.company || '—') },
+      { type: 'mrkdwn', text: '*Role:*\n' + (lead.role || '—') },
+      { type: 'mrkdwn', text: '*Domain:*\n' + (lead.domain || '—') },
+      { type: 'mrkdwn', text: '*Years of experience:*\n' + (lead.years || '—') }
+    ] },
+    { type: 'section', text: { type: 'mrkdwn', text: '*Details:*\n' + (lead.challenge || '—') } },
+    { type: 'context', elements: [{ type: 'mrkdwn', text: 'from ' + (lead.page || '/') + ' · ' + lead.ts }] }
+  ];
+  var mention = SLACK_MENTION ? '<@' + SLACK_MENTION.trim() + '> ' : '';
+  if (SLACK_WEBHOOK) SLACK_WEBHOOK.split(',').forEach(function (url) { url = url.trim(); if (url) UrlFetchApp.fetch(url, { method: 'post', contentType: 'application/json', payload: JSON.stringify({ text: mention + text, blocks: blocks }), muteHttpExceptions: true }); });
+  if (SLACK_BOT_TOKEN && SLACK_DM_USERS) SLACK_DM_USERS.split(',').forEach(function (id) { id = id.trim(); if (id) slackDM_(id, mention + text, blocks); });
 }
 
 function slackDM_(userId, text, blocks) {
-  var channel = userId;
-  try { // open the DM channel (needs im:write); fall back to raw user id
-    var open = UrlFetchApp.fetch('https://slack.com/api/conversations.open', {
-      method: 'post', contentType: 'application/json',
-      headers: { Authorization: 'Bearer ' + SLACK_BOT_TOKEN },
-      payload: JSON.stringify({ users: userId }), muteHttpExceptions: true
-    });
-    var data = JSON.parse(open.getContentText());
-    if (data.ok && data.channel && data.channel.id) channel = data.channel.id;
-  } catch (e) {}
-  UrlFetchApp.fetch('https://slack.com/api/chat.postMessage', {
-    method: 'post', contentType: 'application/json',
-    headers: { Authorization: 'Bearer ' + SLACK_BOT_TOKEN },
-    payload: JSON.stringify({ channel: channel, text: text, blocks: blocks }), muteHttpExceptions: true
-  });
+  var headers = { Authorization: 'Bearer ' + SLACK_BOT_TOKEN };
+  var open = UrlFetchApp.fetch('https://slack.com/api/conversations.open', { method: 'post', contentType: 'application/json', headers: headers, payload: JSON.stringify({ users: userId }), muteHttpExceptions: true });
+  var data = JSON.parse(open.getContentText());
+  if (data.ok && data.channel && data.channel.id) UrlFetchApp.fetch('https://slack.com/api/chat.postMessage', { method: 'post', contentType: 'application/json', headers: headers, payload: JSON.stringify({ channel: data.channel.id, text: text, blocks: blocks }), muteHttpExceptions: true });
 }
 
-function json_(obj) {
-  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
-}
-function escapeHtml_(s) {
-  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
+function constantTimeEqual_(a, b) { if (a.length !== b.length) return false; var result = 0; for (var i = 0; i < a.length; i++) result |= a.charCodeAt(i) ^ b.charCodeAt(i); return result === 0; }
+function trim_(value) { return String(value || '').trim(); }
+function json_(obj) { return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON); }
+function escapeHtml_(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }

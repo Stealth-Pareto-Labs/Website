@@ -151,6 +151,47 @@ def check_nav(path, live):
     active = len(re.findall(r'class="active"', block))
     if active > 1:
         fail(path, '%d nav items marked active, expected at most 1' % active)
+    nav_region = re.search(r'<nav\b.*?</nav>', live, re.S)
+    if nav_region:
+        actions = nav_region.group(0)
+        if not re.search(r'<a[^>]*href="(?:/#partner|#partner)"[^>]*>\s*For companies\s*</a>', actions):
+            fail(path, 'navigation is missing the For companies action')
+        if not re.search(r'<a[^>]*href="https://factory\.trypareto\.ai/"[^>]*>\s*For developers\s*</a>', actions):
+            fail(path, 'navigation is missing the For developers action')
+
+
+def check_site_intake(path, live):
+    if re.search(r'https?://expert\.trypareto\.ai', live, re.I):
+        fail(path, 'Website must not link to the separate expert portal')
+    if 'build-modal.js' in live:
+        fail(path, 'legacy modal script would intercept company intake navigation')
+    if path == 'index.html':
+        for field in ('name="name"', 'name="email"', 'name="company"',
+                      'name="role"', 'name="challenge"'):
+            if field not in live:
+                fail(path, 'company intake is missing %s' % field)
+        if 'data-form-type="company"' not in live or 'id="partner"' not in live:
+            fail(path, 'company intake is missing its API type or direct anchor')
+        if '/assets/site-intake.js' not in live:
+            fail(path, 'company intake submit handler is missing')
+    if path == 'experts.html':
+        for field in ('name="name"', 'name="email"', 'name="current_role"',
+                      'name="domain"', 'name="years_experience"', 'name="background"'):
+            if field not in live:
+                fail(path, 'expert questionnaire is missing %s' % field)
+        if 'id="expert-intake"' not in live or 'data-form-type="expert"' not in live:
+            fail(path, 'expert questionnaire anchor or API type is missing')
+    if path in ('index.html', 'experts.html'):
+        for label in ('Discord', 'LinkedIn', '>X<', 'Instagram'):
+            if label not in live:
+                fail(path, 'thank-you state is missing %s social link' % label)
+    if path == 'index.html':
+        try:
+            newsletter = open('assets/newsletter.js', encoding='utf-8').read()
+            if "fetch('/api/site-intake'" not in newsletter or 'mode: \'no-cors\'' in newsletter:
+                fail('assets/newsletter.js', 'newsletter signup must use the response-aware same-origin API')
+        except FileNotFoundError:
+            fail('assets/newsletter.js', 'newsletter submit handler is missing')
 
 
 def check_footer(path, live):
@@ -379,6 +420,7 @@ def main():
         check_assets(path, live)
         check_retired(path, live)
         check_nav(path, live)
+        check_site_intake(path, live)
         check_footer(path, live)
         check_endcap(path, live)
         if path in NEW_PAGES or path in ('index.html', 'platform.html',

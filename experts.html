@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css?v=20261012b">
-  <link rel="stylesheet" href="/assets/build-modal.css?v=20261012b">
+  <link rel="stylesheet" href="/assets/site-intake.css?v=20261104a">
   <link rel="stylesheet" href="/assets/newsletter.css?v=20261012b">
 </head>
 <body>
@@ -33,7 +33,8 @@
     <li class="hide-sm"><a href="/industries.html">Industries</a></li>
     <li class="hide-sm"><a href="/experts.html" class="active">Experts</a></li>
     <li class="hide-sm"><a href="/research.html">Research</a></li>
-    <li><a class="nav-cta" href="/#partner">Build with Pareto</a></li>
+    <li><a class="nav-cta" href="/#partner">For companies</a></li>
+    <li><a class="nav-cta" href="https://factory.trypareto.ai/">For developers</a></li>
   </ul>
 </nav>
 
@@ -44,7 +45,7 @@
     <h1 class="rv" style="transition-delay:.05s">Real expertise, <em>built into the system.</em></h1>
     <p class="lead rv" style="transition-delay:.1s">AI fails when it only learns from documents. Pareto brings in a growing network of vetted domain experts who understand how the work actually happens: the edge cases, judgment calls, and operational nuance that rarely appear in documentation.</p>
     <div class="actions rv" style="transition-delay:.15s">
-      <a class="btn btn-solid btn-arr" href="https://expert.trypareto.ai/">Become an Expert</a>
+      <a class="btn btn-solid btn-arr" href="#expert-intake">Become an Expert</a>
       <a class="tlink" href="/#partner">Build with Pareto &rarr;</a>
     </div>
   </div>
@@ -54,6 +55,38 @@
 <section class="section">
   <div class="wrap-thin">
     <p class="statement rv">The best operational knowledge lives in people, not documents. Pareto turns that judgment into <em>trusted, governed knowledge</em> your AI systems can rely on.</p>
+  </div>
+</section>
+
+<!-- EXPERT QUESTIONNAIRE -->
+<section class="section alt" id="expert-intake">
+  <div class="wrap">
+    <div class="intake-panel">
+      <div>
+        <p class="eyebrow">Expert network</p>
+        <h2 class="col-h">Become an <em>Expert.</em></h2>
+        <p class="col-p">Tell us about your experience. We review every questionnaire and match experts to relevant paid work.</p>
+      </div>
+      <div>
+        <form class="site-intake-form expert-intake-form" data-form-type="expert" data-ok="expert-ok" novalidate>
+          <div class="intake-fields">
+            <div class="intake-field"><label for="e-name">Your name <span aria-hidden="true">*</span></label><input id="e-name" name="name" type="text" autocomplete="name" required maxlength="120"></div>
+            <div class="intake-field"><label for="e-email">Email <span aria-hidden="true">*</span></label><input id="e-email" name="email" type="email" autocomplete="email" required maxlength="254"></div>
+            <div class="intake-field"><label for="e-role">Current role <span aria-hidden="true">*</span></label><input id="e-role" name="current_role" type="text" required maxlength="200"></div>
+            <div class="intake-field"><label for="e-org">Organization</label><input id="e-org" name="organization" type="text" autocomplete="organization" maxlength="200"></div>
+            <div class="intake-field"><label for="e-domain">Primary domain or industry <span aria-hidden="true">*</span></label><input id="e-domain" name="domain" type="text" required maxlength="200" placeholder="e.g. healthcare operations"></div>
+            <div class="intake-field"><label for="e-years">Years of experience <span aria-hidden="true">*</span></label><select id="e-years" name="years_experience" required><option value="">Choose one</option><option>0–4</option><option>5–10</option><option>11–15</option><option>16–20</option><option>21+</option></select></div>
+            <div class="intake-field intake-wide"><label for="e-linkedin">LinkedIn profile (optional)</label><input id="e-linkedin" name="linkedin" type="url" autocomplete="url" maxlength="500" placeholder="https://www.linkedin.com/in/your-name"></div>
+            <div class="intake-field intake-wide"><label for="e-background">What experience or judgment would you bring? <span aria-hidden="true">*</span></label><textarea id="e-background" name="background" rows="5" required maxlength="3000" placeholder="Share the work you know well, the decisions you make, and the problems you have helped solve."></textarea></div>
+          </div>
+          <label class="intake-consent"><input type="checkbox" name="newsletter_consent" value="true"> Send me occasional Pareto Labs research and product updates.</label>
+          <button type="submit" class="btn btn-solid">Submit questionnaire</button>
+          <p class="intake-note">Your information is used to review your application and contact you about relevant expert work.</p>
+          <p class="intake-error" data-error role="alert" aria-live="polite"></p>
+        </form>
+        <div class="intake-success" id="expert-ok" role="status" aria-live="polite" hidden><div class="ok-ring">✓</div><h3>Thank you.</h3><p>We’ve received your questionnaire. The Pareto Labs team will be in touch if there’s a fit.</p><p class="intake-optin-warning" data-newsletter-status hidden></p><div class="intake-socials"><a href="https://discord.gg/z3fgyDuGM" target="_blank" rel="noopener noreferrer">Discord</a><a href="https://www.linkedin.com/company/trypareto-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://x.com/paretolabsx?s=11" target="_blank" rel="noopener noreferrer">X</a><a href="https://www.instagram.com/labspareto?exln=MXBkdTZ5OWR6OWMweA%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener noreferrer">Instagram</a></div></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -102,7 +135,7 @@
       <h2>Put your expertise <em>to work.</em></h2>
       <p>Join a growing network of vetted domain experts shaping AI systems that real operating companies rely on, on your terms.</p>
       <div class="actions">
-        <a class="btn btn-invert" href="https://expert.trypareto.ai/">Become an Expert</a>
+        <a class="btn btn-invert" href="#expert-intake">Become an Expert</a>
         <a class="btn btn-invert-ghost" href="/#partner">Build with Pareto</a>
       </div>
     </div>
@@ -133,7 +166,7 @@
   </div>
 </footer>
 <script src="/assets/site.js?v=20261012b" defer></script>
-<script src="/assets/build-modal.js?v=20261012b" defer></script>
+<script src="/assets/site-intake.js?v=20261104a" defer></script>
 <script src="/assets/newsletter.js?v=20261012b" defer></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
