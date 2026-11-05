@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import test from 'node:test';
 import { onRequest } from '../functions/api/site-intake.js';
 
@@ -40,4 +41,15 @@ test('Pages adapter routes newsletter requests through newsletter validation', a
   const invalid = await onRequest({ request: jsonRequest({ formType: 'newsletter', email: 'bad' }), env: {} });
   assert.equal(invalid.status, 400);
   assert.match((await invalid.json()).error, /valid email/i);
+});
+
+test('company and expert confirmations acknowledge responses and invite visitors to follow Pareto', () => {
+  for (const path of ['../index.html', '../experts.html']) {
+    const html = fs.readFileSync(new URL(path, import.meta.url), 'utf8');
+    assert.ok(/We(?:&rsquo;|’)ve received your responses\./i.test(html), `${path} should say responses were received`);
+    assert.ok(/Please follow us online:/i.test(html), `${path} should introduce the social links`);
+    for (const social of ['Discord', 'LinkedIn', '>X<', 'Instagram']) {
+      assert.ok(html.includes(social), `${path} should include ${social}`);
+    }
+  }
 });
