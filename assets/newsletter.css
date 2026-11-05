@@ -163,3 +163,6 @@
   pointer-events: none; z-index: 0;
 }
 .plw-stage { z-index: 1; }
+
+/* Keep the Follow Pareto footer treatment still. */
+.plw-eyebrow, .plw-l, .plw-tag { opacity: 1; transform: none; transition: none; }
