@@ -9,20 +9,31 @@
 
   var HTML =
     '<section class="nl-band" aria-labelledby="nl-title"><div class="nl-inner">' +
-      '<div>' +
-        '<p class="nl-eyebrow">Research &amp; Notes</p>' +
-        '<h2 class="nl-title" id="nl-title">The latest from <em>Pareto Labs.</em></h2>' +
-        '<p class="nl-sub">Research notes, field lessons, and what we&rsquo;re learning as we deploy continuous-learning AI into the real economy. No noise, a few emails a quarter.</p>' +
+      '<div class="nl-copy">' +
+        '<p class="nl-eyebrow">Pareto &nbsp;/&nbsp; Research letter</p>' +
+        '<h2 class="nl-title" id="nl-title">What we learn, <em>we share.</em></h2>' +
+        '<p class="nl-sub">Research, field lessons, and ideas from building AI for real operations. A few considered updates each year, grounded in the work.</p>' +
+        '<nav class="nl-social" aria-label="Follow Pareto Labs">' +
+          '<span class="nl-social-label">Follow Pareto</span>' +
+          '<a href="https://www.linkedin.com/company/trypareto-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>' +
+          '<a href="https://x.com/paretolabsx" target="_blank" rel="noopener noreferrer">X</a>' +
+          '<a href="https://discord.gg/z3fgyDuGM" target="_blank" rel="noopener noreferrer">Discord</a>' +
+        '</nav>' +
       '</div>' +
-      '<div>' +
+      '<div class="nl-signup">' +
+        '<p class="nl-signup-label">Occasional research updates</p>' +
         '<form class="nl-form" novalidate>' +
           '<div class="nl-row">' +
-            '<input class="nl-input" type="email" name="email" autocomplete="email" placeholder="you@company.com" aria-label="Email address" required>' +
-            '<button class="nl-btn" type="submit">Subscribe</button>' +
+            '<label class="nl-label" for="nl-email">Email address</label>' +
+            '<input class="nl-input" id="nl-email" type="email" name="email" autocomplete="email" placeholder="you@company.com" aria-describedby="nl-note" required>' +
+            '<button class="nl-btn" type="submit">Subscribe <span aria-hidden="true">&rarr;</span></button>' +
           '</div>' +
-          '<p class="nl-note">By subscribing you agree to receive occasional emails from Pareto Labs. Unsubscribe anytime.</p>' +
+          '<p class="nl-note" id="nl-note">By subscribing, you agree to receive occasional updates from Pareto Labs. Unsubscribe at any time.</p>' +
         '</form>' +
-        '<div class="nl-ok">You&rsquo;re subscribed.<span>We&rsquo;ll be in touch with what we&rsquo;re learning.</span></div>' +
+        '<div class="nl-ok" role="status" aria-live="polite">' +
+          '<svg class="nl-ok-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>' +
+          '<div><strong>You&rsquo;re on the list.</strong><span>Thanks for joining us. We&rsquo;ll send the next research note when it&rsquo;s ready.</span></div>' +
+        '</div>' +
       '</div>' +
     '</div></section>';
 
@@ -76,7 +87,7 @@
       '- Publish every precision served, with the memory each one needs.',
       '- Name the model and the precision that answered, on every response.',
       '- Scale an idle endpoint to zero rather than keep it warm.',
-      '- Keep fine tuned weights with the customer whose data made them.',
+      '- Keep post-trained weights with the customer whose data made them.',
       '- Never move a workload across a border to make an operator cheaper.',
       '## The evidence loop',
       '1. Operators work in the system and correct it where it is wrong.',
@@ -281,14 +292,15 @@
     var ok = band.querySelector('.nl-ok');
     function showErr(msg) {
       var el = form.querySelector('.nl-err');
-      if (!el) { el = document.createElement('p'); el.className = 'nl-err'; form.appendChild(el); }
+      if (!el) { el = document.createElement('p'); el.className = 'nl-err'; el.setAttribute('role', 'alert'); form.appendChild(el); }
       el.textContent = msg || '';
     }
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       showErr('');
       var email = (form.elements['email'].value || '').trim();
-      if (!EMAIL_RE.test(email)) { showErr('Please enter a valid email address.'); return; }
+      if (!EMAIL_RE.test(email)) { form.elements['email'].setAttribute('aria-invalid', 'true'); showErr('Please enter a valid email address.'); return; }
+      form.elements['email'].removeAttribute('aria-invalid');
       var btn = form.querySelector('.nl-btn'); btn.disabled = true; btn.textContent = 'Subscribing…';
       var data = new URLSearchParams();
       data.append('form', 'newsletter');

@@ -4,25 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inference · Pareto Labs</title>
-  <meta name="description" content="Open-source models, optimized and quantized, served from infrastructure in your own country behind one OpenAI-compatible API. Chat, vision, transcription and embeddings, with fine-tuning, evaluations and retrieval.">
+  <meta name="description" content="Open models for language, speech, vision and robotics. Optimized, post-trained and served behind one OpenAI-compatible API on infrastructure in your country.">
   <link rel="canonical" href="https://www.trypareto.ai/inference.html">
-  <meta name="theme-color" content="#F5F2EB">
+  <meta name="theme-color" content="#080C18">
   <link rel="icon" href="/assets/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
   <link rel="apple-touch-icon" href="/assets/favicon-180.png">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Pareto Labs">
   <meta property="og:title" content="Inference · Open models, served where you are">
-  <meta property="og:description" content="Open-source models, optimized and quantized, behind one OpenAI-compatible API, served inside your own country.">
+  <meta property="og:description" content="Open models for language, speech, vision and robotics, served behind one OpenAI-compatible API inside your own country.">
   <meta property="og:url" content="https://www.trypareto.ai/inference.html">
   <meta property="og:image" content="https://www.trypareto.ai/og/pareto-labs-v2.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css?v=20261012b">
-  <link rel="stylesheet" href="/assets/infra.css?v=20261012b">
+  <link rel="stylesheet" href="/assets/infra.css?v=20261030g">
   <link rel="stylesheet" href="/assets/build-modal.css?v=20261012b">
-  <link rel="stylesheet" href="/assets/newsletter.css?v=20261012b">
+  <link rel="stylesheet" href="/assets/newsletter.css?v=20261105a">
 </head>
 <body>
 
@@ -39,28 +39,96 @@
 </nav>
 
 <!-- HERO -->
-<header class="ih ih-film">
-  <div class="ih-bg" aria-hidden="true">
-    <video class="ih-vid" autoplay muted loop playsinline poster="/assets/infra/inference.jpg">
-      <source src="/assets/infra/vid-inference.mp4" type="video/mp4">
-    </video>
-    <span class="ih-tint"></span>
-  </div>
+<header class="ih ih-inference">
   <div class="wrap">
-    <p class="eyebrow rv"><a href="/infrastructure.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Infrastructure</a> &nbsp;/&nbsp; Inference</p>
-    <h1 class="rv" style="transition-delay:.05s">Open models, served <em>where you are.</em></h1>
-    <p class="lead rv" style="transition-delay:.1s">We optimize and quantize open-source models and serve them on infrastructure we operate, behind one OpenAI-compatible API. Change a base URL and your existing code keeps working, except that the tokens are generated in your own country.</p>
-    <div class="actions rv" style="transition-delay:.15s">
-      <a class="btn btn-cream btn-arr" href="/#partner">Get an API key</a>
-      <a class="btn btn-wire" href="#models">See the models</a>
+    <div class="ih-inference-intro">
+      <div class="ih-inference-copy">
+        <p class="eyebrow rv"><a href="/infrastructure.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Infrastructure</a> &nbsp;/&nbsp; Inference</p>
+        <h1 class="rv" style="transition-delay:.05s">Models that understand <em>the work.</em></h1>
+      </div>
+      <div class="ih-inference-summary">
+        <p class="lead rv" style="transition-delay:.1s">Task-specialized language models. Voice models for emerging-market languages. Vision-language-action models for robots. Post-trained for specific tasks and regions, sized for available compute, and served on infrastructure we run.</p>
+        <div class="actions rv" style="transition-delay:.15s">
+          <a class="btn btn-cream btn-arr" href="#use-cases">Explore real-world use cases</a>
+          <a class="btn btn-wire" href="#how">How we adapt models</a>
+        </div>
+      </div>
     </div>
   </div>
 </header>
 
+<!-- REAL-WORLD USE CASES -->
+<section class="ih-showcase" id="use-cases">
+  <div class="wrap">
+    <div class="ih-gallery-head rv">
+      <p class="section-tag">Real-world use cases</p>
+      <span>Eight scenes / four kinds of intelligence</span>
+    </div>
+    <div class="ih-mosaic" aria-label="Real-world examples of language, voice, vision and robotics">
+      <figure class="ih-shot ih-shot-language">
+        <div class="ih-shot-media">
+          <img src="/assets/infra/inference-language.jpg" alt="" aria-hidden="true" width="800" height="450" fetchpriority="high" decoding="async">
+          <video data-src="/assets/infra/inference-language.mp4" muted loop playsinline preload="none" poster="/assets/infra/inference-language.jpg" aria-hidden="true" tabindex="-1"></video>
+        </div>
+        <figcaption><span>01 / LANGUAGE</span><strong>Knowledge at the point of work</strong></figcaption>
+      </figure>
+      <figure class="ih-shot ih-shot-voice">
+        <div class="ih-shot-media">
+          <img src="/assets/infra/inference-voice.jpg" alt="" aria-hidden="true" width="800" height="450" loading="lazy" decoding="async">
+          <video data-src="/assets/infra/inference-voice.mp4" muted loop playsinline preload="none" poster="/assets/infra/inference-voice.jpg" aria-hidden="true" tabindex="-1"></video>
+        </div>
+        <figcaption><span>02 / VOICE</span><strong>Calls, notes and handovers</strong><small>Models for underserved languages</small></figcaption>
+      </figure>
+      <figure class="ih-shot ih-shot-vision">
+        <div class="ih-shot-media">
+          <img src="/assets/infra/inference-vision.jpg" alt="" aria-hidden="true" width="800" height="450" loading="lazy" decoding="async">
+          <video data-src="/assets/infra/inference-vision.mp4" muted loop playsinline preload="none" poster="/assets/infra/inference-vision.jpg" aria-hidden="true" tabindex="-1"></video>
+        </div>
+        <figcaption><span>03 / VISION</span><strong>Inspection on the line</strong></figcaption>
+      </figure>
+      <figure class="ih-shot ih-shot-vla">
+        <div class="ih-shot-media">
+          <img src="/assets/infra/inference-vla2.jpg" alt="" aria-hidden="true" width="800" height="450" loading="lazy" decoding="async">
+          <video data-src="/assets/infra/inference-vla2.mp4" muted loop playsinline preload="none" poster="/assets/infra/inference-vla2.jpg" aria-hidden="true" tabindex="-1"></video>
+        </div>
+        <figcaption><span>04 / VLA</span><strong>Perception into robot control</strong></figcaption>
+      </figure>
+      <figure class="ih-shot ih-shot-field">
+        <div class="ih-shot-media">
+          <img src="/assets/infra/inference-oilfield.jpg" alt="" aria-hidden="true" width="800" height="450" loading="lazy" decoding="async">
+          <video data-src="/assets/infra/inference-oilfield.mp4" muted loop playsinline preload="none" poster="/assets/infra/inference-oilfield.jpg" aria-hidden="true" tabindex="-1"></video>
+        </div>
+        <figcaption><span>05 / VISION</span><strong>Maintenance in the field</strong></figcaption>
+      </figure>
+      <figure class="ih-shot ih-shot-voice">
+        <div class="ih-shot-media">
+          <img src="/assets/infra/inference-radio.jpg" alt="" aria-hidden="true" width="800" height="450" loading="lazy" decoding="async">
+          <video data-src="/assets/infra/inference-radio.mp4" muted loop playsinline preload="none" poster="/assets/infra/inference-radio.jpg" aria-hidden="true" tabindex="-1"></video>
+        </div>
+        <figcaption><span>06 / VOICE</span><strong>Radio on site</strong><small>Models for underserved languages</small></figcaption>
+      </figure>
+      <figure class="ih-shot ih-shot-vision">
+        <div class="ih-shot-media">
+          <img src="/assets/infra/inference-quality.jpg" alt="" aria-hidden="true" width="800" height="450" loading="lazy" decoding="async">
+          <video data-src="/assets/infra/inference-quality.mp4" muted loop playsinline preload="none" poster="/assets/infra/inference-quality.jpg" aria-hidden="true" tabindex="-1"></video>
+        </div>
+        <figcaption><span>07 / VISION</span><strong>Quality checks at scale</strong></figcaption>
+      </figure>
+      <figure class="ih-shot ih-shot-vla">
+        <div class="ih-shot-media">
+          <img src="/assets/infra/inference-assembly.jpg" alt="" aria-hidden="true" width="800" height="450" loading="lazy" decoding="async">
+          <video data-src="/assets/infra/inference-assembly.mp4" muted loop playsinline preload="none" poster="/assets/infra/inference-assembly.jpg" aria-hidden="true" tabindex="-1"></video>
+        </div>
+        <figcaption><span>08 / VLA</span><strong>Assembly in motion</strong></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
 <!-- STATEMENT -->
-<section class="section">
+<section class="section dark ih-statement">
   <div class="wrap-thin">
-    <p class="statement rv">The model is a commodity. What matters is how well it is tuned, how cheaply it is served, and <em>whose law it answers to.</em></p>
+    <p class="statement rv">The model is only a starting point. What matters is how well it works in the real world, how little compute it needs, and <em>where it runs.</em></p>
   </div>
 </section>
 
@@ -70,12 +138,12 @@
     <div class="section-tag rv">How it works</div>
     <div class="two-col">
       <h2 class="col-h rv" style="margin-bottom:0">Optimize. Quantize. <em>Host.</em></h2>
-      <p class="col-p rv" style="margin-bottom:0; align-self:end">Three steps, each one a lever on quality and control. We run all three ourselves, so the model that answers you was tuned, sized and served by the same team, in the country where your data already lives.</p>
+      <p class="col-p rv" style="margin-bottom:0; align-self:end">Three steps, each one a lever on quality and control. We specialize models for real operating tasks, make them practical to run on limited compute, then serve them close to the work and the data.</p>
     </div>
     <div class="cap-list">
-      <div class="cap-item rv"><span class="cap-n">01</span><h3 class="cap-h">Optimize</h3><p class="cap-p">Models tuned to the language, the domain and the data they will actually serve. That means French and the regional languages global defaults handle poorly, and it means the vocabulary of the industries we work in, where a mining grade, a drilling term or a network fault code has one correct reading and a general model guesses. Fine-tune on your own corpus and keep the weights yours.</p></div>
-      <div class="cap-item rv"><span class="cap-n">02</span><h3 class="cap-h">Quantize</h3><p class="cap-p">The same model at lower precision needs a fraction of the memory and a fraction of the hardware. We publish every precision we serve so you choose the trade-off instead of inheriting it.</p></div>
-      <div class="cap-item rv"><span class="cap-n">03</span><h3 class="cap-h"><em>Host</em></h3><p class="cap-p">Endpoints run on whole GPUs (one, two, four or eight) and scale to zero when idle, so an endpoint you are not using is not an endpoint you are paying to keep warm.</p></div>
+      <div class="cap-item rv"><span class="cap-n">01</span><h3 class="cap-h">Optimize</h3><p class="cap-p">We post-train models for specific, measurable jobs in telecom, oil and gas, and other industries, using the language, data and operating rules of the regions they serve. For a tightly defined task such as predicting a network fault, a specialist model with around one million parameters can outperform a much larger frontier model when it is trained and evaluated on the right task. We also build for emerging-market languages and the terms operators actually use, rather than assuming a global default will fit.</p></div>
+      <div class="cap-item rv"><span class="cap-n">02</span><h3 class="cap-h">Quantize</h3><p class="cap-p">We reduce model precision so useful intelligence can run with less memory, less power and less compute, including on the hardware available locally. We publish the precision and its measured trade-offs, so you can choose the smallest practical footprint for the job.</p></div>
+      <div class="cap-item rv"><span class="cap-n">03</span><h3 class="cap-h"><em>Host</em></h3><p class="cap-p">We serve language, speech, vision and vision-language-action models close to the systems they support. Endpoints scale to demand and can scale to zero when idle, so you are not paying to keep unused capacity warm.</p></div>
     </div>
   </div>
 </section>
@@ -115,49 +183,20 @@
   </div>
 </section>
 
-<!-- MODELS -->
-<section class="section" id="models">
+<!-- ROBOTICS ITERATION LOOP -->
+<section class="section alt vla-loop" aria-labelledby="vla-loop-title">
   <div class="wrap">
-    <div class="section-tag rv">The catalogue</div>
+    <div class="section-tag rv">For robotics</div>
     <div class="two-col">
-      <h2 class="col-h rv" style="margin-bottom:0">Chat, vision, speech, <em>embeddings.</em></h2>
-      <p class="col-p rv" style="margin-bottom:0; align-self:end">Open-weight models across the modalities most products need, alongside the ones we train ourselves, each served at the precision you choose. Tell us the job and we will tell you which model does it. If the one you want is not running yet, we add it.</p>
+      <h2 class="col-h rv" id="vla-loop-title" style="margin-bottom:0">Autonomy improves <em>one task at a time.</em></h2>
+      <p class="col-p rv" style="margin-bottom:0; align-self:end">A useful VLA workflow starts with the robot and the job. Test in the real environment, learn from what fails, then choose the next data to collect.</p>
     </div>
-
-    <div class="mcards">
-      <article class="mcard rv">
-        <img class="mcard-img" src="/assets/infra/cap-chat.jpg" alt="A dispatcher working at night in an operations room, wearing a headset" width="1200" height="675" loading="lazy" decoding="async">
-        <div class="mcard-b">
-          <h3>Chat and <em>reasoning</em></h3>
-          <p>Assistants that answer from your own material, drafting, classification, extraction, and models that work a problem through step by step instead of guessing at it. Context windows long enough to take a whole file, a whole case or a whole shift at once.</p>
-          <div class="mtags"><span class="mtag">Long context</span><span class="mtag">Tool calling</span><span class="mtag">Fine-tunable</span></div>
-        </div>
-      </article>
-      <article class="mcard rv" style="transition-delay:.08s">
-        <img class="mcard-img" src="/assets/infra/cap-vision.jpg" alt="An industrial robot arm with an inspection camera examining a metal part" width="1200" height="675" loading="lazy" decoding="async">
-        <div class="mcard-b">
-          <h3><em>Vision</em></h3>
-          <p>Read what a camera or a scanner sees. A delivery note, a damaged part, a meter, a form somebody filled in by hand, a photograph of a site. The answer comes back as structured data you can put straight into a system, not as a description.</p>
-          <div class="mtags"><span class="mtag">Documents</span><span class="mtag">Inspection</span><span class="mtag">Data extraction</span></div>
-        </div>
-      </article>
-      <article class="mcard rv" style="transition-delay:.16s">
-        <img class="mcard-img" src="/assets/infra/cap-speech.jpg" alt="A field technician in a hard hat speaking into a handheld radio at an industrial site" width="1200" height="675" loading="lazy" decoding="async">
-        <div class="mcard-b">
-          <h3><em>Speech</em></h3>
-          <p>99 languages in one model. Turn what people actually say into text that can be searched, checked and acted on: calls, handovers, site radio and voice notes. For the regional languages a global default mishears, we serve dedicated fine-tuned models.</p>
-          <div class="mtags"><span class="mtag">Transcription</span><span class="mtag">99 languages</span><span class="mtag">Noisy audio</span></div>
-        </div>
-      </article>
-      <article class="mcard rv" style="transition-delay:.24s">
-        <img class="mcard-img" src="/assets/infra/cap-retrieval.jpg" alt="A deep archive of ledgers and document boxes on steel shelving" width="1200" height="675" loading="lazy" decoding="async">
-        <div class="mcard-b">
-          <h3>Retrieval and <em>embeddings</em></h3>
-          <p>Search everything the business has ever written down by meaning rather than by keyword, so the right procedure surfaces even when nobody remembers what it was called. The vectors live on the same nodes as the models that read them.</p>
-          <div class="mtags"><span class="mtag">Vector search</span><span class="mtag">Multilingual</span><span class="mtag">On the node</span></div>
-        </div>
-      </article>
-    </div>
+    <ol class="vla-steps">
+      <li class="rv"><span>01</span><h3>Show the task</h3><p>Collect demonstrations on the robot, object and environment that matter.</p></li>
+      <li class="rv" style="transition-delay:.05s"><span>02</span><h3>Post-train</h3><p>Adapt the vision-language-action model to that task and hardware.</p></li>
+      <li class="rv" style="transition-delay:.1s"><span>03</span><h3>Run &amp; evaluate</h3><p>Test the model on the robot and record where it succeeds or fails.</p></li>
+      <li class="rv" style="transition-delay:.15s"><span>04</span><h3>Choose the next data</h3><p>Use failure cases to decide what to demonstrate and improve next.</p></li>
+    </ol>
   </div>
 </section>
 
@@ -195,9 +234,9 @@ response = client.chat.completions.create(
       <p class="col-p rv" style="margin-bottom:0; align-self:end">Serving an open model is the floor. The work that makes it useful (teaching it your domain, proving it got better, keeping track of which version is live) runs on the same platform.</p>
     </div>
     <div class="cap-list">
-      <div class="cap-item rv"><span class="cap-n">01</span><h3 class="cap-h">Fine-<em>tuning</em></h3><p class="cap-p">Train an open model on your own data and serve the result as your own endpoint. The weights stay in your project.</p></div>
+      <div class="cap-item rv"><span class="cap-n">01</span><h3 class="cap-h"><em>Post-training</em></h3><p class="cap-p">Adapt an open model to your task, data and regional context, then serve it as your own endpoint. The weights stay in your project.</p></div>
       <div class="cap-item rv"><span class="cap-n">02</span><h3 class="cap-h">Evaluations</h3><p class="cap-p">Score a model against your own test set before it reaches production, and again after every change, so "it got better" is a measurement rather than a feeling.</p></div>
-      <div class="cap-item rv"><span class="cap-n">03</span><h3 class="cap-h">Model <em>registry</em></h3><p class="cap-p">Every model, variant and fine-tune you run, versioned, with what it scored and what is currently serving traffic.</p></div>
+      <div class="cap-item rv"><span class="cap-n">03</span><h3 class="cap-h">Model <em>registry</em></h3><p class="cap-p">Every model, variant and post-trained version you run, tracked with its evaluation scores and the version currently serving traffic.</p></div>
       <div class="cap-item rv"><span class="cap-n">04</span><h3 class="cap-h">Retrieval</h3><p class="cap-p">Vector storage and embeddings sit on the same nodes as the models, so retrieval-augmented answers are a local call rather than a round trip across an ocean.</p></div>
       <div class="cap-item rv"><span class="cap-n">05</span><h3 class="cap-h">Our own <em>models</em></h3><p class="cap-p">We are not only serving other people&rsquo;s weights. We train our own models for the work these industries actually do, and we build the reinforcement-learning environments and the benchmarks that prove whether they do it. What those runs teach us goes back into everything we serve you.</p></div>
     </div>
@@ -240,9 +279,31 @@ response = client.chat.completions.create(
     </div>
   </div>
 </footer>
+<script>
+(() => {
+  const clips = document.querySelectorAll('.ih-shot video[data-src]');
+  if (!clips.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const play = video => {
+    if (!video.src) {
+      video.src = video.dataset.src;
+      video.load();
+    }
+    video.play().catch(() => {});
+  };
+  if (!('IntersectionObserver' in window)) {
+    clips.forEach(play);
+    return;
+  }
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (entry.isIntersecting) play(entry.target);
+    else entry.target.pause();
+  }), { rootMargin: '80px 0px' });
+  clips.forEach(video => observer.observe(video));
+})();
+</script>
 <script src="/assets/site.js?v=20261012b" defer></script>
 <script src="/assets/build-modal.js?v=20261012b" defer></script>
-<script src="/assets/newsletter.js?v=20261012b" defer></script>
+<script src="/assets/newsletter.js?v=20261105a" defer></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

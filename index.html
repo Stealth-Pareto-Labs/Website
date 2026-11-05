@@ -37,11 +37,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/build-modal.css?v=20261012b">
-  <link rel="stylesheet" href="/assets/newsletter.css?v=20261012b">
+  <link rel="stylesheet" href="/assets/newsletter.css?v=20261105a">
   <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
+    --home-announcement-height: 36px;
+    --home-nav-height: 70px;
     --w:   #F5F2EB;
     --w2:  #EAE6DC;
     --wi:  #14120F;
@@ -84,13 +86,14 @@
 
   /* ── NAV ─────────────────────────────────────────── */
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 18px 48px;
+    position: fixed; top: var(--home-announcement-height); left: 0; right: 0; z-index: 100; padding: 18px 48px;
     display: flex; align-items: center; justify-content: space-between;
-    transition: background 0.5s, border-color 0.5s, color 0.5s; border-bottom: 1px solid transparent;
+    transition: top 0.22s, background 0.5s, border-color 0.5s, color 0.5s; border-bottom: 1px solid transparent;
   }
   nav.on-dark { color: var(--di); }
   nav.scrolled-light { background: rgba(245,242,235,0.93); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-color: var(--wl); }
   nav.scrolled-dark { background: rgba(8,12,24,0.93); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-color: var(--dl); }
+  nav.scrolled-light, nav.scrolled-dark { top: 0; }
 
   .nav-logo { display: inline-flex; align-items: center; font-family: var(--serif); font-size: 18px; font-weight: 500; color: inherit; letter-spacing: -0.01em; }
   .brand-mark { height: 34px; width: auto; display: block; margin: 0 -7px 0 -8px; transform: translateY(-5px); }
@@ -121,6 +124,22 @@
   .hero-h1 em { font-style: italic; font-weight: 300; }
   .hero-body { font-size: 15px; font-weight: 300; line-height: 1.75; opacity: 0.72; max-width: 440px; margin-bottom: 44px; }
   .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* ── TOP RESEARCH ANNOUNCEMENT ───────────────────── */
+  .home-research-ribbon {
+    position:relative; z-index:101; display:flex; min-height:var(--home-announcement-height); align-items:center; justify-content:center;
+    flex-wrap:wrap; gap:7px 12px; padding:4px 20px; text-align:center;
+    color:var(--di); background:var(--d); border-bottom:1px solid rgba(200,174,125,.24);
+  }
+  .home-nav-spacer { height:var(--home-nav-height); }
+  .home-research-kicker { color:var(--sig); font-size:8px; font-weight:600; letter-spacing:.12em; line-height:1.3; text-transform:uppercase; }
+  .home-research-separator { width:1px; height:11px; background:rgba(238,233,224,.25); }
+  .home-research-title { color:var(--di); font-family:var(--sans); font-size:11px; font-weight:400; line-height:1.35; }
+  .home-research-link { color:var(--sig); font-size:10px; font-weight:500; white-space:nowrap; transition:color .18s; }
+  .home-research-link span { display:inline-block; margin-left:3px; transition:transform .18s; }
+  .home-research-ribbon:hover .home-research-link { color:#e4d0a7; }
+  .home-research-ribbon:hover .home-research-link span { transform:translateX(2px); }
+  .home-research-ribbon:focus-visible { outline:2px solid var(--sig); outline-offset:-3px; }
 
   .scroll-hint { position: absolute; bottom: 30px; left: 48px; display: flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: 0.08em; opacity: 0.4; }
   .scroll-line { width: 32px; height: 1px; background: currentColor; animation: scroll-pulse 2s ease-in-out infinite; }
@@ -388,13 +407,21 @@
 
   /* ── TWO ENGINES ────────────────────────────── */
   .eng-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; }
-  .eng { display: flex; flex-direction: column; border: 1px solid var(--wl); background: var(--w); padding: 38px 34px 32px; transition: border-color .25s ease, transform .25s ease, background .25s ease; }
-  .eng:hover { border-color: var(--wi3); transform: translateY(-2px); background: var(--w2); }
-  .eng:focus-visible { outline: 2px solid var(--ac); outline-offset: 3px; }
-  .eng-n { font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ac); margin-bottom: 18px; }
+  .eng { position: relative; overflow: hidden; display: flex; flex-direction: column; min-height: 330px; border: 1px solid transparent; padding: 38px 34px 32px; transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease; }
+  .eng::after { content: ''; position: absolute; width: 240px; height: 240px; right: -115px; top: -130px; border: 1px solid currentColor; border-radius: 50%; opacity: .09; box-shadow: 0 0 0 28px transparent, 0 0 0 29px currentColor, 0 0 0 58px transparent, 0 0 0 59px currentColor; pointer-events: none; }
+  .eng:hover { transform: translateY(-3px); box-shadow: 0 24px 48px -32px rgba(20,18,15,0.34); }
+  .eng:focus-visible { outline: 2px solid var(--ac); outline-offset: 4px; }
+  .eng-inference { background: var(--d); color: var(--di); }
+  .eng-inference:hover { border-color: rgba(200,174,125,0.55); }
+  .eng-cloud { background: #E9E2D4; color: var(--wi); }
+  .eng-cloud:hover { border-color: rgba(168,133,79,0.52); }
+  .eng-n { position: relative; z-index: 1; font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ac); margin-bottom: 18px; }
+  .eng-inference .eng-n, .eng-inference .eng-go { color: var(--sig); }
+  .eng h3, .eng p, .eng-go { position: relative; z-index: 1; }
   .eng h3 { font-family: var(--serif); font-size: 30px; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 12px; }
   .eng h3 em { font-style: italic; font-weight: 300; }
-  .eng p { font-size: 14.5px; font-weight: 300; line-height: 1.7; opacity: 0.7; margin-bottom: 22px; }
+  .eng p { font-size: 14.5px; font-weight: 300; line-height: 1.7; opacity: 0.78; margin-bottom: 22px; max-width: 52ch; }
+  .eng-inference p { color: var(--di); }
   .eng-go { margin-top: auto; font-size: 13px; color: var(--ac); }
   @media (max-width: 860px) { .eng-grid { grid-template-columns: 1fr; } }
   @media (prefers-reduced-motion: reduce) { .eng { transition: none; } .eng:hover { transform: none; } }
@@ -412,6 +439,7 @@
 
   /* ── RESPONSIVE ──────────────────────────────────── */
   @media (max-width: 960px) {
+    :root { --home-announcement-height:36px; --home-nav-height:66px; }
     nav { padding: 16px 24px; }
     .wrap, .wrap-thin { padding: 0 24px; }
     .nav-links li:not(.cta-li) { display: none; }
@@ -437,8 +465,14 @@
     .section, .section-dark { padding: 84px 0; }
   }
   @media (max-width: 560px) {
+    :root { --home-announcement-height:40px; --home-nav-height:66px; }
     .ind-grid { grid-template-columns: 1fr; }
     .hero-ctas .btn { width: 100%; justify-content: center; }
+    .home-research-ribbon { flex-wrap:nowrap; gap:6px; padding:5px 9px; }
+    .home-research-kicker { font-size:7px; letter-spacing:.08em; white-space:nowrap; }
+    .home-research-title { max-width:27ch; font-size:10px; }
+    .home-research-separator { height:10px; flex:none; }
+    .home-research-link { font-size:9px; }
   }
 
   /* ── REDUCED MOTION ──────────────────────────────── */
@@ -456,6 +490,13 @@
 <div id="prog"></div>
 
 <!-- NAV ─────────────────────────────────────────── -->
+<a class="home-research-ribbon" href="/research/harmattan-ai-evidence-plan/" aria-label="Read the new Pareto Labs research note: Harmattan AI, evidence before scale">
+  <span class="home-research-kicker">New research</span>
+  <span class="home-research-separator" aria-hidden="true"></span>
+  <span class="home-research-title">Harmattan AI: Evidence Before Scale</span>
+  <span class="home-research-link">Read the paper <span aria-hidden="true">→</span></span>
+</a>
+
 <nav id="nav">
   <a class="nav-logo" href="/" aria-label="Pareto Labs"><img class="brand-mark" src="/assets/logo.png" alt=""><span>areto&nbsp;Labs</span></a>
   <ul class="nav-links">
@@ -468,6 +509,7 @@
     <li class="cta-li"><a href="#partner" class="nav-cta">Build with Pareto</a></li>
   </ul>
 </nav>
+<div class="home-nav-spacer" aria-hidden="true"></div>
 
 <!-- ═══ HERO A — OPERATIONS (light) ══════════════ -->
 <div id="section-human" class="hero-split">
@@ -614,13 +656,13 @@
     </div>
 
     <div class="eng-grid">
-      <a class="eng rv" href="/inference.html">
+      <a class="eng eng-inference rv" href="/inference.html">
         <div class="eng-n">01 / Training &amp; Inference</div>
         <h3>Open models, <em>served.</em></h3>
-        <p>Chat, vision, transcription and embeddings behind one OpenAI-compatible API, with fine-tuning, evaluations and retrieval on the same platform.</p>
+        <p>LLMs, speech and vision-language-action models behind one OpenAI-compatible API, with post-training, evaluations and retrieval on the same platform.</p>
         <span class="eng-go">Explore training &amp; inference &rarr;</span>
       </a>
-      <a class="eng rv" style="transition-delay:.06s" href="/cloud.html">
+      <a class="eng eng-cloud rv" style="transition-delay:.06s" href="/cloud.html">
         <div class="eng-n">02 / Cloud</div>
         <h3>Everything <em>around</em> the model.</h3>
         <p>Apps, jobs, Postgres, vector, key-value and object storage, with logs, metrics and traces, running on the same nodes as the models they call.</p>
@@ -997,7 +1039,7 @@ if (REDUCE || !('IntersectionObserver' in window)) {
 })();
 </script>
 <script src="/assets/build-modal.js?v=20261012b" defer></script>
-<script src="/assets/newsletter.js?v=20261012b" defer></script>
+<script src="/assets/newsletter.js?v=20261105a" defer></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
