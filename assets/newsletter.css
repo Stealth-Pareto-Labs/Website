@@ -18,11 +18,12 @@
 .nl-title em { font-style: italic; font-weight: 300; }
 .nl-sub { font-family:var(--nl-sans); font-size:15px; font-weight:300; line-height:1.75; color:rgba(238,233,224,.75); max-width:49ch; margin:0; }
 
-.nl-social { display:flex; flex-wrap:wrap; align-items:center; gap:9px 20px; margin-top:31px; }
-.nl-social-label { margin-right:2px; color:rgba(238,233,224,.48); font-family:var(--nl-sans); font-size:10px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; }
-.nl-social a { display:inline-flex; min-height:36px; align-items:center; color:rgba(238,233,224,.82); font:400 13px var(--nl-sans); text-decoration:none; border-bottom:1px solid rgba(238,233,224,.25); transition:color .18s,border-color .18s; }
-.nl-social a::after { content:"↗"; margin-left:6px; color:var(--nl-gold); font-size:11px; }
-.nl-social a:hover { color:#fff; border-color:var(--nl-gold); }
+.nl-follow-footer { flex:1 0 100%; display:flex; align-items:center; flex-wrap:wrap; gap:10px 24px; padding:16px 0 2px; border-top:1px solid rgba(32,30,26,.11); }
+.nl-follow-label { color:rgba(20,18,15,.48); font:600 10px 'Hanken Grotesk','Inter',system-ui,sans-serif; letter-spacing:.13em; text-transform:uppercase; }
+.nl-social { display:flex; flex-wrap:wrap; align-items:center; gap:8px 20px; margin:0; }
+.nl-social a { display:inline-flex; min-height:28px; align-items:center; color:rgba(20,18,15,.68); font:400 13px 'Hanken Grotesk','Inter',system-ui,sans-serif; text-decoration:none; border-bottom:1px solid rgba(20,18,15,.18); transition:color .18s,border-color .18s; }
+.nl-social a::after { content:"↗"; margin-left:6px; color:#a8854f; font-size:11px; }
+.nl-social a:hover { color:#201e1a; border-color:#a8854f; }
 .nl-signup { padding:clamp(24px,3vw,36px); border:1px solid rgba(238,233,224,.16); background:rgba(7,11,20,.48); box-shadow:0 24px 70px rgba(0,0,0,.18); }
 .nl-signup-label { margin:0 0 21px; color:rgba(238,233,224,.72); font-family:var(--nl-sans); font-size:11px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; }
 .nl-form { width:100%; }
@@ -64,7 +65,8 @@
   .nl-row { grid-template-columns:1fr; }
   .nl-label { grid-column:1; }
   .nl-btn { width:100%; }
-  .nl-social { gap:7px 16px; margin-top:24px; }
+  .nl-follow-footer { gap:8px 18px; }
+  .nl-social { gap:7px 16px; }
 }
 
 /* ── END-CAP ──────────────────────────────────────────────────────────────
@@ -164,5 +166,5 @@
 }
 .plw-stage { z-index: 1; }
 
-/* Keep the Follow Pareto footer treatment still. */
+/* Keep the wordmark at the footer still. */
 .plw-eyebrow, .plw-l, .plw-tag { opacity: 1; transform: none; transition: none; }

@@ -12,12 +12,6 @@
         '<p class="nl-eyebrow">Pareto &nbsp;/&nbsp; Research letter</p>' +
         '<h2 class="nl-title" id="nl-title">What we learn, <em>we share.</em></h2>' +
         '<p class="nl-sub">Research, field lessons, and ideas from building AI for real operations. A few considered updates each year, grounded in the work.</p>' +
-        '<nav class="nl-social" aria-label="Follow Pareto Labs">' +
-          '<span class="nl-social-label">Follow Pareto</span>' +
-          '<a href="https://www.linkedin.com/company/trypareto-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>' +
-          '<a href="https://x.com/paretolabsx" target="_blank" rel="noopener noreferrer">X</a>' +
-          '<a href="https://discord.gg/z3fgyDuGM" target="_blank" rel="noopener noreferrer">Discord</a>' +
-        '</nav>' +
       '</div>' +
       '<div class="nl-signup">' +
         '<p class="nl-signup-label">Occasional research updates</p>' +
@@ -43,6 +37,22 @@
     holder.innerHTML = HTML;
     var band = holder.firstChild;
     footer.parentNode.insertBefore(band, footer);
+
+    var footerInner = footer.querySelector('.foot-inner');
+    if (footerInner) {
+      var follow = document.createElement('div');
+      follow.className = 'nl-follow-footer';
+      follow.innerHTML =
+        '<span class="nl-follow-label">Follow Pareto</span>' +
+        '<nav class="nl-social" aria-label="Follow Pareto Labs">' +
+          '<a href="https://www.linkedin.com/company/trypareto-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>' +
+          '<a href="https://x.com/paretolabsx" target="_blank" rel="noopener noreferrer">X</a>' +
+          '<a href="https://discord.gg/z3fgyDuGM" target="_blank" rel="noopener noreferrer">Discord</a>' +
+        '</nav>';
+      var footerCopy = footerInner.querySelector('.foot-copy');
+      if (footerCopy) footerInner.insertBefore(follow, footerCopy);
+      else footerInner.appendChild(follow);
+    }
 
     // Keep the footer closeout static so it does not draw attention away from the Follow Pareto links.
 
