@@ -4,7 +4,6 @@
    to the same Apps Script web app used by the Build form.
    ============================================================ */
 (function () {
-  var NL_ENDPOINT = 'https://script.google.com/macros/s/AKfycbylgzQLs7NDiLvxldpmbwFMfjURjqNJIOA_iocBK141-PekIyGC51WmKIuA1dZHo8aS/exec';
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   var HTML =
@@ -302,14 +301,11 @@
       if (!EMAIL_RE.test(email)) { form.elements['email'].setAttribute('aria-invalid', 'true'); showErr('Please enter a valid email address.'); return; }
       form.elements['email'].removeAttribute('aria-invalid');
       var btn = form.querySelector('.nl-btn'); btn.disabled = true; btn.textContent = 'Subscribing…';
-      var data = new URLSearchParams();
-      data.append('form', 'newsletter');
-      data.append('email', email);
-      data.append('page', location.pathname);
       function done() { form.style.display = 'none'; ok.classList.add('show'); }
-      if (NL_ENDPOINT) {
-        fetch(NL_ENDPOINT, { method: 'post', mode: 'no-cors', body: data }).then(done).catch(done);
-      } else { setTimeout(done, 400); }
+      fetch('/api/site-intake', { method: 'POST', headers: { 'content-type': 'application/json' }, credentials: 'same-origin', body: JSON.stringify({ formType: 'newsletter', email: email, page: location.pathname }) })
+        .then(function (response) { return response.json().then(function (result) { if (!response.ok || !result.ok) throw new Error(result.error || 'We could not add you to the update list. Please try again.'); }); })
+        .then(done)
+        .catch(function (err) { showErr(err.message || 'We could not add you to the update list. Please try again.'); btn.disabled = false; btn.textContent = 'Subscribe'; });
     });
   }
   if (document.readyState !== 'loading') init();

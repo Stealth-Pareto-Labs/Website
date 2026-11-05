@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/build-modal.css?v=20261012b">
+  <link rel="stylesheet" href="/assets/site-intake.css?v=20261104a">
   <link rel="stylesheet" href="/assets/newsletter.css?v=20261105a">
   <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -828,13 +828,13 @@
       <div class="rv" style="transition-delay:.15s">
         <div class="form-box">
           <p class="form-ttl">Start a conversation</p>
-          <form id="partner-form" class="build-form" data-ok="partner-ok" novalidate>
+          <form id="partner-form" class="build-form site-intake-form" data-form-type="company" data-ok="partner-ok" novalidate>
             <div class="fields">
               <div class="field"><label for="c-name">Your name</label><input id="c-name" name="name" type="text" autocomplete="name" placeholder="James Wright" required></div>
               <div class="field"><label for="c-email">Work email</label><input id="c-email" name="email" type="email" autocomplete="email" placeholder="james@company.com" required></div>
-              <div class="field"><label for="c-co">Company</label><input id="c-co" name="company" type="text" autocomplete="organization" placeholder="Your company"></div>
+              <div class="field"><label for="c-co">Company</label><input id="c-co" name="company" type="text" autocomplete="organization" placeholder="Your company" required></div>
               <div class="field"><label for="c-type">You are</label>
-                <select id="c-type" name="type">
+                <select id="c-type" name="role" required>
                   <option value="">Select one</option>
                   <option>Operating company (SMB / mid-market)</option>
                   <option>Developer / startup (inference)</option>
@@ -844,7 +844,7 @@
                   <option>Other</option>
                 </select>
               </div>
-              <div class="field"><label for="c-chal">What do you want to build or improve?</label><textarea id="c-chal" name="challenge" placeholder="e.g. Our customer service team is overwhelmed and our knowledge is scattered across people and docs…"></textarea></div>
+              <div class="field"><label for="c-chal">What do you want to build or improve?</label><textarea id="c-chal" name="challenge" placeholder="e.g. Our customer service team is overwhelmed and our knowledge is scattered across people and docs…" required></textarea></div>
             </div>
             <div class="form-ft">
               <button type="submit" class="btn btn-solid">Build with Pareto</button>
@@ -874,7 +874,7 @@
         </ul>
       </div>
       <div class="rv" style="transition-delay:.15s; display:flex; align-items:center; justify-content:center;">
-        <a href="https://expert.trypareto.ai/" class="btn btn-solid btn-arr" style="font-size:15px; padding:18px 28px;">Become an Expert</a>
+        <a href="/experts.html#expert-intake" class="btn btn-solid btn-arr" style="font-size:15px; padding:18px 28px;">Become an Expert</a>
       </div>
     </div>
   </div>
@@ -946,7 +946,7 @@ if (REDUCE || !('IntersectionObserver' in window)) {
   animEls.forEach(el => io.observe(el));
 }
 
-/* Build-with-Pareto form (inline + modal) handled by /assets/build-modal.js */
+/* Build-with-Pareto form is submitted through the same-origin Pages intake route. */
 
 /* ── CANVAS A: KNOWLEDGE NETWORK (gold, light hero) ── */
 (function() {
@@ -1038,7 +1038,7 @@ if (REDUCE || !('IntersectionObserver' in window)) {
   }
 })();
 </script>
-<script src="/assets/build-modal.js?v=20261012b" defer></script>
+<script src="/assets/site-intake.js?v=20261104a" defer></script>
 <script src="/assets/newsletter.js?v=20261105a" defer></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
