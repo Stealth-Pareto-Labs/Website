@@ -441,6 +441,8 @@
   @media (max-width: 960px) {
     :root { --home-announcement-height:36px; --home-nav-height:66px; }
     nav { padding: 16px 24px; }
+    .nav-links { gap: 8px; }
+    .nav-cta { padding: 7px 8px; min-height: 34px; font-size: 11px !important; }
     .wrap, .wrap-thin { padding: 0 24px; }
     .nav-links li:not(.cta-li) { display: none; }
     .hero-split { grid-template-columns: 1fr; min-height: auto; }
@@ -466,6 +468,11 @@
   }
   @media (max-width: 560px) {
     :root { --home-announcement-height:40px; --home-nav-height:66px; }
+    nav { padding: 16px 12px; }
+    .nav-links { gap: 4px; }
+    .nav-cta { padding: 5px 6px; min-height: 32px; font-size: 10px !important; }
+    .nav-logo { font-size: 16px; }
+    .brand-mark { height: 30px; }
     .ind-grid { grid-template-columns: 1fr; }
     .hero-ctas .btn { width: 100%; justify-content: center; }
     .home-research-ribbon { flex-wrap:nowrap; gap:6px; padding:5px 9px; }
@@ -506,7 +513,8 @@
     <li><a href="/industries.html">Industries</a></li>
     <li><a href="/experts.html">Experts</a></li>
     <li><a href="/research.html">Research</a></li>
-    <li class="cta-li"><a href="#partner" class="nav-cta">Build with Pareto</a></li>
+    <li class="cta-li"><a href="#partner" class="nav-cta">For companies</a></li>
+    <li class="cta-li"><a href="https://factory.trypareto.ai/" class="nav-cta">For developers</a></li>
   </ul>
 </nav>
 <div class="home-nav-spacer" aria-hidden="true"></div>
