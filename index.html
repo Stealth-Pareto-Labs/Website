@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/build-modal.css?v=20261012b">
+  <link rel="stylesheet" href="/assets/site-intake.css?v=20261104a">
   <link rel="stylesheet" href="/assets/newsletter.css?v=20261012b">
   <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -437,6 +437,13 @@
     .section, .section-dark { padding: 84px 0; }
   }
   @media (max-width: 560px) {
+    nav { padding: 12px 12px; gap: 8px; }
+    .nav-logo { font-size: 15px; }
+    .brand-mark { height: 28px; }
+    .nav-links { gap: 6px; }
+    .nav-cta { padding: 7px 8px; min-height: 34px; font-size: 11px !important; }
+  }
+  @media (max-width: 560px) {
     .ind-grid { grid-template-columns: 1fr; }
     .hero-ctas .btn { width: 100%; justify-content: center; }
   }
@@ -465,7 +472,8 @@
     <li><a href="/industries.html">Industries</a></li>
     <li><a href="/experts.html">Experts</a></li>
     <li><a href="/research.html">Research</a></li>
-    <li class="cta-li"><a href="#partner" class="nav-cta">Build with Pareto</a></li>
+    <li class="cta-li"><a href="#partner" class="nav-cta">For companies</a></li>
+    <li class="cta-li"><a href="https://factory.trypareto.ai/" class="nav-cta">For developers</a></li>
   </ul>
 </nav>
 
@@ -786,30 +794,31 @@
       <div class="rv" style="transition-delay:.15s">
         <div class="form-box">
           <p class="form-ttl">Start a conversation</p>
-          <form id="partner-form" class="build-form" data-ok="partner-ok" novalidate>
+          <form id="partner-form" class="build-form site-intake-form" data-form-type="company" data-ok="partner-ok" novalidate>
             <div class="fields">
               <div class="field"><label for="c-name">Your name</label><input id="c-name" name="name" type="text" autocomplete="name" placeholder="James Wright" required></div>
               <div class="field"><label for="c-email">Work email</label><input id="c-email" name="email" type="email" autocomplete="email" placeholder="james@company.com" required></div>
-              <div class="field"><label for="c-co">Company</label><input id="c-co" name="company" type="text" autocomplete="organization" placeholder="Your company"></div>
+              <div class="field"><label for="c-co">Company</label><input id="c-co" name="company" type="text" autocomplete="organization" placeholder="Your company" required></div>
               <div class="field"><label for="c-type">You are</label>
-                <select id="c-type" name="type">
+                <select id="c-type" name="role" required>
                   <option value="">Select one</option>
-                  <option>Operating company (SMB / mid-market)</option>
-                  <option>Developer / startup (inference)</option>
-                  <option>Team deploying workloads (cloud)</option>
-                  <option>Vertical / industry business</option>
-                  <option>Government / public institution</option>
-                  <option>Other</option>
+                  <option value="Operating company (SMB / mid-market)">Operating company (SMB / mid-market)</option>
+                  <option value="Developer / startup (inference)">Developer / startup (inference)</option>
+                  <option value="Team deploying workloads (cloud)">Team deploying workloads (cloud)</option>
+                  <option value="Vertical / industry business">Vertical / industry business</option>
+                  <option value="Government / public institution">Government / public institution</option>
+                  <option value="Other">Other</option>
                 </select>
               </div>
-              <div class="field"><label for="c-chal">What do you want to build or improve?</label><textarea id="c-chal" name="challenge" placeholder="e.g. Our customer service team is overwhelmed and our knowledge is scattered across people and docs…"></textarea></div>
+              <div class="field"><label for="c-chal">What do you want to build or improve?</label><textarea id="c-chal" name="challenge" placeholder="e.g. Our customer service team is overwhelmed and our knowledge is scattered across people and docs…" required></textarea></div>
             </div>
             <div class="form-ft">
-              <button type="submit" class="btn btn-solid">Build with Pareto</button>
+              <label class="intake-consent"><input type="checkbox" name="newsletter_consent" value="true"> Send me occasional Pareto Labs research and product updates.</label>
+              <button type="submit" class="btn btn-solid">Send request</button>
               <p class="form-note">We review every inquiry personally and respond within two business days.</p>
             </div>
           </form>
-          <div class="form-ok" id="partner-ok"><div class="ok-ring">✓</div><h3>Thank you.</h3><p>We&rsquo;ll be in touch within two business days.</p></div>
+          <div class="form-ok" id="partner-ok" role="status" aria-live="polite"><div class="ok-ring">✓</div><h3>Thank you.</h3><p>We&rsquo;ve received your responses. The Pareto Labs team will be in touch.</p><p class="intake-optin-warning" data-newsletter-status hidden></p><p>Please follow us online:</p><div class="intake-socials"><a href="https://discord.gg/z3fgyDuGM" target="_blank" rel="noopener noreferrer">Discord</a><a href="https://www.linkedin.com/company/trypareto-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://x.com/paretolabsx?s=11" target="_blank" rel="noopener noreferrer">X</a><a href="https://www.instagram.com/labspareto?exln=MXBkdTZ5OWR6OWMweA%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener noreferrer">Instagram</a></div></div>
         </div>
       </div>
     </div>
@@ -832,7 +841,7 @@
         </ul>
       </div>
       <div class="rv" style="transition-delay:.15s; display:flex; align-items:center; justify-content:center;">
-        <a href="https://expert.trypareto.ai/" class="btn btn-solid btn-arr" style="font-size:15px; padding:18px 28px;">Become an Expert</a>
+        <a href="/experts.html#expert-intake" class="btn btn-solid btn-arr" style="font-size:15px; padding:18px 28px;">Become an Expert</a>
       </div>
     </div>
   </div>
@@ -904,7 +913,7 @@ if (REDUCE || !('IntersectionObserver' in window)) {
   animEls.forEach(el => io.observe(el));
 }
 
-/* Build-with-Pareto form (inline + modal) handled by /assets/build-modal.js */
+/* Company intake uses the direct in-page form and /assets/site-intake.js. */
 
 /* ── CANVAS A: KNOWLEDGE NETWORK (gold, light hero) ── */
 (function() {
@@ -996,7 +1005,7 @@ if (REDUCE || !('IntersectionObserver' in window)) {
   }
 })();
 </script>
-<script src="/assets/build-modal.js?v=20261012b" defer></script>
+<script src="/assets/site-intake.js?v=20261104a" defer></script>
 <script src="/assets/newsletter.js?v=20261012b" defer></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>

@@ -1,14 +1,13 @@
 /* ============================================================
    Pareto Labs — newsletter subscription.
    Injects a band above the footer and posts {form:'newsletter', email}
-   to the same Apps Script web app used by the Build form.
+   to the same-origin intake API, then Resend + Apps Script handle delivery.
    ============================================================ */
 (function () {
-  var NL_ENDPOINT = 'https://script.google.com/macros/s/AKfycbylgzQLs7NDiLvxldpmbwFMfjURjqNJIOA_iocBK141-PekIyGC51WmKIuA1dZHo8aS/exec';
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   var HTML =
-    '<section class="nl-band" aria-labelledby="nl-title"><div class="nl-inner">' +
+    '<section class="nl-band" id="newsletter" aria-labelledby="nl-title"><div class="nl-inner">' +
       '<div>' +
         '<p class="nl-eyebrow">Research &amp; Notes</p>' +
         '<h2 class="nl-title" id="nl-title">The latest from <em>Pareto Labs.</em></h2>' +
@@ -290,14 +289,11 @@
       var email = (form.elements['email'].value || '').trim();
       if (!EMAIL_RE.test(email)) { showErr('Please enter a valid email address.'); return; }
       var btn = form.querySelector('.nl-btn'); btn.disabled = true; btn.textContent = 'Subscribing…';
-      var data = new URLSearchParams();
-      data.append('form', 'newsletter');
-      data.append('email', email);
-      data.append('page', location.pathname);
       function done() { form.style.display = 'none'; ok.classList.add('show'); }
-      if (NL_ENDPOINT) {
-        fetch(NL_ENDPOINT, { method: 'post', mode: 'no-cors', body: data }).then(done).catch(done);
-      } else { setTimeout(done, 400); }
+      fetch('/api/site-intake', { method: 'POST', headers: { 'content-type': 'application/json' }, credentials: 'same-origin', body: JSON.stringify({ formType: 'newsletter', email: email, page: location.pathname }) })
+        .then(function (response) { return response.json().then(function (result) { if (!response.ok || !result.ok) throw new Error(result.error || 'We could not add you to the update list. Please try again.'); }); })
+        .then(done)
+        .catch(function (err) { showErr(err.message || 'We could not add you to the update list. Please try again.'); btn.disabled = false; btn.textContent = 'Subscribe'; });
     });
   }
   if (document.readyState !== 'loading') init();

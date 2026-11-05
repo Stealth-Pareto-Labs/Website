@@ -183,6 +183,11 @@ a:focus-visible, .btn:focus-visible, button:focus-visible { outline: 2px solid v
 @media (max-width: 560px) {
   .card-grid, .card-grid.cols-2 { grid-template-columns: 1fr; }
   .nav-links a:not(.nav-cta) { display: none; }
+  nav.site-nav { padding: 12px 12px; gap: 8px; }
+  .nav-logo { font-size: 15px; }
+  .brand-mark { height: 28px; }
+  .nav-links { gap: 6px; }
+  .nav-cta { padding: 7px 8px; min-height: 34px; font-size: 11px !important; }
   .page-hero .actions .btn, .cta-final .actions .btn { width: 100%; justify-content: center; }
 }
 @media (prefers-reduced-motion: reduce) {
