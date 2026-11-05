@@ -1,7 +1,6 @@
-const assert = require('node:assert/strict');
-const test = require('node:test');
-
-const { handleNewsletter, handleSubmission, validateSubmission } = require('../api/lib/site-intake');
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { handleNewsletter, handleSubmission, validateSubmission } from '../api/lib/site-intake.js';
 
 const companySubmission = {
   formType: 'company',

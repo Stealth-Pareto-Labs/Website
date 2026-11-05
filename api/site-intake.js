@@ -1,8 +1,6 @@
-'use strict';
+import { handleNewsletter, handleSubmission } from './lib/site-intake.js';
 
-const { handleNewsletter, handleSubmission } = require('./lib/site-intake');
-
-module.exports = async function siteIntake(req, res) {
+export default async function siteIntake(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   res.setHeader('X-Content-Type-Options', 'nosniff');
   if (req.method !== 'POST') {
@@ -13,4 +11,4 @@ module.exports = async function siteIntake(req, res) {
     ? await handleNewsletter(req.body)
     : await handleSubmission(req.body);
   return res.status(result.status).json(result.body);
-};
+}

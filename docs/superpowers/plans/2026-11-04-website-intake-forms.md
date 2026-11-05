@@ -30,15 +30,15 @@
 
 ### Task 1: Intake validation and server-side proxy
 
-**Files:** create `api/site-intake.js`, `api/lib/site-intake.js`, `scripts/site-intake.test.cjs`; modify `backend/build-request.gs`.
+**Files:** create `api/site-intake.js`, `api/lib/site-intake.js`, `scripts/site-intake.test.mjs`; modify `backend/build-request.gs`.
 
 - [x] Write failing Node tests for company/expert validation, newsletter forwarding, proxy configuration, and Apps Script result handling.
-- [x] Run `node --test scripts/site-intake.test.cjs` and verify failures are due to missing implementation.
+- [x] Run `node --test scripts/site-intake.test.mjs` and verify failures are due to missing implementation.
 - [x] Implement the Vercel proxy and server-side validation. Require `APPS_SCRIPT_URL` and `SITE_INTAKE_SHARED_SECRET`; never expose the secret to the browser.
 - [x] Extend Apps Script to verify the shared secret, validate each form type, upsert HubSpot contacts, attach form-specific notes, preserve header-aware company logging, add expert logging to its own sheet tab, and notify Slack.
 - [x] Read integration credentials from Apps Script Script Properties. Add a receipt-enabled flag that defaults off until copy approval.
 - [x] Check Resend response status, use per-submission idempotency keys, and report email failure without undoing an already-recorded CRM request.
-- [x] Run `node --test scripts/site-intake.test.cjs` and verify all focused tests pass.
+- [x] Run `node --test scripts/site-intake.test.mjs` and verify all focused tests pass.
 
 ### Task 2: Navigation, forms, and confirmation states
 
