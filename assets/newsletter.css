@@ -18,10 +18,10 @@
 .nl-title em { font-style: italic; font-weight: 300; }
 .nl-sub { font-family:var(--nl-sans); font-size:15px; font-weight:300; line-height:1.75; color:rgba(238,233,224,.75); max-width:49ch; margin:0; }
 
-.nl-follow-footer { flex:1 0 100%; display:flex; align-items:center; flex-wrap:wrap; gap:10px 24px; padding:16px 0 2px; border-top:1px solid rgba(32,30,26,.11); }
-.nl-follow-label { color:rgba(20,18,15,.48); font:600 10px 'Hanken Grotesk','Inter',system-ui,sans-serif; letter-spacing:.13em; text-transform:uppercase; }
-.nl-social { display:flex; flex-wrap:wrap; align-items:center; gap:8px 20px; margin:0; }
-.nl-social a { display:inline-flex; min-height:28px; align-items:center; color:rgba(20,18,15,.68); font:400 13px 'Hanken Grotesk','Inter',system-ui,sans-serif; text-decoration:none; border-bottom:1px solid rgba(20,18,15,.18); transition:color .18s,border-color .18s; }
+.nl-follow-footer { flex:1 0 100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; padding:24px 0 8px; border-top:1px solid rgba(32,30,26,.11); }
+.nl-follow-label { color:rgba(20,18,15,.48); font:600 11px 'Hanken Grotesk','Inter',system-ui,sans-serif; letter-spacing:.15em; text-transform:uppercase; }
+.nl-social { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:10px 32px; margin:0; }
+.nl-social a { display:inline-flex; min-height:44px; align-items:center; padding:0 2px; color:rgba(20,18,15,.72); font:500 15px 'Hanken Grotesk','Inter',system-ui,sans-serif; text-decoration:none; border-bottom:1px solid rgba(20,18,15,.18); transition:color .18s,border-color .18s; }
 .nl-social a::after { content:"↗"; margin-left:6px; color:#a8854f; font-size:11px; }
 .nl-social a:hover { color:#201e1a; border-color:#a8854f; }
 .nl-signup { padding:clamp(24px,3vw,36px); border:1px solid rgba(238,233,224,.16); background:rgba(7,11,20,.48); box-shadow:0 24px 70px rgba(0,0,0,.18); }
@@ -65,8 +65,9 @@
   .nl-row { grid-template-columns:1fr; }
   .nl-label { grid-column:1; }
   .nl-btn { width:100%; }
-  .nl-follow-footer { gap:8px 18px; }
-  .nl-social { gap:7px 16px; }
+  .nl-follow-footer { gap:10px; padding:20px 0 6px; }
+  .nl-social { gap:8px 24px; }
+  .nl-social a { min-height:42px; font-size:14px; }
 }
 
 /* ── END-CAP ──────────────────────────────────────────────────────────────
