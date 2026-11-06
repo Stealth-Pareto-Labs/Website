@@ -38,24 +38,6 @@
     var band = holder.firstChild;
     footer.parentNode.insertBefore(band, footer);
 
-    var footerInner = footer.querySelector('.foot-inner');
-    if (footerInner) {
-      var follow = document.createElement('div');
-      follow.className = 'nl-follow-footer';
-      follow.innerHTML =
-        '<span class="nl-follow-label">Follow Pareto</span>' +
-        '<nav class="nl-social" aria-label="Follow Pareto Labs">' +
-          '<a href="https://www.linkedin.com/company/trypareto-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>' +
-          '<a href="https://x.com/paretolabsx" target="_blank" rel="noopener noreferrer">X</a>' +
-          '<a href="https://discord.gg/z3fgyDuGM" target="_blank" rel="noopener noreferrer">Discord</a>' +
-        '</nav>';
-      var footerCopy = footerInner.querySelector('.foot-copy');
-      if (footerCopy) footerInner.insertBefore(follow, footerCopy);
-      else footerInner.appendChild(follow);
-    }
-
-    // Keep the footer closeout static so it does not draw attention away from the Follow Pareto links.
-
     var WORD = 'Pareto Labs';
     var letters = '';
     for (var i = 0; i < WORD.length; i++) {

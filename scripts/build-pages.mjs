@@ -62,6 +62,16 @@ async function collect(directory) {
 await collect(output);
 
 const htmlFiles = pageFiles.filter((file) => file.endsWith('.html'));
+const followMarkup = [
+  '<div class="nl-follow-footer">',
+  '  <span class="nl-follow-label">Follow Pareto</span>',
+  '  <nav class="nl-social" aria-label="Follow Pareto Labs">',
+  '    <a href="https://www.linkedin.com/company/trypareto-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>',
+  '    <a href="https://x.com/paretolabsx" target="_blank" rel="noopener noreferrer">X</a>',
+  '    <a href="https://discord.gg/z3fgyDuGM" target="_blank" rel="noopener noreferrer">Discord</a>',
+  '  </nav>',
+  '</div>',
+].join('\n');
 for (const file of htmlFiles) {
   const path = join(output, file);
   const html = await (await import('node:fs/promises')).readFile(path, 'utf8');
@@ -69,7 +79,10 @@ for (const file of htmlFiles) {
     const cleaned = cleanPageUrl(value);
     return cleaned === value ? match : `${attribute}=${quote}${cleaned}${quote}`;
   });
-  await writeFile(path, cleanLinks
+  const withFollowFooter = cleanLinks.includes('class="nl-follow-footer"')
+    ? cleanLinks
+    : cleanLinks.replace(/(<p\b[^>]*class="[^"]*\bfoot-copy\b[^"]*"[^>]*>)/, `${followMarkup}\n$1`);
+  await writeFile(path, withFollowFooter
     .replace(/\s*<script\b[^>]*src="\/assets\/build-modal\.js[^"]*"[^>]*><\/script>/g, '')
     .replace(/\s*<script defer src="\/_vercel\/insights\/script\.js"><\/script>/g, ''), 'utf8');
 }

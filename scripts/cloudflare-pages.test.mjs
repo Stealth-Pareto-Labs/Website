@@ -29,6 +29,15 @@ test('Pages build publishes only public site files with Pages routing rules', ()
 
   const sitemap = readFileSync(join(dist, 'sitemap.xml'), 'utf8');
   assert.doesNotMatch(sitemap, /\.html(?:<|\/)/, 'sitemap URLs must use Cloudflare Pages clean URLs');
+  const homepage = readFileSync(join(dist, 'index.html'), 'utf8');
+  const followStart = homepage.indexOf('<div class="nl-follow-footer"');
+  const navEnd = homepage.indexOf('</nav>', homepage.indexOf('<nav id="nav">'));
+  const footerCopy = homepage.indexOf('<p class="foot-copy">');
+  assert.ok(followStart > navEnd && followStart < footerCopy, 'Follow Pareto must be in the page footer, before the copyright');
+  assert.match(homepage.slice(followStart, footerCopy), /LinkedIn[\s\S]*>X</);
+  assert.match(homepage.slice(followStart, footerCopy), /Discord/);
+  const newsletterScript = readFileSync(join(dist, 'assets/newsletter.js'), 'utf8');
+  assert.doesNotMatch(newsletterScript, /nl-follow-footer|linkedin\.com\/company|paretolabsx|discord\.gg/, 'newsletter script must not inject social links at runtime');
   const htmlFiles = [];
   const collectHtml = (directory, prefix = '') => {
     for (const entry of readdirSync(directory, { withFileTypes: true })) {
