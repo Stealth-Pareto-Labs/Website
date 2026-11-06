@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" href="/assets/favicon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Pareto Labs">
-<meta property="og:title" content="Industries & Solutions — Pareto Labs">
+<meta property="og:title" content="Industries & Solutions · Pareto Labs">
 <meta property="og:description" content="Continuous-learning AI for operating industries across the real economy. Deployed in weeks, improving for as long as it runs.">
 <meta property="og:url" content="https://www.trypareto.ai/industries.html">
 <meta property="og:image" content="https://www.trypareto.ai/og/pareto-labs-v2.png">
@@ -21,7 +21,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/build-modal.css">
+<link rel="stylesheet" href="/assets/build-modal.css?v=20261012b">
+<link rel="stylesheet" href="/assets/newsletter.css?v=20261106a">
 <style>
 
 /* ============ TOKENS ============ */
@@ -56,7 +57,7 @@ button{cursor:pointer;font:inherit}
 h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.08;letter-spacing:-0.01em}
 h1 em,h2 em,h3 em,.stmt em{font-style:italic;font-weight:300;color:inherit}
 .on-dark h2 em,.on-dark h1 em,.on-dark .stmt em{color:inherit}
-:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+:focus-visible{outline:2px solid var(--ac);outline-offset:3px;border-radius:2px}
 ::selection{background:rgba(168,133,79,.25)}
 
 .skip{
@@ -73,7 +74,7 @@ h1 em,h2 em,h3 em,.stmt em{font-style:italic;font-weight:300;color:inherit}
   font-size:11px;letter-spacing:.16em;text-transform:uppercase;
   opacity:.55;font-weight:400;
 }
-.eyebrow::before{content:"";display:block;width:26px;height:1px;background:var(--gold);flex:none}
+.eyebrow::before{content:"";display:block;width:26px;height:1px;background:var(--ac);flex:none}
 .on-dark .eyebrow::before{background:var(--sig)}
 
 /* Buttons */
@@ -92,7 +93,7 @@ h1 em,h2 em,h3 em,.stmt em{font-style:italic;font-weight:300;color:inherit}
 .btn-ink{background:var(--wi);color:var(--w);border-color:var(--wi)}
 .btn-ink:hover{background:#2A2620}
 .btn-ghost-ink{background:transparent;color:var(--wi);border-color:rgba(20,18,15,.3)}
-.btn-ghost-ink:hover{border-color:var(--gold);color:var(--gold)}
+.btn-ghost-ink:hover{border-color:var(--ac);color:var(--ac)}
 
 /* ============ NAV ============ */
 .nav{
@@ -132,7 +133,7 @@ h1 em,h2 em,h3 em,.stmt em{font-style:italic;font-weight:300;color:inherit}
   box-shadow:0 1px 0 var(--wl);
 }
 .nav.scrolled .wordmark em{color:inherit}
-.nav.scrolled .nav-links a:hover{color:var(--gold)}
+.nav.scrolled .nav-links a:hover{color:var(--ac)}
 .nav.scrolled .nav-cta{background:var(--wi);color:var(--w)}
 .nav.scrolled .nav-cta:hover{background:#2A2620}
 @media (max-width:900px){.nav-links{display:none}}
@@ -313,9 +314,9 @@ h1 em,h2 em,h3 em,.stmt em{font-style:italic;font-weight:300;color:inherit}
 .icard-dark:hover .icard-cta{color:var(--di)}
 .icard-dark .icard-cta{transition:color .25s ease}
 /* with nine industries the grid fills exactly, so the CTA closes the row full-width */
-.igrid .icard-dark{grid-column:1/-1;aspect-ratio:auto;min-height:clamp(190px,17vw,250px)}
+.igrid .icard-dark{grid-column:span 2;aspect-ratio:auto;min-height:clamp(190px,17vw,250px)}
 .igrid .icard-dark p{max-width:44ch}
-@media (max-width:1023px){.igrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:1023px){.igrid{grid-template-columns:repeat(2,1fr)}.igrid .icard-dark{grid-column:span 1}}
 @media (max-width:600px){
   .igrid{grid-template-columns:1fr}
   .icard{aspect-ratio:4/4.6}
@@ -335,7 +336,7 @@ h1 em,h2 em,h3 em,.stmt em{font-style:italic;font-weight:300;color:inherit}
 }
 .scell:hover{background:var(--w2)}
 .scell .icon{
-  color:var(--gold);width:30px;height:30px;margin-bottom:22px;
+  color:var(--ac);width:30px;height:30px;margin-bottom:22px;
 }
 .scell .icon svg{width:100%;height:100%;display:block}
 .scell h3{font-size:1.15rem;margin-bottom:10px}
@@ -519,8 +520,9 @@ html:not(.anim) .pulse-ring{display:none}
     <div class="nav-inner">
       <a class="wordmark" href="/" aria-label="Pareto Labs home">Pareto <em>Labs</em></a>
       <ul class="nav-links">
+        <li><a href="/infrastructure.html">Infrastructure</a></li>
         <li><a href="/platform.html">Platform</a></li>
-        <li><a href="/private-equity.html">Private Equity</a></li>
+        <!-- REMOVED (private equity) <li><a href="/private-equity.html">Private Equity</a></li> -->
         <li><a href="/industries.html" aria-current="page">Industries</a></li>
         <li><a href="/experts.html">Experts</a></li>
         <li><a href="/research.html">Research</a></li>
@@ -575,7 +577,7 @@ html:not(.anim) .pulse-ring{display:none}
         </div>
       </div>
     </div>
-    <p class="metrics-note">Built for operators in PE portfolios, SMBs, government institutions, and vertical operating businesses &mdash; in emerging markets and beyond.</p>
+    <p class="metrics-note">Built for operators: SMBs, government institutions, and vertical operating businesses, wherever they run.</p>
   </section>
 
   <!-- ============ INTRO STATEMENT ============ -->
@@ -612,7 +614,9 @@ html:not(.anim) .pulse-ring{display:none}
           </div>
         </a>
 
-        <a class="icard reveal" href="/industries/consumer-brands-retail.html" style="--rd:.06s">
+        <!-- TEMPORARILY HIDDEN (consumer-brands-retail) — restore by removing this comment wrapper;
+     renumber .icard-num across the grid afterwards.
+<a class="icard reveal" href="/industries/consumer-brands-retail.html" style="--rd:.06s">
           <div class="icard-media" style="background-image:url(/assets/industries/retail.jpg)" role="img" aria-label="Retail store operations"></div>
           <div class="icard-scrim" aria-hidden="true"></div>
           <div class="icard-body">
@@ -626,12 +630,13 @@ html:not(.anim) .pulse-ring{display:none}
             </div></div>
           </div>
         </a>
+-->
 
-        <a class="icard reveal" href="/industries/business-services.html" style="--rd:.12s">
+        <a class="icard reveal" href="/industries/business-services.html" style="--rd:.06s">
           <div class="icard-media" style="background-image:url(/assets/industries/business.jpg)" role="img" aria-label="Business services team"></div>
           <div class="icard-scrim" aria-hidden="true"></div>
           <div class="icard-body">
-            <span class="icard-num">03</span>
+            <span class="icard-num">02</span>
             <h3>Business Services</h3>
             <p class="icard-promise">AI that drafts, reconciles, and resolves, so billable hours stay billable.</p>
             <div class="icard-more"><div class="icard-more-in">
@@ -642,7 +647,9 @@ html:not(.anim) .pulse-ring{display:none}
           </div>
         </a>
 
-        <a class="icard reveal" href="/industries/healthcare.html">
+        <!-- TEMPORARILY HIDDEN (healthcare) — restore by removing this comment wrapper;
+     renumber .icard-num across the grid afterwards.
+<a class="icard reveal" href="/industries/healthcare.html">
           <div class="icard-media" style="background-image:url(/assets/industries/healthcare.jpg)" role="img" aria-label="Healthcare administration"></div>
           <div class="icard-scrim" aria-hidden="true"></div>
           <div class="icard-body">
@@ -656,12 +663,13 @@ html:not(.anim) .pulse-ring{display:none}
             </div></div>
           </div>
         </a>
+-->
 
-        <a class="icard reveal" href="/industries/logistics.html" style="--rd:.06s">
+        <a class="icard reveal" href="/industries/logistics.html" style="--rd:.12s">
           <div class="icard-media" style="background-image:url(/assets/industries/logistics.jpg)" role="img" aria-label="Fleet and logistics"></div>
           <div class="icard-scrim" aria-hidden="true"></div>
           <div class="icard-body">
-            <span class="icard-num">05</span>
+            <span class="icard-num">03</span>
             <h3>Logistics &amp; Transportation</h3>
             <p class="icard-promise">AI that quotes, routes, and dispatches at the pace of the dock.</p>
             <div class="icard-more"><div class="icard-more-in">
@@ -672,11 +680,11 @@ html:not(.anim) .pulse-ring{display:none}
           </div>
         </a>
 
-        <a class="icard reveal" href="/industries/telecom.html" style="--rd:.12s">
+        <a class="icard reveal" href="/industries/telecom.html">
           <div class="icard-media" style="background-image:url(/assets/industries/telecom.jpg)" role="img" aria-label="Telecom network operations"></div>
           <div class="icard-scrim" aria-hidden="true"></div>
           <div class="icard-body">
-            <span class="icard-num">06</span>
+            <span class="icard-num">04</span>
             <h3>Telecom</h3>
             <p class="icard-promise">AI that watches the network, deflects the ticket, and saves the subscriber.</p>
             <div class="icard-more"><div class="icard-more-in">
@@ -687,11 +695,11 @@ html:not(.anim) .pulse-ring{display:none}
           </div>
         </a>
 
-        <a class="icard reveal" href="/industries/oil-gas.html">
+        <a class="icard reveal" href="/industries/oil-gas.html" style="--rd:.06s">
           <div class="icard-media" style="background-image:url(/assets/industries/oilgas.jpg)" role="img" aria-label="Oil and gas facility"></div>
           <div class="icard-scrim" aria-hidden="true"></div>
           <div class="icard-body">
-            <span class="icard-num">07</span>
+            <span class="icard-num">05</span>
             <h3>Oil &amp; Gas</h3>
             <p class="icard-promise">AI that hears every asset, files every report, and keeps the field moving.</p>
             <div class="icard-more"><div class="icard-more-in">
@@ -702,7 +710,25 @@ html:not(.anim) .pulse-ring{display:none}
           </div>
         </a>
 
-        <a class="icard reveal" href="/industries/legal.html">
+        <a class="icard reveal" href="/industries/mining.html" style="--rd:.12s">
+          <div class="icard-media" style="background-image:url(/assets/industries/mining.jpg)" role="img" aria-label="Mining operations"></div>
+          <div class="icard-scrim" aria-hidden="true"></div>
+          <div class="icard-body">
+            <span class="icard-num">06</span>
+            <h3>Mining</h3>
+            <p class="icard-promise">AI that hears the mill, moves the fleet, and accounts for every tonne.</p>
+            <div class="icard-more"><div class="icard-more-in">
+              <div class="chips"><span>Asset reliability</span><span>Grade and recovery</span><span>Haulage</span><span>HSE</span><span>Maintenance</span></div>
+              <p class="icard-uses">Failure prediction on mills and crushers. Grade and recovery tuned shift by shift.</p>
+              <span class="icard-cta">Explore &rarr;</span>
+            </div></div>
+          </div>
+        </a>
+
+
+        <!-- TEMPORARILY HIDDEN (legal) — restore by removing this comment wrapper;
+     renumber .icard-num across the grid afterwards.
+<a class="icard reveal" href="/industries/legal.html">
           <div class="icard-media" style="background-image:url(/assets/industries/legal.jpg)" role="img" aria-label="Legal operations"></div>
           <div class="icard-scrim" aria-hidden="true"></div>
           <div class="icard-body">
@@ -716,12 +742,13 @@ html:not(.anim) .pulse-ring{display:none}
             </div></div>
           </div>
         </a>
+-->
 
-        <a class="icard reveal" href="/industries/government.html" style="--rd:.06s">
+        <a class="icard reveal" href="/industries/government.html">
           <div class="icard-media" style="background-image:url(/assets/industries/government.jpg)" role="img" aria-label="Government service operations"></div>
           <div class="icard-scrim" aria-hidden="true"></div>
           <div class="icard-body">
-            <span class="icard-num">09</span>
+            <span class="icard-num">07</span>
             <h3>Government</h3>
             <p class="icard-promise">AI that serves the public, and stays under your control.</p>
             <div class="icard-more"><div class="icard-more-in">
@@ -735,7 +762,7 @@ html:not(.anim) .pulse-ring{display:none}
         <a class="icard icard-dark reveal" href="mailto:contact@trypareto.ai" style="--rd:.06s">
           <div class="icard-body">
             <div class="icard-dark-rule" aria-hidden="true"></div>
-            <span class="icard-num">10</span>
+            <span class="icard-num">08</span>
             <h3>Your industry</h3>
             <p>These are where we publish, not where we stop. Tell us what your operation runs on.</p>
             <span class="icard-cta">Start the conversation &rarr;</span>
@@ -913,8 +940,11 @@ html:not(.anim) .pulse-ring{display:none}
   <div class="wrap footer-inner">
     <a class="wordmark" href="/">Pareto <em>Labs</em></a>
     <ul class="footer-links">
+      <li><a href="/infrastructure.html">Infrastructure</a></li>
+      <li><a href="/inference.html">Inference</a></li>
+      <li><a href="/cloud.html">Cloud</a></li>
       <li><a href="/platform.html">Platform</a></li>
-      <li><a href="/private-equity.html">Private Equity</a></li>
+      <!-- REMOVED (private equity) <li><a href="/private-equity.html">Private Equity</a></li> -->
       <li><a href="/industries.html">Industries</a></li>
       <li><a href="/experts.html">Experts</a></li>
       <li><a href="/research.html">Research</a></li>
@@ -1015,7 +1045,8 @@ html:not(.anim) .pulse-ring{display:none}
   }
 })();
 </script>
-<script src="/assets/build-modal.js" defer></script>
+<script src="/assets/build-modal.js?v=20261012b" defer></script>
+<script src="/assets/newsletter.js?v=20261106a" defer></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

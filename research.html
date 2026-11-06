@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Research &amp; Insights — Pareto Labs</title>
-  <meta name="description" content="Research notes and perspectives from the work of deploying continuous-learning AI into the real economy — what compounds, what breaks, and what we&rsquo;re building next.">
+  <title>Research &amp; Insights · Pareto Labs</title>
+  <meta name="description" content="Research notes and perspectives from the work of deploying continuous-learning AI into the real economy: what compounds, what breaks, and what we&rsquo;re building next.">
   <link rel="canonical" href="https://www.trypareto.ai/research.html">
   <meta name="theme-color" content="#F5F2EB">
   <link rel="icon" href="/assets/favicon.ico" sizes="any">
@@ -12,23 +12,36 @@
   <link rel="apple-touch-icon" href="/assets/favicon-180.png">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Pareto Labs">
-  <meta property="og:title" content="Research &amp; Insights — Pareto Labs">
-  <meta property="og:description" content="What we&rsquo;re learning, in the open — research notes and perspectives on deploying continuous-learning AI into the real economy.">
+  <meta property="og:title" content="Research &amp; Insights · Pareto Labs">
+  <meta property="og:description" content="What we&rsquo;re learning, in the open: research notes and perspectives on deploying continuous-learning AI into the real economy.">
   <meta property="og:image" content="https://www.trypareto.ai/og/pareto-labs-v2.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css">
-  <link rel="stylesheet" href="/assets/build-modal.css">
-  <link rel="stylesheet" href="/assets/newsletter.css">
+  <link rel="stylesheet" href="/assets/site.css?v=20261012b">
+  <link rel="stylesheet" href="/assets/build-modal.css?v=20261012b">
+  <link rel="stylesheet" href="/assets/newsletter.css?v=20261106a">
+  <style>
+    .research-feature { grid-column:1/-1; display:grid; grid-template-columns:minmax(0,1.12fr) minmax(300px,.88fr); min-height:320px; overflow:hidden; border:1px solid rgba(20,18,15,.12); background:#080c18; color:#eee9e0; }
+    .research-feature-art { display:block; min-height:280px; background:#080c18; }
+    .research-feature-art img { display:block; width:100%; height:100%; min-height:280px; object-fit:cover; }
+    .research-feature-copy { display:flex; flex-direction:column; align-items:flex-start; padding:clamp(24px,4vw,48px); }
+    .research-feature-copy .section-tag { color:#c8ae7d; opacity:1; }
+    .research-feature-copy h2 { max-width:15ch; margin:8px 0 14px; font-family:var(--serif); font-size:clamp(27px,3.1vw,40px); font-weight:400; line-height:1.12; letter-spacing:-.025em; }
+    .research-feature-copy h2 a { color:#eee9e0; }
+    .research-feature-copy>p:not(.section-tag) { max-width:54ch; margin:0 0 22px; color:rgba(238,233,224,.72); font-size:14px; line-height:1.75; }
+    .research-feature-copy .tlink { margin-top:auto; color:#d8c393; border-color:rgba(216,195,147,.4); }
+    @media(max-width:760px) { .research-feature { grid-template-columns:1fr; } .research-feature-art,.research-feature-art img { min-height:0; aspect-ratio:16/8; } }
+  </style>
 </head>
 <body>
 
 <nav class="site-nav">
   <a class="nav-logo" href="/" aria-label="Pareto Labs"><img class="brand-mark" src="/assets/logo.png" alt=""><span>areto&nbsp;Labs</span></a>
   <ul class="nav-links">
+    <li class="hide-sm"><a href="/infrastructure.html">Infrastructure</a></li>
     <li class="hide-sm"><a href="/platform.html">Platform</a></li>
-    <li class="hide-sm"><a href="/private-equity.html">Private Equity</a></li>
+    <!-- REMOVED (private equity) <li class="hide-sm"><a href="/private-equity.html">Private Equity</a></li> -->
     <li class="hide-sm"><a href="/industries.html">Industries</a></li>
     <li class="hide-sm"><a href="/experts.html">Experts</a></li>
     <li class="hide-sm"><a href="/research.html" class="active">Research</a></li>
@@ -41,7 +54,7 @@
   <div class="wrap">
     <p class="eyebrow rv">Research &amp; Insights</p>
     <h1 class="rv" style="transition-delay:.05s">What we&rsquo;re learning, <em>in the open.</em></h1>
-    <p class="lead rv" style="transition-delay:.1s">Research notes and perspectives from the work of deploying continuous-learning AI into the real economy — what compounds, what breaks, and what we&rsquo;re building next.</p>
+    <p class="lead rv" style="transition-delay:.1s">Research notes and perspectives from the work of deploying continuous-learning AI into the real economy: what compounds, what breaks, and what we&rsquo;re building next.</p>
   </div>
 </header>
 
@@ -50,6 +63,18 @@
   <div class="wrap">
     <div class="section-tag rv">Writing</div>
     <div class="card-grid cols-2">
+
+      <article class="research-feature rv">
+        <a class="research-feature-art" href="/research/harmattan-ai-evidence-plan/" aria-label="Read Harmattan AI: evidence before scale">
+          <img src="/research/harmattan-ai-evidence-plan/assets/hero-harmattan-editorial.webp" alt="Abstract landscape of flowing data lines in Pareto Labs’ ivory, indigo, sage, and warm gold palette" loading="lazy">
+        </a>
+        <div class="research-feature-copy">
+          <p class="section-tag" style="margin-bottom:8px">New research · 5 November 2026</p>
+          <h2><a href="/research/harmattan-ai-evidence-plan/">Harmattan AI: evidence before scale</a></h2>
+          <p>What the data and benchmark record supports, what early training has not yet shown, and the phased research plan we propose before a broad training run.</p>
+          <a class="tlink" href="/research/harmattan-ai-evidence-plan/">Read the research note &rarr;</a>
+        </div>
+      </article>
 
       <article class="pcard rv">
         <div class="pcard-text" style="min-height:240px">
@@ -77,7 +102,7 @@
 <section class="cta-final">
   <div class="wrap">
     <div class="rv">
-      <h2>Build with us — or <em>come build with us.</em></h2>
+      <h2>Build with us, or <em>come build with us.</em></h2>
       <p>Build with Pareto to put continuous-learning AI to work in your operations, or join the team diffusing it into the real economy.</p>
       <div class="actions">
         <a class="btn btn-invert" href="/#partner">Build with Pareto</a>
@@ -92,8 +117,11 @@
     <div class="foot-inner">
       <div class="foot-logo">Pareto Labs</div>
       <ul class="foot-links">
+        <li><a href="/infrastructure.html">Infrastructure</a></li>
+        <li><a href="/inference.html">Inference</a></li>
+        <li><a href="/cloud.html">Cloud</a></li>
         <li><a href="/platform.html">Platform</a></li>
-        <li><a href="/private-equity.html">Private Equity</a></li>
+        <!-- REMOVED (private equity) <li><a href="/private-equity.html">Private Equity</a></li> -->
         <li><a href="/industries.html">Industries</a></li>
         <li><a href="/experts.html">Experts</a></li>
         <li><a href="/research.html">Research</a></li>
@@ -107,9 +135,9 @@
     </div>
   </div>
 </footer>
-<script src="/assets/site.js" defer></script>
-<script src="/assets/build-modal.js" defer></script>
-<script src="/assets/newsletter.js" defer></script>
+<script src="/assets/site.js?v=20261012b" defer></script>
+<script src="/assets/build-modal.js?v=20261012b" defer></script>
+<script src="/assets/newsletter.js?v=20261106a" defer></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Learning Layer — Pareto Labs</title>
+  <title>The Learning Layer · Pareto Labs</title>
   <meta name="description" content="A research note from Pareto Labs on self-continual learning systems, adaptive memory, human signal, and safe model improvement after deployment.">
   <link rel="canonical" href="https://www.trypareto.ai/research/the-learning-layer">
   <meta name="theme-color" content="#F5F2EB">
@@ -12,8 +12,8 @@
   <link rel="icon" href="/assets/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
   <link rel="apple-touch-icon" href="/assets/favicon-180.png">
-  <link rel="stylesheet" href="/assets/build-modal.css">
-  <link rel="stylesheet" href="/assets/newsletter.css">
+  <link rel="stylesheet" href="/assets/build-modal.css?v=20261012b">
+  <link rel="stylesheet" href="/assets/newsletter.css?v=20261106a">
 
   <!-- Open Graph -->
   <meta property="og:type" content="article">
@@ -26,14 +26,14 @@
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="The Learning Layer — Pareto Labs research note on self-continual learning systems.">
+  <meta property="og:image:alt" content="The Learning Layer · Pareto Labs research note on self-continual learning systems.">
 
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="The Learning Layer">
   <meta name="twitter:description" content="A research note from Pareto Labs on self-continual learning systems, adaptive memory, human signal, and safe model improvement after deployment.">
   <meta name="twitter:image" content="https://www.trypareto.ai/og/the-learning-layer-v2.png">
-  <meta name="twitter:image:alt" content="The Learning Layer — Pareto Labs research note on self-continual learning systems.">
+  <meta name="twitter:image:alt" content="The Learning Layer · Pareto Labs research note on self-continual learning systems.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -84,7 +84,7 @@
   .paper-meta {
     font-family: var(--sans);
     font-size: 11px; font-weight: 500; letter-spacing: 0.18em;
-    text-transform: uppercase; color: var(--gold);
+    text-transform: uppercase; color: var(--ac);
     text-align: center; margin-bottom: 26px;
   }
   .paper-title {
@@ -151,8 +151,8 @@
     font-size: 16px; line-height: 1.7; color: var(--wi);
   }
   ol.list li { counter-increment: li; }
-  ol.list li::before { content: counter(li) '.'; position: absolute; left: 4px; color: var(--gold); font-weight: 500; }
-  ul.list li::before { content: '—'; position: absolute; left: 4px; color: var(--wi3); }
+  ol.list li::before { content: counter(li) '.'; position: absolute; left: 4px; color: var(--ac); font-weight: 500; }
+  ul.list li::before { content: '·'; position: absolute; left: 4px; color: var(--wi3); }
 
   .paper a.ref { color: var(--wi); text-decoration: underline; text-underline-offset: 2px; text-decoration-color: var(--wl); transition: text-decoration-color 0.2s; }
   .paper a.ref:hover { text-decoration-color: var(--wi); }
@@ -169,7 +169,7 @@
   .paper-foot .corr a { color: var(--wi2); text-decoration: underline; text-underline-offset: 2px; }
   .paper-foot .corr a:hover { color: var(--wi); }
 
-  a:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--ac); outline-offset: 2px; }
 
   @media (max-width: 720px) {
     .topbar { padding: 16px 22px; }
@@ -252,11 +252,11 @@
     <p>The central question is not whether an AI system has memory. The question is whether it has <strong>adaptive memory</strong>.</p>
     <p class="tight">Adaptive memory requires five properties:</p>
     <ol class="list">
-      <li><strong>Provenance</strong> — every memory should be traceable to its source.</li>
-      <li><strong>Relevance</strong> — memory should be routed to the agents, models, or workflows where it matters.</li>
-      <li><strong>Compression</strong> — raw signal should be distilled into usable knowledge.</li>
-      <li><strong>Evaluation</strong> — proposed updates should be tested before they alter behavior.</li>
-      <li><strong>Governance</strong> — humans should control what enters production.</li>
+      <li><strong>Provenance.</strong> Every memory should be traceable to its source.</li>
+      <li><strong>Relevance.</strong> Memory should be routed to the agents, models, or workflows where it matters.</li>
+      <li><strong>Compression.</strong> Raw signal should be distilled into usable knowledge.</li>
+      <li><strong>Evaluation.</strong> Proposed updates should be tested before they alter behavior.</li>
+      <li><strong>Governance.</strong> Humans should control what enters production.</li>
     </ol>
     <p>Without these properties, memory becomes a liability.</p>
     <p>With them, memory becomes a foundation for continual improvement.</p>
@@ -295,7 +295,7 @@
 
   <section>
     <h2 class="sec">7. Why Self-Continual Learning Is Different</h2>
-    <p>Self-continual learning is not the same as fine-tuning. It is not the same as retrieval. It is not the same as prompt optimization. It is not the same as agent monitoring.</p>
+    <p>Self-continual learning is not the same as post-training. It is not the same as retrieval. It is not the same as prompt optimization. It is not the same as agent monitoring.</p>
     <p>It is the coordination of all these mechanisms into a closed learning loop.</p>
     <p class="tight">A self-continual learning system must decide:</p>
     <ul class="list">
@@ -319,10 +319,10 @@
     <p>A self-continual learning system should not blindly retrain itself on every user interaction. It should not automatically adopt every preference. It should not overwrite core policies because of a local pattern. It should not confuse temporary behavior with durable knowledge.</p>
     <p class="tight">Safe continual learning requires separation between four stages:</p>
     <ol class="list">
-      <li><strong>Observation</strong> — the system records what happened.</li>
-      <li><strong>Interpretation</strong> — the system proposes what the signal means.</li>
-      <li><strong>Evaluation</strong> — the system tests whether adaptation would improve outcomes.</li>
-      <li><strong>Approval</strong> — a human or governed process decides whether to deploy the change.</li>
+      <li><strong>Observation.</strong> The system records what happened.</li>
+      <li><strong>Interpretation.</strong> The system proposes what the signal means.</li>
+      <li><strong>Evaluation.</strong> The system tests whether adaptation would improve outcomes.</li>
+      <li><strong>Approval.</strong> A human or governed process decides whether to deploy the change.</li>
     </ol>
     <p>This separation preserves control.</p>
     <p>It also makes learning auditable. Documentation practices such as model cards and dataset datasheets were introduced to improve transparency around model behavior, training data, intended use, and limitations. Continual learning systems need an analogous form of documentation for post-deployment change: what changed, why it changed, what evidence supported the change, and what evaluation justified the update.</p>
@@ -382,7 +382,7 @@
 </article>
 
 <script defer src="/_vercel/insights/script.js"></script>
-<script src="/assets/build-modal.js" defer></script>
-<script src="/assets/newsletter.js" defer></script>
+<script src="/assets/build-modal.js?v=20261012b" defer></script>
+<script src="/assets/newsletter.js?v=20261106a" defer></script>
 </body>
 </html>

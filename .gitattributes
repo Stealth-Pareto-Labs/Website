@@ -1,0 +1,33 @@
+# Binary assets must never be touched by line-ending conversion.
+#
+# This repo is checked out with core.autocrlf=true. Every background video was
+# committed with each CRLF collapsed to a bare LF, which shifted every byte
+# offset after the first loss: Chrome then decoded three to ten frames of a
+# hundred and froze, which is what "the videos shake" was. Git's own binary
+# heuristic did not save them, so the file types are declared here instead.
+#
+# Verify after any media change:  python -s scripts/check-site.py
+
+*.mp4   binary
+*.mov   binary
+*.webm  binary
+*.m4v   binary
+*.jpg   binary
+*.jpeg  binary
+*.png   binary
+*.gif   binary
+*.webp  binary
+*.avif  binary
+*.ico   binary
+*.pdf   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
+*.eot   binary
+*.zip   binary
+
+# Deliberately nothing here for text. HTML in this repo is a mix of CRLF
+# (index.html, industries.html, industries/*.html) and LF (assets/*, the rest),
+# and declaring an eol would renormalize every one of them into a whole-file
+# diff. Edits preserve each file's existing endings instead.

@@ -1,10 +1,15 @@
 /* ============================================================
-   The hardware — loop diagram + sensor showcase
-   Industry pages: oil-gas, telecom, manufacturing
+   The hardware — sensor showcase
+   Industry pages: oil-gas, telecom, manufacturing, mining
    Everything namespaced .sx- so it cannot collide with site.css
+
+   The inner/outer loop diagram that used to sit above the showcase
+   was removed (it read as confusing). Its rules are kept below,
+   commented out, so the figure can be restored from git history
+   without re-deriving the styling.
    ============================================================ */
 
-/* ---------- loop diagram ---------- */
+/* ---------- loop diagram — REMOVED, kept for restore ----------
 .sx-fig { margin: 0 0 clamp(48px, 6vw, 76px); }
 .sx-canvas { overflow-x: auto; padding-bottom: 6px; }
 .sx-canvas svg { display: block; width: 100%; min-width: 660px; height: auto; }
@@ -32,8 +37,12 @@
 .sx-pulse-in  { stroke: var(--sig); animation: sx-travel 2.2s linear infinite; }
 .sx-pulse-out { stroke: var(--di); stroke-opacity: 0.85; animation: sx-travel 14s linear infinite; }
 @keyframes sx-travel { to { stroke-dashoffset: -1000; } }
+   ---------- end loop diagram ---------- */
 
 /* ---------- showcase ---------- */
+/* the figure used to supply this gap; the showcase now owns it */
+[data-sensor-showcase] { margin-top: clamp(48px, 6vw, 76px); }
+
 .sx-rail {
   display: flex; flex-wrap: wrap; gap: 0;
   border-top: 1px solid var(--dl); margin: 0 0 0;
@@ -116,20 +125,6 @@
   .sx-spec { border-left: none; border-top: 1px solid var(--dl); padding: 24px 22px 26px; }
 }
 @media (max-width: 700px) {
-  /* the loop reads as a vertical stack rather than a squeezed wide figure */
-  .sx-canvas { overflow-x: visible; }
-  .sx-canvas svg { min-width: 0; }
-  .sx-canvas .sx-wide { display: none; }
-  .sx-canvas .sx-tall { display: block; }
   .sx-rail { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
   .sx-rail button { padding: 13px 15px 11px; }
-  .sx-cap { font-size: 12.5px; }
-}
-@media (min-width: 701px) {
-  .sx-canvas .sx-tall { display: none; }
-  .sx-canvas .sx-wide { display: block; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .sx-pulse-in, .sx-pulse-out { animation: none; }
 }

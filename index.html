@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pareto Labs — Continuous-Learning AI for Real-World Operations</title>
-  <meta name="description" content="Pareto Labs is a continuously learning AI platform and implementation partner for emerging markets, SMBs, vertical operating businesses and governments — sovereign AI systems that learn from your data, customers, workflows, and vetted domain experts, and improve over time.">
+  <title>Pareto Labs · Sovereign Training, Inference and Cloud for Real-World Operations</title>
+  <meta name="description" content="Pareto Labs provides sovereign training, inference and cloud for real-world operations, with models and managed compute served inside your own country.">
   <link rel="canonical" href="https://www.trypareto.ai/">
   <meta name="theme-color" content="#F5F2EB">
 
@@ -16,32 +16,34 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Pareto Labs">
-  <meta property="og:title" content="Pareto Labs — Continuous-Learning AI for Real-World Operations">
-  <meta property="og:description" content="A continuously learning AI platform and implementation partner for emerging markets, SMBs, vertical operating businesses and governments. Sovereign AI systems that improve with your business.">
+  <meta property="og:title" content="Pareto Labs · Sovereign Training, Inference and Cloud for Real-World Operations">
+  <meta property="og:description" content="Sovereign training, inference and cloud for real-world operations, with models and managed compute served inside your own country.">
   <meta property="og:url" content="https://www.trypareto.ai/">
   <meta property="og:image" content="https://www.trypareto.ai/og/pareto-labs-v2.png">
   <meta property="og:image:secure_url" content="https://www.trypareto.ai/og/pareto-labs-v2.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Pareto Labs — Continuous-Learning AI">
+  <meta property="og:image:alt" content="Pareto Labs · Sovereign Training, Inference and Cloud">
 
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pareto Labs — Continuous-Learning AI for Real-World Operations">
-  <meta name="twitter:description" content="A continuously learning AI platform and implementation partner for emerging markets, SMBs, vertical operating businesses and governments. Sovereign AI systems.">
+  <meta name="twitter:title" content="Pareto Labs · Sovereign Training, Inference and Cloud for Real-World Operations">
+  <meta name="twitter:description" content="Sovereign training, inference and cloud for real-world operations, with models and managed compute served inside your own country.">
   <meta name="twitter:image" content="https://www.trypareto.ai/og/pareto-labs-v2.png">
-  <meta name="twitter:image:alt" content="Pareto Labs — Continuous-Learning AI">
+  <meta name="twitter:image:alt" content="Pareto Labs · Sovereign Training, Inference and Cloud">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/build-modal.css">
-  <link rel="stylesheet" href="/assets/newsletter.css">
+  <link rel="stylesheet" href="/assets/site-intake.css?v=20261104a">
+  <link rel="stylesheet" href="/assets/newsletter.css?v=20261106a">
   <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
+    --home-announcement-height: 36px;
+    --home-nav-height: 70px;
     --w:   #F5F2EB;
     --w2:  #EAE6DC;
     --wi:  #14120F;
@@ -56,6 +58,8 @@
     --dl:  rgba(238,233,224,0.10);
     --sig: #C8AE7D;
     --gold:#A8854F;
+    --ac:  #2C3C60;
+    --ac-d: #92A4C2;
 
     --serif: 'Newsreader', 'Tiempos Headline', Georgia, serif;
     --sans:  'Hanken Grotesk', 'Inter', system-ui, sans-serif;
@@ -82,13 +86,14 @@
 
   /* ── NAV ─────────────────────────────────────────── */
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 18px 48px;
+    position: fixed; top: var(--home-announcement-height); left: 0; right: 0; z-index: 100; padding: 18px 48px;
     display: flex; align-items: center; justify-content: space-between;
-    transition: background 0.5s, border-color 0.5s, color 0.5s; border-bottom: 1px solid transparent;
+    transition: top 0.22s, background 0.5s, border-color 0.5s, color 0.5s; border-bottom: 1px solid transparent;
   }
   nav.on-dark { color: var(--di); }
   nav.scrolled-light { background: rgba(245,242,235,0.93); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-color: var(--wl); }
   nav.scrolled-dark { background: rgba(8,12,24,0.93); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-color: var(--dl); }
+  nav.scrolled-light, nav.scrolled-dark { top: 0; }
 
   .nav-logo { display: inline-flex; align-items: center; font-family: var(--serif); font-size: 18px; font-weight: 500; color: inherit; letter-spacing: -0.01em; }
   .brand-mark { height: 34px; width: auto; display: block; margin: 0 -7px 0 -8px; transform: translateY(-5px); }
@@ -120,6 +125,22 @@
   .hero-body { font-size: 15px; font-weight: 300; line-height: 1.75; opacity: 0.72; max-width: 440px; margin-bottom: 44px; }
   .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
 
+  /* ── TOP RESEARCH ANNOUNCEMENT ───────────────────── */
+  .home-research-ribbon {
+    position:relative; z-index:101; display:flex; min-height:var(--home-announcement-height); align-items:center; justify-content:center;
+    flex-wrap:wrap; gap:7px 12px; padding:4px 20px; text-align:center;
+    color:var(--di); background:var(--d); border-bottom:1px solid rgba(200,174,125,.24);
+  }
+  .home-nav-spacer { height:var(--home-nav-height); }
+  .home-research-kicker { color:var(--sig); font-size:8px; font-weight:600; letter-spacing:.12em; line-height:1.3; text-transform:uppercase; }
+  .home-research-separator { width:1px; height:11px; background:rgba(238,233,224,.25); }
+  .home-research-title { color:var(--di); font-family:var(--sans); font-size:11px; font-weight:400; line-height:1.35; }
+  .home-research-link { color:var(--sig); font-size:10px; font-weight:500; white-space:nowrap; transition:color .18s; }
+  .home-research-link span { display:inline-block; margin-left:3px; transition:transform .18s; }
+  .home-research-ribbon:hover .home-research-link { color:#e4d0a7; }
+  .home-research-ribbon:hover .home-research-link span { transform:translateX(2px); }
+  .home-research-ribbon:focus-visible { outline:2px solid var(--sig); outline-offset:-3px; }
+
   .scroll-hint { position: absolute; bottom: 30px; left: 48px; display: flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: 0.08em; opacity: 0.4; }
   .scroll-line { width: 32px; height: 1px; background: currentColor; animation: scroll-pulse 2s ease-in-out infinite; }
   @keyframes scroll-pulse { 0%,100% { width: 32px; opacity: 0.4; } 50% { width: 52px; opacity: 0.75; } }
@@ -139,12 +160,35 @@
   /* ── GENERAL SECTIONS ────────────────────────────── */
   .section { padding: 112px 0; border-top: 1px solid var(--wl); background: var(--w); color: var(--wi); }
   .section-dark { padding: 112px 0; background: var(--d); color: var(--di); border-top: none; }
+  /* The Build-with-Pareto block sits on the same ink as the Research & Notes
+     band, so the page closes on dark panels rather than one more cream one.
+     The blue-black --d is the site's one dark, shared with the platform
+     section, the dark hero and the newsletter band. */
+  .section-ink { background: var(--d); color: var(--di); border-top: none; }
+  .section-ink .form-box { background: rgba(238,233,224,0.045); border: 1px solid rgba(238,233,224,0.10); }
+  .section-ink .field { border-bottom-color: rgba(238,233,224,0.22); }
+  .section-ink .field:focus-within { border-color: rgba(238,233,224,0.55); }
+  .section-ink .field select option { background: var(--d); color: var(--di); }
+  .section-ink .btn-solid { background: var(--di); color: var(--d); border-color: var(--di); }
+  .section-ink .btn-solid:hover { background: #FFFFFF; border-color: #FFFFFF; }
+  .section-ink a:focus-visible, .section-ink .btn:focus-visible,
+  .section-ink button:focus-visible, .section-ink input:focus-visible,
+  .section-ink select:focus-visible, .section-ink textarea:focus-visible { outline-color: var(--sig); }
+  /* Chrome paints an autofilled field white, which would punch a hole in the panel */
+  .section-ink .field input:-webkit-autofill,
+  .section-ink .field input:-webkit-autofill:hover,
+  .section-ink .field input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--di);
+    -webkit-box-shadow: 0 0 0 1000px var(--d) inset;
+    caret-color: var(--di);
+  }
   .section-tag { font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.45; margin-bottom: 52px; display: flex; align-items: center; gap: 14px; }
   .section-tag::after { content: ''; flex: 1; height: 1px; background: currentColor; opacity: 0.15; max-width: 60px; }
 
   /* ── INTRO STATEMENT ─────────────────────────────── */
   .statement { font-family: var(--serif); font-size: clamp(24px, 3.2vw, 40px); font-weight: 400; line-height: 1.32; letter-spacing: -0.025em; }
-  .statement em { font-style: italic; font-weight: 300; color: var(--gold); }
+  .statement em { font-style: italic; font-weight: 300; color: var(--ac); }
+  .section-dark .statement em { color: var(--sig); }
 
   /* ── TWO-COL ─────────────────────────────────────── */
   .two-col { display: grid; grid-template-columns: 5fr 6fr; gap: 80px; align-items: start; }
@@ -154,7 +198,7 @@
   .col-p { font-size: 15px; font-weight: 300; opacity: 0.68; line-height: 1.75; margin-bottom: 36px; }
   .bens { list-style: none; display: flex; flex-direction: column; gap: 13px; }
   .bens li { font-size: 14px; font-weight: 300; opacity: 0.7; padding-left: 18px; position: relative; line-height: 1.6; }
-  .bens li::before { content: '—'; position: absolute; left: 0; opacity: 0.5; }
+  .bens li::before { content: '·'; position: absolute; left: 0; opacity: 0.5; }
 
   /* ── CAPABILITY / LOOP LIST ──────────────────────── */
   .cap-list { margin-top: 60px; }
@@ -164,7 +208,7 @@
   .section:not(.section-dark) .cap-item:last-child { border-color: var(--wl); }
   .cap-n { font-family: var(--serif); font-size: 13px; font-weight: 300; opacity: 0.4; padding-top: 4px; }
   .cap-h { font-family: var(--serif); font-size: clamp(18px, 2vw, 26px); font-weight: 400; letter-spacing: -0.02em; line-height: 1.25; }
-  .cap-h em { font-style: italic; font-weight: 300; color: var(--gold); }
+  .cap-h em { font-style: italic; font-weight: 300; color: var(--ac); }
   .section-dark .cap-h em { color: var(--sig); }
   .cap-p { font-size: 14px; font-weight: 300; opacity: 0.66; line-height: 1.75; }
 
@@ -174,7 +218,7 @@
   .stat:nth-child(3n) { border-right: none; }
   .stat:nth-child(n+4) { border-top: 1px solid var(--dl); padding-top: 40px; }
   .stat-v { font-family: var(--serif); font-size: clamp(20px, 2.2vw, 28px); font-weight: 400; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 10px; }
-  .stat-v em { font-style: italic; font-weight: 300; color: var(--sig); }
+  .section-dark .stat-v em { font-style: italic; font-weight: 300; color: var(--sig); }
   .stat-l { font-size: 12.5px; font-weight: 300; opacity: 0.6; line-height: 1.55; }
 
   /* ── INDUSTRIES ──────────────────────────────────── */
@@ -190,16 +234,18 @@
   .ind-cta p { opacity: 0.72; }
   .ind-cta a { color: var(--sig); border-bottom: 1px solid currentColor; padding-bottom: 2px; align-self: flex-start; margin-top: 6px; font-size: 13.5px; }
   /* with nine industries the grid fills exactly, so the CTA closes the row full-width */
-  .ind-grid .ind-cta { grid-column: 1 / -1; }
+  .ind-grid .ind-cta { grid-column: span 2; }
   .ind-grid .ind-cta p { max-width: 52ch; }
 
-  /* ── PE WHERE-WE-HELP ────────────────────────────── */
+  /* REMOVED (private equity). Delete this wrapper to restore.
   .pe-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; }
   .pe-cols ul { list-style: none; }
   .pe-cols li { font-size: 14px; font-weight: 300; padding: 12px 0; border-top: 1px solid var(--wl); display: flex; align-items: center; gap: 11px; }
   .pe-cols li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
   .pe-loop { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 36px; }
   .pe-loop span { font-size: 12.5px; font-weight: 400; opacity: 0.75; border: 1px solid var(--wl); border-radius: 100px; padding: 7px 15px; }
+  @media (max-width: 900px) { .pe-cols { grid-template-columns: 1fr; } }
+  */
 
   /* ── FORM ────────────────────────────────────────── */
   .form-box { background: var(--w2); padding: 44px; }
@@ -238,7 +284,148 @@
   .foot-links { display: flex; gap: 26px; list-style: none; flex-wrap: wrap; }
   .foot-links a { font-size: 13px; font-weight: 300; color: var(--wi2); transition: color 0.2s; }
   .foot-links a:hover { color: var(--wi); }
-  .foot-copy { font-size: 12px; font-weight: 300; color: var(--wi3); }
+  .foot-copy { font-size: 12px; font-weight: 300; color: var(--wi3);
+  flex: 1 0 100%; text-align: center; margin-top: 6px; }
+
+  /* ── PARETO OS: a pinned stack that assembles as you scroll ─── */
+  .osx { position: relative; height: 560vh; background: var(--d); }
+  .osx-pin { position: sticky; top: 0; height: 100vh; overflow: hidden;
+             display: flex; align-items: center; color: var(--di); }
+  .osx-inner { position: relative; z-index: 1; width: 100%;
+    display: grid; grid-template-columns: minmax(0,440px) minmax(0,1fr); gap: clamp(30px,5vw,80px);
+    align-items: center; }
+
+  .osx-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase;
+                 color: var(--sig); margin-bottom: 16px; }
+  .osx-title { font-family: var(--serif); font-weight: 400; font-size: clamp(32px,3.6vw,52px);
+               line-height: 1.06; letter-spacing: -.03em; margin-bottom: 14px; }
+  .osx-title em { font-style: italic; font-weight: 300; color: var(--sig); }
+  .osx-sub { font-size: 14px; font-weight: 300; line-height: 1.7; max-width: 46ch;
+             color: rgba(238,233,224,.7); margin-bottom: 30px; }
+
+  /* Capsules, measured off legora.com: each one only as wide as its own label
+     when closed, opening to a fixed 480px as it takes its turn. A column of
+     equal-width bars reads as a list; a ragged column reads as a stack. */
+  .osx-pills { list-style: none; display: flex; flex-direction: column;
+               align-items: flex-start; gap: 7px; }
+  .osx-pill { border-radius: 24px; overflow: hidden;
+    width: max-content; max-width: 100%;
+    background: rgba(12,17,30,.44); backdrop-filter: blur(26px) saturate(1.25);
+    -webkit-backdrop-filter: blur(26px) saturate(1.25);
+    border: 1px solid rgba(238,233,224,.11);
+    transition: background .45s ease, border-color .45s ease, width .55s cubic-bezier(.16,1,.3,1),
+                transform .5s cubic-bezier(.16,1,.3,1);
+    transform: translateX(0); }
+  .osx-pill.is-on { background: rgba(18,24,42,.72); border-color: rgba(238,233,224,.3);
+                    width: 480px; transform: translateX(14px); }
+  .osx-head { width: 100%; display: flex; align-items: center; gap: 13px; background: none;
+    border: 0; padding: 11px 19px; color: inherit; font-family: var(--sans); text-align: left;
+    white-space: nowrap; cursor: default; }
+  .osx-n { font-size: 10px; font-weight: 500; letter-spacing: .14em; color: rgba(238,233,224,.4);
+           transition: color .4s ease; }
+  .osx-own .osx-n { color: var(--sig); }
+  .osx-name { flex: 1; font-size: 14px; font-weight: 400; }
+  .osx-plus { position: relative; width: 13px; height: 13px; flex: none; opacity: .5;
+              transition: transform .45s cubic-bezier(.16,1,.3,1), opacity .4s ease; }
+  .osx-plus::before, .osx-plus::after { content: ''; position: absolute; inset: 50% 0 auto 0;
+              height: 1px; background: currentColor; }
+  .osx-plus::after { transform: rotate(90deg); }
+  .osx-pill.is-on .osx-plus { transform: rotate(45deg); opacity: .95; }
+  /* A closed capsule must be as wide as its label and no wider, but its hidden
+     description still counts toward the capsule's intrinsic width and was
+     quietly making every pill the same size. Zero the body's width while it is
+     closed and give the paragraph a fixed one, so nothing in there votes. */
+  .osx-body { display: grid; grid-template-rows: 0fr; width: 0; max-width: 100%;
+              transition: grid-template-rows .5s cubic-bezier(.16,1,.3,1), width 0s .5s; }
+  .osx-body-in { overflow: hidden; min-height: 0; width: 100%; }
+  .osx-pill.is-on .osx-body { grid-template-rows: 1fr; width: 478px;
+              transition: grid-template-rows .5s cubic-bezier(.16,1,.3,1), width 0s; }
+  .osx-body p { font-size: 13px; font-weight: 300; line-height: 1.68; white-space: normal;
+                color: rgba(238,233,224,.74); padding: 0 24px 15px 50px; }
+
+  /* the deck: one translucent plate per layer, assembling in 3D */
+  .osx-right { height: min(78vh, 680px); position: relative; }
+  /* The stack is one generated glass slab used seven times. Rendered on
+     black, composited with screen, so it sits on the section's blue without
+     an alpha channel. The live layer's gold is a filter on the same image,
+     which keeps it pixel-aligned with the others. */
+  .osx-deck { position: absolute; inset: 0; }
+  .osx-stack { position: absolute; inset: 0; }
+  .osx-plate, .osx-case {
+    position: absolute; left: 50%; top: 50%; width: 70%; aspect-ratio: 1;
+    --y: calc((3 - var(--i, 0)) * 42px);
+    transform: translate(-50%, -50%) translateY(calc(var(--y) - 44px));
+    opacity: 0; z-index: calc(var(--i, 0) + 1);
+    transition: opacity .62s ease, transform .9s cubic-bezier(.16,1,.3,1),
+                filter .5s ease; }
+  .osx-plate img, .osx-case img {
+    display: block; width: 100%; height: 100%; }
+  .osx-plate.is-in { opacity: 1;
+    transform: translate(-50%, -50%) translateY(var(--y)); }
+  .osx-plate.is-live img {
+    filter: sepia(.58) saturate(2.5) hue-rotate(-14deg) brightness(1.1); }
+  /* the last beat: a wider slab closes over everything beneath it */
+  .osx-case { width: 86%; --i: 9; z-index: 20;
+    transform: translate(-50%, -50%) translateY(-172px) scale(.94); }
+  .osx-case.is-in { opacity: .9;
+    transform: translate(-50%, -50%) translateY(-158px) scale(1); }
+  .osx-case img { filter: brightness(1.06) saturate(.9); }
+  /* the layer name, lying on the slab's top face. The matrix is the render's
+     own isometric projection, so the text sits in the glass rather than on
+     top of the picture. Only the topmost landed layer is ever legible, which
+     is the point: the stack hides what is underneath it. */
+  .osx-lbl { position: absolute; left: 50%; top: 45%; white-space: nowrap;
+    font-family: var(--sans); font-size: 11px; font-weight: 500;
+    letter-spacing: .17em; text-transform: uppercase;
+    color: rgba(238,233,224,.5); pointer-events: none;
+    transform: translate(-50%,-50%) matrix(.809,.587,-.822,.569,0,0);
+    transform-origin: 50% 50%;
+    opacity: 0; transition: opacity .5s ease, color .4s ease; }
+  .osx-plate.is-in .osx-lbl { opacity: .3; }
+  .osx-plate.is-live .osx-lbl { opacity: 1; color: var(--sig); }
+  .osx-case .osx-lbl { font-size: 15px; letter-spacing: .2em;
+    color: rgba(238,233,224,.88); }
+  .osx-case.is-in .osx-lbl { opacity: 1; }
+
+  @media (max-width: 1000px) {
+    .osx { height: auto; }
+    .osx-pin { position: static; height: auto; padding: 86px 0; }
+    .osx-inner { grid-template-columns: 1fr; }
+    .osx-right { display: none; }
+    .osx-pills { align-items: stretch; }
+    .osx-pill, .osx-pill.is-on { transform: none; width: auto; }
+    .osx-head { white-space: normal; }
+    .osx-body, .osx-pill.is-on .osx-body, .osx-body-in { width: auto; }
+    /* nothing closes here, so do not offer a close affordance */
+    .osx-plus { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .osx-pill, .osx-plate, .osx-plus, .osx-body { transition: none; }
+  }
+
+
+
+  /* ── TWO ENGINES ────────────────────────────── */
+  .eng-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; }
+  .eng { position: relative; overflow: hidden; display: flex; flex-direction: column; min-height: 330px; border: 1px solid transparent; padding: 38px 34px 32px; transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease; }
+  .eng::after { content: ''; position: absolute; width: 240px; height: 240px; right: -115px; top: -130px; border: 1px solid currentColor; border-radius: 50%; opacity: .09; box-shadow: 0 0 0 28px transparent, 0 0 0 29px currentColor, 0 0 0 58px transparent, 0 0 0 59px currentColor; pointer-events: none; }
+  .eng:hover { transform: translateY(-3px); box-shadow: 0 24px 48px -32px rgba(20,18,15,0.34); }
+  .eng:focus-visible { outline: 2px solid var(--ac); outline-offset: 4px; }
+  .eng-inference { background: var(--d); color: var(--di); }
+  .eng-inference:hover { border-color: rgba(200,174,125,0.55); }
+  .eng-cloud { background: #E9E2D4; color: var(--wi); }
+  .eng-cloud:hover { border-color: rgba(168,133,79,0.52); }
+  .eng-n { position: relative; z-index: 1; font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ac); margin-bottom: 18px; }
+  .eng-inference .eng-n, .eng-inference .eng-go { color: var(--sig); }
+  .eng h3, .eng p, .eng-go { position: relative; z-index: 1; }
+  .eng h3 { font-family: var(--serif); font-size: 30px; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 12px; }
+  .eng h3 em { font-style: italic; font-weight: 300; }
+  .eng p { font-size: 14.5px; font-weight: 300; line-height: 1.7; opacity: 0.78; margin-bottom: 22px; max-width: 52ch; }
+  .eng-inference p { color: var(--di); }
+  .eng-go { margin-top: auto; font-size: 13px; color: var(--ac); }
+  @media (max-width: 860px) { .eng-grid { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) { .eng { transition: none; } .eng:hover { transform: none; } }
+
 
   /* ── ANIMATIONS ──────────────────────────────────── */
   .cr { overflow: hidden; }
@@ -247,12 +434,15 @@
   .rv { opacity: 0; transform: translateY(22px); transition: opacity 0.75s ease, transform 0.75s ease; }
   .rv.in { opacity: 1; transform: none; }
 
-  a:focus-visible, .btn:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  a:focus-visible, .btn:focus-visible, button:focus-visible { outline: 2px solid var(--ac); outline-offset: 3px; }
   .section-dark a:focus-visible, .dark-panel a:focus-visible { outline-color: var(--sig); }
 
   /* ── RESPONSIVE ──────────────────────────────────── */
   @media (max-width: 960px) {
+    :root { --home-announcement-height:36px; --home-nav-height:66px; }
     nav { padding: 16px 24px; }
+    .nav-links { gap: 8px; }
+    .nav-cta { padding: 7px 8px; min-height: 34px; font-size: 11px !important; }
     .wrap, .wrap-thin { padding: 0 24px; }
     .nav-links li:not(.cta-li) { display: none; }
     .hero-split { grid-template-columns: 1fr; min-height: auto; }
@@ -268,7 +458,7 @@
     .stat:nth-child(2n) { border-right: none; }
     .stat:nth-child(n+3) { border-top: 1px solid var(--dl); padding-top: 32px; }
     .ind-grid { grid-template-columns: 1fr 1fr; }
-    .pe-cols { grid-template-columns: 1fr; }
+    .ind-grid .ind-cta { grid-column: span 1; }
     .steps { grid-template-columns: 1fr; gap: 36px; }
     .step, .step:not(:first-child) { border-right: none; border-bottom: 1px solid var(--wl); padding: 0 0 36px; }
     .step:last-child { border-bottom: none; padding-bottom: 0; }
@@ -277,8 +467,19 @@
     .section, .section-dark { padding: 84px 0; }
   }
   @media (max-width: 560px) {
+    :root { --home-announcement-height:40px; --home-nav-height:66px; }
+    nav { padding: 16px 12px; }
+    .nav-links { gap: 4px; }
+    .nav-cta { padding: 5px 6px; min-height: 32px; font-size: 10px !important; }
+    .nav-logo { font-size: 16px; }
+    .brand-mark { height: 30px; }
     .ind-grid { grid-template-columns: 1fr; }
     .hero-ctas .btn { width: 100%; justify-content: center; }
+    .home-research-ribbon { flex-wrap:nowrap; gap:6px; padding:5px 9px; }
+    .home-research-kicker { font-size:7px; letter-spacing:.08em; white-space:nowrap; }
+    .home-research-title { max-width:27ch; font-size:10px; }
+    .home-research-separator { height:10px; flex:none; }
+    .home-research-link { font-size:9px; }
   }
 
   /* ── REDUCED MOTION ──────────────────────────────── */
@@ -296,28 +497,40 @@
 <div id="prog"></div>
 
 <!-- NAV ─────────────────────────────────────────── -->
+<a class="home-research-ribbon" href="/research/harmattan-ai-evidence-plan/" aria-label="Read the new Pareto Labs research note: Harmattan AI, evidence before scale">
+  <span class="home-research-kicker">New research</span>
+  <span class="home-research-separator" aria-hidden="true"></span>
+  <span class="home-research-title">Harmattan AI: Evidence Before Scale</span>
+  <span class="home-research-link">Read the paper <span aria-hidden="true">→</span></span>
+</a>
+
 <nav id="nav">
   <a class="nav-logo" href="/" aria-label="Pareto Labs"><img class="brand-mark" src="/assets/logo.png" alt=""><span>areto&nbsp;Labs</span></a>
   <ul class="nav-links">
+    <li><a href="/infrastructure.html">Infrastructure</a></li>
     <li><a href="/platform.html">Platform</a></li>
-    <li><a href="/private-equity.html">Private Equity</a></li>
+    <!-- REMOVED (private equity) <li><a href="/private-equity.html">Private Equity</a></li> -->
     <li><a href="/industries.html">Industries</a></li>
     <li><a href="/experts.html">Experts</a></li>
     <li><a href="/research.html">Research</a></li>
-    <li class="cta-li"><a href="#partner" class="nav-cta">Build with Pareto</a></li>
+    <li class="cta-li"><a href="#partner" class="nav-cta">For companies</a></li>
+    <li class="cta-li"><a href="https://factory.trypareto.ai/" class="nav-cta">For developers</a></li>
   </ul>
 </nav>
+<div class="home-nav-spacer" aria-hidden="true"></div>
 
 <!-- ═══ HERO A — OPERATIONS (light) ══════════════ -->
 <div id="section-human" class="hero-split">
   <div class="hero-text-col">
-    <p class="hero-eyebrow">Continuous-Learning AI</p>
+    <p class="hero-eyebrow">Training · Inference · Cloud · Continuous-Learning AI</p>
     <h1 class="hero-h1">
-      <span class="cr"><span class="cr-inner">Sovereign AI</span></span>
-      <span class="cr"><span class="cr-inner" style="transition-delay:.10s">solutions for</span></span>
-      <span class="cr"><span class="cr-inner" style="transition-delay:.20s"><em>real-world operations.</em></span></span>
+      <span class="cr"><span class="cr-inner">Sovereign</span></span>
+      <span class="cr"><span class="cr-inner" style="transition-delay:.08s">Training,</span></span>
+      <span class="cr"><span class="cr-inner" style="transition-delay:.16s">Inference,</span></span>
+      <span class="cr"><span class="cr-inner" style="transition-delay:.24s">and Cloud for</span></span>
+      <span class="cr"><span class="cr-inner" style="transition-delay:.32s"><em>real-world operations.</em></span></span>
     </h1>
-    <p class="hero-body rv" style="transition-delay:.34s">Pareto helps emerging markets, SMBs, vertical operating businesses and governments implement sovereign AI systems that learn from internal data, customer interactions, operational workflows, and vetted domain experts — improving performance automatically over time.</p>
+    <p class="hero-body rv" style="transition-delay:.34s">Pareto builds sovereign infrastructure and AI: open-source models and managed compute, served inside your own country instead of rented from a region on another continent. On top of it we build AI systems that keep learning from the operations they serve.</p>
     <div class="hero-ctas rv" style="transition-delay:.46s">
       <a href="#partner" class="btn btn-solid btn-arr">Build with Pareto</a>
       <a href="#how" class="btn btn-outline">See how it works</a>
@@ -345,7 +558,7 @@
       <span class="cr"><span class="cr-inner" style="transition-delay:.10s">Learn from reality.</span></span>
       <span class="cr"><span class="cr-inner" style="transition-delay:.20s"><em>Improve over time.</em></span></span>
     </h1>
-    <p class="hero-body rv" style="transition-delay:.35s">Every workflow, customer interaction, expert review, and business outcome becomes signal. Pareto uses it to keep your AI systems accurate, useful, and aligned with real operations — long after launch.</p>
+    <p class="hero-body rv" style="transition-delay:.35s">Every workflow, customer interaction, expert review, and business outcome becomes signal. Pareto uses it to keep your AI systems accurate, useful, and aligned with real operations, long after launch.</p>
     <div class="hero-ctas rv" style="transition-delay:.48s">
       <a href="#partner" class="btn btn-sig btn-arr">Build with Pareto</a>
       <a href="#platform" class="btn btn-outline-dark">The platform</a>
@@ -356,28 +569,117 @@
 <!-- ═══ STATEMENT ════════════════════════════════ -->
 <div class="section">
   <div class="wrap-thin">
-    <p class="statement rv">AI adoption is no longer blocked by model capability. It&rsquo;s blocked by <em>implementation</em> — the infrastructure, expertise, and continuous improvement that turn a model into measurable operational gain.</p>
+    <p class="statement rv">AI adoption is no longer blocked by model capability. It&rsquo;s blocked by <em>implementation</em>: the infrastructure, expertise, and continuous improvement that turn a model into measurable operational gain.</p>
   </div>
 </div>
 
-<!-- ═══ WHAT WE DO + LOOP ════════════════════════ -->
-<div class="section" id="how">
+<!-- PARETO OS -->
+<section class="osx" id="how" aria-label="Pareto OS">
+  <div class="osx-pin">
+    <div class="wrap osx-inner">
+      <div class="osx-left">
+        <p class="osx-eyebrow">The stack</p>
+        <h2 class="osx-title">Introducing <em>Pareto&nbsp;OS.</em></h2>
+        <p class="osx-sub">A single system that connects the machines, the models and the operating knowledge of a business. Most AI companies start at layer 04. We start at 01.</p>
+        <ul class="osx-pills">
+          <li class="osx-pill osx-own" data-i="0">
+            <button class="osx-head" type="button">
+              <span class="osx-n">01</span><span class="osx-name">Sovereign compute</span>
+              <span class="osx-plus" aria-hidden="true"></span>
+            </button>
+            <div class="osx-body"><div class="osx-body-in"><p>The machines themselves, in your own country rather than a region on another continent. Every layer above this one runs on them.</p></div></div>
+          </li>
+          <li class="osx-pill osx-own" data-i="1">
+            <button class="osx-head" type="button">
+              <span class="osx-n">02</span><span class="osx-name">Inference</span>
+              <span class="osx-plus" aria-hidden="true"></span>
+            </button>
+            <div class="osx-body"><div class="osx-body-in"><p>Open-source models, optimized and quantized, served behind one OpenAI-compatible API. Several precisions per model, each one labelled.</p></div></div>
+          </li>
+          <li class="osx-pill osx-own" data-i="2">
+            <button class="osx-head" type="button">
+              <span class="osx-n">03</span><span class="osx-name">Cloud</span>
+              <span class="osx-plus" aria-hidden="true"></span>
+            </button>
+            <div class="osx-body"><div class="osx-body-in"><p>Apps, jobs, databases and object storage running on the same nodes as the models they call, so retrieval is a local hop.</p></div></div>
+          </li>
+          <li class="osx-pill" data-i="3">
+            <button class="osx-head" type="button">
+              <span class="osx-n">04</span><span class="osx-name">Company Brain</span>
+              <span class="osx-plus" aria-hidden="true"></span>
+            </button>
+            <div class="osx-body"><div class="osx-body-in"><p>What the business actually knows: documents, workflows, policies, customer context, and the judgment of the people who run it.</p></div></div>
+          </li>
+          <li class="osx-pill" data-i="4">
+            <button class="osx-head" type="button">
+              <span class="osx-n">05</span><span class="osx-name">Evidence loop</span>
+              <span class="osx-plus" aria-hidden="true"></span>
+            </button>
+            <div class="osx-body"><div class="osx-body-in"><p>Every correction, outcome and expert review becomes signal, reviewed and approved before it changes anything in production.</p></div></div>
+          </li>
+          <li class="osx-pill" data-i="5">
+            <button class="osx-head" type="button">
+              <span class="osx-n">06</span><span class="osx-name">Governance</span>
+              <span class="osx-plus" aria-hidden="true"></span>
+            </button>
+            <div class="osx-body"><div class="osx-body-in"><p>Human-gated change, approval paths, guardrails and an audit trail the company controls, not us.</p></div></div>
+          </li>
+          <li class="osx-pill" data-i="6">
+            <button class="osx-head" type="button">
+              <span class="osx-n">07</span><span class="osx-name">Industry systems</span>
+              <span class="osx-plus" aria-hidden="true"></span>
+            </button>
+            <div class="osx-body"><div class="osx-body-in"><p>The AI your operators actually use, in telecom, mining, oil and gas, health, legal and government.</p></div></div>
+          </li>
+        </ul>
+      </div>
+      <div class="osx-right" aria-hidden="true">
+      <div class="osx-deck">
+        <div class="osx-stack" aria-hidden="true">
+          <div class="osx-plate" data-i="0" style="--i:0"><img src="/assets/os-slab.webp" alt="" width="840" height="840" loading="lazy" decoding="async"><span class="osx-lbl">Sovereign compute</span></div>
+          <div class="osx-plate" data-i="1" style="--i:1"><img src="/assets/os-slab.webp" alt="" width="840" height="840" loading="lazy" decoding="async"><span class="osx-lbl">Inference</span></div>
+          <div class="osx-plate" data-i="2" style="--i:2"><img src="/assets/os-slab.webp" alt="" width="840" height="840" loading="lazy" decoding="async"><span class="osx-lbl">Cloud</span></div>
+          <div class="osx-plate" data-i="3" style="--i:3"><img src="/assets/os-slab.webp" alt="" width="840" height="840" loading="lazy" decoding="async"><span class="osx-lbl">Company Brain</span></div>
+          <div class="osx-plate" data-i="4" style="--i:4"><img src="/assets/os-slab.webp" alt="" width="840" height="840" loading="lazy" decoding="async"><span class="osx-lbl">Evidence loop</span></div>
+          <div class="osx-plate" data-i="5" style="--i:5"><img src="/assets/os-slab.webp" alt="" width="840" height="840" loading="lazy" decoding="async"><span class="osx-lbl">Governance</span></div>
+          <div class="osx-plate" data-i="6" style="--i:6"><img src="/assets/os-slab.webp" alt="" width="840" height="840" loading="lazy" decoding="async"><span class="osx-lbl">Industry systems</span></div>
+          <div class="osx-case"><img src="/assets/os-slab.webp" alt="" width="840" height="840" loading="lazy" decoding="async"><span class="osx-lbl">Pareto OS</span></div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- TWO ENGINES -->
+<div class="section" id="engines">
   <div class="wrap">
-    <div class="section-tag rv">How it works</div>
+    <div class="section-tag rv">Infrastructure</div>
     <div class="two-col">
-      <h2 class="col-h" style="margin-bottom:0">Pareto turns operations into <em>continuously improving</em> AI systems.</h2>
-      <p class="col-p" style="margin-bottom:0; align-self:end">We map how your company actually works, bring in vetted domain experts, deploy practical AI into real workflows, and keep improving it as the business changes. The result isn&rsquo;t a pilot — it&rsquo;s a system that gets better after launch.</p>
+      <h2 class="col-h" style="margin-bottom:0">Compute is moving home. <em>We run it where you are.</em></h2>
+      <p class="col-p" style="margin-bottom:0; align-self:end">Pareto operates its own inference and cloud platform: open-source models and managed compute, served inside your own country rather than from a region on another continent. Our AI systems are its first workload, and it is open to anyone building on it. The stack runs in local sovereign partner data centers or inside your own building.</p>
     </div>
 
-    <div class="cap-list">
-      <div class="cap-item rv"><span class="cap-n">01</span><h3 class="cap-h">Map</h3><p class="cap-p">Capture company knowledge, workflows, customer signal, and the judgment of the people who run the operation.</p></div>
-      <div class="cap-item rv" style="transition-delay:.06s"><span class="cap-n">02</span><h3 class="cap-h">Deploy</h3><p class="cap-p">Top-tier Forward Deployed Engineers — exceptional, hand-picked builders — embed with your team and ship practical AI (assistants, automations, copilots, voice and workflow systems) into real workflows.</p></div>
-      <div class="cap-item rv" style="transition-delay:.12s"><span class="cap-n">03</span><h3 class="cap-h">Measure</h3><p class="cap-p">Track adoption, time saved, cost, and service quality, so value is visible to operators and owners alike.</p></div>
-      <div class="cap-item rv" style="transition-delay:.18s"><span class="cap-n">04</span><h3 class="cap-h">Learn</h3><p class="cap-p">Every interaction, outcome, and expert review becomes signal that feeds back into the system.</p></div>
-      <div class="cap-item rv" style="transition-delay:.24s"><span class="cap-n">05</span><h3 class="cap-h"><em>Improve</em></h3><p class="cap-p">Systems get more accurate and useful over time — measurably, safely, and without a rebuild.</p></div>
+    <div class="eng-grid">
+      <a class="eng eng-inference rv" href="/inference.html">
+        <div class="eng-n">01 / Training &amp; Inference</div>
+        <h3>Open models, <em>served.</em></h3>
+        <p>LLMs, speech and vision-language-action models behind one OpenAI-compatible API, with post-training, evaluations and retrieval on the same platform.</p>
+        <span class="eng-go">Explore training &amp; inference &rarr;</span>
+      </a>
+      <a class="eng eng-cloud rv" style="transition-delay:.06s" href="/cloud.html">
+        <div class="eng-n">02 / Cloud</div>
+        <h3>Everything <em>around</em> the model.</h3>
+        <p>Apps, jobs, Postgres, vector, key-value and object storage, with logs, metrics and traces, running on the same nodes as the models they call.</p>
+        <span class="eng-go">Explore cloud &rarr;</span>
+      </a>
     </div>
   </div>
 </div>
+
 
 <!-- ═══ PLATFORM (dark) ══════════════════════════ -->
 <div class="section-dark" id="platform">
@@ -385,18 +687,18 @@
     <div class="section-tag rv">The platform</div>
     <div class="two-col">
       <h2 class="col-h" style="margin-bottom:0">The learning layer <em>behind every AI system.</em></h2>
-      <p class="col-p" style="margin-bottom:0; align-self:end; opacity:0.72">The scarce value in AI is no longer model capability — it&rsquo;s implementation, company-specific learning, expert validation, and continuous improvement after deployment. Pareto is built around exactly that.</p>
+      <p class="col-p" style="margin-bottom:0; align-self:end; opacity:0.72">The scarce value in AI is no longer model capability. It is implementation, company-specific learning, expert validation, and continuous improvement after deployment. Pareto is built around exactly that.</p>
     </div>
 
     <div class="cap-list">
       <div class="cap-item rv"><span class="cap-n">01</span><h3 class="cap-h">Company <em>Brain</em></h3><p class="cap-p">The operational knowledge layer: company documents, workflows, processes, policies, customer context, internal decisions, playbooks, edge cases, and the practical knowledge teams use to run the business.</p></div>
       <div class="cap-item rv" style="transition-delay:.05s"><span class="cap-n">02</span><h3 class="cap-h">Company <em>Brand</em></h3><p class="cap-p">The approved identity layer: positioning, tone, messaging, claims, legal language, compliance rules, customer-facing standards, and the way the company should sound and behave in the market.</p></div>
-      <div class="cap-item rv" style="transition-delay:.1s"><span class="cap-n">03</span><h3 class="cap-h">Evidence <em>Pipeline</em></h3><p class="cap-p">Pareto captures signal from every angle — user interviews, customer feedback, product behavior, support conversations, expert answers, internal knowledge, workflow outcomes, and AI failures.</p></div>
+      <div class="cap-item rv" style="transition-delay:.1s"><span class="cap-n">03</span><h3 class="cap-h">Evidence <em>Pipeline</em></h3><p class="cap-p">Pareto captures signal from every angle: user interviews, customer feedback, product behavior, support conversations, expert answers, internal knowledge, workflow outcomes, and AI failures.</p></div>
       <div class="cap-item rv" style="transition-delay:.15s"><span class="cap-n">04</span><h3 class="cap-h">Human-Gated <em>Knowledge Map</em></h3><p class="cap-p">Signals don&rsquo;t blindly change production behavior. They are reviewed, approved, and converted into trusted knowledge the company can control.</p></div>
-      <div class="cap-item rv" style="transition-delay:.2s"><span class="cap-n">05</span><h3 class="cap-h">AI Improvement <em>Loop</em></h3><p class="cap-p">Trusted knowledge becomes proposed improvements to prompts, workflows, retrieval, policies, guardrails, system behavior, and specialized models — with reasoning and source evidence attached.</p></div>
-      <div class="cap-item rv" style="transition-delay:.25s"><span class="cap-n">06</span><h3 class="cap-h">Model-Agnostic <em>Execution Layer</em></h3><p class="cap-p">Pareto isn&rsquo;t locked into one model, vendor, or architecture. We use the most effective model for the outcome — open or proprietary, large or small, frontier or specialized — and keep the learning layer intact as models change.</p></div>
+      <div class="cap-item rv" style="transition-delay:.2s"><span class="cap-n">05</span><h3 class="cap-h">AI Improvement <em>Loop</em></h3><p class="cap-p">Trusted knowledge becomes proposed improvements to prompts, workflows, retrieval, policies, guardrails, system behavior, and specialized models, with reasoning and source evidence attached.</p></div>
+      <div class="cap-item rv" style="transition-delay:.25s"><span class="cap-n">06</span><h3 class="cap-h">Model-Agnostic <em>Execution Layer</em></h3><p class="cap-p">Pareto isn&rsquo;t locked into one model, vendor, or architecture. We use the most effective model for the outcome, whether open or proprietary, large or small, frontier or specialized, and keep the learning layer intact as models change.</p></div>
       <div class="cap-item rv" style="transition-delay:.3s"><span class="cap-n">07</span><h3 class="cap-h">Governance &amp; <em>Guardrails</em></h3><p class="cap-p">The company defines what can change, what must be reviewed, and what the system should never do. Pareto keeps AI systems inside approved boundaries with policy controls, approval gates, human oversight, and clear review paths before critical changes affect real workflows.</p></div>
-      <div class="cap-item rv" style="transition-delay:.35s"><span class="cap-n">08</span><h3 class="cap-h">Frontier <em>Security Layer</em></h3><p class="cap-p">As frontier models grow more powerful, the same capabilities that help companies can also be used to probe, manipulate, or exploit AI systems. Pareto stays at the frontier of AI security too — continuously improving defenses against prompt attacks, data exposure, unauthorized tool use, workflow abuse, and emerging AI-native threats. The goal isn&rsquo;t only to make AI systems smarter, but safer as models become more capable.</p></div>
+      <div class="cap-item rv" style="transition-delay:.35s"><span class="cap-n">08</span><h3 class="cap-h">Frontier <em>Security Layer</em></h3><p class="cap-p">As frontier models grow more powerful, the same capabilities that help companies can also be used to probe, manipulate, or exploit AI systems. Pareto stays at the frontier of AI security too, continuously improving defenses against prompt attacks, data exposure, unauthorized tool use, workflow abuse, and emerging AI-native threats. The goal isn&rsquo;t only to make AI systems smarter, but safer as models become more capable.</p></div>
     </div>
 
     <div class="stats-row rv">
@@ -416,42 +718,54 @@
     <div class="section-tag rv">Industries</div>
     <div class="two-col">
       <h2 class="col-h" style="margin-bottom:0">Practical AI for <em>real-world operations.</em></h2>
-      <p class="col-p" style="margin-bottom:0; align-self:end">You know your operations better than anyone. Pareto knows how to turn that into AI that works — building on your knowledge of the problem to engineer the right solution for your business, and the outcomes that matter most: time, cost, and service.</p>
+      <p class="col-p" style="margin-bottom:0; align-self:end">You know your operations better than anyone. Pareto knows how to turn that into AI that works, building on your knowledge of the problem to engineer the right solution for your business, and the outcomes that matter most: time, cost, and service.</p>
     </div>
 
     <div class="ind-grid">
       <a class="ind rv" href="/industries/manufacturing.html">
         <img class="ind-photo" src="/assets/img/ind-manufacturing.webp" alt="Skilled manufacturing operations" loading="lazy" width="1000" height="625">
         <div class="ind-text"><h3>Manufacturing</h3><p>AI that continuously improves production, quality, maintenance, inventory, and supply-chain operations.</p></div></a>
-      <a class="ind rv" style="transition-delay:.05s" href="/industries/consumer-brands-retail.html">
+      <!-- TEMPORARILY HIDDEN (consumer-brands-retail) — restore by removing this comment wrapper;
+           re-stagger transition-delay across the grid afterwards.
+<a class="ind rv" style="transition-delay:.05s" href="/industries/consumer-brands-retail.html">
         <img class="ind-photo" src="/assets/img/ind-retail.webp" alt="Consumer brands and retail environment" loading="lazy" width="1000" height="625">
         <div class="ind-text"><h3>Consumer Brands &amp; Retail</h3><p>AI that optimizes merchandising, customer service, inventory, pricing, and omnichannel operations through continuous learning.</p></div></a>
-      <a class="ind rv" style="transition-delay:.1s" href="/industries/business-services.html">
+      -->
+      <a class="ind rv" style="transition-delay:.05s" href="/industries/business-services.html">
         <img class="ind-photo" src="/assets/img/ind-business.webp" alt="Modern business services workplace" loading="lazy" width="1000" height="625">
         <div class="ind-text"><h3>Business Services</h3><p>AI that automates knowledge work, client operations, back-office processes, and support while learning from every interaction.</p></div></a>
-      <a class="ind rv" href="/industries/healthcare.html">
+      <!-- TEMPORARILY HIDDEN (healthcare) — restore by removing this comment wrapper;
+           re-stagger transition-delay across the grid afterwards.
+<a class="ind rv" href="/industries/healthcare.html">
         <img class="ind-photo" src="/assets/img/ind-healthcare.webp" alt="Healthcare administration and operations" loading="lazy" width="1000" height="625">
         <div class="ind-text"><h3>Healthcare Services</h3><p>AI that streamlines administrative workflows, patient operations, billing, and scheduling while improving from outcomes.</p></div></a>
-      <a class="ind rv" style="transition-delay:.05s" href="/industries/logistics.html">
+      -->
+      <a class="ind rv" style="transition-delay:.1s" href="/industries/logistics.html">
         <img class="ind-photo" src="/assets/img/ind-logistics.webp" alt="Logistics and warehouse operations" loading="lazy" width="1000" height="625">
         <div class="ind-text"><h3>Logistics &amp; Transportation</h3><p>AI that continuously optimizes routing, warehouse operations, fleet management, dispatch, and supply-chain performance.</p></div></a>
-      <a class="ind rv" style="transition-delay:.1s" href="/industries/telecom.html">
+      <a class="ind rv" href="/industries/telecom.html">
         <img class="ind-photo" src="/assets/industries/telecom.jpg" alt="Telecom network operations" loading="lazy" width="1000" height="625">
         <div class="ind-text"><h3>Telecom</h3><p>AI that continuously improves network operations, field service, billing, customer care, and churn prevention.</p></div></a>
-      <a class="ind rv" href="/industries/oil-gas.html">
+      <a class="ind rv" style="transition-delay:.05s" href="/industries/oil-gas.html">
         <img class="ind-photo" src="/assets/industries/oilgas.jpg" alt="Oil and gas field operations" loading="lazy" width="1000" height="625">
         <div class="ind-text"><h3>Oil &amp; Gas</h3><p>AI that continuously improves asset reliability, field operations, HSE compliance, and production across the field.</p></div></a>
-      <a class="ind rv" href="/industries/legal.html">
+      <a class="ind rv" style="transition-delay:.1s" href="/industries/mining.html">
+        <img class="ind-photo" src="/assets/industries/mining.jpg" alt="Mining operations" loading="lazy" width="1000" height="625">
+        <div class="ind-text"><h3>Mining</h3><p>AI that continuously improves asset reliability, grade and recovery, haulage, and HSE compliance across the pit and the plant.</p></div></a>
+      <!-- TEMPORARILY HIDDEN (legal) — restore by removing this comment wrapper;
+           re-stagger transition-delay across the grid afterwards.
+<a class="ind rv" href="/industries/legal.html">
         <img class="ind-photo" src="/assets/industries/legal.jpg" alt="Legal operations" loading="lazy" width="1000" height="625">
         <div class="ind-text"><h3>Legal</h3><p>AI that drafts, reviews, and organizes matters, so lawyers do the work only lawyers can, with a human in control.</p></div>
       </a>
-      <a class="ind rv" style="transition-delay:.05s" href="/industries/government.html">
+      -->
+      <a class="ind rv" href="/industries/government.html">
         <img class="ind-photo" src="/assets/industries/government.jpg" alt="Government service operations" loading="lazy" width="1000" height="625">
-        <div class="ind-text"><h3>Government</h3><p>AI that improves citizen services, case work, and public administration — deployed inside your environment, with data that stays under your control.</p></div></a>
+        <div class="ind-text"><h3>Government</h3><p>AI that improves citizen services, case work, and public administration, deployed inside your environment, with data that stays under your control.</p></div></a>
       <article class="ind ind-cta rv" style="transition-delay:.05s">
         <div class="ind-text">
           <h3>Your industry</h3>
-          <p>Most operations can be improved with AI. Pareto implements the right solution — and keeps it learning.</p>
+          <p>Most operations can be improved with AI. Pareto implements the right solution, and keeps it learning.</p>
           <a href="#partner">Talk to us &rarr;</a>
         </div>
       </article>
@@ -464,16 +778,16 @@
   <div class="wrap">
     <div class="section-tag rv">Where we work</div>
     <div class="two-col">
-      <h2 class="col-h" style="margin-bottom:0">Real-world operations. <em>Emerging markets and beyond.</em></h2>
+      <h2 class="col-h" style="margin-bottom:0">Real-world operations. <em>Wherever they run.</em></h2>
       <div class="rv" style="align-self:end">
-        <p class="col-p" style="margin-bottom:18px">Real operations rarely run on clean data. Knowledge lives in people, workflows cross a dozen systems, and the work moves faster than the documentation — which is why the same systems travel.</p>
-        <p class="col-p" style="margin-bottom:0">We build across emerging markets, where operators move fast and getting AI right compounds quickest, and anywhere else the work is still carried by spreadsheets, phone calls, and people who just know.</p>
+        <p class="col-p" style="margin-bottom:18px">Real operations rarely run on clean data. Knowledge lives in people, workflows cross a dozen systems, and the work moves faster than the documentation, which is why the same systems travel.</p>
+        <p class="col-p" style="margin-bottom:0">We build sovereign infrastructure and AI where operators move fast and getting AI right compounds quickest, and anywhere else the work is still carried by spreadsheets, phone calls, and people who just know.</p>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ═══ PRIVATE EQUITY ═══════════════════════════ -->
+<!-- REMOVED (private equity). Delete this wrapper to restore the section.
 <div class="section" id="private-equity" style="background:var(--w2);">
   <div class="wrap">
     <div class="section-tag rv">Private equity</div>
@@ -499,16 +813,18 @@
     </div>
   </div>
 </div>
+-->
+
 
 <!-- ═══ PARTNER FORM ═════════════════════════════ -->
-<div class="section" id="partner">
+<div class="section section-ink" id="partner">
   <div class="wrap">
     <div class="section-tag rv">Build with Pareto</div>
     <div class="two-col">
       <div class="rv">
         <p class="col-label">For companies</p>
         <h2 class="col-h">Tell us where your <em>operations hurt.</em></h2>
-        <p class="col-p">We&rsquo;ll show you what continuous-learning AI can do — tailored to your company, implemented into real workflows, and improved over time. Every engagement is scoped to your operation, not a one-size-fits-all product.</p>
+        <p class="col-p">We&rsquo;ll show you what continuous-learning AI can do, tailored to your company, implemented into real workflows, and improved over time. Every engagement is scoped to your operation, not a one-size-fits-all product.</p>
         <ul class="bens">
           <li>A practical assessment of your highest-ROI AI opportunities</li>
           <li>Implementation by hand-picked Forward Deployed Engineers, embedded in your workflows</li>
@@ -520,30 +836,31 @@
       <div class="rv" style="transition-delay:.15s">
         <div class="form-box">
           <p class="form-ttl">Start a conversation</p>
-          <form id="partner-form" class="build-form" data-ok="partner-ok" novalidate>
+          <form id="partner-form" class="build-form site-intake-form" data-form-type="company" data-ok="partner-ok" novalidate>
             <div class="fields">
               <div class="field"><label for="c-name">Your name</label><input id="c-name" name="name" type="text" autocomplete="name" placeholder="James Wright" required></div>
               <div class="field"><label for="c-email">Work email</label><input id="c-email" name="email" type="email" autocomplete="email" placeholder="james@company.com" required></div>
-              <div class="field"><label for="c-co">Company</label><input id="c-co" name="company" type="text" autocomplete="organization" placeholder="Your company"></div>
+              <div class="field"><label for="c-co">Company</label><input id="c-co" name="company" type="text" autocomplete="organization" placeholder="Your company" required></div>
               <div class="field"><label for="c-type">You are</label>
-                <select id="c-type" name="type">
+                <select id="c-type" name="role" required>
                   <option value="">Select one</option>
                   <option>Operating company (SMB / mid-market)</option>
-                  <option>Private equity firm</option>
-                  <option>PE portfolio company</option>
+                  <option>Developer / startup (inference)</option>
+                  <option>Team deploying workloads (cloud)</option>
                   <option>Vertical / industry business</option>
                   <option>Government / public institution</option>
                   <option>Other</option>
                 </select>
               </div>
-              <div class="field"><label for="c-chal">Where could AI help your operations?</label><textarea id="c-chal" name="challenge" placeholder="e.g. Our customer service team is overwhelmed and our knowledge is scattered across people and docs…"></textarea></div>
+              <div class="field"><label for="c-chal">What do you want to build or improve?</label><textarea id="c-chal" name="challenge" placeholder="e.g. Our customer service team is overwhelmed and our knowledge is scattered across people and docs…" required></textarea></div>
             </div>
+            <label class="intake-consent"><input type="checkbox" name="newsletter_consent" value="true"> Send me occasional Pareto Labs research and product updates.</label>
             <div class="form-ft">
               <button type="submit" class="btn btn-solid">Build with Pareto</button>
               <p class="form-note">We review every inquiry personally and respond within two business days.</p>
             </div>
           </form>
-          <div class="form-ok" id="partner-ok"><div class="ok-ring">✓</div><h3>Thank you.</h3><p>We&rsquo;ll be in touch within two business days.</p></div>
+          <div class="form-ok intake-success" id="partner-ok" role="status" aria-live="polite" hidden><div class="ok-ring">✓</div><h3>Thank you.</h3><p>We&rsquo;ve received your inquiry. The Pareto Labs team will be in touch within two business days.</p><p class="intake-optin-warning" data-newsletter-status hidden></p><p>Please follow us online:</p><div class="intake-socials" style="justify-content:center"><a href="https://discord.gg/z3fgyDuGM" target="_blank" rel="noopener noreferrer">Discord</a><a href="https://www.linkedin.com/company/trypareto-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://x.com/paretolabsx?s=11" target="_blank" rel="noopener noreferrer">X</a><a href="https://www.instagram.com/labspareto?exln=MXBkdTZ5OWR6OWMweA%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener noreferrer">Instagram</a></div></div>
         </div>
       </div>
     </div>
@@ -558,15 +875,15 @@
       <div class="rv">
         <p class="col-label">For domain experts</p>
         <h2 class="col-h">Real expertise,<br><em>built into the system.</em></h2>
-        <p class="col-p">AI fails when it only learns from documents. Pareto brings in a growing network of vetted domain experts who understand how the work actually happens — the edge cases, judgment calls, and operational nuance that rarely appear in documentation. Our Forward Deployed Engineers turn that into systems that ship and keep improving.</p>
+        <p class="col-p">AI fails when it only learns from documents. Pareto brings in a growing network of vetted domain experts who understand how the work actually happens: the edge cases, judgment calls, and operational nuance that rarely appear in documentation. Our Forward Deployed Engineers turn that into systems that ship and keep improving.</p>
         <ul class="bens">
           <li>Flexible, paid engagements matched to your domain</li>
           <li>Shape AI systems that real operating companies rely on</li>
-          <li>No cold outreach — we match you to relevant work</li>
+          <li>No cold outreach, we match you to relevant work</li>
         </ul>
       </div>
       <div class="rv" style="transition-delay:.15s; display:flex; align-items:center; justify-content:center;">
-        <a href="https://expert.trypareto.ai/" class="btn btn-solid btn-arr" style="font-size:15px; padding:18px 28px;">Become an Expert</a>
+        <a href="/experts.html#expert-intake" class="btn btn-solid btn-arr" style="font-size:15px; padding:18px 28px;">Become an Expert</a>
       </div>
     </div>
   </div>
@@ -578,8 +895,11 @@
     <div class="foot-inner">
       <div class="foot-logo">Pareto Labs</div>
       <ul class="foot-links">
+        <li><a href="/infrastructure.html">Infrastructure</a></li>
+        <li><a href="/inference.html">Inference</a></li>
+        <li><a href="/cloud.html">Cloud</a></li>
         <li><a href="/platform.html">Platform</a></li>
-        <li><a href="/private-equity.html">Private Equity</a></li>
+        <!-- REMOVED (private equity) <li><a href="/private-equity.html">Private Equity</a></li> -->
         <li><a href="/industries.html">Industries</a></li>
         <li><a href="/experts.html">Experts</a></li>
         <li><a href="/research.html">Research</a></li>
@@ -635,7 +955,7 @@ if (REDUCE || !('IntersectionObserver' in window)) {
   animEls.forEach(el => io.observe(el));
 }
 
-/* Build-with-Pareto form (inline + modal) handled by /assets/build-modal.js */
+/* Build-with-Pareto form is submitted through the same-origin Pages intake route. */
 
 /* ── CANVAS A: KNOWLEDGE NETWORK (gold, light hero) ── */
 (function() {
@@ -643,7 +963,7 @@ if (REDUCE || !('IntersectionObserver' in window)) {
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   let nodes = [], W, H;
-  const LABELS = ['Manufacturing','Retail','Healthcare Services','Logistics','Business Services','Private Equity','Sovereign AI','Customer Signals','Expert Intelligence','Operational Data','Continuous Improvement'];
+  const LABELS = ['Manufacturing','Retail','Healthcare Services','Logistics','Business Services','Sovereign AI','Customer Signals','Expert Intelligence','Operational Data','Continuous Improvement'];
   const COLORS = ['rgba(190,155,100,', 'rgba(170,135,85,', 'rgba(210,175,120,', 'rgba(155,120,75,'];
 
   function resize() {
@@ -677,10 +997,58 @@ if (REDUCE || !('IntersectionObserver' in window)) {
   draw(0);
 })();
 
-/* (dark hero now uses a premium photograph — signal-grid canvas removed) */
+/* (dark hero now uses a premium photograph; signal-grid canvas removed) */
 </script>
-<script src="/assets/build-modal.js" defer></script>
-<script src="/assets/newsletter.js" defer></script>
+<script>
+/* ── Pareto OS: scroll drives which layer is open and how much of the deck
+   has assembled. One rAF-throttled read per scroll, no layout thrash. ── */
+(function () {
+  var sec = document.querySelector('.osx');
+  if (!sec) return;
+  var pills  = [].slice.call(sec.querySelectorAll('.osx-pill'));
+  var plates = [].slice.call(sec.querySelectorAll('.osx-plate'));
+  var n = pills.length, active = -1, ticking = false;
+
+  var shell = sec.querySelector('.osx-case');
+
+  function paint(i) {
+    if (i === active) return;
+    active = i;
+    pills.forEach(function (p, k) { p.classList.toggle('is-on', k === i); });
+    plates.forEach(function (p, k) {
+      p.classList.toggle('is-in', k <= i);
+      p.classList.toggle('is-live', k === i);
+    });
+    if (shell) shell.classList.toggle('is-in', i >= n - 1);
+  }
+
+  function read() {
+    ticking = false;
+    var r = sec.getBoundingClientRect();
+    var travel = sec.offsetHeight - window.innerHeight;
+    if (travel <= 0) { paint(0); return; }
+    var t = Math.min(1, Math.max(0, -r.top / travel));
+    // a short lead-in and run-out so the first and last layers get a beat
+    var eased = Math.min(1, Math.max(0, (t - 0.04) / 0.9));
+    paint(Math.min(n - 1, Math.floor(eased * n)));
+  }
+
+  function onScroll() {
+    if (!ticking) { ticking = true; requestAnimationFrame(read); }
+  }
+
+  if (window.matchMedia('(max-width: 1000px)').matches) {
+    pills.forEach(function (p) { p.classList.add('is-on'); });
+    plates.forEach(function (p) { p.classList.add('is-in'); });
+  } else {
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    read();
+  }
+})();
+</script>
+<script src="/assets/site-intake.js?v=20261104a" defer></script>
+<script src="/assets/newsletter.js?v=20261106a" defer></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

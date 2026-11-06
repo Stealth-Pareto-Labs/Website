@@ -3,76 +3,169 @@
    Injected above the footer on every page by newsletter.js.
    ============================================================ */
 .nl-band {
-  --nl-w:#F5F2EB; --nl-ink:#14120F; --nl-di:#EEE9E0; --nl-di2:#9a927f; --nl-gold:#C8AE7D;
+  --nl-w:#F5F2EB; --nl-ink:#080C18; --nl-di:#EEE9E0; --nl-di2:#9a927f; --nl-gold:#C8AE7D;
   --nl-serif:'Newsreader','Tiempos Headline',Georgia,serif; --nl-sans:'Hanken Grotesk','Inter',system-ui,sans-serif;
-  background: var(--nl-ink); color: var(--nl-di); border-top: 1px solid rgba(238,233,224,0.10);
+  position:relative; overflow:hidden;
+  background:radial-gradient(ellipse at 84% 52%,rgba(44,60,96,.42),transparent 48%),linear-gradient(118deg,#080c18 0%,#0d1423 100%);
+  color:var(--nl-di); border-top:1px solid rgba(238,233,224,.12);
 }
-.nl-inner { max-width: 1160px; margin: 0 auto; padding: clamp(56px,8vw,92px) 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px 72px; align-items: center; }
-.nl-eyebrow { font-family: var(--nl-sans); font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--nl-gold); margin-bottom: 16px; }
-.nl-title { font-family: var(--nl-serif); font-size: clamp(26px,3vw,38px); font-weight: 400; line-height: 1.14; letter-spacing: -0.03em; margin: 0 0 12px; }
+.nl-band::before { content:""; position:absolute; inset:0; pointer-events:none; opacity:.22; background-image:linear-gradient(rgba(238,233,224,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(238,233,224,.035) 1px,transparent 1px); background-size:72px 72px; mask-image:linear-gradient(90deg,transparent 12%,#000 100%); }
+.nl-inner { position:relative; z-index:1; max-width:1240px; margin:0 auto; padding:clamp(68px,9vw,116px) 48px; display:grid; grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr); gap:clamp(40px,7vw,104px); align-items:center; }
+.nl-copy { max-width:610px; }
+.nl-eyebrow { display:flex; align-items:center; gap:12px; font-family:var(--nl-sans); font-size:10px; font-weight:600; letter-spacing:.17em; text-transform:uppercase; color:var(--nl-gold); margin:0 0 23px; }
+.nl-eyebrow::before { content:""; width:24px; height:1px; background:currentColor; opacity:.8; }
+.nl-title { max-width:12ch; font-family:var(--nl-serif); font-size:clamp(40px,5.2vw,66px); font-weight:400; line-height:1.02; letter-spacing:-.04em; margin:0 0 20px; }
 .nl-title em { font-style: italic; font-weight: 300; }
-.nl-sub { font-family: var(--nl-sans); font-size: 14.5px; font-weight: 300; line-height: 1.7; color: rgba(238,233,224,0.62); max-width: 46ch; margin: 0; }
+.nl-sub { font-family:var(--nl-sans); font-size:15px; font-weight:300; line-height:1.75; color:rgba(238,233,224,.75); max-width:49ch; margin:0; }
 
-.nl-form { width: 100%; }
-.nl-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.nl-follow-footer { box-sizing:border-box; width:100%; flex:1 0 100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; padding:24px 0 8px; border-top:1px solid rgba(32,30,26,.11); }
+.nl-follow-label { color:rgba(20,18,15,.48); font:600 11px 'Hanken Grotesk','Inter',system-ui,sans-serif; letter-spacing:.15em; text-transform:uppercase; }
+.nl-social { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:10px 32px; margin:0; }
+.nl-social a { display:inline-flex; min-height:48px; align-items:center; padding:0 4px; color:rgba(20,18,15,.78); font:600 18px 'Hanken Grotesk','Inter',system-ui,sans-serif; text-decoration:none; border-bottom:1px solid rgba(20,18,15,.22); transition:color .18s,border-color .18s; }
+.nl-social a::after { content:"↗"; margin-left:6px; color:#a8854f; font-size:11px; }
+.nl-social a:hover { color:#201e1a; border-color:#a8854f; }
+.nl-signup { padding:clamp(24px,3vw,36px); border:1px solid rgba(238,233,224,.16); background:rgba(7,11,20,.48); box-shadow:0 24px 70px rgba(0,0,0,.18); }
+.nl-signup-label { margin:0 0 21px; color:rgba(238,233,224,.72); font-family:var(--nl-sans); font-size:11px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; }
+.nl-form { width:100%; }
+.nl-row { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:9px; }
+.nl-label { grid-column:1/-1; margin-bottom:-1px; color:var(--nl-di); font-family:var(--nl-sans); font-size:12px; font-weight:500; }
 .nl-input {
-  flex: 1 1 220px; min-width: 0; background: transparent; border: none; border-bottom: 1px solid rgba(238,233,224,0.28);
-  color: var(--nl-di); font-family: var(--nl-sans); font-size: 16px; font-weight: 300; padding: 14px 2px; outline: none;
+  min-width:0; min-height:52px; padding:0 14px; border:1px solid rgba(238,233,224,.22); border-radius:2px;
+  background:rgba(238,233,224,.045); color:var(--nl-di); font-family:var(--nl-sans); font-size:15px; font-weight:400; outline:none;
 }
-.nl-input::placeholder { color: rgba(238,233,224,0.4); }
-.nl-input:focus { border-color: var(--nl-gold); }
+.nl-input::placeholder { color:rgba(238,233,224,.46); }
+.nl-input:focus { border-color:var(--nl-gold); box-shadow:0 0 0 3px rgba(200,174,125,.16); }
+.nl-input[aria-invalid="true"] { border-color:#e7a99f; }
 .nl-btn {
-  flex: 0 0 auto; min-height: 50px; padding: 0 26px; background: var(--nl-di); color: var(--nl-ink); border: 1px solid var(--nl-di);
-  font-family: var(--nl-sans); font-size: 13px; font-weight: 500; letter-spacing: 0.01em; cursor: pointer; transition: background 0.2s, color 0.2s;
+  display:inline-flex; align-items:center; justify-content:center; gap:13px; min-height:52px; padding:0 20px; background:var(--nl-di); color:var(--nl-ink); border:1px solid var(--nl-di);
+  font-family:var(--nl-sans); font-size:13px; font-weight:600; letter-spacing:.01em; cursor:pointer; transition:background .2s,color .2s,border-color .2s;
 }
-.nl-btn:hover { background: #fff; }
-.nl-btn:disabled { opacity: 0.6; cursor: default; }
-.nl-note { font-family: var(--nl-sans); font-size: 11.5px; font-weight: 300; color: rgba(238,233,224,0.4); margin-top: 14px; line-height: 1.5; }
-.nl-err { font-family: var(--nl-sans); font-size: 12px; color: #e7a99f; margin-top: 12px; }
-.nl-ok { font-family: var(--nl-serif); font-size: 18px; font-weight: 400; color: var(--nl-di); display: none; }
-.nl-ok.show { display: block; }
-.nl-ok span { display: block; font-family: var(--nl-sans); font-size: 13.5px; font-weight: 300; color: rgba(238,233,224,0.6); margin-top: 8px; }
+.nl-btn:hover { background:#fff; border-color:#fff; }
+.nl-btn:focus-visible { outline:2px solid var(--nl-gold); outline-offset:3px; }
+.nl-btn:disabled { opacity:.65; cursor:wait; }
+.nl-note { font-family:var(--nl-sans); font-size:12px; font-weight:300; color:rgba(238,233,224,.58); margin:15px 0 0; line-height:1.55; }
+.nl-err { font-family:var(--nl-sans); font-size:12px; color:#f0b8af; margin:12px 0 0; }
+.nl-ok { display:none; align-items:flex-start; gap:16px; padding:23px 0 8px; color:var(--nl-di); }
+.nl-ok.show { display:flex; }
+.nl-ok-icon { flex:0 0 22px; width:22px; height:22px; margin-top:3px; padding:4px; border:1px solid var(--nl-gold); border-radius:50%; color:var(--nl-gold); }
+.nl-ok strong { display:block; margin:0 0 8px; font-family:var(--nl-serif); font-size:27px; font-weight:400; line-height:1.1; }
+.nl-ok span { display:block; color:rgba(238,233,224,.72); font-family:var(--nl-sans); font-size:14px; font-weight:300; line-height:1.65; }
 
 @media (max-width: 860px) {
-  .nl-inner { grid-template-columns: 1fr; gap: 28px; padding: 64px 24px; }
+  .nl-inner { grid-template-columns:1fr; gap:34px; padding:65px 24px; }
+  .nl-copy { max-width:680px; }
+  .nl-title { max-width:15ch; }
+  .nl-signup { max-width:680px; }
+}
+@media (max-width:560px) {
+  .nl-inner { gap:28px; padding:54px 22px; }
+  .nl-title { font-size:clamp(38px,11vw,52px); }
+  .nl-sub { font-size:14px; }
+  .nl-signup { padding:21px 18px; }
+  .nl-row { grid-template-columns:1fr; }
+  .nl-label { grid-column:1; }
+  .nl-btn { width:100%; }
+  .nl-follow-footer { gap:10px; padding:20px 0 6px; }
+  .nl-social { gap:8px 24px; }
+  .nl-social a { min-height:46px; font-size:16px; }
 }
 
-/* ── Elegant end-cap: giant gold-foil wordmark on warm near-black ── */
+/* ── END-CAP ──────────────────────────────────────────────────────────────
+   Modelled on legalpareto.com: a cream field continuous with the footer, the
+   wordmark set oversized and almost invisible, closed by a hairline. A
+   watermark, not a stage. Behind it, the runbook the platform is built from,
+   lit where the pointer passes.
+
+   Read as a colophon, top to bottom: a tracked label held between two
+   hairlines, the wordmark at watermark scale, a rule under it, then the line
+   of copy that hands off to the footer.
+
+   Scale note. fitWord() in newsletter.js measures the word and sets an inline
+   font-size so it spans the content box of .plw-stage exactly, so any
+   font-size written here is overridden at runtime and the only way to make
+   the wordmark bigger is to widen the box it is fitted to. The stage is
+   therefore deliberately wider than the 1160px grid the rest of the page sits
+   on: the word is a watermark under the page, not one more column of text.
+   ──────────────────────────────────────────────────────────────────────── */
 .plw {
-  position: relative; overflow: hidden; text-align: center;
-  background: radial-gradient(120% 130% at 50% 120%, #1b1712 0%, #110f0d 52%, #0c0a09 100%);
-  padding: clamp(108px,15vw,224px) 24px clamp(80px,12vw,160px);
+  position: relative; overflow: hidden;
+  background: var(--w, #F5F2EB);
+  padding: clamp(72px,9vw,130px) 0 0;
 }
-.plw-glow {
-  position: absolute; left: 50%; bottom: -16%; width: 120%; height: 120%; transform: translateX(-50%); pointer-events: none;
-  background: radial-gradient(42% 50% at 50% 72%, rgba(201,168,106,0.13) 0%, transparent 64%);
-  animation: plw-pulse 11s ease-in-out infinite;
-}
-@keyframes plw-pulse { 0%,100% { opacity: .65; transform: translateX(-50%) scale(1); } 50% { opacity: .92; transform: translateX(-50%) scale(1.05); } }
-.plw-stage { position: relative; z-index: 1; max-width: 1500px; margin: 0 auto; }
+.plw-stage { position: relative; max-width: 1480px; margin: 0 auto;
+  padding: 0 clamp(24px,3vw,44px); text-align: center; }
+
+/* The label, centred between two hairlines. Same idea as .section-tag in
+   site.css, made symmetrical because this one closes the page rather than
+   opening a section. The left padding pays back the trailing letter-space so
+   the type, not its tracking, sits in the middle. */
 .plw-eyebrow {
-  display: inline-block; font-family: 'Hanken Grotesk','Inter',system-ui,sans-serif; font-size: 11px; font-weight: 500;
-  letter-spacing: 0.22em; text-transform: uppercase; color: rgba(238,233,224,0.42); margin-bottom: clamp(20px,2.6vw,32px);
-  opacity: 0; transform: translateY(14px); transition: opacity .8s ease, transform .8s ease;
+  display: inline-block; position: relative; line-height: 1;
+  font-family: 'Hanken Grotesk','Inter',system-ui,sans-serif;
+  font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(20,18,15,0.42); padding-left: 0.2em;
+  margin-bottom: clamp(30px,4vw,58px);
+  opacity: 0; transform: translateY(12px); transition: opacity .7s ease, transform .7s ease;
 }
+.plw-eyebrow::before, .plw-eyebrow::after {
+  content: ''; position: absolute; top: 50%;
+  width: clamp(26px,5vw,76px); height: 1px;
+  background: currentColor; opacity: 0.3;
+}
+.plw-eyebrow::before { right: 100%; margin-right: clamp(14px,1.8vw,24px); }
+.plw-eyebrow::after { left: 100%; margin-left: clamp(14px,1.8vw,24px); }
+
+/* Display weight. At 260px a 400 reads as a slab; Newsreader carries an opsz
+   axis and a 300, so the watermark is set the way a title page would be:
+   lighter as it gets larger, and held a shade off the paper. */
 .plw-word {
-  margin: 0; font-family: 'Newsreader','Tiempos Headline',Georgia,serif; font-weight: 500;
-  font-size: clamp(58px,16.5vw,300px); line-height: 1; letter-spacing: -0.035em; white-space: nowrap; padding-top: 0.08em;
-  background: linear-gradient(96deg, #E8DFCB 0%, #C8AE7D 26%, #F2EAD6 50%, #C8AE7D 74%, #E8DFCB 100%);
-  background-size: 210% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
-  opacity: 0; transform: translateY(42px);
-  transition: opacity 1.1s cubic-bezier(.16,1,.3,1) .08s, transform 1.2s cubic-bezier(.16,1,.3,1) .08s;
+  font-family: 'Newsreader','Tiempos Headline',Georgia,serif; font-weight: 300;
+  font-size: clamp(82px,19.5vw,300px); /* replaced inline by fitWord() */
+  line-height: .9; letter-spacing: -.045em; font-optical-sizing: auto;
+  white-space: nowrap; display: flex; align-items: baseline; justify-content: center;
+  color: rgba(20,18,15,0.095);
 }
-.plw.in .plw-word { opacity: 1; transform: none; animation: plw-sheen 13s ease-in-out infinite; }
-@keyframes plw-sheen { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.plw-l {
+  display: inline-block;
+  opacity: 0; transform: translateY(26px);
+  transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1);
+  transition-delay: calc(var(--i) * 24ms);
+}
+.plw.in .plw-l { opacity: 1; transform: none; }
+
+/* The rule moved above this line. It used to sit under it, a pixel from the
+   footer's own border-top, which read as one thick line. Here it closes the
+   wordmark instead, and the footer keeps its own. */
 .plw-tag {
-  display: block; margin-top: clamp(24px,3vw,42px); font-family: 'Hanken Grotesk','Inter',system-ui,sans-serif;
-  font-size: clamp(12px,1.4vw,14px); font-weight: 400; letter-spacing: 0.05em; color: rgba(238,233,224,0.5);
-  opacity: 0; transform: translateY(14px); transition: opacity .9s ease .3s, transform .9s ease .3s;
+  display: block; margin-top: clamp(8px,1.4vw,20px);
+  padding-top: clamp(26px,3vw,42px); padding-bottom: clamp(30px,3.4vw,48px);
+  border-top: 1px solid rgba(20,18,15,0.085);
+  font-family: 'Hanken Grotesk','Inter',system-ui,sans-serif;
+  font-size: 12.5px; font-weight: 300; letter-spacing: .04em; color: rgba(20,18,15,0.5);
+  opacity: 0; transform: translateY(12px); transition: opacity .8s ease .22s, transform .8s ease .22s;
 }
 .plw.in .plw-eyebrow, .plw.in .plw-tag { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) {
-  .plw-glow { animation: none; }
-  .plw-eyebrow, .plw-word, .plw-tag { transition: none !important; opacity: 1 !important; transform: none !important; }
-  .plw.in .plw-word { animation: none; }
+
+/* Narrow: the label is nearly the full measure on its own, so the hairlines
+   that flank it come off rather than crowd it. */
+@media (max-width: 600px) {
+  .plw-eyebrow::before, .plw-eyebrow::after { display: none; }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .plw-l, .plw-eyebrow, .plw-tag {
+    transition: none !important; transform: none !important; }
+  .plw-l, .plw-eyebrow, .plw-tag { opacity: 1 !important; }
+}
+
+/* The character field. A monospace grid of the platform runbook, drawn on a
+   canvas and lit only where the pointer is, in the manner of
+   legora.com/product/skills. Sits under everything and takes no clicks. */
+.plw-field {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
+}
+.plw-stage { z-index: 1; }
+
+/* Keep the wordmark at the footer still. */
+.plw-eyebrow, .plw-l, .plw-tag { opacity: 1; transform: none; transition: none; }

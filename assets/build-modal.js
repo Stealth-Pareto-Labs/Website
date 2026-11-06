@@ -18,14 +18,14 @@
       '<button class="bm-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>' +
       '<p class="bm-eyebrow">Build with Pareto</p>' +
       '<h2 class="bm-title" id="bm-title">Start a conversation.</h2>' +
-      '<p class="bm-sub">Tell us where your operations hurt. We’ll show you what continuous-learning AI can do for your business.</p>' +
+      '<p class="bm-sub">Tell us what you want to build, or where your operations hurt. Whether that is an API key, a project on our cloud, or an AI system for your business.</p>' +
       '<form class="bm-form" novalidate>' +
         '<div class="bm-fields">' +
           '<div class="bm-field"><label for="bm-name">Your name</label><input id="bm-name" name="name" type="text" autocomplete="name" placeholder="James Wright" required></div>' +
           '<div class="bm-field"><label for="bm-email">Work email</label><input id="bm-email" name="email" type="email" autocomplete="email" placeholder="james@company.com" required></div>' +
           '<div class="bm-field"><label for="bm-company">Company</label><input id="bm-company" name="company" type="text" autocomplete="organization" placeholder="Your company"></div>' +
-          '<div class="bm-field"><label for="bm-type">You are</label><select id="bm-type" name="type"><option value="">Select one</option><option>Operating company (SMB / mid-market)</option><option>Private equity firm</option><option>PE portfolio company</option><option>Vertical / industry business</option><option>Government / public institution</option><option>Other</option></select></div>' +
-          '<div class="bm-field"><label for="bm-challenge">Where could AI help your operations?</label><textarea id="bm-challenge" name="challenge" placeholder="e.g. Our customer service team is overwhelmed and our knowledge is scattered across people and docs…"></textarea></div>' +
+          '<div class="bm-field"><label for="bm-type">You are</label><select id="bm-type" name="type"><option value="">Select one</option><option>Operating company (SMB / mid-market)</option><option>Developer / startup (inference)</option><option>Team deploying workloads (cloud)</option><option>Vertical / industry business</option><option>Government / public institution</option><option>Other</option></select></div>' +
+          '<div class="bm-field"><label for="bm-challenge">What do you want to build or improve?</label><textarea id="bm-challenge" name="challenge" placeholder="e.g. We need an OpenAI-compatible endpoint in-country, or: our support team is overwhelmed and our knowledge is scattered…"></textarea></div>' +
         '</div>' +
         '<div class="bm-foot">' +
           '<button type="submit" class="bm-btn">Build with Pareto</button>' +

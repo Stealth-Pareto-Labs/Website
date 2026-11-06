@@ -15,7 +15,7 @@ Pareto Labs is a **continuously learning AI platform and implementation partner*
 Pareto connects internal systems, customer interactions, operational workflows, and vetted domain-expert intelligence into AI solutions that **continuously improve business performance over time**.
 
 - The center of gravity is **continual learning / continuous improvement** — not "agents."
-- Agents, voice, chat, fine-tuned models, workflow automation, copilots = *examples* of solution types, never the headline category.
+- Agents, voice, chat, post-trained models, workflow automation, copilots = *examples* of solution types, never the headline category.
 - Core thesis: **models are commoditizing; the scarce value is implementation, company-specific learning, expert validation, and continuous improvement after deployment.**
 - PE is the **primary wedge**, but the site must not read as PE-only.
 - Tone: premium but accessible; serious but not cold; enterprise-grade but not Fortune-500-only; readable by a non-technical operator or PE operating partner.

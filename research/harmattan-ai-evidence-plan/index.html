@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harmattan AI: evidence before scale · Pareto Labs</title>
+  <meta name="description" content="An evidence-led research note on Harmattan AI: what the data and benchmarks establish, what early training has not yet shown, and what to test before investing in a broad training run.">
+  <link rel="canonical" href="https://www.trypareto.ai/research/harmattan-ai-evidence-plan/">
+  <meta name="theme-color" content="#F5F2EB">
+  <meta name="author" content="Pareto Labs Research">
+  <link rel="icon" href="/assets/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="/assets/favicon-180.png">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Pareto Labs">
+  <meta property="og:title" content="Harmattan AI: evidence before scale">
+  <meta property="og:description" content="What the evidence supports, what it does not, and the phased research plan we propose before any broad training run.">
+  <meta property="og:url" content="https://www.trypareto.ai/research/harmattan-ai-evidence-plan/">
+  <meta property="og:image" content="https://www.trypareto.ai/research/harmattan-ai-evidence-plan/assets/og-harmattan.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="article:published_time" content="2026-11-05">
+  <meta property="article:author" content="Pareto Labs">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Harmattan AI: evidence before scale">
+  <meta name="twitter:description" content="A research note on the data, evaluation, open questions, and next experiments for Harmattan AI.">
+  <meta name="twitter:image" content="https://www.trypareto.ai/research/harmattan-ai-evidence-plan/assets/og-harmattan.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/site.css?v=20261012b">
+  <link rel="stylesheet" href="/assets/newsletter.css?v=20261106a">
+  <style>
+    .ha-page { --ha-ink:#14120f; --ha-muted:#6a6760; --ha-line:rgba(20,18,15,.12); --ha-paper:#f5f2eb; --ha-wash:#efebe1; --ha-accent:#2c3c60; }
+    .ha-skip { position:absolute; left:16px; top:-80px; z-index:1000; padding:12px 16px; background:var(--ha-ink); color:var(--ha-paper); }
+    .ha-skip:focus { top:12px; }
+    .ha-hero { padding:clamp(58px,8vw,104px) 0 54px; }
+    .ha-hero-inner { max-width:1000px; margin:0 auto; padding:0 48px; }
+    .ha-eyebrow { display:flex; align-items:center; gap:12px; margin:0 0 22px; color:var(--ha-accent); font-size:11px; font-weight:500; letter-spacing:.18em; text-transform:uppercase; }
+    .ha-eyebrow::before { content:""; width:24px; height:1px; background:currentColor; opacity:.65; }
+    .ha-hero h1 { max-width:19ch; margin:0 0 22px; font-family:var(--serif); font-size:clamp(42px,6.2vw,76px); font-weight:400; line-height:1.02; letter-spacing:-.04em; }
+    .ha-hero h1 em { font-weight:300; }
+    .ha-dek { max-width:62ch; margin:0; color:var(--ha-muted); font-family:var(--serif); font-size:clamp(20px,2.4vw,27px); font-weight:300; line-height:1.42; }
+    .ha-meta { display:flex; flex-wrap:wrap; gap:8px 18px; align-items:center; margin-top:30px; padding-top:18px; border-top:1px solid var(--ha-line); color:var(--ha-muted); font-size:13px; }
+    .ha-meta span+span::before { content:"·"; margin-right:18px; color:#aaa69e; }
+    .ha-cover { max-width:1200px; margin:0 auto; padding:0 48px; }
+    .ha-cover img { display:block; width:100%; height:auto; max-height:none; aspect-ratio:16/9; object-fit:cover; border:1px solid rgba(20,18,15,.08); border-radius:4px; background:#f5f2eb; box-shadow:0 22px 60px rgba(20,18,15,.11); }
+    .ha-cover figcaption { max-width:780px; margin:14px auto 0; color:#68645d; font-size:12.5px; line-height:1.55; }
+    .ha-cover figcaption strong { display:block; margin-bottom:4px; color:#4f4b43; font-size:10px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; }
+    .ha-announce { max-width:1064px; margin:54px auto 0; padding:0 48px; }
+    .ha-announce-box { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:20px 32px; align-items:center; padding:26px 30px; border:1px solid var(--ha-line); background:rgba(239,235,225,.58); }
+    .ha-announce-label { margin:0 0 6px; color:var(--ha-accent); font-size:10px; font-weight:600; letter-spacing:.15em; text-transform:uppercase; }
+    .ha-announce p:last-child { max-width:72ch; margin:0; color:#35322d; font-size:15px; line-height:1.65; }
+    .ha-share { display:flex; flex-wrap:wrap; gap:8px; }
+    .ha-share a,.ha-share button { display:inline-flex; min-height:42px; align-items:center; justify-content:center; gap:8px; padding:9px 13px; border:1px solid rgba(20,18,15,.18); background:transparent; color:var(--ha-ink); font:500 12px var(--sans); cursor:pointer; transition:background .18s,border-color .18s; }
+    .ha-share a:hover,.ha-share button:hover { border-color:var(--ha-ink); background:rgba(255,255,255,.45); }
+    .ha-share a:focus-visible,.ha-share button:focus-visible,.ha-toc a:focus-visible,.ha-body a:focus-visible { outline:2px solid var(--ha-accent); outline-offset:3px; }
+    .ha-share svg { width:15px; height:15px; }
+    .ha-share-status { min-height:1.3em; margin:6px 0 0; color:var(--ha-muted); font-size:12px; }
+    .ha-overview { max-width:1064px; margin:50px auto 0; padding:0 48px; }
+    .ha-overview-head { display:grid; grid-template-columns:minmax(210px,.8fr) minmax(0,1.5fr); gap:36px; padding-bottom:24px; border-bottom:1px solid var(--ha-line); }
+    .ha-overview h2 { margin:0; font-family:var(--serif); font-size:clamp(25px,3vw,34px); font-weight:400; line-height:1.15; letter-spacing:-.025em; }
+    .ha-overview-head p { max-width:68ch; margin:0; color:#37342f; font-size:16px; line-height:1.75; }
+    .ha-stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); margin-top:24px; border-top:1px solid var(--ha-line); border-bottom:1px solid var(--ha-line); }
+    .ha-stat { padding:22px 22px 22px 0; }
+    .ha-stat+.ha-stat { padding-left:22px; border-left:1px solid var(--ha-line); }
+    .ha-stat strong { display:block; margin-bottom:8px; font-family:var(--serif); font-size:clamp(24px,3vw,34px); font-weight:400; line-height:1.05; letter-spacing:-.03em; }
+    .ha-stat span { display:block; color:var(--ha-muted); font-size:13px; line-height:1.55; }
+    .ha-quick-figure { display:grid; grid-template-columns:minmax(0,1.55fr) minmax(250px,.65fr); align-items:stretch; max-width:1120px; margin:32px auto 0; padding:0 48px; }
+    .ha-quick-figure-art { display:flex; min-width:0; align-items:center; overflow:hidden; border:1px solid rgba(20,18,15,.12); border-right:0; border-radius:4px 0 0 4px; background:#080c18; }
+    .ha-quick-figure-art img { display:block; width:100%; height:auto; }
+    .ha-quick-figure figcaption { display:flex; flex-direction:column; justify-content:center; padding:clamp(22px,3vw,38px); border:1px solid rgba(20,18,15,.12); border-radius:0 4px 4px 0; background:#efebe1; }
+    .ha-quick-label { margin:0 0 15px; color:var(--ha-accent); font-size:10px; font-weight:600; letter-spacing:.15em; text-transform:uppercase; }
+    .ha-quick-figure figcaption strong { display:block; margin:0 0 13px; color:var(--ha-ink); font-family:var(--serif); font-size:clamp(23px,2.7vw,32px); font-weight:400; line-height:1.13; }
+    .ha-quick-figure figcaption span { color:#5c5851; font-size:13.5px; line-height:1.7; }
+    .ha-layout { display:grid; grid-template-columns:180px minmax(0,880px); gap:44px; align-items:start; max-width:1200px; margin:0 auto; padding:58px 48px 100px; }
+    .ha-toc { position:sticky; top:92px; }
+    .ha-toc-label { margin:0 0 14px; color:var(--ha-muted); font-size:10px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; }
+    .ha-toc ol { display:flex; flex-direction:column; gap:2px; margin:0; padding:0; list-style:none; }
+    .ha-toc a { display:block; padding:8px 10px; border-left:2px solid transparent; color:#6a6760; font-size:13px; line-height:1.35; transition:color .15s,border-color .15s; }
+    .ha-toc a:hover,.ha-toc a[aria-current="location"] { border-left-color:var(--ha-accent); color:var(--ha-ink); }
+    .ha-toc-share { display:flex; gap:8px; margin-top:22px; padding-top:18px; border-top:1px solid var(--ha-line); }
+    .ha-toc-share a { display:grid; width:40px; height:40px; place-items:center; padding:0; border:1px solid var(--ha-line); border-radius:50%; color:var(--ha-muted); }
+    .ha-toc-share a:hover { color:var(--ha-ink); border-color:#77736c; }
+    .ha-toc-share svg { width:15px; height:15px; }
+    .ha-body { min-width:0; }
+    .ha-body section { scroll-margin-top:96px; }
+    .ha-body h2 { margin:58px 0 18px; font-family:var(--serif); font-size:clamp(27px,3.4vw,38px); font-weight:400; line-height:1.15; letter-spacing:-.03em; }
+    .ha-body h3 { margin:36px 0 13px; font-family:var(--serif); font-size:clamp(20px,2.5vw,25px); font-weight:400; line-height:1.25; letter-spacing:-.02em; }
+    .ha-body p { margin:0 0 21px; color:#35322d; font-size:16.5px; font-weight:300; line-height:1.82; }
+    .ha-body p strong,.ha-body li strong { color:var(--ha-ink); font-weight:600; }
+    .ha-body .ha-lead { color:var(--ha-ink); font-family:var(--serif); font-size:clamp(21px,2.5vw,25px); font-weight:400; line-height:1.5; }
+    .ha-body ul,.ha-body ol { margin:0 0 24px; padding:0; list-style:none; }
+    .ha-body li { position:relative; margin:0 0 11px; padding-left:20px; color:#35322d; font-size:15.5px; font-weight:300; line-height:1.7; }
+    .ha-body ul li::before { position:absolute; top:.72em; left:1px; width:5px; height:5px; border-radius:50%; background:var(--ha-accent); content:""; }
+    .ha-body a { color:var(--ha-accent); text-decoration:underline; text-decoration-color:rgba(44,60,96,.35); text-underline-offset:3px; }
+    .ha-body a:hover { text-decoration-color:currentColor; }
+    .ha-callout { margin:28px 0 34px; padding:23px 25px; border-left:3px solid var(--ha-accent); background:#efebe1; }
+    .ha-callout .ha-callout-label { margin:0 0 9px; color:var(--ha-accent); font-size:10px; font-weight:600; letter-spacing:.15em; text-transform:uppercase; }
+    .ha-callout p:last-child { margin:0; font-size:15px; line-height:1.72; }
+    .ha-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:26px 0 38px; }
+    .ha-grid-card { padding:19px 18px; border:1px solid var(--ha-line); background:rgba(255,255,255,.24); }
+    .ha-grid-card span { display:block; margin-bottom:11px; color:var(--ha-accent); font-family:var(--serif); font-size:16px; }
+    .ha-grid-card h3 { margin:0 0 8px; font-family:var(--sans); font-size:14px; font-weight:600; letter-spacing:0; }
+    .ha-grid-card p { margin:0; color:var(--ha-muted); font-size:13.5px; line-height:1.6; }
+    .ha-figure { margin:34px 0 42px; }
+    .ha-figure-frame { overflow:hidden; padding:0; border:1px solid var(--ha-line); border-radius:4px; background:#f9f7f1; }
+    .ha-figure img { display:block; width:100%; height:auto; }
+    .ha-figure figcaption { margin-top:12px; padding-top:11px; border-top:1px solid var(--ha-line); color:#69665f; font-size:13px; line-height:1.65; }
+    .ha-figure figcaption strong { display:block; margin-bottom:4px; color:var(--ha-accent); font-size:10px; font-weight:600; letter-spacing:.11em; text-transform:uppercase; }
+    .ha-table-wrap { overflow-x:auto; margin:22px 0 12px; border:1px solid var(--ha-line); border-radius:9px; background:#fff; -webkit-overflow-scrolling:touch; }
+    .ha-table { width:100%; min-width:580px; border-collapse:collapse; font-size:13px; }
+    .ha-table th,.ha-table td { padding:11px 12px; border-bottom:1px solid var(--ha-line); text-align:left; vertical-align:top; }
+    .ha-table th { background:#efebe1; color:#504d47; font-size:10px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; }
+    .ha-table tbody tr:nth-child(even) { background:#faf9f6; }
+    .ha-table tr:last-child td { border-bottom:0; }
+    .ha-table .num { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+    .ha-note { margin:10px 0 26px!important; color:#65615a!important; font-size:12.5px!important; line-height:1.6!important; }
+    .ha-quote { margin:34px 0; padding:4px 0 4px 23px; border-left:2px solid var(--ha-accent); color:var(--ha-ink); font-family:var(--serif); font-size:clamp(21px,2.6vw,28px); font-weight:400; line-height:1.42; }
+    .ha-phases { display:grid; gap:12px; margin:23px 0 34px; }
+    .ha-phase { display:grid; grid-template-columns:125px minmax(0,1fr); gap:10px 20px; padding:22px 23px; border:1px solid var(--ha-line); background:rgba(255,255,255,.28); }
+    .ha-phase-tag { color:var(--ha-accent); font-size:10px; font-weight:600; letter-spacing:.15em; text-transform:uppercase; }
+    .ha-phase h3 { margin:0 0 8px; font-size:20px; }
+    .ha-phase p { margin:0; color:var(--ha-muted); font-size:14.5px; line-height:1.7; }
+    .ha-phase p+p { margin-top:9px; }
+    .ha-paper-status { display:flex; align-items:flex-start; gap:14px; margin:28px 0 14px; padding:20px 22px; border:1px solid var(--ha-line); background:#efebe1; }
+    .ha-paper-status svg { flex:0 0 20px; width:20px; height:20px; color:var(--ha-accent); }
+    .ha-paper-status p { margin:0; font-size:14px; line-height:1.65; }
+    .ha-citation { margin:12px 0 28px; padding:17px 18px; border:1px solid var(--ha-line); background:rgba(255,255,255,.28); color:#57534d; font-family:ui-monospace,SFMono-Regular,Consolas,monospace; font-size:12.5px; line-height:1.7; overflow-wrap:anywhere; }
+    .ha-end { margin-top:50px; padding-top:27px; border-top:1px solid var(--ha-line); }
+    .ha-boundary { color:#65615a!important; font-size:13px!important; line-height:1.65!important; }
+    .ha-bottom-share { display:flex; flex-wrap:wrap; gap:10px; margin:22px 0 0; }
+    .ha-bottom-share .btn { min-height:46px; }
+    .ha-feature { margin-top:32px; padding:25px; background:#080c18; color:#eee9e0; }
+    .ha-feature p { color:rgba(238,233,224,.7); font-size:14px; }
+    .ha-feature a { color:#d8c393; }
+    .ha-page .cta-final { padding:clamp(52px,7vw,88px) 0; background:#efebe1; color:#14120f; text-align:center; }
+    .ha-cta-inner { display:block; }
+    .ha-cta-copy { max-width:760px; margin:0 auto; text-align:center; }
+    .ha-page .cta-final h2 { max-width:14ch; margin:0 auto 16px; color:#14120f; }
+    .ha-page .cta-final p { max-width:52ch; margin:0 auto 27px; color:#5e5a52; }
+    .ha-page .cta-final .btn-invert { border-color:#14120f; background:#14120f; color:#f5f2eb; }
+    .ha-page .cta-final .btn-invert:hover { border-color:#2c3c60; background:#2c3c60; }
+    .ha-page .cta-final .btn-invert-ghost { border-color:rgba(20,18,15,.35); color:#14120f; }
+    .ha-page .cta-final .btn-invert-ghost:hover { border-color:#14120f; background:#14120f; color:#f5f2eb; }
+    @media (max-width:900px) {
+      .ha-announce-box { grid-template-columns:1fr; }
+      .ha-layout { grid-template-columns:1fr; gap:25px; padding-top:38px; }
+      .ha-toc { position:static; padding-bottom:19px; border-bottom:1px solid var(--ha-line); }
+      .ha-toc ol { flex-direction:row; gap:7px; overflow-x:auto; padding:1px 2px 8px; scrollbar-width:thin; }
+      .ha-toc a { padding:8px 12px; border:1px solid var(--ha-line); border-radius:999px; white-space:nowrap; }
+      .ha-toc a:hover,.ha-toc a[aria-current="location"] { border-color:var(--ha-accent); background:rgba(255,255,255,.4); }
+      .ha-toc-share { display:none; }
+      .ha-overview-head { grid-template-columns:1fr; gap:14px; }
+      .ha-quick-figure { grid-template-columns:1fr; }
+      .ha-quick-figure-art { border-right:1px solid rgba(20,18,15,.12); border-bottom:0; border-radius:4px 4px 0 0; }
+      .ha-quick-figure figcaption { border-radius:0 0 4px 4px; }
+    }
+    @media (max-width:650px) {
+      .ha-hero-inner,.ha-cover,.ha-announce,.ha-overview,.ha-quick-figure { padding-right:24px; padding-left:24px; }
+      .ha-hero-inner { width:100%; }
+      .ha-hero { padding-top:50px; }
+      .ha-hero h1 { font-size:clamp(36px,10vw,54px); }
+      .ha-dek { width:100%; max-width:100%; font-size:clamp(18px,4.5vw,20px); }
+      .ha-meta { gap:7px 0; }
+      .ha-meta span { width:100%; }
+      .ha-meta span+span::before { content:""; margin:0; }
+      .ha-cover img { border-radius:10px; }
+      .ha-announce { margin-top:35px; }
+      .ha-announce-box { padding:21px 19px; }
+      .ha-share a,.ha-share button { flex:1 1 auto; }
+      .ha-overview { margin-top:38px; }
+      .ha-stats { grid-template-columns:1fr; }
+      .ha-stat,.ha-stat+.ha-stat { padding:17px 0; border-left:0; }
+      .ha-stat+.ha-stat { border-top:1px solid var(--ha-line); }
+      .ha-layout { padding:36px 24px 72px; }
+      .ha-body p { font-size:16px; }
+      .ha-grid { grid-template-columns:1fr; }
+      .ha-phase { grid-template-columns:1fr; gap:9px; padding:19px; }
+      .ha-figure-frame { padding:0; }
+    }
+    @media (max-width:560px) {
+      .ha-page nav.site-nav { padding-right:20px; padding-left:20px; }
+      .ha-page nav.site-nav .nav-cta { display:none; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      .ha-page *, .ha-page *::before, .ha-page *::after { scroll-behavior:auto!important; transition-duration:.01ms!important; animation-duration:.01ms!important; animation-iteration-count:1!important; }
+    }
+    @media print {
+      .site-nav,.ha-toc,.ha-share,.ha-bottom-share,.cta-final,.site-footer { display:none!important; }
+      .ha-layout { display:block; max-width:none; padding:25px 0; }
+      .ha-hero-inner,.ha-cover,.ha-announce,.ha-overview,.ha-quick-figure { max-width:none; padding-right:0; padding-left:0; }
+      .ha-figure,.ha-phase,.ha-figure-frame { break-inside:avoid; }
+    }
+  </style>
+</head>
+<body class="ha-page">
+<a class="ha-skip" href="#article">Skip to article</a>
+<nav class="site-nav" aria-label="Main navigation">
+  <a class="nav-logo" href="/" aria-label="Pareto Labs home"><img class="brand-mark" src="/assets/logo.png" alt=""><span>areto&nbsp;Labs</span></a>
+  <ul class="nav-links">
+    <li class="hide-sm"><a href="/infrastructure.html">Infrastructure</a></li>
+    <li class="hide-sm"><a href="/platform.html">Platform</a></li>
+    <li class="hide-sm"><a href="/industries.html">Industries</a></li>
+    <li class="hide-sm"><a href="/experts.html">Experts</a></li>
+    <li class="hide-sm"><a class="active" href="/research.html" aria-current="page">Research</a></li>
+    <li><a class="nav-cta" href="/#partner">Build with Pareto</a></li>
+  </ul>
+</nav>
+
+<header class="ha-hero">
+  <div class="ha-hero-inner">
+    <p class="ha-eyebrow">New research note · 5 November 2026</p>
+    <h1>Harmattan AI: evidence, market hypotheses and a <em>phased research plan.</em></h1>
+    <p class="ha-dek">What the evidence supports, what it does not, and the experiments we propose before committing to a broad training run.</p>
+    <div class="ha-meta" aria-label="Article information">
+      <span>Pareto Labs Research</span><span>Research note</span><span>12 minute read</span>
+    </div>
+  </div>
+</header>
+
+<figure class="ha-cover">
+  <img src="assets/hero-harmattan-editorial.webp" alt="Abstract wind-shaped landscape of fine data lines, ivory and sandstone forms, deep indigo shadows, and restrained gold accents" fetchpriority="high">
+  <figcaption><strong>Harmattan AI · Research at the edge of evidence and scale</strong>An editorial interpretation of the patient work behind data lineage, evaluation, and reproducible research.</figcaption>
+</figure>
+
+<section class="ha-announce" aria-label="Share this research note">
+  <div class="ha-announce-box">
+    <div>
+      <p class="ha-announce-label">The central finding</p>
+      <p>The project has a meaningful data and evaluation foundation. The historical training variants in this review do not yet clear both the domain-knowledge and general-retention gates. The next investment should buy reproducibility and evidence of user value before a broad training sweep.</p>
+    </div>
+    <div>
+      <div class="ha-share">
+        <a class="share-linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwww.trypareto.ai%2Fresearch%2Fharmattan-ai-evidence-plan%2F" target="_blank" rel="noopener noreferrer" aria-label="Share this research note on LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.33V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.28 2.37 4.28 5.46v6.28ZM5.31 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.09 20.45H3.53V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+          <span>LinkedIn</span>
+        </a>
+        <a class="share-x" href="https://twitter.com/intent/tweet?text=Harmattan%20AI%3A%20evidence%20before%20scale%20%E2%80%94%20Pareto%20Labs&amp;url=https%3A%2F%2Fwww.trypareto.ai%2Fresearch%2Fharmattan-ai-evidence-plan%2F" target="_blank" rel="noopener noreferrer" aria-label="Share this research note on X">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-6.78 7.75L23.2 22h-6.25l-4.9-7.43L5.55 22H2.4l7.25-8.28L1.8 2h6.4l4.43 6.77L18.9 2Zm-1.1 18h1.73L7.26 3.88H5.4L17.8 20Z"/></svg>
+          <span>Post on X</span>
+        </a>
+        <button class="copy-link" type="button" aria-label="Copy a link to this research note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg>
+          <span>Copy link</span>
+        </button>
+      </div>
+      <p class="ha-share-status" role="status" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<section class="ha-overview" aria-labelledby="overview-heading">
+  <div class="ha-overview-head">
+    <h2 id="overview-heading">A careful case for what comes next.</h2>
+    <p>This illustrated summary brings together the collection inventory, recorded benchmark runs, early training evidence, and a testable market hypothesis. It distinguishes what exists from what is reported, in progress, blocked, or still proposed.</p>
+  </div>
+  <div class="ha-stats" aria-label="Research note at a glance">
+    <div class="ha-stat"><strong>5.64M</strong><span>Tokenizer tokens in released curated v2: 591 documents, including 79 held out.</span></div>
+    <div class="ha-stat"><strong>≈1.02B</strong><span>Reported November inventory across separate document and corpus passes; not a deduplicated training release.</span></div>
+    <div class="ha-stat"><strong>16</strong><span>Reproducible notebook graphs in the underlying analysis; this summary highlights the decision-relevant figures.</span></div>
+  </div>
+</section>
+
+<figure class="ha-quick-figure">
+  <div class="ha-quick-figure-art"><img src="assets/hero-training-evidence.svg" alt="ABL2 and ABL4 each scored 16.87 on closed-book domain QA against a 24.65 gate; ABL4 TruthfulQA MC2 fell from 48.01 to 43.01"></div>
+  <figcaption>
+    <p class="ha-quick-label">At a glance / training evidence</p>
+    <strong>Neither early variant cleared both gates.</strong>
+    <span>Both variants scored 16.87 on closed-book domain QA against the historical v1 gate of 24.65. ABL4&rsquo;s TruthfulQA MC2 fell five points, from 48.01 to 43.01. These point estimates do not establish statistical significance.</span>
+  </figcaption>
+</figure>
+
+<main class="ha-layout" id="article">
+  <aside class="ha-toc" aria-label="Article navigation">
+    <p class="ha-toc-label">On this page</p>
+    <ol>
+      <li><a href="#finding">The finding</a></li>
+      <li><a href="#data">Data evidence</a></li>
+      <li><a href="#benchmarks">Benchmark evidence</a></li>
+      <li><a href="#training">Training evidence</a></li>
+      <li><a href="#market">Market hypothesis</a></li>
+      <li><a href="#plan">Research plan</a></li>
+      <li><a href="#limits">Limits &amp; status</a></li>
+      <li><a href="#cite">Cite &amp; follow</a></li>
+    </ol>
+    <div class="ha-toc-share" aria-label="Share this note">
+      <a class="share-linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwww.trypareto.ai%2Fresearch%2Fharmattan-ai-evidence-plan%2F" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.33V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.28 2.37 4.28 5.46v6.28ZM5.31 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.09 20.45H3.53V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg></a>
+      <a class="share-x" href="https://twitter.com/intent/tweet?text=Harmattan%20AI%3A%20evidence%20before%20scale%20%E2%80%94%20Pareto%20Labs&amp;url=https%3A%2F%2Fwww.trypareto.ai%2Fresearch%2Fharmattan-ai-evidence-plan%2F" target="_blank" rel="noopener noreferrer" aria-label="Share on X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-6.78 7.75L23.2 22h-6.25l-4.9-7.43L5.55 22H2.4l7.25-8.28L1.8 2h6.4l4.43 6.77L18.9 2Zm-1.1 18h1.73L7.26 3.88H5.4L17.8 20Z"/></svg></a>
+    </div>
+  </aside>
+
+  <article class="ha-body">
+    <section id="finding" aria-labelledby="finding-heading">
+      <p class="ha-lead">The evidence supports continued, disciplined research on Harmattan. It does not yet support a broad training run or claims of product readiness.</p>
+      <p>Harmattan has grown from a small French-dominant experiment into a larger collection effort spanning African and francophone institutional sources. Alongside that work, Pareto has assembled benchmark protocols, training variants, and an evaluation harness. This note brings those strands together to answer a practical question: <strong>what should the next research investment prove?</strong></p>
+      <div class="ha-callout">
+        <p class="ha-callout-label">Proposed decision</p>
+        <p>Reconstruct comparable baselines first. Admit more data only after quality, rights, leakage, and split checks. Then test a staged set of domain, sector, and language mixtures against retrieval and specialist-model controls.</p>
+      </div>
+      <div class="ha-grid" aria-label="What this note establishes">
+        <div class="ha-grid-card"><span>01 / Established</span><h3>A real collection and evaluation base</h3><p>Released v2 data and recorded benchmark runs give the team a basis for reproducible follow-up.</p></div>
+        <div class="ha-grid-card"><span>02 / Not established</span><h3>A model that clears both gates</h3><p>The reviewed variants do not demonstrate domain gains while preserving general performance.</p></div>
+        <div class="ha-grid-card"><span>03 / Next to prove</span><h3>Incremental value over controls</h3><p>Training must earn its place against retrieval, specialist systems, and the existing workflow.</p></div>
+      </div>
+    </section>
+
+    <section id="data" aria-labelledby="data-heading">
+      <h2 id="data-heading">Data evidence: a growing inventory, not a cleared release</h2>
+      <p>Three populations matter here and should not be added together as if they were unique, approved training supply: the released curated v2 set, a November documents pass, and a separately processed corpus pass. The two November passes were run separately because combined processing exceeded the available 62 GB of RAM.</p>
+      <figure class="ha-figure">
+        <div class="ha-figure-frame"><img src="assets/fig01-inventory.pareto.webp" alt="Comparison of reported Harmattan data populations: 5.64 million tokens in released curated v2, 426.2 million in the November documents pass, and about 596.8 million in the separate corpus pass" loading="lazy" decoding="async"></div>
+        <figcaption><strong>Figure 1 · Reported inventory by pass</strong>Released curated v2: 5.640M tokenizer tokens. November documents: 426.212M. Corpora: approximately 596.8M. These populations may overlap and are not a unique-token growth series.</figcaption>
+      </figure>
+      <p>The documents pass retained 45,058 records from 76,704 inputs after filtering and deduplication. That arithmetic is internally consistent; it does not validate raw records that were unavailable for this review. The corpus pass retained another 285,540 records, all still pending in the recorded split.</p>
+      <div class="ha-grid" aria-label="Document pass counts">
+        <div class="ha-grid-card"><span>76,704</span><h3>Input records</h3><p>Before filtering, exact duplicate removal, and fuzzy duplicate removal.</p></div>
+        <div class="ha-grid-card"><span>48,124</span><h3>Post-filter records</h3><p>The denominator used for the reported 6.37% deduplication rate.</p></div>
+        <div class="ha-grid-card"><span>45,058</span><h3>Retained records</h3><p>Across train, pending, and held-out splits in the documents pass.</p></div>
+      </div>
+      <figure class="ha-figure">
+        <div class="ha-figure-frame"><img src="assets/fig02-retention.pareto.webp" alt="Retention funnel: 76,704 input documents, 28,580 filtered, 1,209 exact duplicates and 1,857 fuzzy duplicates removed, leaving 45,058 kept" loading="lazy" decoding="async"></div>
+        <figcaption><strong>Figure 2 · Documents-pass retention</strong>76,704 inputs − 28,580 filtered − 1,209 exact duplicates − 1,857 fuzzy duplicates = 45,058 kept. The rate uses post-filter records; it is not an audit of unavailable source files.</figcaption>
+      </figure>
+      <figure class="ha-figure">
+        <div class="ha-figure-frame"><img src="assets/fig03-split.pareto.webp" alt="Document-pass split by tokenizer tokens: 23.224 million train, 402.712 million pending, and 0.277 million held out" loading="lazy" decoding="async"></div>
+        <figcaption><strong>Figure 3 · Documents-pass split</strong>Train 23.224M, pending 402.712M, and held-out 0.277M tokenizer tokens (1,461 / 43,518 / 79 records). A train label alone does not certify source rights or quality.</figcaption>
+      </figure>
+      <h3>Tiering and domain coverage are still scenarios</h3>
+      <p>Draft source tiers distinguish core domain narrative, lower-density statistical and procurement material, and general or education corpora. These are source labels, not training recipes, and they do not certify every document. Proposed caps produce an allocation scenario near 500M tokens; this is not a released training budget.</p>
+      <figure class="ha-figure">
+        <div class="ha-figure-frame"><img src="assets/fig05-tiers-full.pareto.webp" alt="Reported full-run token totals by source tier, with proposed draft caps shown separately as an allocation scenario" loading="lazy" decoding="async"></div>
+        <figcaption><strong>Figure 4 · Reported tiers and proposed caps</strong>Reported full-run: 376.6M Tier 1, 72.4M Tier 2, 567.4M Tier 3, and 6.6M untiered tokens across 257 groups. Draft caps yield about 500M tokens, not an approved release.</figcaption>
+      </figure>
+      <figure class="ha-figure">
+        <div class="ha-figure-frame"><img src="assets/fig06-domains.pareto.webp" alt="Domain inventory alongside draft token caps, including a proposed reduction in general Wikipedia and WURA text" loading="lazy" decoding="async"></div>
+        <figcaption><strong>Figure 5 · Domain inventory and proposed caps</strong>Coverage spans agriculture, economics and finance, energy and mining, health, law, and telecommunications and media. Regional folders are not necessarily subject domains; eligibility and cross-pass uniqueness remain unresolved.</figcaption>
+      </figure>
+      <div class="ha-callout">
+        <p class="ha-callout-label">Release gate</p>
+        <p>Before expanded data is treated as a training release, the quality audit needs verdicts, cross-pass deduplication must be resolved, rights and tiers must be reviewed, validation partitions must be fixed, and packing lineage must be recorded.</p>
+      </div>
+    </section>
+
+    <section id="benchmarks" aria-labelledby="benchmarks-heading">
+      <h2 id="benchmarks-heading">Benchmark evidence: results depend on the protocol</h2>
+      <p>The reference base is NVIDIA Nemotron-H-4B-Base-8K, evaluated in LLM.int8 and NF4 conditions. The 9B comparisons use Nemotron Nano 9B base or chat weights. These are historical evaluations under recorded protocols, not a newly produced common leaderboard.</p>
+      <div class="ha-table-wrap" role="region" aria-label="Historical benchmark comparison table" tabindex="0">
+        <table class="ha-table">
+          <thead><tr><th scope="col">Recorded condition</th><th class="num" scope="col">MMLU</th><th class="num" scope="col">GSM8K</th><th class="num" scope="col">HumanEval</th><th class="num" scope="col">IFEval</th></tr></thead>
+          <tbody>
+            <tr><td>4B int8 · base prompts</td><td class="num">64.93</td><td class="num">65.8</td><td class="num">62.0</td><td class="num">25.30</td></tr>
+            <tr><td>4B NF4 · base prompts</td><td class="num">48.15</td><td class="num">40.0</td><td class="num">44.0</td><td class="num">21.10</td></tr>
+            <tr><td>9B Base · NF4</td><td class="num">69.00</td><td class="num">71.2</td><td class="num">56.0</td><td class="num">—</td></tr>
+            <tr><td>9B chat · NF4 · base prompts</td><td class="num">74.11</td><td class="num">88.6</td><td class="num">21.0</td><td class="num">56.83</td></tr>
+            <tr><td>9B chat · NF4 · chat template</td><td class="num">—</td><td class="num">67.2</td><td class="num">92.0</td><td class="num">89.93</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="ha-note">Scores are percentages. GSM8K uses the first 500 items, eight shots, and strict extraction; IFEval is instruction-level strict. A dash means the report contains no comparable value. The rows are different conditions, not a controlled model comparison.</p>
+      <p>Precision and prompt format can materially change reported scores. The same 9B chat GSM8K run scored 67.2 under strict extraction and 86.2 under flexible extraction. HumanEval moved from 21 to 92 with a chat protocol while MBPP moved only from 68.2 to 68.6. These shifts are a reason to freeze evaluation conditions before drawing model-level conclusions.</p>
+      <figure class="ha-figure">
+        <div class="ha-figure-frame"><img src="assets/fig07-knowledge.pareto.webp" alt="Knowledge benchmark results across MMLU, MMLU-Pro and TruthfulQA for recorded 4B and 9B conditions" loading="lazy" decoding="async"></div>
+        <figcaption><strong>Figure 6 · Knowledge benchmarks</strong>MMLU: 14,042 items, five shots; MMLU-Pro: 280 items, five-shot chain-of-thought; TruthfulQA: 817 items, zero shots. Different scoring rules preclude a cross-task average.</figcaption>
+      </figure>
+      <figure class="ha-figure">
+        <div class="ha-figure-frame"><img src="assets/fig08-code.pareto.webp" alt="Code benchmark pass at one under base and chat protocols for HumanEval and MBPP" loading="lazy" decoding="async"></div>
+        <figcaption><strong>Figure 7 · Code benchmarks</strong>The large HumanEval protocol shift alongside a much smaller MBPP change is evidence of format sensitivity, not a controlled model improvement.</figcaption>
+      </figure>
+      <h3>Language and domain performance point to questions, not conclusions</h3>
+      <p>Recorded 4B results show a gap between English and the available African-language evaluations: about 91% versus 27% on Uhura, and 52% versus 25% on AfriMMLU. These results motivate targeted data and evaluation work. They should not be generalized to every language, task, or current model.</p>
+      <figure class="ha-figure">
+        <div class="ha-figure-frame"><img src="assets/fig12-english-gap.pareto.webp" alt="Difference between English results and the mean over available African target languages in the recorded 4B evaluations" loading="lazy" decoding="async"></div>
+        <figcaption><strong>Figure 8 · Recorded English–African-language differences</strong>The mean covers only the languages available in each evaluation and does not establish a universal language ranking.</figcaption>
+      </figure>
+      <p>The domain-QA review also separates a model’s closed-book answer from a supplied-context answer and from recall of facts seen in training. Supplied context can raise a score, but that is not evidence that a retrieval system is implemented or useful; a retrieval control still needs to be built and measured.</p>
+      <figure class="ha-figure">
+        <div class="ha-figure-frame"><img src="assets/fig14-domain-qa.pareto.webp" alt="Historical domain QA results for closed-book, supplied-context, and training-recall conditions" loading="lazy" decoding="async"></div>
+        <figcaption><strong>Figure 9 · Historical domain QA</strong>A GLM-5.3 judge scored correct as 1, partial as 0.5, and wrong as 0. Graded support differs across closed-book (157), supplied-context (162), and training-recall (113) questions; 23 answers were ungraded.</figcaption>
+      </figure>
+    </section>
+
+    <section id="training" aria-labelledby="training-heading">
+      <h2 id="training-heading">Training evidence: lower loss is not enough</h2>
+      <p>The early synthetic-data recipe increased recall on training facts, but it did not meet the unseen-document domain gate and could reduce general performance. Lower validation loss did not establish better question answering. Domain capability and general retention have to be measured separately, under matched conditions.</p>
+      <div class="ha-table-wrap" role="region" aria-label="Historical training recipe comparison table" tabindex="0">
+        <table class="ha-table">
+          <thead><tr><th scope="col">Recorded recipe</th><th class="num" scope="col">Epochs</th><th class="num" scope="col">Replay</th><th class="num" scope="col">Steps</th><th class="num" scope="col">Final mean loss</th></tr></thead>
+          <tbody>
+            <tr><td>v1 raw · LR 10⁻⁴</td><td class="num">3</td><td class="num">10%</td><td class="num">384</td><td class="num">2.1712</td></tr>
+            <tr><td>v1 raw · LR 2×10⁻⁴</td><td class="num">3</td><td class="num">10%</td><td class="num">384</td><td class="num">2.2077</td></tr>
+            <tr><td>v1 raw · LR 10⁻⁴</td><td class="num">1</td><td class="num">10%</td><td class="num">128</td><td class="num">2.1346</td></tr>
+            <tr><td>v1 synthetic (ABL3) · LR 10⁻⁴</td><td class="num">1</td><td class="num">30%</td><td class="num">595</td><td class="num">2.1398</td></tr>
+            <tr><td>v1 synthetic (ABL4) · LR 10⁻⁴</td><td class="num">1</td><td class="num">10%</td><td class="num">463</td><td class="num">2.1448</td></tr>
+            <tr><td>v2 raw · t1_4b_r30</td><td class="num">1</td><td class="num">30%</td><td class="num">365</td><td class="num">1.5433</td></tr>
+            <tr><td>v2 synthetic · t2_4b_r30</td><td class="num">1</td><td class="num">30%</td><td class="num">1,276</td><td class="num">1.5284</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="ha-note">Final mean losses reflect unequal exposure across recipes. Different releases and validation subsets prevent direct v1/v2 loss comparisons or isolated causal conclusions.</p>
+      <figure class="ha-figure">
+        <div class="ha-figure-frame"><img src="assets/fig15-training-qa.pareto.webp" alt="Historical domain QA comparison for ABL2 raw training and ABL4 synthetic training across closed-book, recall, and supplied-context conditions" loading="lazy" decoding="async"></div>
+        <figcaption><strong>Figure 10 · Historical training domain QA</strong>On 166 held-out and 123 recall questions, ABL2 scored 16.87 closed-book, 15.04 recall, and 90.06 grounded; ABL4 scored 16.87, 20.33, and 94.58. Both fall below the historical v1 closed-book gate of 24.65. Supplied-context performance is not a retrieval result.</figcaption>
+      </figure>
+      <figure class="ha-figure">
+        <div class="ha-figure-frame"><img src="assets/fig16-retention.pareto.webp" alt="General-retention scorecard showing ABL2 and ABL4 results against recorded gates, including ABL4 TruthfulQA decline" loading="lazy" decoding="async"></div>
+        <figcaption><strong>Figure 11 · General-retention gates</strong>ABL4 TruthfulQA MC2 fell five points, from 48.01 to 43.01. ABL2 passed the recorded general checks but missed the domain gate; ABL4 missed both. Point estimates do not establish statistical significance.</figcaption>
+      </figure>
+      <blockquote class="ha-quote">A training run is useful only if it improves the task people need, against a strong baseline, without breaking what already works.</blockquote>
+    </section>
+
+    <section id="market" aria-labelledby="market-heading">
+      <h2 id="market-heading">Market hypothesis: test the workflow before the model</h2>
+      <p>The proposed use case is an institutional assistant that reduces the effort of finding, comparing, and citing African sector documents in French and English, with African-language support where a real workflow warrants it. This is a hypothesis to validate, not demonstrated product demand.</p>
+      <p>Existing systems are the relevant benchmark. The review considered African-language models including Lelapa Vulavula, InkubaLM, Lugha-Llama, Tiny Aya Earth, and MORENA 1.5B, as well as general models paired with retrieval. No common-protocol comparison with Harmattan is available in this evidence set, so published scores across different protocols should not be treated as a shared leaderboard. Policy interest in African-centered AI is also not evidence of customer budgets or procurement demand.</p>
+      <h3>A proposed demand test</h3>
+      <ol>
+        <li><strong>Discovery:</strong> interview 12 users, budget owners, and deployment or security staff. Continue only if at least three independent organizations identify the same recurring task and an accountable budget owner.</li>
+        <li><strong>Design partners:</strong> recruit three organizations willing to contribute permitted documents, task examples, and staff time under a written scope. Interviews and unpriced interest are not revenue.</li>
+        <li><strong>Offline task study:</strong> test at least 100 representative unseen tasks with two blind assessors. Target at least 20% lower median task time without quality loss against the current process, search-only, and a base model plus retrieval.</li>
+        <li><strong>Paid pilot:</strong> secure at least one signed paid-pilot agreement. Without it, willingness to pay remains unproven, even if benchmark performance improves.</li>
+      </ol>
+      <div class="ha-callout">
+        <p class="ha-callout-label">Proposed quality targets · require owner approval before study</p>
+        <p>At least 95% valid citation support among answered tasks, no observed critical unsupported recommendation, and at least 80% coverage of answerable tasks. Quality and coverage must both hold so an always-abstain system cannot appear successful.</p>
+      </div>
+    </section>
+
+    <section id="plan" aria-labelledby="plan-heading">
+      <h2 id="plan-heading">A phased research plan</h2>
+      <p>The plan buys down uncertainty in sequence: first make the existing evidence reproducible, then test whether additional data breadth creates measurable gains beyond strong alternatives.</p>
+      <div class="ha-phases">
+        <article class="ha-phase">
+          <div class="ha-phase-tag">Phase 1 · Proposed</div>
+          <div><h3>Reconstruct the v2 bridge</h3><p>Reproduce the packed v2 release from its manifest and commit, with rank 32, sequence length 2,048, accumulation 4, and seed 1234. Evaluate the compatible unadapted base first, then compare raw-plus-replay against raw-plus-synthetic-plus-replay at matched token exposure.</p><p><strong>Exit when:</strong> an independent setup reproduces the run, complete baselines exist, and leakage checks pass.</p></div>
+        </article>
+        <article class="ha-phase">
+          <div class="ha-phase-tag">Phase 2 · Proposed</div>
+          <div><h3>Test breadth, mix, and answerability</h3><p>Use a 10M / 30M / 100M distinct-domain-token ladder on 4B with nested reproducible samples and a frozen evaluation version. Compare broader domain text, a West African sector focus, and a domain-plus-language mix against base-plus-retrieval and a legally eligible specialist model.</p><p><strong>Advance only when:</strong> a declared development objective improves without general-gate failures, then confirm on untouched data across all seeds. Report negative results when retrieval wins or training adds no defensible value.</p></div>
+        </article>
+      </div>
+      <p>The evaluation contract already records model adapters, CPU merges into bf16, LLM.int8 evaluation copies, suite routing, domain-QA judging, loss, timings, and scorecards. Proposed extensions add run IDs, artifact hashes, precision, recipe shares, judge and rubric versions, and document-cluster-aware bootstrap intervals. If an interval crosses a gate, the result remains inconclusive even when its point estimate passes.</p>
+    </section>
+
+    <section id="limits" aria-labelledby="limits-heading">
+      <h2 id="limits-heading">What this note does not claim</h2>
+      <p>The underlying analysis includes 16 reproducible graphs; this summary surfaces the figures most relevant to the proposed decision. No model was trained for this edition, and no paid evaluation or customer study was conducted. Missing raw data, rights decisions, and proposed experiments remain unresolved.</p>
+      <div class="ha-callout">
+        <p class="ha-callout-label">Status and evidence boundary</p>
+        <p>“Completed” means an artifact or recorded run exists; it does not certify deployment readiness. The November inventory is not an audited, globally deduplicated release. The market thresholds and proposed experiments are not measured results. No revenue or product-market fit is established by this repository snapshot.</p>
+      </div>
+      <p>The underlying review is anchored to repository snapshot <code>de9be87</code>, with external sources checked on 5 November 2026. It is not external investor endorsement or an investment recommendation.</p>
+    </section>
+
+    <section id="cite" aria-labelledby="cite-heading">
+      <h2 id="cite-heading">Cite the research note</h2>
+      <p>Pareto Labs is preparing the full paper for public release. We will add the arXiv and Hugging Face Papers records here once they are live.</p>
+      <div class="ha-paper-status">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg>
+        <p><strong>Full paper forthcoming.</strong> There is no public arXiv or Hugging Face Papers link yet. Please cite this web summary only if that is the version you used.</p>
+      </div>
+      <div class="ha-citation">Pareto Labs. (2026, November 5). <em>Harmattan AI: Evidence, Market Hypotheses and a Phased Research Plan.</em> Pareto Labs Research. https://www.trypareto.ai/research/harmattan-ai-evidence-plan/</div>
+      <div class="ha-end">
+        <p class="ha-lead">The next milestone is not a bigger run. It is a result the team can reproduce, compare fairly, and connect to a real user outcome.</p>
+        <p class="ha-boundary">The proposed sequence is evidence-led: resolve data lineage and missing inputs; clear data and rights requirements; preregister allocations and evaluation; then test whether training delivers value beyond retrieval and specialist alternatives.</p>
+        <div class="ha-bottom-share" aria-label="Share this research note">
+          <a class="btn btn-outline" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwww.trypareto.ai%2Fresearch%2Fharmattan-ai-evidence-plan%2F" target="_blank" rel="noopener noreferrer">Share on LinkedIn</a>
+          <a class="btn btn-outline" href="https://twitter.com/intent/tweet?text=Harmattan%20AI%3A%20evidence%20before%20scale%20%E2%80%94%20Pareto%20Labs&amp;url=https%3A%2F%2Fwww.trypareto.ai%2Fresearch%2Fharmattan-ai-evidence-plan%2F" target="_blank" rel="noopener noreferrer">Share on X</a>
+          <a class="btn btn-solid" href="/research.html">Explore all research</a>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+
+<section class="cta-final">
+  <div class="wrap ha-cta-inner">
+    <div class="ha-cta-copy">
+      <h2>Build with us, or <em>come build with us.</em></h2>
+      <p>Work with Pareto to put evidence-led AI into real operations, or join the team building it.</p>
+      <div class="actions"><a class="btn btn-invert" href="/#partner">Build with Pareto</a><a class="btn btn-invert-ghost" href="/work-with-us.html">Work with us</a></div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap"><div class="foot-inner">
+    <div class="foot-logo">Pareto Labs</div>
+    <ul class="foot-links">
+      <li><a href="/infrastructure.html">Infrastructure</a></li><li><a href="/inference.html">Inference</a></li><li><a href="/cloud.html">Cloud</a></li><li><a href="/platform.html">Platform</a></li><li><a href="/industries.html">Industries</a></li><li><a href="/experts.html">Experts</a></li><li><a href="/research.html">Research</a></li><li><a href="/work-with-us.html">Work with us</a></li><li><a href="/#partner">Build with Pareto</a></li><li><a href="mailto:contact@trypareto.ai">Contact</a></li><li><a href="/privacy.html">Privacy</a></li><li><a href="/terms.html">Terms</a></li>
+    </ul>
+    <p class="foot-copy">&copy; 2026 Pareto Labs, Inc.</p>
+  </div></div>
+</footer>
+<script>
+  (() => {
+    const url = document.querySelector('link[rel="canonical"]').href;
+    const title = 'Harmattan AI: evidence before scale — Pareto Labs';
+    document.querySelectorAll('.share-linkedin').forEach((link) => { link.href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url); });
+    document.querySelectorAll('.share-x').forEach((link) => { link.href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(title) + '&url=' + encodeURIComponent(url); });
+    const copy = document.querySelector('.copy-link');
+    const status = document.querySelector('.ha-share-status');
+    copy.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(url);
+        status.textContent = 'Link copied.';
+      } catch {
+        status.textContent = 'Copy is unavailable in this browser. Use the address bar to copy the link.';
+      }
+    });
+    const links = [...document.querySelectorAll('.ha-toc a')];
+    const sections = links.map((link) => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          links.forEach((link) => {
+            if (link.getAttribute('href') === '#' + entry.target.id) link.setAttribute('aria-current', 'location');
+            else link.removeAttribute('aria-current');
+          });
+        });
+      }, { rootMargin: '-18% 0px -68% 0px' });
+      sections.forEach((section) => observer.observe(section));
+    }
+  })();
+</script>
+<script src="/assets/site.js?v=20261012b" defer></script>
+<script src="/assets/build-modal.js?v=20261012b" defer></script>
+<script src="/assets/newsletter.js?v=20261106a" defer></script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
