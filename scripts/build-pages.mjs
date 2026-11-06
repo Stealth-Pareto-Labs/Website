@@ -65,11 +65,11 @@ const htmlFiles = pageFiles.filter((file) => file.endsWith('.html'));
 const followMarkup = [
   '<div class="nl-follow-footer">',
   '  <span class="nl-follow-label">Follow Pareto</span>',
-  '  <nav class="nl-social" aria-label="Follow Pareto Labs">',
+  '  <div class="nl-social" role="navigation" aria-label="Follow Pareto Labs">',
   '    <a href="https://www.linkedin.com/company/trypareto-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>',
   '    <a href="https://x.com/paretolabsx" target="_blank" rel="noopener noreferrer">X</a>',
   '    <a href="https://discord.gg/z3fgyDuGM" target="_blank" rel="noopener noreferrer">Discord</a>',
-  '  </nav>',
+  '  </div>',
   '</div>',
 ].join('\n');
 for (const file of htmlFiles) {
